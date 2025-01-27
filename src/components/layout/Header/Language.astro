@@ -15,7 +15,7 @@ const route = getRouteFromUrl(Astro.url);
 <div class="flex gap-8 item">
   <div class="relative">
     <button-language>
-      <button id="language" class="block text-primary"
+      <button id="language" class="block text-primary cursor-pointer hover:text-gray-800 dark:hover:text-white"
         >{lang === "es" ? "Español" : "English"}</button
       >
       <ul
@@ -24,9 +24,9 @@ const route = getRouteFromUrl(Astro.url);
       >
         {
           Object.entries(languages).map(([lang, label]) => (
-            <li class="">
+            <li class="text-primary hover:text-gray-800 dark:hover:text-white transition-colors">
               <a
-                class="text-primary"
+                class=""
                 href={translatePath(`/${route ? route : ""}`, lang)}
               >
                 {label}

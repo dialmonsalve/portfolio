@@ -31,7 +31,7 @@ div:has(.menu[type="checkbox"]:not(:checked)) + .container-elements {
 }
 
 div:has(.menu[type="checkbox"]:checked) + .container-elements {
-  transform: translateY(0);
+  transform: translateY(0.2rem);
 }
 
 @media (width >= 64rem) {
@@ -39,6 +39,18 @@ div:has(.menu[type="checkbox"]:checked) + .container-elements {
     transform: translateY(-225%);
   }
   div:has(.menu[type="checkbox"]:checked) + .container-elements {
-    transform: translateY(1.6rem);
+    transform: translateY(12px);
   }
 }
+
+@media (width >= 80rem) { 
+  div:has(.menu[type="checkbox"]:checked) + .container-elements {
+    transform: translateY(16px);
+  }
+ }
+
+ @media (width >= 96rem) { 
+  div:has(.menu[type="checkbox"]:checked) + .container-elements {
+    transform: translateY(40px);
+  }
+  }
