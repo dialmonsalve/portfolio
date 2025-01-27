@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-poppins: Poppins, sans-serif;
+  --ease-in-jump: cubic-bezier(0.42, 0, 0.58, 1.8);
+  --color-primary: #4682b4;
+}
+
+.dark {
+  --color-primary: #27bd48;
+}
+
+html {
+  font-family: var(--font-poppins);
+}
+
+.menu[type="checkbox"]:checked ~ .container-menu__label {
+  box-shadow: 1px -1px 8px black inset;
+}
+
+div:has(.menu[type="checkbox"]:not(:checked)) + .container-elements {
+  transform: translateY(-110%);
+}
+
+div:has(.menu[type="checkbox"]:checked) + .container-elements {
+  transform: translateY(0);
+}
+
+@media (width >= 64rem) {
+  div:has(.menu[type="checkbox"]:not(:checked)) + .container-elements {
+    transform: translateY(-225%);
+  }
+  div:has(.menu[type="checkbox"]:checked) + .container-elements {
+    transform: translateY(1.6rem);
+  }
+}

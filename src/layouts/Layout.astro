@@ -1,22 +1,64 @@
+---
+import { ClientRouter } from "astro:transitions";
+import Container from "../components/layout/Container.astro";
+import Header from "../components/layout/Header.astro";
+import "../../styles.css";
+---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>dialmonsalve</title>
+    <script is:inline>
+      const setTheme = () => {
+        const theme = (() => {
+          if (
+            typeof localStorage !== "undefined" &&
+            localStorage.getItem("theme")
+          ) {
+            return localStorage.getItem("theme");
+          }
+          if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            return "dark";
+          }
+          return "light";
+        })();
+
+        if (theme === "light") {
+          document.documentElement.classList.remove("dark");
+        } else {
+          document.documentElement.classList.add("dark");
+        }
+
+        window.localStorage.setItem("theme", theme || "light");
+      };
+
+      setTheme();
+
+      document.addEventListener("astro:after-swap", setTheme);
+    </script>
+    <ClientRouter />
+  </head>
+  <body>
+    <Container>
+      <Header />
+      <main class="px-5 pt-14 pb-2 lg:pt-25">
+        <slot />
+      </main>
+    </Container>
+  </body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+  @font-face {
+    font-family: "Poppins";
+    src: url("/fonts/Poppins/Poppins-Medium.ttf") format("ttf");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
 </style>
