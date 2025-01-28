@@ -1,11 +1,39 @@
+---
+import {
+  getLangFromUrl,
+  useTranslations,
+  useTranslatedPath,
+} from "../../../i18n/utils";
+import MenuIcon from "../../../icons/Menu.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+interface Links {
+  href: string;
+  name:
+    | "nav.home"
+    | "nav.about"
+    | "nav.services"
+    | "nav.projects"
+    | "nav.contact";
+}
+
+const links: Links[] = [
+  { href: "/", name: "nav.home" },
+  { href: "/projects", name: "nav.projects" },
+];
+---
+
 <div>
   <div class="container-menu">
     <input id="menu" type="checkbox" class="menu opacity-0 hidden" />
-    <label for="menu">
-      <span
-        class="text-4xl relative text-primary cursor-pointer after:content-[''] hover:text-gray-800 dark:hover:text-white after:block after:text-4xl after:w-5 after:h-0.5 after:bg-primary after:absolute after:bottom-0 after:-translate-y-2.5 hover:after:bg-gray-800 dark:hover:after:bg-white before:content-[''] before:block before:text-4xl before:w-5 before:h-0.5 before:bg-primary before:absolute before:top-0 before:translate-y-4 hover:before:bg-gray-800 dark:hover:before:bg-white transition-all"
-        >&ndash;
-      </span>
+    <label
+      for="menu"
+      class="bg-primary cursor-pointer hover:bg-white dark:hover:text-white"
+    >
+      <MenuIcon />
     </label>
   </div>
 
@@ -13,13 +41,17 @@
     class="container-elements w-screen h-screen overflow-y-auto absolute left-0 z-2 transition-transform duration-300 ease-in-jump lg:max-h-[8dvh] lg:border-b lg:border-primary lg:overflow-hidden lg:px-10 bg-gray-200 dark:bg-gray-900"
   >
     <ul
-      class="flex flex-col h-full max-h-full py-5  dark:bg-gray-900 px-3 lg:flex-row lg:py-3 lg:max-h-[8dvh]"
+      class="flex flex-col h-full max-h-full py-5 dark:bg-gray-900 px-3 lg:flex-row lg:py-3 lg:max-h-[8dvh] lg:gap-4"
     >
-      <li
-        class="border-b border-t text-primary transition-colors uppercase border-primary dark:border-white py-2 text-center lg:border-0 hover:text-gray-800 dark:hover:text-white hover:border-b-gray-800 dark:hover:border-b-white hover:border-b lg:py-1"
-      >
-        <a class="block" href="/">Home</a>
-      </li>
+      {
+        links.map((link) => (
+          <li class="border-t text-primary transition-colors uppercase border-primary dark:border-white py-2 text-center lg:border-0 hover:text-gray-800 dark:hover:text-white hover:border-b-gray-800 dark:hover:border-b-white hover:border-b lg:py-1 last:border-b">
+            <a class="block" href={translatePath(link.href)}>
+              {t(link.name)}
+            </a>
+          </li>
+        ))
+      }
     </ul>
   </nav>
 </div>
