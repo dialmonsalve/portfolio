@@ -6,14 +6,13 @@ import Card from "../../Card.astro";
 const currentLocale = Astro.currentLocale;
 
 const i18n = getI18N({ currentLocale });
-
 ---
 
 <Layout>
   <h1 transition:animate="slide">{i18n.PROJECTS.TITLE}</h1>
 
-  <section class="section-projects">
-    <article class="article-cards__proyects">
+  <section class="flex flex-col gap-10 p-10">
+    <article class="grid m-w-[80dvw] gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 auto-cols-fr">
       {
         i18n.PROJECTS.EXTERNAL_PROJECTS.map((project) => (
           <Card
@@ -27,7 +26,7 @@ const i18n = getI18N({ currentLocale });
       }
     </article>
 
-    <article class="article-cards__proyects">
+    <article class="grid m-w-[80dvw] gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 auto-cols-fr">
       {
         i18n.PROJECTS.INTERNAL_PROJECTS.map((project) => (
           <Card

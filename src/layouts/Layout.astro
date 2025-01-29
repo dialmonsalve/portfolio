@@ -1,6 +1,6 @@
 ---
 import { ClientRouter } from "astro:transitions";
-import Container from "../components/layout/Container.astro";
+
 import Header from "../components/layout/Header.astro";
 import "../../styles.css";
 ---
@@ -44,12 +44,10 @@ import "../../styles.css";
     <ClientRouter />
   </head>
   <body>
-    <Container>
-      <Header />
-      <main class="px-5 pt-14 pb-2 lg:pt-25">
+    <Header />
+      <main class="pt-18 px-18 bg-gray-100 dark:bg-gray-800">
         <slot />
       </main>
-    </Container>
   </body>
 </html>
 
