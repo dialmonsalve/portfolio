@@ -46,7 +46,7 @@ const route = getRouteFromUrl(Astro.url);
       const buttonLanguage = this.querySelector("#language");
       const language = this.querySelector("#language-container");
 
-      const container = document.querySelector("#container");
+      const container = document.querySelector("body");
 
       buttonLanguage?.addEventListener("click", (evt) => {
         evt.stopPropagation();

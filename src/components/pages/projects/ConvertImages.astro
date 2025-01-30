@@ -1,0 +1,58 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+
+import { getI18N } from "../../../i18n";
+import UploadImage from "../../../icons/UploadImage.astro";
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+
+const selectFormat = ["jpeg", "png", "jpg", "webp"];
+const selectQuantity = ["95", "30", "40", "50", "60", "70", "80", "90"];
+---
+
+<Layout>
+  <section class="flex flex-col gap-10 items-center">
+    <h1 transition:name="convert-images" class="text-gray-800 dark:text-white text-center">
+      {i18n.PROJECTS.INTERNAL_PROJECTS[1].TITLE}
+    </h1>
+
+    <article class="flex flex-col gap-3">
+      <div class="flex gap-2 items-center" >
+        <label for="select-format" class="text-gray-900 uppercase dark:text-white" >format</label>
+        <select id="select-format" class="border border-primary px-2 py-1 rounded-md text-primary">
+          {selectFormat.map((sel) => <option value={sel}>{sel}</option>)}
+        </select>
+      </div>
+      <div class="flex gap-2 items-center"  >
+        <label for="select-quality" class="text-gray-900 uppercase dark:text-white">Quality</label>
+        <select id="select-quality"class="border border-primary px-2 py-1 rounded-md text-primary">
+          {selectQuantity.map((sel) => <option value={sel}>{sel} %</option>)}
+        </select>
+      </div>
+    </article>
+
+    <article class="container-components" id="card-image">
+      <div class="container-components__image" id="container-components">
+        <div id="container-image" data-target="image" class="new-uploader">
+          <label for="image"><UploadImage /></label> 
+          <label
+            for="image"
+            class="label"
+            id="input-image"
+            class="new-uploader__input"
+            data-sk-drawer="drawer-image"
+            data-sk-target="image"
+            data-required="true">Upload image</label
+          >
+        </div>
+        <input
+          id="image"
+          type="file"
+          class="uploader-image hidden"
+          name="image"
+        />
+      </div>
+    </article>
+  </section>
+</Layout>
