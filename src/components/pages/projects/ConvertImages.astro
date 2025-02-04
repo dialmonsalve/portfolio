@@ -1,8 +1,8 @@
 ---
-import Layout from "../../../layouts/Layout.astro";
+import Layout from "@layouts/Layout.astro";
 
-import { getI18N } from "../../../i18n";
-import UploadImage from "../../../icons/UploadImage.astro";
+import { getI18N } from "@i18n/index";
+import UploadImage from "@icons/UploadImage.astro";
 
 const { currentLocale } = Astro;
 const i18n = getI18N({ currentLocale });
@@ -12,47 +12,76 @@ const selectQuantity = ["95", "30", "40", "50", "60", "70", "80", "90"];
 ---
 
 <Layout>
-  <section class="flex flex-col gap-10 items-center">
-    <h1 transition:name="convert-images" class="text-gray-800 dark:text-white text-center">
+  <section class="flex flex-col gap-6 items-center section-images">
+    <h1
+      transition:name="convert-images"
+      class="text-gray-800 dark:text-white text-center"
+    >
       {i18n.PROJECTS.INTERNAL_PROJECTS[1].TITLE}
     </h1>
 
     <article class="flex flex-col gap-3">
-      <div class="flex gap-2 items-center" >
-        <label for="select-format" class="text-gray-900 uppercase dark:text-white" >format</label>
-        <select id="select-format" class="border border-primary px-2 py-1 rounded-md text-primary">
+      <div class="flex gap-2 items-center">
+        <label
+          for="select-format"
+          class="text-gray-900 uppercase dark:text-white">format</label
+        >
+        <select
+          id="select-format"
+          class="border border-primary px-2 py-1 rounded-md text-primary cursor-pointer"
+        >
           {selectFormat.map((sel) => <option value={sel}>{sel}</option>)}
         </select>
       </div>
-      <div class="flex gap-2 items-center"  >
-        <label for="select-quality" class="text-gray-900 uppercase dark:text-white">Quality</label>
-        <select id="select-quality"class="border border-primary px-2 py-1 rounded-md text-primary">
+      <div class="flex gap-2 items-center">
+        <label
+          for="select-quality"
+          class="text-gray-900 uppercase dark:text-white">Quality</label
+        >
+        <select
+          id="select-quality"
+          class="border border-primary px-2 py-1 rounded-md text-primary cursor-pointer"
+        >
           {selectQuantity.map((sel) => <option value={sel}>{sel} %</option>)}
         </select>
       </div>
     </article>
 
     <article class="container-components" id="card-image">
-      <div class="container-components__image" id="container-components">
-        <div id="container-image" data-target="image" class="new-uploader">
-          <label for="image"><UploadImage /></label> 
-          <label
-            for="image"
-            class="label"
-            id="input-image"
-            class="new-uploader__input"
-            data-sk-drawer="drawer-image"
-            data-sk-target="image"
-            data-required="true">Upload image</label
+      <load-images>
+        <div class="container-components__image" id="container-components">
+          <div
+            id="container-image"
+            data-target="image"
+            class="new-uploader flex flex-col gap-4 items-center border-2 border-gray-300 p-3 min-w-40 rounded-md shadow-lg shadow-gray-500/50 transition-all"
           >
+            <UploadImage />
+
+            <label
+              class="px-1.5 py-1 block bg-primary rounded-md text-white cursor-pointer shadow-lg shadow-blue-500/50 hover:opacity-85 active:shadow-inset dark:shadow-green-500/50"
+              data-sk-drawer="drawer-image"
+              data-sk-target="image"
+              id="label-image"
+            >
+              Upload image
+            </label>
+            <p
+              class="px-1.5 py-1 bg-gray-700 rounded-md text-white"
+              id="drag-and-drop-text"
+            >
+              Drag and drop
+            </p>
+            <p id="input-image" class="text-[10px] text-center"></p>
+          </div>
+          <input
+            id="image"
+            type="file"
+            class="uploader-image hidden"
+            name="image"
+          />
         </div>
-        <input
-          id="image"
-          type="file"
-          class="uploader-image hidden"
-          name="image"
-        />
-      </div>
+      </load-images>
     </article>
   </section>
 </Layout>
+<script src="@typescript/load-images/upload.ts"></script>

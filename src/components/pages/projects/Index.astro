@@ -1,7 +1,7 @@
 ---
-import { getI18N } from "../../../i18n";
-import Layout from "../../../layouts/Layout.astro";
-import Card from "../../Card.astro";
+import { getI18N } from "@i18n/index";
+import Layout from "@layouts/Layout.astro";
+import Card from "@components/Card.astro";
 
 const currentLocale = Astro.currentLocale;
 
@@ -41,4 +41,6 @@ const i18n = getI18N({ currentLocale });
     </article>
   </section>
 </Layout>
+
+
 

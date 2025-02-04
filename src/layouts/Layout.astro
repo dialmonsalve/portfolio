@@ -2,7 +2,7 @@
 import { ClientRouter } from "astro:transitions";
 
 import Header from "../components/layout/Header.astro";
-import "../../styles.css";
+import "@styles/global.css";
 ---
 
 <!doctype html>
@@ -45,18 +45,8 @@ import "../../styles.css";
   </head>
   <body>
     <Header />
-      <main class="pt-18 xl:px-18 max-h-screen h-screen overflow-auto bg-gray-100 dark:bg-gray-800">
+      <main class="pt-18 xl:px-18 pb-5 max-h-screen h-screen overflow-auto bg-gray-200 dark:bg-slate-800">
         <slot />
       </main>
   </body>
 </html>
-
-<style>
-  @font-face {
-    font-family: "Poppins";
-    src: url("/fonts/Poppins/Poppins-Medium.ttf") format("ttf");
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-  }
-</style>

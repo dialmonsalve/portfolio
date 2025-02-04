@@ -1,11 +1,11 @@
 ---
-import { languages } from "../../../i18n/ui";
+import { languages } from "@i18n/ui";
 
 import {
   useTranslatedPath,
   getLangFromUrl,
   getRouteFromUrl,
-} from "../../../i18n/utils";
+} from "@i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const translatePath = useTranslatedPath(lang);
@@ -15,20 +15,19 @@ const route = getRouteFromUrl(Astro.url);
 <div class="flex gap-8 item">
   <div class="relative">
     <button-language>
-      <button id="language" class="block text-primary cursor-pointer hover:text-gray-800 dark:hover:text-white"
+      <button
+        id="language"
+        class="block text-primary cursor-pointer hover:text-gray-800 dark:hover:text-white"
         >{lang === "es" ? "Español" : "English"}</button
       >
       <ul
         id="language-container"
-        class="absolute hidden bg-white border border-primary p-1 dark:bg-gray-800 rounded translate-y-1 z-3 transition-all"
+        class="absolute hidden bg-white border border-primary p-1 dark:bg-gray-800 rounded translate-y-1 z-3 language"
       >
         {
           Object.entries(languages).map(([lang, label]) => (
             <li class="text-primary hover:text-gray-800 dark:hover:text-white transition-colors">
-              <a
-                class=""
-                href={translatePath(`/${route ? route : ""}`, lang)}
-              >
+              <a class="" href={translatePath(`/${route ? route : ""}`, lang)}>
                 {label}
               </a>
             </li>
@@ -67,3 +66,15 @@ const route = getRouteFromUrl(Astro.url);
 
   customElements.define("button-language", ButtonLanguage);
 </script>
+
+<style>
+  .language {
+    opacity: 1;
+    transition:
+      opacity 0.3s ease-in-out,
+      display 0.3s ease-in-out allow-discrete;
+    @starting-style {
+      opacity: 0;
+    }
+  }
+</style>

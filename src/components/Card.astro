@@ -1,5 +1,5 @@
 ---
-import { getLangFromUrl, useTranslatedPath } from "../i18n/utils.ts";
+import { getLangFromUrl, useTranslatedPath } from "@i18n/utils.ts";
 
 interface Props {
   title: string;
@@ -8,7 +8,8 @@ interface Props {
   slug: string;
   isExternalProject: boolean;
 }
-import { getI18N } from "../i18n";
+import { getI18N } from "@i18n/index";
+import "@styles/components/modal.css";
 
 const { currentLocale } = Astro;
 const i18n = getI18N({ currentLocale });
@@ -20,7 +21,7 @@ const { title, image, description, slug, isExternalProject } = Astro.props;
 ---
 
 <div
-  class="h-[250px] flex flex-col gap-8 border border-primary p-4 rounded-sm shadow-primary shadow-md justify-between items-center bg-white dark:bg-gray-900"
+  class="h-[250px] flex flex-col gap-8 border border-primary p-4 rounded-sm shadow-primary shadow-md justify-between items-center bg-white dark:bg-slate-900"
 >
   <div class="relative">
     <h6
@@ -37,24 +38,26 @@ const { title, image, description, slug, isExternalProject } = Astro.props;
   </div>
 
   <div class="flex w-full justify-around">
-    <button
-      class="py-1 px-3 rounded-sm uppercase text-md text-white transition-colors cursor-pointer bg-blue-500 shadow-lg shadow-blue-500/50 hover:opacity-85"
-      >{i18n.GENERAL.MORE}</button
-    >
+    <modal-more-info>
+      <button
+        class="py-1 px-3 rounded-sm uppercase text-md text-white transition-colors cursor-pointer bg-blue-500 shadow-lg shadow-blue-500/50 hover:opacity-85 active:shadow-inset buttons-more"
+        >{i18n.GENERAL.MORE}</button
+      >
+    </modal-more-info>
     {
       isExternalProject ? (
         <a
           target="_blank"
           referrerpolicy="no-referrer"
           href={slug}
-          class="py-1 px-3 rounded-sm uppercase text-md text-white transition-colors cursor-pointer bg-indigo-500 shadow-lg shadow-indigo-500/50 hover:opacity-85"
+          class="py-1 px-3 rounded-sm uppercase text-md text-white transition-colors cursor-pointer bg-indigo-500 shadow-lg shadow-indigo-500/50 hover:opacity-85 active:shadow-inset"
         >
           {i18n.GENERAL.GO}
         </a>
       ) : (
         <a
           href={translatePath(`/projects/${slug}`)}
-          class="py-1 px-3 rounded-sm uppercase text-md text-white transition-colors cursor-pointer bg-indigo-500 shadow-lg shadow-indigo-500/50 hover:opacity-85"
+          class="py-1 px-3 rounded-sm uppercase text-md text-white transition-colors cursor-pointer bg-indigo-500 shadow-lg shadow-indigo-500/50 hover:opacity-85 active:shadow-inset"
         >
           {i18n.GENERAL.GO}
         </a>
@@ -63,9 +66,15 @@ const { title, image, description, slug, isExternalProject } = Astro.props;
   </div>
 </div>
 
+<script src="@typescript/projects/more-info.ts"></script>
+
+<!-- <div
+  class=""
+>
+</div> -->
+
 <style>
-  button:active,
-  a:active {
-    box-shadow: 2px 2px 8px #0f0f0fac inset;
+  .modal-content {
+    backdrop-filter: blur(2px);
   }
 </style>

@@ -3,8 +3,8 @@ import {
   getLangFromUrl,
   useTranslations,
   useTranslatedPath,
-} from "../../../i18n/utils";
-import MenuIcon from "../../../icons/Menu.astro";
+} from "@i18n/utils";
+import MenuIcon from "@icons/Menu.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -24,6 +24,9 @@ const links: Links[] = [
   { href: "/", name: "nav.home" },
   { href: "/projects", name: "nav.projects" },
 ];
+
+const currentPath = Astro.url.pathname;
+
 ---
 
 <div>
@@ -38,14 +41,26 @@ const links: Links[] = [
   </div>
 
   <nav
-    class="container-elements w-screen h-screen overflow-y-auto absolute left-0 z-2 transition-transform duration-300 ease-in-jump lg:max-h-[8dvh] lg:border-b lg:border-primary lg:overflow-hidden lg:px-10 bg-gray-100 dark:bg-gray-800"
+    class="container-elements w-screen h-screen overflow-y-auto absolute left-0 z-2 transition-transform duration-300 ease-in-jump lg:max-h-[8dvh] lg:border-b lg:border-primary lg:overflow-hidden lg:px-10 bg-gray-100 dark:bg-slate-800"
   >
     <ul
       class="flex flex-col h-full max-h-full py-5 px-3 lg:flex-row lg:py-3 lg:max-h-[8dvh] lg:gap-4"
     >
       {
         links.map((link) => (
-          <li class="border-t text-primary transition-colors uppercase border-primary dark:border-white py-2 text-center lg:border-0 hover:text-gray-800 dark:hover:text-white lg:py-1 last:border-b lg:last:border-none ">
+          <li
+            class:list={[
+              "border-t transition-colors uppercase border-primary dark:border-white py-2 text-center lg:border-0 hover:text-gray-800 dark:hover:text-white lg:py-1 last:border-b lg:last:border-none",
+              {
+                "text-primary":
+                `/${currentPath.split('/').at(-1)}` !== link.href,
+              },
+              {
+                "text-gray-800 border-primary dark:text-white  dark:border-white":
+                `/${currentPath.split('/').at(-1)}`  === link.href,
+              },
+            ]}
+          >
             <a class="block" href={translatePath(link.href)}>
               {t(link.name)}
             </a>
