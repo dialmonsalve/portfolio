@@ -30,6 +30,7 @@ export function useTranslatedPath(lang: keyof typeof ui) {
 export function getRouteFromUrl(url: URL): string | undefined {
   const pathname = new URL(url).pathname;
   const parts = pathname?.split("/");
+
   const path = parts.pop() || parts.pop();
 
   if (path === undefined) {
@@ -40,17 +41,19 @@ export function getRouteFromUrl(url: URL): string | undefined {
 
   if (defaultLang === currentLang) {
     const route = Object.values(routes)[0];
+
     return route[path] !== undefined ? route[path] : undefined;
   }
 
   const getKeyByValue = (
     obj: Record<string, string>,
-    value: string,
+    value: string
   ): string | undefined => {
     return Object.keys(obj).find((key) => obj[key] === value);
   };
 
   const reversedKey = getKeyByValue(routes[currentLang], path);
+  console.log({ reversedKey });
 
   if (reversedKey !== undefined) {
     return reversedKey;
@@ -58,3 +61,46 @@ export function getRouteFromUrl(url: URL): string | undefined {
 
   return undefined;
 }
+
+// export function getRouteFromUrl(url: URL): string | undefined {
+//   const pathname = new URL(url).pathname;
+//   const parts = pathname?.split("/").filter(part => part !== "");
+//   const currentLang = getLangFromUrl(url);
+
+//   if (parts.length === 0) {
+//     return undefined;
+//   }
+
+//   const routeExists = (lang: string, parts: string[]): boolean => {
+//     let currentRoutes = routes[lang];
+//     for (const part of parts) {
+//       console.log( {parts: currentRoutes[part]});
+//       if (typeof currentRoutes === "object" && currentRoutes[part]) {
+//         currentRoutes = currentRoutes[part];
+//       } else {
+//         return false;
+//       }
+//     }
+//     return true;
+//   };
+
+//   const getLocalizedPath = (lang: string, parts: string[]): string => {
+//     return parts.map(part => {
+//       const reversedKey = Object.keys(routes[lang]).find(key => routes[lang][key] === part);
+//       return reversedKey !== undefined ? reversedKey : part;
+
+//     }).join("/");
+//   };
+
+//   if (routeExists(defaultLang, parts)) {
+//     const route = getLocalizedPath(defaultLang, parts);
+//     return route;
+//   }
+
+//   if (routeExists(currentLang, parts)) {
+//     const route = getLocalizedPath(currentLang, parts);
+//     return route;
+//   }
+
+//   return undefined;
+// }

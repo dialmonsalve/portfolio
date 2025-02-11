@@ -8,8 +8,8 @@ import {
 } from "@i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
-const translatePath = useTranslatedPath(lang);
 const route = getRouteFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
 ---
 
 <div class="flex gap-8 item">

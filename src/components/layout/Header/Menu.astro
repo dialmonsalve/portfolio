@@ -4,7 +4,8 @@ import {
   useTranslations,
   useTranslatedPath,
 } from "@i18n/utils";
-import MenuIcon from "@icons/Menu.astro";
+
+import { Icon } from "astro-icon/components";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -21,12 +22,11 @@ interface Links {
 }
 
 const links: Links[] = [
-  { href: "/", name: "nav.home" },
-  { href: "/projects", name: "nav.projects" },
+  { href: "", name: "nav.home" },
+  { href: "projects", name: "nav.projects" },
 ];
 
 const currentPath = Astro.url.pathname;
-
 ---
 
 <div>
@@ -36,7 +36,7 @@ const currentPath = Astro.url.pathname;
       for="menu"
       class="bg-primary cursor-pointer hover:bg-white dark:hover:text-white"
     >
-      <MenuIcon />
+      <Icon name="menu" class="text-slate-800 dark:text-white" />
     </label>
   </div>
 
@@ -53,15 +53,18 @@ const currentPath = Astro.url.pathname;
               "border-t transition-colors uppercase border-primary dark:border-white py-2 text-center lg:border-0 hover:text-gray-800 dark:hover:text-white lg:py-1 last:border-b lg:last:border-none",
               {
                 "text-primary":
-                `/${currentPath.split('/').at(-1)}` !== link.href,
+                  `${currentPath.split("/").at(-1)}` !== link.href,
               },
               {
                 "text-gray-800 border-primary dark:text-white  dark:border-white":
-                `/${currentPath.split('/').at(-1)}`  === link.href,
+                  `${currentPath.split("/").at(-1)}` === link.href,
               },
             ]}
           >
-            <a class="block" href={translatePath(link.href)}>
+            <a
+              class="block"
+              href={translatePath(`/${link.href ? link.href : ""}`, lang)}
+            >
               {t(link.name)}
             </a>
           </li>

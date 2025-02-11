@@ -21,13 +21,13 @@
         "TITLE": "componentes web",
         "IMAGE": "",
         "DESCRIPTION": "Crea tus formularios",
-        "SLUG": "web-components"
+        "SLUG": "projects/web-components"
       },
       {
         "TITLE": "Conversor de imágenes",
         "IMAGE": "",
         "DESCRIPTION": "Cambie el formato de sus imagenes",
-        "SLUG": "convert-images"
+        "SLUG": "projects/convert-images"
       }
     ],
     "WEB_COMPONENTS":[

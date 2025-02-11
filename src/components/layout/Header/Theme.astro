@@ -1,6 +1,6 @@
 ---
-import Dark from "@icons/Dark.astro";
-import Light from "@icons/Light.astro";
+import { Icon } from 'astro-icon/components'
+
 ---
 
 <div class="w-6 h-6">
@@ -8,13 +8,13 @@ import Light from "@icons/Light.astro";
     class="container-themes__theme block cursor-pointer transition-opacity ease-in-out"
     id="dark"
   >
-    <Dark />
+    <Icon name="dark" class="text-2xl" />
   </button>
   <button
     id="light"
     class="container-themes__theme block cursor-pointer transition-opacity ease-in-out"
   >
-    <Light />
+  <Icon name="light" class="text-2xl text-white" />
   </button>
 </div>
 
