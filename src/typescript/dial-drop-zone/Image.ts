@@ -1,8 +1,8 @@
-
 interface Images {
   urlObj: string;
   fileName: string;
   ext: string;
+  webpImage: File;
 }
 
 const drawer = document.createElement("canvas");
@@ -30,10 +30,10 @@ export class Image {
         const ctx = drawer.getContext("2d");
         ctx?.drawImage(img, 0, 0, img.width, img.height);
 
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
           drawer.toBlob(
             (blob) => {
-              if (!blob) return;
+              if (!blob) return reject(new Error("Blob not created"));
               const uuid = Image.getUUID();
               const ext = "webp";
               const webpImage = new File([blob], uuid, {
@@ -43,14 +43,15 @@ export class Image {
               const urlObj = URL.createObjectURL(webpImage);
 
               resolve({
+                webpImage,
                 urlObj,
                 fileName: uuid,
                 ext,
               });
             },
-            "image/jpeg",
+            "image/webp",
             // quality
-            0.95
+            0.5
           );
           ctx?.reset();
         });
@@ -67,5 +68,4 @@ export class Image {
 
     return uuid[0] + "-" + uuid[1] + "-" + uuid[2];
   };
-
 }

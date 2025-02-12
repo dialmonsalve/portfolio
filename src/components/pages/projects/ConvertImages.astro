@@ -4,7 +4,7 @@ import Layout from "@layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
 
 import { getI18N } from "@i18n/index";
-import UploadImage from "@icons/UploadImage.astro";
+
 
 const { currentLocale } = Astro;
 const i18n = getI18N({ currentLocale });
@@ -12,18 +12,6 @@ const i18n = getI18N({ currentLocale });
 const selectFormat = ["jpeg", "png", "jpg", "webp"];
 const selectQuantity = ["95", "30", "40", "50", "60", "70", "80", "90"];
 
-const product = {
-  title: "hola",
-  slug: "hola",
-  description: "hola",
-  price: 4,
-  stock: 3,
-  tags: ["hola", "mundo"],
-  type: "mundo",
-  gender: "MEN",
-};
-
-const images = ["/hola"];
 ---
 
 <Layout>
@@ -61,42 +49,6 @@ const images = ["/hola"];
         </select>
       </div>
     </article>
-
-    <article class="container-components" id="card-image">
-      <load-images>
-        <div class="container-components__image" id="container-components">
-          <div
-            id="container-image"
-            data-target="image"
-            class="new-uploader flex flex-col gap-4 items-center border-2 border-gray-300 p-3 min-w-40 rounded-md shadow-lg shadow-gray-500/50 transition-all"
-          >
-            <UploadImage />
-
-            <label
-              class="px-1.5 py-1 block bg-primary rounded-md text-white cursor-pointer shadow-lg shadow-blue-500/50 hover:opacity-85 active:shadow-inset dark:shadow-green-500/50"
-              data-sk-drawer="drawer-image"
-              data-sk-target="image"
-              id="label-image"
-            >
-              Upload image
-            </label>
-            <p
-              class="px-1.5 py-1 bg-gray-700 rounded-md text-white"
-              id="drag-and-drop-text"
-            >
-              Drag and drop
-            </p>
-            <p id="input-image" class="text-[10px] text-center"></p>
-          </div>
-          <input
-            id="image"
-            type="file"
-            class="uploader-image hidden"
-            name="image"
-          />
-        </div>
-      </load-images>
-    </article>
   </section>
 
   <section>
@@ -106,7 +58,7 @@ const images = ["/hola"];
         <!-- File input -->
         <dial-drop-zone class="" >
           <div
-            class="flex items-center justify-center w-full"
+            class="flex flex-col items-center justify-center w-full"
             id="parent-drop-zone"
           >
             <label
@@ -135,43 +87,13 @@ const images = ["/hola"];
                 class="hidden"
               />
             </label>
+            <p class="my-2 text-sm text-gray-500" id="lbl-selected-files">0 files selected</p>
           </div>
-          <p class="my-2 text-sm text-gray-500" id="lbl-selected-files">0 files selected</p>
-        </dial-drop-zone>
-
-        <table class="w-full border">
-          <thead>
-            <tr>
-              <th>Imagen</th>
-              <th>Eliminar</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              images.map((image) => (
-                <tr class="border">
-                  <td class="flex justify-center">
-                    <img
-                      src={image}
-                      alt={product.title}
-                      class="w-16 h-16 rounded"
-                    />
-                  </td>
-                  <td class="text-center">
-                    <button type="button" class="btn-delete-image">
-                      X
-                    </button>
-                  </td>
-                </tr>
-              ))
-            }
-          </tbody>
-        </table>
-       
+        </dial-drop-zone>     
       </div>
     </div>
   </section>
+  <button id="hola" >Click</button>
 </Layout>
 
-<script src="@typescript/load-images/upload.ts"></script>
 <script src="@typescript/dial-drop-zone"></script>
