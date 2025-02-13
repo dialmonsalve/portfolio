@@ -53,7 +53,6 @@ export function getRouteFromUrl(url: URL): string | undefined {
   };
 
   const reversedKey = getKeyByValue(routes[currentLang], path);
-  console.log({ reversedKey });
 
   if (reversedKey !== undefined) {
     return reversedKey;
@@ -74,7 +73,6 @@ export function getRouteFromUrl(url: URL): string | undefined {
 //   const routeExists = (lang: string, parts: string[]): boolean => {
 //     let currentRoutes = routes[lang];
 //     for (const part of parts) {
-//       console.log( {parts: currentRoutes[part]});
 //       if (typeof currentRoutes === "object" && currentRoutes[part]) {
 //         currentRoutes = currentRoutes[part];
 //       } else {

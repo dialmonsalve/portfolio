@@ -94,7 +94,6 @@ export class DialDropZone extends HTMLElement {
         container.appendChild(containerImg);
         parent?.appendChild(container);
 
-        console.log(i.webpImage);
         
       });
     } catch (error) {
