@@ -1,0 +1,10 @@
+---
+import NavLink from "./NavLink.astro";
+import LINKS from "@constants/navLinks";
+---
+
+<nav class="hidden lg:flex">
+  <ul class="flex lg:gap-3 xl:gap-4 items-center">
+    {LINKS.map((link) => <NavLink link={link} />)}
+  </ul>
+</nav>

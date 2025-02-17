@@ -1,4 +1,4 @@
-import Modal from "@typescript/components/modal"
+import Modal from "src/lib/components/modal"
 
 
 class MoreInfo extends HTMLElement {

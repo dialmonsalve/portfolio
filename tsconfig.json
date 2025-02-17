@@ -14,7 +14,9 @@
       "@layouts/*": ["./src/layouts/*"],
       "@pages/*": ["./src/pages/*"],
       "@styles/*": ["./src/styles/*"],
-      "@typescript/*": ["./src/typescript/*"]
+      "@lib/*": ["src/lib/*"],
+      "@interfaces/*": ["./src/interfaces/*"],
+      "@constants/*": ["./src/constants/*"],
     }
   }
 }

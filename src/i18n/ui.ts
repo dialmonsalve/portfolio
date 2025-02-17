@@ -33,6 +33,9 @@ export const ui = {
     "nav.services": "Services",
     "nav.projects": "Projects",
     "nav.contact": "Contact",
+    "nav.web-components" : "Web components",
+    "nav.convert-images" : "Convert Images",
+    "nav.dialui-components" : "Dial-UI components"
   },
   es: {
     "nav.home": "Inicio",
@@ -40,6 +43,9 @@ export const ui = {
     "nav.services": "Servicios",
     "nav.projects": "Proyectos",
     "nav.contact": "Contacto",
+    "nav.web-components" : "Componentes web",
+    "nav.convert-images" : "Convertidor de imágenes",
+    "nav.dialui-components" :"Dial-UI components"
   },
 } as const;
 

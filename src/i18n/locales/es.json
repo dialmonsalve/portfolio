@@ -1,4 +1,9 @@
 {
+  "general": {
+    "configurations": "configuraciones",
+    "language": "idioma",
+    "theme": "tema"
+  },
   "GENERAL": {
     "MORE": "más",
     "GO": "ir"

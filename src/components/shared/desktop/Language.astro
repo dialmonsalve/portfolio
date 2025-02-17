@@ -8,8 +8,8 @@ import {
 } from "@i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
-const route = getRouteFromUrl(Astro.url);
 const translatePath = useTranslatedPath(lang);
+const route = getRouteFromUrl(Astro.url);
 ---
 
 <div class="flex gap-8 item">
@@ -17,16 +17,16 @@ const translatePath = useTranslatedPath(lang);
     <button-language>
       <button
         id="language"
-        class="block text-primary cursor-pointer hover:text-gray-800 dark:hover:text-white"
+        class="block hover:opacity-80 text-primary cursor-pointer dark:hover:text-white text-sm xl:text-xl"
         >{lang === "es" ? "Español" : "English"}</button
       >
       <ul
         id="language-container"
-        class="absolute hidden bg-white border border-primary p-1 dark:bg-gray-800 rounded translate-y-1 z-3 language"
+        class="absolute hidden bg-white border border-primary p-2 dark:bg-white rounded translate-y-1 z-3 language"
       >
         {
           Object.entries(languages).map(([lang, label]) => (
-            <li class="text-primary hover:text-gray-800 dark:hover:text-white transition-colors">
+            <li class="text-primary  transition-colors lg:text-[12px] text-sm xl:text-xl">
               <a class="" href={translatePath(`/${route ? route : ""}`, lang)}>
                 {label}
               </a>
@@ -49,11 +49,7 @@ const translatePath = useTranslatedPath(lang);
 
       buttonLanguage?.addEventListener("click", (evt) => {
         evt.stopPropagation();
-        if (language?.classList.contains("hidden")) {
-          language?.classList.remove("hidden");
-        } else {
-          language?.classList.add("hidden");
-        }
+        language?.classList.toggle("hidden");
       });
 
       container?.addEventListener("click", () => {
@@ -72,7 +68,7 @@ const translatePath = useTranslatedPath(lang);
     opacity: 1;
     transition:
       opacity 0.3s ease-in-out,
-      display 0.3s ease-in-out allow-discrete;
+      display 0.1s ease-in-out allow-discrete;
     @starting-style {
       opacity: 0;
     }

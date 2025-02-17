@@ -1,0 +1,86 @@
+---
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations,
+} from "@i18n/utils";
+import type { Link } from "@interfaces/links";
+import { Icon } from "astro-icon/components";
+
+import ChildrenLink from "./ChildrenLink.astro";
+
+
+interface Props {
+  link: Link;
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+const suffix = lang === "en" ? "/en" : "";
+
+const currentPath = Astro.url.pathname;
+const { link } = Astro.props;
+
+const isSamePath = currentPath === `${suffix}${link.href}`;
+---
+
+<li class="sub-menu-has-children">
+  {
+    (
+      <a
+        class="flex items-center transition-colors lg:gap-1  text-primary hover:opacity-80 xl:text-md 2xl:text-xl text-center border-b-transparent capitalize"
+        href={translatePath(`${link.href ? link.href : ""}`, lang)}
+        target={link.target}
+      >
+        <Icon name={link.icon} size={20} />
+        {t(link.name)} {link.hasChildren && <Icon name="arrow-down" />}
+      </a>
+    )
+  }
+
+  {link.hasChildren && <ChildrenLink submenu={link.subMenu} />}
+
+  {
+    isSamePath ? (
+      <div
+        transition:name="next-anchor"
+        class="transition-colors border-b border-primary ml-6"
+      />
+    ) : (
+      <div class="border-b-2 border-transparent" />
+    )
+  }
+</li>
+
+<style is:global>
+  .sub-menu-has-children:hover > .submenu {
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+    transition: all 0.4s ease-in-out;
+
+    @starting-style {
+      opacity: 0;
+    }
+  }
+
+  li > a {
+    position: relative;
+  }
+  li > a::after {
+    content: "";
+    height: 1px;
+    width: 0;
+    position: absolute;
+    transition: all 0.2s ease-in-out;
+    background-color: #00aeee;
+    bottom: -2px;
+    right: 0;
+  }
+
+  li > a:hover::after {
+    width: 80%;
+  }
+</style>

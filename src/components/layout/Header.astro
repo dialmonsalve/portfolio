@@ -1,17 +1,26 @@
 ---
-import Language from "@components/layout/Header/Language.astro";
-import Logo from "@components/layout/Header/Logo.astro";
-import Menu from "@components/layout/Header/Menu.astro";
-import Theme from "@components/layout/Header/Theme.astro";
+import Language from "@components/shared/desktop/Language.astro";
+import Logo from "@components/shared/desktop/Logo.astro";
+import Menu from "@components/shared/desktop/Menu.astro";
+import Theme from "@components/shared/Theme.astro";
+
+import MenuMobile from "@components/shared/mobile/MenuMobile.astro";
 ---
 
 <header
-  class="fixed inset-x-0 top-0 z-10 border-b border-gray-400 dark:border-white/10 flex items-center justify-between gap-8 p-4 sm:px-6 bg-gray-200 dark:bg-slate-800"
+  class="flex fixed inset-x-0 top-0 z-10 border-b border-slate-400 dark:border-white/10 items-center justify-evenly lg:justify-between xl:justify-evenly md:gap-0 py-2 bg-linear-to-r/srgb from-white to-gray-200 dark:from-slate-900 dark:to-slate-800 lg:py-0 lg:px-4 xl:px-4"
 >
-  <Logo />
-  <div class="flex items-center gap-4 md:gap-8">
-    <Theme />
+  <Logo
+    className="h-20 w-40 md:h-20 md:w-50 lg:w-25 lg:h-30 xl:h-20 xl:w-50 relative overflow-hidden"
+  />
+  <Menu />
+  <div class="hidden lg:flex items-center lg:gap-2 xl:gap-4">
+    <theme-dial>
+      <Theme />
+    </theme-dial>
     <Language />
-    <Menu />
   </div>
+  <MenuMobile />
 </header>
+
+

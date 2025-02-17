@@ -1,0 +1,34 @@
+---
+// import Picture from "astro/components/Picture.astro";
+
+// import logo from "@/assets/brand/logo.png";
+// import logoWhite from "@/assets/brand/logo-white.png";
+
+interface Props {
+  className: string;
+}
+
+const { className } = Astro.props;
+---
+
+<div class=`dark:hidden ${className} `>
+  <!-- <a href="/">
+    <Picture
+      src={logo}
+      alt={"Skytel logo"}
+      formats={["webp", "jpg", "jpeg"]}
+      class="w-full h-full object-cover"
+    />
+  </a> -->
+</div>
+
+<div class=`hidden dark:block ${className} `>
+  <!-- <a href="/">
+    <Picture
+      src={logoWhite}
+      alt={"Skytel logo"}
+      formats={["webp", "jpg", "jpeg"]}
+      class="w-full h-full object-cover"
+    />
+  </a> -->
+</div>
