@@ -1,4 +1,4 @@
-import { Image } from "./Image";
+import { Image } from "./ImageClass";
 
 export class DialDropZone extends HTMLElement {
 

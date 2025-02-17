@@ -5,13 +5,11 @@ import { Icon } from "astro-icon/components";
 
 import { getI18N } from "@i18n/index";
 
-
 const { currentLocale } = Astro;
 const i18n = getI18N({ currentLocale });
 
 const selectFormat = ["jpeg", "png", "jpg", "webp"];
 const selectQuantity = ["95", "30", "40", "50", "60", "70", "80", "90"];
-
 ---
 
 <Layout>
@@ -49,16 +47,14 @@ const selectQuantity = ["95", "30", "40", "50", "60", "70", "80", "90"];
         </select>
       </div>
     </article>
-  </section>
 
-  <section>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <article class="w-2/3">
       <!-- File upload -->
       <div class="mt-4">
         <!-- File input -->
-        <dial-drop-zone class="" >
+        <dial-download-drop-zone class="">
           <div
-            class="flex flex-col items-center justify-center w-full"
+            class="flex flex-col items-center justify-center w-full gap-2"
             id="parent-drop-zone"
           >
             <label
@@ -71,12 +67,10 @@ const selectQuantity = ["95", "30", "40", "50", "60", "70", "80", "90"];
                   name="upload"
                   class="text-2xl text-gray-700 dark:text-gray-300"
                 />
-                <p class="mb-2 text-sm text-gray-500" >
+                <p class="mb-2 text-sm text-gray-500">
                   <span class="font-semibold">Click aquí </span> o arrastra los archivos
                 </p>
-                <p class="text-xs text-gray-500">
-                  SVG, PNG, JPG or GIF (max. 800x400px)
-                </p>
+                <p class="text-xs text-gray-500">SVG, PNG, JPG or GIF</p>
               </div>
               <input
                 id="file-upload"
@@ -87,13 +81,14 @@ const selectQuantity = ["95", "30", "40", "50", "60", "70", "80", "90"];
                 class="hidden"
               />
             </label>
-            <p class="my-2 text-sm text-gray-500" id="lbl-selected-files">0 files selected</p>
+            <p class="my-2 text-sm text-gray-500" id="lbl-selected-files">
+              0 archivos seleccionados
+            </p>
           </div>
-        </dial-drop-zone>     
+        </dial-download-drop-zone>
       </div>
-    </div>
+    </article>
   </section>
-  <button id="hola" >Click</button>
 </Layout>
 
-<script src="@typescript/dial-drop-zone"></script>
+<script src="@typescript/dial-download-drop-zone"></script>

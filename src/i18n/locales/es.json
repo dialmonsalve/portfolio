@@ -13,6 +13,7 @@
         "TITLE": "dialui-components",
         "IMAGE": "",
         "DESCRIPTION": "Componentes de react",
+        "HREF": "https://dialui-components.netlify.app",
         "SLUG": "https://dialui-components.netlify.app"
       }
     ],
@@ -21,13 +22,15 @@
         "TITLE": "componentes web",
         "IMAGE": "",
         "DESCRIPTION": "Crea tus formularios",
-        "SLUG": "projects/web-components"
+        "SLUG": "web-components",
+        "HREF": "projects/web-components"
       },
       {
         "TITLE": "Conversor de imágenes",
         "IMAGE": "",
         "DESCRIPTION": "Cambie el formato de sus imagenes",
-        "SLUG": "projects/convert-images"
+        "HREF": "projects/convert-images",
+        "SLUG": "convert-images"
       }
     ],
     "WEB_COMPONENTS":[

@@ -6,6 +6,7 @@ import Card from "@components/Card.astro";
 const currentLocale = Astro.currentLocale;
 
 const i18n = getI18N({ currentLocale });
+
 ---
 
 <Layout>
@@ -21,6 +22,7 @@ const i18n = getI18N({ currentLocale });
             description={project.DESCRIPTION}
             slug={project.SLUG}
             isExternalProject={true}
+            href={project.HREF}
           />
         ))
       }
@@ -35,6 +37,7 @@ const i18n = getI18N({ currentLocale });
             description={project.DESCRIPTION}
             slug={project.SLUG}
             isExternalProject={false}
+            href={project.HREF}
           />
         ))
       }

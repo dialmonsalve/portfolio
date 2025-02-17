@@ -12,9 +12,13 @@ export class HandleFiles {
     fileInput: HTMLInputElement,
     dropZone: HTMLLabelElement
   ) => {
-    const validFiles = Array.from(files).filter((file) =>
-      file.type.startsWith("image/")
-    );
+    const validFiles = Array.from(files).filter((file) => {
+      if (file.type.startsWith("image/")) {
+        return true;
+      } else {
+        throw new Error("File or files not supported");
+      }
+    });
 
     const paragraph = dropZone.parentElement?.querySelector(
       "#lbl-selected-files"
@@ -24,7 +28,12 @@ export class HandleFiles {
       fileInput.files = HandleFiles.createFileList(validFiles);
     }
 
-    paragraph.innerHTML = `<strong>${validFiles.length} archivos seleccionados</strong>`;
+    const text =
+      validFiles.length === 1
+        ? "1 archivo seleccionado"
+        : `${validFiles.length} archivos seleccionado`;
+
+    paragraph.innerHTML = `<strong>${text}</strong>`;
 
     return validFiles.length;
   };
