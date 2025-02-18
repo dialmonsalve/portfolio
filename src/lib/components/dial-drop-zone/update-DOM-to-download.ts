@@ -10,7 +10,7 @@ interface ImageOptimized {
   webpImage: File;
 }
 
-export class UpdateDOM {
+export class UpdateDOMToDownload {
   constructor() {}
 
   static createImages = async (files: FileList, dropZone: HTMLLabelElement) => {
@@ -29,7 +29,7 @@ export class UpdateDOM {
 
       const imagesLength = images.length;
 
-      UpdateDOM.andAddClasesAtParentNode(imagesLength, container);
+      UpdateDOMToDownload.andAddClasesAtParentNode(imagesLength, container);
 
       images.map((imageOptimized) => {
         const spinner = new Spinner("absolute top-12 left-10");
@@ -37,7 +37,7 @@ export class UpdateDOM {
 
         containerImg?.appendChild(spinner.getElement());
 
-        const image = UpdateDOM.andCreateImage(imageOptimized);
+        const image = UpdateDOMToDownload.andCreateImage(imageOptimized);
 
         image.onload = () => {
           spinner.getElement().remove();
@@ -51,8 +51,8 @@ export class UpdateDOM {
       const containerLinks = document.createElement("div");
       containerLinks.classList.add("flex", "gap-2");
 
-      const link = UpdateDOM.andCreateLink();
-      const linkClear = UpdateDOM.andCreateLinkToCleanScreen();
+      const link = UpdateDOMToDownload.andCreateLink();
+      const linkClear = UpdateDOMToDownload.andCreateLinkToCleanScreen();
       const downloadImages = new DownLoadImages();
 
       if (imagesLength > 1) {
@@ -118,6 +118,7 @@ export class UpdateDOM {
 
     link.classList.add(
       "bg-green-700",
+      "dark:bg-blue-700",
       "cursor-pointer",
       "py-1",
       "px-2",

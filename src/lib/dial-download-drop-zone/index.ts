@@ -1,6 +1,6 @@
 import { HandleFiles } from "src/lib/components/dial-drop-zone/handle-files";
 import HandleEvents from "../components/dial-drop-zone/handle-events";
-import { UpdateDOM } from "src/lib/components/dial-drop-zone/update-DOM-to-download";
+import { UpdateDOMToDownload } from "src/lib/components/dial-drop-zone/update-DOM-to-download";
 
 export class DialDownLoadDropZone extends HTMLElement {
   private dropZone = this.querySelector("#drop-zone") as HTMLLabelElement;
@@ -25,7 +25,7 @@ export class DialDownLoadDropZone extends HTMLElement {
       try {
         HandleFiles.handleFiles(files, fileInput, this.dropZone);
 
-        UpdateDOM.createImages(files, this.dropZone);
+        UpdateDOMToDownload.createImages(files, this.dropZone);
       } catch (error) {
         if (error instanceof Object) {
           DialDownLoadDropZone.createAlertOnError(error.toString());
@@ -43,7 +43,7 @@ export class DialDownLoadDropZone extends HTMLElement {
       try {
         HandleFiles.handleFiles(files, target, this.dropZone);
 
-        UpdateDOM.createImages(files, this.dropZone);
+        UpdateDOMToDownload.createImages(files, this.dropZone);
       } catch (error) {
         if (error instanceof Object) {
           DialDownLoadDropZone.createAlertOnError(error.toString());

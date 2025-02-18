@@ -26,23 +26,23 @@ const isSamePath = currentPath === `${suffix}${link.href}`;
 
 <li
   class:list={[
-    "first:border-t border-brand-200 dark:border-brand-300 py-2 border-b sub-menu-has-children px-2",
+    "first:border-t border-primary py-2 border-b sub-menu-has-children px-2",
   ]}
 >
   {
     !isSamePath && !link.hasChildren ? (
       <a
-        class="flex items-center gap-1 text-md transition-colors capitalize text-brand-100 hover:text-brand-200 dark:text-gray-300 dark:hover:text-brand-300"
+        class="flex items-center gap-1 text-md transition-colors capitalize text-primary"
         href={translatePath(`${link.href ? link.href : ""}`, lang)}
       >
-        <Icon name={link.icon} size={20} class="dark:text-brand-200" />
+        <Icon name={link.icon} size={20} class="text-primary" />
         {t(link.name)}
       </a>
     ) : (
       <button
         class:list={[getLinkClasses(isSamePath), "accordion-header w-full"]}
       >
-        <Icon name={link.icon} size={20} class="dark:text-brand-200" />
+        <Icon name={link.icon} size={20} class="text-primary" />
         {t(link.name)} {link.hasChildren && <span id="icon-link">+</span>}
       </button>
     )

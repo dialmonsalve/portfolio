@@ -16,31 +16,33 @@ const { submenu } = Astro.props;
 
 const suffix = lang === "en" ? "/en" : "";
 ---
+<div class="absolute w-55 translate-y-0.5 submenu Z-10 hidden py-2" >
+  <ul
+    class=" bg-white py-4 px-4 rounded-md shadow-xl flex flex-col gap-1"
+  >
+    {
+      submenu?.map((sub) => {
+        const isSamePath = currentPath === `${suffix}${sub.href}`;
+        return (
+          <li class="">
+            <a
+              class:list={[
+                "flex items-center gap-1 text-sm transition-colors capitalize",
+                {
+                  "text-primary hover:opacity-80": !isSamePath,
+                },
+                {
+                  "text-primary dark:text-white": isSamePath,
+                },
+              ]}
+              href={translatePath(`${sub.href ? sub.href : ""}`, lang)}
+            >
+              {t(sub.name)}
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
 
-<ul
-  class="absolute bg-white py-4 px-4 w-55 translate-y-0.5 rounded-md hidden gap-1 shadow-xl z-10 submenu"
->
-  {
-    submenu?.map((sub) => {
-      const isSamePath = currentPath === `${suffix}${sub.href}`;
-      return (
-        <li class="">
-          <a
-            class:list={[
-              "flex items-center gap-1 text-sm transition-colors capitalize",
-              {
-                "text-primary hover:opacity-80": !isSamePath,
-              },
-              {
-                "text-primary dark:text-white": isSamePath,
-              },
-            ]}
-            href={translatePath(`${sub.href ? sub.href : ""}`, lang)}
-          >
-            {t(sub.name)}
-          </a>
-        </li>
-      );
-    })
-  }
-</ul>
+</div>

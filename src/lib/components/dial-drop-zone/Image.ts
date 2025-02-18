@@ -1,9 +1,4 @@
-interface Images {
-  urlObj: string;
-  fileName: string;
-  ext: string;
-  webpImage: File;
-}
+import type { ImageOptimized } from "./interfaces";
 
 const drawer = document.createElement("canvas");
 drawer.style.display = "none";
@@ -13,7 +8,7 @@ document.body.appendChild(drawer);
 export class Image {
   constructor(private readonly conserveOriginalName: boolean = false) {}
 
-  create = async (files: FileList): Promise<Images[]> => {
+  create = async (files: FileList): Promise<ImageOptimized[]> => {
     const images = await Promise.all(
       Array.from(files).map(async (file) => {
         const $labelImage = document.querySelector("#label-image");
@@ -57,7 +52,7 @@ export class Image {
         });
       })
     );
-    return images.filter((image): image is Images => image !== null);
+    return images.filter((image): image is ImageOptimized => image !== null);
   };
 
   static getUUID = () => {

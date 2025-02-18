@@ -19,15 +19,18 @@ const LINKS: Link[] = [
       {
         name: Translate["nav.dialui-components"],
         href: "https://dialui-components.netlify.app",
+        target: "_blank",
       },
 
       {
         name: Translate["nav.convert-images"],
         href: "/projects/convert-images",
+        target: "_self",
       },
       {
         name: Translate["nav.web-components"],
         href: "/projects/web-components",
+        target: "_self",
       },
     ],
   },

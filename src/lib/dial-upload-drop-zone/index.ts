@@ -1,6 +1,9 @@
 import { HandleFiles } from "src/lib/components/dial-drop-zone/handle-files";
 import HandleEvents from "../components/dial-drop-zone/handle-events";
-import { UpdateDOM } from "src/lib/components/dial-drop-zone/update-DOM-to-download";
+import { UpdateDOMToSend } from "src/lib/components/dial-drop-zone/update-DOM-to-send";
+import type { ImageOptimized } from "@lib/components/dial-drop-zone/interfaces";
+
+import { actions } from "astro:actions";
 
 export class DialUploadDropZone extends HTMLElement {
   private dropZone = this.querySelector("#drop-zone") as HTMLLabelElement;
@@ -25,7 +28,9 @@ export class DialUploadDropZone extends HTMLElement {
       try {
         HandleFiles.handleFiles(files, fileInput, this.dropZone);
 
-        UpdateDOM.createImages(files, this.dropZone);
+        const images = await UpdateDOMToSend.createImages(files, this.dropZone);
+
+        new UpdateDOMToSend(() => this.action(images));
       } catch (error) {
         if (error instanceof Object) {
           DialUploadDropZone.createAlertOnError(error.toString());
@@ -34,7 +39,7 @@ export class DialUploadDropZone extends HTMLElement {
     }
   };
 
-  private onInputChange = (evt: Event) => {
+  private onInputChange = async (evt: Event) => {
     const target = evt.target as HTMLInputElement;
 
     const files = target.files;
@@ -43,7 +48,9 @@ export class DialUploadDropZone extends HTMLElement {
       try {
         HandleFiles.handleFiles(files, target, this.dropZone);
 
-        UpdateDOM.createImages(files, this.dropZone);
+        const images = await UpdateDOMToSend.createImages(files, this.dropZone);
+
+        new UpdateDOMToSend(() => this.action(images));
       } catch (error) {
         if (error instanceof Object) {
           DialUploadDropZone.createAlertOnError(error.toString());
@@ -92,7 +99,7 @@ export class DialUploadDropZone extends HTMLElement {
       div.addEventListener("transitionend", () => div.remove(), { once: true });
     };
 
-    const animationDuration = 4000; 
+    const animationDuration = 4000;
     const startTime = Date.now();
 
     const checkTime = () => {
@@ -104,8 +111,32 @@ export class DialUploadDropZone extends HTMLElement {
     };
 
     requestAnimationFrame(checkTime);
-
   };
+
+  private action(images: ImageOptimized[] | undefined) {
+    images?.map(async (image) => {
+      const buffer = await image.webpImage.arrayBuffer();
+      const base64Image = btoa(
+        new Uint8Array(buffer).reduce(
+          (data, byte) => data + String.fromCharCode(byte),
+          ""
+        )
+      );
+      const imageType = image.webpImage.type.split("/").at(-1)!;
+
+      const {data, error} = await actions.createImageOnCloud({ base64Image, imageType });
+
+      if(error){
+
+        return
+      }
+
+      if(data){
+        console.log("Subido de manera correcta");
+        window.location.href = "/projects/convert-images"
+      }
+    });
+  }
 }
 
 customElements.define("dial-upload-drop-zone", DialUploadDropZone);

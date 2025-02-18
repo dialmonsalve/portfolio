@@ -40,30 +40,30 @@ html {
 }
 
 div:has(.menu[type="checkbox"]:not(:checked)) + .container-elements {
-  transform: translateY(-110%);
+  transform: translateX(-110%);
 }
 
 div:has(.menu[type="checkbox"]:checked) + .container-elements {
-  transform: translateY(0.2rem);
+  transform: translateX(0);
 }
 
 @media (width >= 64rem) {
   div:has(.menu[type="checkbox"]:not(:checked)) + .container-elements {
-    transform: translateY(-225%);
+    transform: translateX(-225%);
   }
   div:has(.menu[type="checkbox"]:checked) + .container-elements {
-    transform: translateY(12px);
+    transform: translateX(12px);
   }
 }
 
 @media (width >= 80rem) {
   div:has(.menu[type="checkbox"]:checked) + .container-elements {
-    transform: translateY(16px);
+    transform: translateX(16px);
   }
 }
 
 @media (width >= 96rem) {
   div:has(.menu[type="checkbox"]:checked) + .container-elements {
-    transform: translateY(40px);
+    transform: translateX(40px);
   }
 }

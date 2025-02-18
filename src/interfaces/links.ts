@@ -10,6 +10,7 @@ export interface Link {
 export interface Submenu {
   href: string;
   name: Translate;
+  target: "_blank" | "_parent" | "_self" | "_top";
 }
 
 export enum Translate {

@@ -20,7 +20,19 @@ const { submenu } = Astro.props;
 const suffix = lang === "en" ? "/en" : "";
 ---
 
-<ul class="max-h-0 overflow-hidden transition-all flex flex-col gap-2">
+<ul class="max-h-0 overflow-hidden transition-all flex flex-col gap-1">
+
+  <li class="pl-5 pt-2"><a 
+    href={translatePath("/projects", lang)}
+    class:list={[
+      "flex items-center gap-1 text-md transition-colors capitalize",
+      {
+        "text-primary": currentPath === "/projects",
+      },
+      {
+        "dark:text-gray-300": currentPath !== "/projects",
+      },
+    ]}>{t('nav.projects')}</a></li>
   {
     submenu?.map((sub) => {
       const isSamePath = currentPath === `${suffix}${sub.href}`;
@@ -38,6 +50,7 @@ const suffix = lang === "en" ? "/en" : "";
               },
             ]}
             href={translatePath(`${sub.href ? sub.href : ""}`, lang)}
+            target={sub.target}
           >
             {t(sub.name)}
           </a>

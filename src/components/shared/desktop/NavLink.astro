@@ -9,7 +9,6 @@ import { Icon } from "astro-icon/components";
 
 import ChildrenLink from "./ChildrenLink.astro";
 
-
 interface Props {
   link: Link;
 }
@@ -28,9 +27,17 @@ const isSamePath = currentPath === `${suffix}${link.href}`;
 
 <li class="sub-menu-has-children">
   {
-    (
+    isSamePath && !link.hasChildren ? (
+      <span 
+      
+      class="flex lg:gap-1 text-primary items-center">
+        <Icon name={link.icon} size={20} />
+        {t(link.name)}
+      </span>
+    ) : (
       <a
-        class="flex items-center transition-colors lg:gap-1  text-primary hover:opacity-80 xl:text-md 2xl:text-xl text-center border-b-transparent capitalize"
+        
+        class="flex items-center lg:gap-1  text-primary hover:opacity-80 xl:text-md 2xl:text-xl text-center border-b-transparent capitalize"
         href={translatePath(`${link.href ? link.href : ""}`, lang)}
         target={link.target}
       >
@@ -43,44 +50,43 @@ const isSamePath = currentPath === `${suffix}${link.href}`;
   {link.hasChildren && <ChildrenLink submenu={link.subMenu} />}
 
   {
-    isSamePath ? (
+    isSamePath && (
       <div
         transition:name="next-anchor"
-        class="transition-colors border-b border-primary ml-6"
+        class:list={["transition-colors border-b-2 border-primary"]}
       />
-    ) : (
-      <div class="border-b-2 border-transparent" />
     )
   }
 </li>
 
 <style is:global>
   .sub-menu-has-children:hover > .submenu {
-    display: flex;
-    flex-direction: column;
-    opacity: 1;
+    display: block;
     transition: all 0.4s ease-in-out;
+    opacity: 1;
+    top: 60%;
 
     @starting-style {
       opacity: 0;
     }
   }
 
-  li > a {
+  .submenu li > a {
     position: relative;
   }
-  li > a::after {
+  .submenu li > a::after {
     content: "";
     height: 1px;
     width: 0;
     position: absolute;
     transition: all 0.2s ease-in-out;
-    background-color: #00aeee;
-    bottom: -2px;
+    background-color: var(--color-primary);
     right: 0;
+    bottom: 0;
   }
 
   li > a:hover::after {
-    width: 80%;
+    width: 100%;
   }
+
 </style>

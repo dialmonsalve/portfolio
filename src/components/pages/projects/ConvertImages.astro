@@ -1,9 +1,8 @@
 ---
 import Layout from "@layouts/Layout.astro";
 
-import { Icon } from "astro-icon/components";
-
 import { getI18N } from "@i18n/index";
+import DownloadImages from "@components/DownloadImages.astro";
 
 const { currentLocale } = Astro;
 const i18n = getI18N({ currentLocale });
@@ -25,11 +24,12 @@ const selectQuantity = ["95", "30", "40", "50", "60", "70", "80", "90"];
       <div class="flex gap-2 items-center">
         <label
           for="select-format"
-          class="text-gray-900 uppercase dark:text-white">format</label
+          class="text-gray-900 uppercase dark:text-white text-[10px] md:text-lg"
+          >format</label
         >
         <select
           id="select-format"
-          class="border border-primary px-2 py-1 rounded-md text-primary cursor-pointer"
+          class="border border-primary px-2 py-1 rounded-md text-primary cursor-pointer text-[10px] md:text-lg"
         >
           {selectFormat.map((sel) => <option value={sel}>{sel}</option>)}
         </select>
@@ -37,58 +37,18 @@ const selectQuantity = ["95", "30", "40", "50", "60", "70", "80", "90"];
       <div class="flex gap-2 items-center">
         <label
           for="select-quality"
-          class="text-gray-900 uppercase dark:text-white">Quality</label
+          class="text-gray-900 uppercase dark:text-white text-[10px] md:text-lg"
+          >Quality</label
         >
         <select
           id="select-quality"
-          class="border border-primary px-2 py-1 rounded-md text-primary cursor-pointer"
+          class="border border-primary px-2 py-1 rounded-md text-primary cursor-pointer text-[10px] md:text-lg"
         >
           {selectQuantity.map((sel) => <option value={sel}>{sel} %</option>)}
         </select>
       </div>
     </article>
 
-    <article class="w-2/3">
-      <!-- File upload -->
-      <div class="mt-4">
-        <!-- File input -->
-        <dial-download-drop-zone class="">
-          <div
-            class="flex flex-col items-center justify-center w-full gap-2"
-            id="parent-drop-zone"
-          >
-            <label
-              for="file-upload"
-              class="flex flex-col items-center justify-center w-full h-52 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-700 drop-zone"
-              id="drop-zone"
-            >
-              <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                <Icon
-                  name="upload"
-                  class="text-2xl text-gray-700 dark:text-gray-300"
-                />
-                <p class="mb-2 text-sm text-gray-500">
-                  <span class="font-semibold">Click aquí </span> o arrastra los archivos
-                </p>
-                <p class="text-xs text-gray-500">SVG, PNG, JPG or GIF</p>
-              </div>
-              <input
-                id="file-upload"
-                name="imageFiles"
-                type="file"
-                accept="image/*"
-                multiple
-                class="hidden"
-              />
-            </label>
-            <p class="my-2 text-sm text-gray-500" id="lbl-selected-files">
-              0 archivos seleccionados
-            </p>
-          </div>
-        </dial-download-drop-zone>
-      </div>
-    </article>
+    <DownloadImages />
   </section>
 </Layout>
-
-<script src="@lib/dial-download-drop-zone"></script>

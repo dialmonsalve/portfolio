@@ -1,12 +1,18 @@
 import { Image } from "./Image";
-import type { ImageOptimized } from "./interfaces";
-
 import Spinner from "./spinner";
 
-export class UpdateDOMToSend {
-  constructor() {}
+import type { ImageOptimized } from "./interfaces";
 
-  static createImages = async (files: FileList, dropZone: HTMLLabelElement) => {
+export class UpdateDOMToSend {
+  static action: () => void;
+  constructor(action: () => void) {
+    UpdateDOMToSend.action = action;
+  }
+
+  static createImages = async (
+    files: FileList,
+    dropZone: HTMLLabelElement
+  ): Promise<ImageOptimized[] | undefined> => {
     const parent = dropZone.closest("#parent-drop-zone") as HTMLDivElement;
     const container = document.createElement("div");
 
@@ -41,11 +47,17 @@ export class UpdateDOMToSend {
 
         parent?.appendChild(container);
       });
+      const containerLinks = document.createElement("div");
+      containerLinks.classList.add("flex", "gap-2");
 
+      const button = UpdateDOMToSend.andCreateButton();
 
-
+      containerLinks.appendChild(button);
+      parent.appendChild(containerLinks);
+      return images;
     } catch (error) {
       dropZone.classList.remove("hidden");
+      throw new Error(`${error}`);
     } finally {
       oneSpinner.getElement().remove();
     }
@@ -68,6 +80,25 @@ export class UpdateDOMToSend {
     return image;
   };
 
+  static andCreateButton = () => {
+    const button = document.createElement("button");
+
+    button.textContent = "Subir";
+
+    button.classList.add(
+      "bg-primary",
+      "cursor-pointer",
+      "py-1",
+      "px-2",
+      "text-white",
+      "rounded-md",
+      "hover:opacity-80"
+    );
+
+    button.addEventListener("click", ()=>UpdateDOMToSend.action());
+
+    return button;
+  };
 
   static andAddClasesAtParentNode = (
     imagesLength: number,
