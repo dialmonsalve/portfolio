@@ -2,7 +2,9 @@
   "general": {
     "configurations": "configuraciones",
     "language": "idioma",
-    "theme": "tema"
+    "theme": "tema",
+    "technology":"Tecnología",
+    "styles":"Estilos"
   },
   "GENERAL": {
     "MORE": "más",
@@ -13,15 +15,6 @@
   },
   "PROJECTS": {
     "TITLE": "Proyectos",
-    "EXTERNAL_PROJECTS": [
-      {
-        "TITLE": "dialui-components",
-        "IMAGE": "",
-        "DESCRIPTION": "Componentes de react",
-        "HREF": "https://dialui-components.netlify.app",
-        "SLUG": "https://dialui-components.netlify.app"
-      }
-    ],
     "INTERNAL_PROJECTS": [
       {
         "TITLE": "componentes web",

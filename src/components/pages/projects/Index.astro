@@ -2,19 +2,47 @@
 import { getI18N } from "@i18n/index";
 import Layout from "@layouts/Layout.astro";
 import Card from "@components/Card.astro";
+import { getCollection } from "astro:content";
 
 const currentLocale = Astro.currentLocale;
 
 const i18n = getI18N({ currentLocale });
 
+const projects = await getCollection(`projects_${currentLocale}` as "projects_es");
 ---
 
 <Layout>
-  <h1 class="text-gray-800 uppercase text-center text-2xl dark:text-white" transition:animate="slide">{i18n.PROJECTS.TITLE}</h1>
+  <h1
+    class="text-gray-800 uppercase text-center text-2xl dark:text-white"
+    transition:animate="slide"
+  >
+    {i18n.PROJECTS.TITLE}
+  </h1>
 
   <section class="flex flex-col gap-10 p-10">
-    <article class="grid m-w-[80dvw] gap-4 grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5">
+    <article
+      class="grid m-w-[80dvw] gap-4 grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5"
+    >
       {
+        projects.map(({ data }) => (
+          <Card
+            title={data.title}
+            image={data.images[0]}
+            description={data.description}
+            isExternalProject={true}
+            href={data.href}
+            styles={data.styles}
+            technology={data.technology}
+            scripts={data.scripts}
+          />
+        ))
+      }
+    </article>
+
+    <article
+      class="grid m-w-[80dvw] gap-4 grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5"
+    >
+      <!-- {
         i18n.PROJECTS.EXTERNAL_PROJECTS.map((project) => (
           <Card
             title={project.TITLE}
@@ -23,12 +51,17 @@ const i18n = getI18N({ currentLocale });
             slug={project.SLUG}
             isExternalProject={true}
             href={project.HREF}
+            styles=""
+            technology=""
+            scripts=""
           />
         ))
-      }
+      } -->
     </article>
 
-    <article class="grid m-w-[80dvw] gap-4 grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5">
+    <article
+      class="grid m-w-[80dvw] gap-4 grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5"
+    >
       {
         i18n.PROJECTS.INTERNAL_PROJECTS.map((project) => (
           <Card
@@ -38,12 +71,12 @@ const i18n = getI18N({ currentLocale });
             slug={project.SLUG}
             isExternalProject={false}
             href={project.HREF}
+            styles=""
+            technology=""
+            scripts=""
           />
         ))
       }
     </article>
   </section>
 </Layout>
-
-
-

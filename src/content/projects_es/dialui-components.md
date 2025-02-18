@@ -1,10 +1,12 @@
 ---
-name: dialui-components
-link: https://dialui-components.netlify.app/
-technology: React
-scripts: react
-styles: scss - sass
-images: []
+description: "Mi set de componentes para react"
+href: "https://dialui-components.netlify.app/"
+images: ["image.png"]
+isExternalProject: true
+scripts: "react"
+styles: "scss - sass"
+technology: "React"
+title: "dialui-components"
 ---
 
 Es es mi set de componentes para react. Con este set se pueden construir interfaces amigables y sin gastar mucho tiempo en los diseños, se puede instalar mediante npm: https://www.npmjs.com/package/dialui-components.

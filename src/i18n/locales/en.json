@@ -2,7 +2,9 @@
   "general": {
     "configurations": "configurations",
     "language": "language",
-    "theme": "theme"
+    "theme": "theme",
+    "technology": "Technology",
+    "styles":"Styles"
   },
   "GENERAL": {
     "MORE": "more",
@@ -13,44 +15,48 @@
   },
   "PROJECTS": {
     "TITLE": "Projects",
-    "EXTERNAL_PROJECTS": [
-      {
-        "TITLE": "dialui-components",
-        "IMAGE": "",
-        "DESCRIPTION": "React components",
-        "HREF": "https://dialui-components.netlify.app",
-        "SLUG": "https://dialui-components.netlify.app"
-      }
-    ],
     "INTERNAL_PROJECTS": [
       {
         "TITLE": "web components",
         "IMAGE": "",
         "DESCRIPTION": "Create your forms",
         "SLUG": "web-components",
-        "HREF":"projects/web-components"
+        "HREF": "projects/web-components"
       },
       {
         "TITLE": "convert images",
         "IMAGE": "",
         "DESCRIPTION": "Change your image format",
         "SLUG": "convert-images",
-        "HREF":"projects/convert-images"
+        "HREF": "projects/convert-images"
       }
     ],
-    "WEB_COMPONENTS":[
+    "WEB_COMPONENTS": [
       {
         "TITLE": "TEXT",
-        "INPUTS" : [ "heading", "paragraph"]
+        "INPUTS": [
+          "heading",
+          "paragraph"
+        ]
       },
       {
         "TITLE": "INPUTS",
-        "INPUTS" : [ 
-          "text", "email", "phone", "number", "password", "date", "time", "select", 
-          "signature", "checkbox", "radio-buttons", "textarea", "files"
+        "INPUTS": [
+          "text",
+          "email",
+          "phone",
+          "number",
+          "password",
+          "date",
+          "time",
+          "select",
+          "signature",
+          "checkbox",
+          "radio-buttons",
+          "textarea",
+          "files"
         ]
       }
     ]
   }
 }
-

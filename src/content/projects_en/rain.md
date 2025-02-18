@@ -1,13 +1,15 @@
 ---
-name: rain
-link: https://rain.scgroup.one/
-technology: Laravel 11
-scripts: typescript
-styles: css puro
-images: []
+description: "This project is a private web application for the employees of Sc Group"
+href: "https://rain.scgroup.one/"
+images: ["image.png"]
+isExternalProject: true
+scripts: "typescript"
+styles: "scss - sass"
+technology: "Laravel"
+title: "rain"
 ---
 
-Este proyecto es una aplicación web privada para los empleados de Sc Group empresa de Puerto Rico que tiene como filiales Skytel Puerto Rico, Truconnect. Entre sus franquicias también están Antoninos Pizza, Marble Slab Creamery y Fatburger esta compañía es la única autorizada para vender dichas franquicias en Puerto Rico.
+This project is a private web application for the employees of Sc Group, a company based in Puerto Rico with subsidiaries Skytel Puerto Rico and Truconnect. Among its franchises are Antoninos Pizza, Marble Slab Creamery, and Fatburger. This company is the only one authorized to sell these franchises in Puerto Rico.
 
 La aplicación cuenta con aproximadamente 25 módulos, y 3 rutas administrativas creado todo ello por 3 desarrolladores:
 

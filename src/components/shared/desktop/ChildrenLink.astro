@@ -29,15 +29,17 @@ const suffix = lang === "en" ? "/en" : "";
               class:list={[
                 "flex items-center gap-1 text-sm transition-colors capitalize",
                 {
-                  "text-primary hover:opacity-80": !isSamePath,
+                  "text-blue-700 dark:text-green-700 hover:opacity-80": !isSamePath,
                 },
                 {
-                  "text-primary dark:text-white": isSamePath,
+                  "text-primary dark:text-slate-800": isSamePath,
                 },
               ]}
               href={translatePath(`${sub.href ? sub.href : ""}`, lang)}
+              target={sub.target}
             >
               {t(sub.name)}
+              
             </a>
           </li>
         );

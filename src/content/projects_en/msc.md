@@ -1,10 +1,12 @@
 ---
-name: marble slab creamery
-link: https://www.marbleslabpr.com/
-technology: Astro
-scripts: typescript
-styles: scss - sass
-images: []
+description: "Static page created for Scgroup and its franchise Marble Slab Creamery in Puerto Rico"
+href: "https://www.marbleslabpr.com/"
+images: ["image.png"]
+isExternalProject: true
+scripts: "react"
+styles: "scss - sass"
+technology: "React"
+title: "marble slab creamery"
 ---
 
 Static page created for Scgroup and its franchise Marble Slab Creamery in Puerto Rico, made 100% with TypeScript and web components in its dynamic parts. It is built as a PWA and is also available in responsive design for mobiles and tablets.

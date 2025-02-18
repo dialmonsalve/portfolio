@@ -114,6 +114,7 @@ export class DialUploadDropZone extends HTMLElement {
   };
 
   private action(images: ImageOptimized[] | undefined) {
+    
     images?.map(async (image) => {
       const buffer = await image.webpImage.arrayBuffer();
       const base64Image = btoa(

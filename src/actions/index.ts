@@ -20,6 +20,8 @@ const createImageOnCloud = defineAction({
       `data:image/${imageType};base64,${base64Image}`
     );
 
+    // cloudinary.api.delete_resources([], {type:"upload", resource_type:"image"})
+
     return rep;
   },
 });

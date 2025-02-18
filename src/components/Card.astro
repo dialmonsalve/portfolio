@@ -1,12 +1,14 @@
 ---
-
 interface Props {
   title: string;
   image: string;
   description: string;
-  slug: string;
+  slug?: string;
   isExternalProject: boolean;
-  href:string
+  href: string;
+  technology: string;
+  scripts: string;
+  styles: string;
 }
 import { getI18N } from "@i18n/index";
 import { getLangFromUrl, useTranslatedPath } from "@i18n/utils";
@@ -15,28 +17,36 @@ import "@styles/components/modal.css";
 const { currentLocale } = Astro;
 const i18n = getI18N({ currentLocale });
 
-const { title, image, description, slug, isExternalProject, href } = Astro.props;
+const { title, image, description, slug, isExternalProject, href, scripts, styles, technology } =
+  Astro.props;
 const lang = getLangFromUrl(Astro.url);
 
 const translatePath = useTranslatedPath(lang);
-
 ---
 
 <div
-  class="h-[250px] flex flex-col gap-8 border border-primary p-4 rounded-sm shadow-primary shadow-md justify-between items-center bg-white dark:bg-slate-900"
+  class="h-[280px] flex flex-col gap-8 border border-primary p-4 rounded-sm shadow-primary shadow-md justify-between items-center bg-white dark:bg-slate-900"
 >
   <div class="relative">
     <h6
-      class="bg-yellow-300 rounded-sm text-gray-800 px-2 py-1 -translate-y-8"
-      transition:name={slug}
+      class="bg-yellow-300 rounded-sm text-gray-800 px-2 py-1 -translate-y-8 uppercase"
+      transition:name={slug ? slug : ""}
     >
       {title}
     </h6>
   </div>
 
   <div class="card__body">
-    <img class="card__body--image" src={image} alt={description} />
-    <p class="text-gray-800 dark:text-white">{description}</p>
+    <img class="card__body--image" src={image} alt={title} />
+    <div class="flex flex-col gap-1 py-2" >
+
+      {isExternalProject && (
+        <p class="text-md text-primary flex items-center gap-2" >{i18n.general.technology}: <span class="text-black dark:text-white capitalize text-sm" >{technology}</span> </p>
+        <p class="text-md text-primary flex items-center gap-2" >{i18n.general.styles}: <span class="text-black dark:text-white capitalize text-sm" >{styles}</span> </p>
+        <p class="text-md text-primary flex items-center gap-2" >Scripts: <span class="text-black dark:text-white capitalize text-sm" >{scripts}</span> </p>
+      )}
+  </div>
+    <p class="text-gray-800 dark:text-gray-400 text-sm">{description}</p>
   </div>
 
   <div class="flex w-full justify-around">
@@ -58,7 +68,7 @@ const translatePath = useTranslatedPath(lang);
         </a>
       ) : (
         <a
-        href={translatePath(`/${href ? href : ""}`, lang)}
+          href={translatePath(`/${href ? href : ""}`, lang)}
           class="py-1 px-3 rounded-sm uppercase text-md text-white transition-colors cursor-pointer bg-indigo-500 shadow-lg shadow-indigo-500/50 hover:opacity-85 active:shadow-inset"
         >
           {i18n.GENERAL.GO}
