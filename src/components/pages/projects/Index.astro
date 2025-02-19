@@ -24,7 +24,7 @@ const projects = await getCollection(`projects_${currentLocale}` as "projects_es
       class="grid m-w-[80dvw] gap-4 grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5"
     >
       {
-        projects.map(({ data }) => (
+        projects.map(({ data, slug }) => (
           <Card
             title={data.title}
             image={data.images[0]}
@@ -34,29 +34,10 @@ const projects = await getCollection(`projects_${currentLocale}` as "projects_es
             styles={data.styles}
             technology={data.technology}
             scripts={data.scripts}
+            slug={slug}
           />
         ))
       }
-    </article>
-
-    <article
-      class="grid m-w-[80dvw] gap-4 grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5"
-    >
-      <!-- {
-        i18n.PROJECTS.EXTERNAL_PROJECTS.map((project) => (
-          <Card
-            title={project.TITLE}
-            image={project.IMAGE}
-            description={project.DESCRIPTION}
-            slug={project.SLUG}
-            isExternalProject={true}
-            href={project.HREF}
-            styles=""
-            technology=""
-            scripts=""
-          />
-        ))
-      } -->
     </article>
 
     <article

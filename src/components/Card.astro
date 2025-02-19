@@ -3,7 +3,7 @@ interface Props {
   title: string;
   image: string;
   description: string;
-  slug?: string;
+  slug: string;
   isExternalProject: boolean;
   href: string;
   technology: string;
@@ -25,19 +25,19 @@ const translatePath = useTranslatedPath(lang);
 ---
 
 <div
-  class="h-[280px] flex flex-col gap-8 border border-primary p-4 rounded-sm shadow-primary shadow-md justify-between items-center bg-white dark:bg-slate-900"
+  class="flex flex-col gap-8 border border-primary p-4 rounded-sm shadow-primary shadow-md justify-between items-center bg-white dark:bg-slate-900"
 >
   <div class="relative">
     <h6
       class="bg-yellow-300 rounded-sm text-gray-800 px-2 py-1 -translate-y-8 uppercase"
-      transition:name={slug ? slug : ""}
+      transition:name={!isExternalProject ? slug : ""}
     >
       {title}
     </h6>
   </div>
 
   <div class="card__body">
-    <img class="card__body--image" src={image} alt={title} />
+    <img class="card__body--image h-30" src={image} alt={title} />
     <div class="flex flex-col gap-1 py-2" >
 
       {isExternalProject && (
@@ -46,16 +46,21 @@ const translatePath = useTranslatedPath(lang);
         <p class="text-md text-primary flex items-center gap-2" >Scripts: <span class="text-black dark:text-white capitalize text-sm" >{scripts}</span> </p>
       )}
   </div>
-    <p class="text-gray-800 dark:text-gray-400 text-sm">{description}</p>
+    <p class="text-gray-800 dark:text-gray-400 text-sm h-12">{description}</p>
   </div>
 
   <div class="flex w-full justify-around">
-    <modal-more-info>
-      <button
-        class="py-1 px-3 rounded-sm uppercase text-md text-white transition-colors cursor-pointer bg-blue-500 shadow-lg shadow-blue-500/50 hover:opacity-85 active:shadow-inset buttons-more"
-        >{i18n.GENERAL.MORE}</button
-      >
-    </modal-more-info>
+    {
+      isExternalProject &&(
+
+        <a
+          class="py-1 px-3 rounded-sm uppercase text-md text-white transition-colors cursor-pointer bg-blue-500 shadow-lg shadow-blue-500/50 hover:opacity-85 active:shadow-inset buttons-more"
+          href={`projects/${slug}`}
+          >{i18n.GENERAL.MORE}</a
+        >
+        )
+    }
+
     {
       isExternalProject ? (
         <a

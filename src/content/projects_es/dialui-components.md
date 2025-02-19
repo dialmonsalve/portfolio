@@ -1,7 +1,7 @@
 ---
 description: "Mi set de componentes para react"
 href: "https://dialui-components.netlify.app/"
-images: ["image.png"]
+images: ["/images/dialui.webp"]
 isExternalProject: true
 scripts: "react"
 styles: "scss - sass"

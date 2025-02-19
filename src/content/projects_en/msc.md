@@ -1,7 +1,7 @@
 ---
 description: "Static page created for Scgroup and its franchise Marble Slab Creamery in Puerto Rico"
 href: "https://www.marbleslabpr.com/"
-images: ["image.png"]
+images: ["/images/msc.webp"]
 isExternalProject: true
 scripts: "react"
 styles: "scss - sass"

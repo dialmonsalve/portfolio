@@ -1,7 +1,7 @@
 ---
 description: "This project is a private web application for the employees of Sc Group"
 href: "https://rain.scgroup.one/"
-images: ["image.png"]
+images: ["/images/rain.webp"]
 isExternalProject: true
 scripts: "typescript"
 styles: "scss - sass"

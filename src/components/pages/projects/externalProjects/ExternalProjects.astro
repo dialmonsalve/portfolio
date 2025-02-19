@@ -1,0 +1,40 @@
+---
+import Layout from "@layouts/Layout.astro";
+
+interface Props {
+  slug: string;
+  data: Data;
+}
+
+interface Data {
+  title: string;
+  description: string;
+  images: string[];
+  isExternalProject: boolean;
+  href: string;
+  technology: string;
+  scripts: string;
+  styles: string;
+}
+
+const { slug, data } = Astro.props;
+
+const { title, description, href, images, styles, technology, scripts } = data;
+---
+
+<Layout>
+  <section class="flex flex-col gap-6">
+    <h1 class="uppercase text-center">{title}</h1>
+    <a href={href}>Ir</a>
+    <p>{description}</p>
+    <p>{technology}</p>
+    <p>{styles}</p>
+    <p>{scripts}</p>
+    <div class="grid grid-cols-4"  >
+      {images.map((image) => <img src={image} alt={title} />)}
+    </div>
+    <div>
+      <slot />
+    </div>
+  </section>
+</Layout>
