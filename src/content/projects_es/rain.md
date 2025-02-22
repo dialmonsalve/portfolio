@@ -1,7 +1,22 @@
 ---
 description: "Este proyecto es una aplicación web privada para los empleados de Sc Group"
 href: "https://rain.scgroup.one/"
-images: ["/images/rain.webp"]
+images: [
+  "/images/rain/webp/1.webp", 
+  "/images/rain/webp/2.webp",
+  "/images/rain/webp/3.webp",
+  "/images/rain/webp/4.webp", 
+  "/images/rain/webp/5.webp",
+  "/images/rain/webp/6.webp",
+  "/images/rain/webp/7.webp",
+  # "/images/rain/png/1.png", 
+  # "/images/rain/png/2.png",
+  # "/images/rain/png/3.png",
+  # "/images/rain/png/4.png", 
+  # "/images/rain/png/5.png",
+  # "/images/rain/png/6.png",
+  # "/images/rain/png/7.png",
+]
 isExternalProject: true
 scripts: "typescript"
 styles: "scss - sass"

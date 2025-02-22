@@ -17,24 +17,36 @@ interface Data {
   styles: string;
 }
 
-const { slug, data } = Astro.props;
+const { data, slug } = Astro.props;
 
 const { title, description, href, images, styles, technology, scripts } = data;
 ---
 
 <Layout>
-  <section class="flex flex-col gap-6">
-    <h1 class="uppercase text-center">{title}</h1>
-    <a href={href}>Ir</a>
-    <p>{description}</p>
-    <p>{technology}</p>
-    <p>{styles}</p>
-    <p>{scripts}</p>
-    <div class="grid grid-cols-4"  >
-      {images.map((image) => <img src={image} alt={title} />)}
+  <section class="flex flex-col gap-2 lg:w-2/3 lg:mx-auto">
+    <h1 class="uppercase text-center text-3xl text-primary ">{title}</h1>
+    <a class="bg-primary text-white w-fit px-4 rounded-xl shadow-2xl shadow-primary hover:opacity-80" href={href}>Ir</a>
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-6">
+      {
+        images.map((_, idx) => (
+          <picture>
+            <source srcset={`/images/${slug}/png/${idx + 1}.png`} />
+            <img
+              src={`/images/${slug}/webp/${idx + 1}.webp`}
+              alt=""
+              class="h-full max-w-full object-cover block"
+            />
+          </picture>
+        ))
+      }
     </div>
-    <div>
+    <div class="text-slate-800 dark:text-white" >
       <slot />
     </div>
+    <p class="text-slate-800 dark:text-gray-400" > <span class="font-bold uppercase">Description:</span> {description}</p>
+    <p class="text-slate-800 dark:text-gray-400" > <span class="font-bold uppercase">Technology:</span> {technology}</p>
+    <p class="text-slate-800 dark:text-gray-400" > <span class="font-bold uppercase">Styles:</span> {styles}</p>
+    <p class="text-slate-800 dark:text-gray-400" > <span class="font-bold uppercase">Scripts:</span> {scripts}</p>
   </section>
 </Layout>

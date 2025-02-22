@@ -1,7 +1,22 @@
 ---
 description: "Página estática creada para Scgroup y su franquicia Marble Slab Creamery en Puerto Rico"
 href: "https://www.marbleslabpr.com/"
-images: ["/images/msc.webp"]
+images: [
+  "/images/msc/webp/1.webp", 
+  "/images/msc/webp/2.webp",
+  "/images/msc/webp/3.webp",
+  "/images/msc/webp/4.webp", 
+  "/images/msc/webp/5.webp",
+  "/images/msc/webp/6.webp",
+  "/images/msc/webp/7.webp",
+  # "/images/msc/png/1.png", 
+  # "/images/msc/png/2.png",
+  # "/images/msc/png/3.png",
+  # "/images/msc/png/4.png", 
+  # "/images/msc/png/5.png",
+  # "/images/msc/png/6.png",
+  # "/images/msc/png/7.png",
+]
 isExternalProject: true
 scripts: "typescript" 
 styles: "scss - sass"

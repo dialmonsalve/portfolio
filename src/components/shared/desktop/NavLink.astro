@@ -30,7 +30,7 @@ const isSamePath = currentPath === `${suffix}${link.href}`;
     isSamePath && !link.hasChildren ? (
       <span 
       
-      class="flex lg:gap-1 text-primary items-center">
+      class="flex lg:gap-1 text-primary items-center xl:text-md 2xl:text-xl">
         <Icon name={link.icon} size={20} />
         {t(link.name)}
       </span>

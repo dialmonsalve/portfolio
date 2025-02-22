@@ -1,7 +1,22 @@
 ---
 description: "Mi set de componentes para react"
 href: "https://dialui-components.netlify.app/"
-images: ["/images/dialui.webp"]
+images: [
+  "/images/dialui-components/webp/1.webp", 
+  "/images/dialui-components/webp/2.webp",
+  "/images/dialui-components/webp/3.webp",
+  "/images/dialui-components/webp/4.webp", 
+  "/images/dialui-components/webp/5.webp",
+  "/images/dialui-components/webp/6.webp",
+  "/images/dialui-components/webp/7.webp",
+  # "/images/dialui-components/png/1.png", 
+  # "/images/dialui-components/png/2.png",
+  # "/images/dialui-components/png/3.png",
+  # "/images/dialui-components/png/4.png", 
+  # "/images/dialui-components/png/5.png",
+  # "/images/dialui-components/png/6.png",
+  # "/images/dialui-components/png/7.png",
+]
 isExternalProject: true
 scripts: "react"
 styles: "scss - sass"
@@ -9,21 +24,23 @@ technology: "React"
 title: "dialui-components"
 ---
 
-Es es mi set de componentes para react. Con este set se pueden construir interfaces amigables y sin gastar mucho tiempo en los diseños, se puede instalar mediante npm: https://www.npmjs.com/package/dialui-components.
+<p class="my-3"> Es es mi set de componentes para react. Con este set se pueden construir interfaces amigables y sin gastar mucho tiempo en los diseños, se puede instalar mediante npm: <a class="text-blue-500 dark:text-green-700" href="https://www.npmjs.com/package/dialui-components" > https://www.npmjs.com/package/dialui-components.</a></p>
 
-El sitio web está hecho 100% en react y react router dom sin frameworks ni librerías adicionales, en inglés y español, modo light y dark, adicional es responsive para todas las pantallas
+<p class="mb-3">El sitio web está hecho 100% en react y react router dom sin frameworks ni librerías adicionales, en inglés y español, modo light y dark, adicional es responsive para todas las pantallas</p>
 
-Tiene componentes como:
+### Tiene componentes como:
 
-- Alertas
-- Botones
-- Iconos de loading
-- Modales
-- Notificaciones
-- Spinners
-- Tablas
-- Checkbox
-- Input
-- Input tags
-- Select y Multi Select
-- TextArea
+<ul class="px-4" >
+  <li> - Alerts</li> 
+  <li> - Buttons</li> 
+  <li> - ILoading icons</li>  
+  <li> - Modals</li> 
+  <li> - Notifications</li> 
+  <li> - Spinners</li> 
+  <li> - Tables </li> 
+  <li> - Checkbox</li> 
+  <li> - Input</li> 
+  <li> - Input tags</li>  
+  <li> - Select and Multi Select</li>  
+  <li> - TextArea</li> 
+</ul>
