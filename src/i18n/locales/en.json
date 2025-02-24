@@ -4,7 +4,9 @@
     "language": "language",
     "theme": "theme",
     "technology": "Technology",
-    "styles":"Styles"
+    "styles":"Styles",
+    "go": "go",
+    "description":"description"
   },
   "GENERAL": {
     "MORE": "more",

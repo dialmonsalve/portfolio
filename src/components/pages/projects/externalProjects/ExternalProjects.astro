@@ -1,5 +1,7 @@
 ---
+import Link from "@components/Link.astro";
 import Layout from "@layouts/Layout.astro";
+import { getI18N } from "@i18n/index";
 
 interface Props {
   slug: string;
@@ -20,20 +22,31 @@ interface Data {
 const { data, slug } = Astro.props;
 
 const { title, description, href, images, styles, technology, scripts } = data;
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
 ---
 
 <Layout>
-  <section class="flex flex-col gap-5 w-80/100 mx-auto">
-    <h1 class="uppercase text-center text-3xl text-primary">{title}</h1>
-    <a
-      class="bg-primary text-white w-fit px-4 rounded-xl shadow-2xl shadow-primary hover:opacity-80"
-      href={href}
-      target="_blank"
+  <section class="flex flex-col gap-5 lg:w-80/100 mx-auto">
+    <h1
+      class="uppercase text-center text-3xl text-primary"
+      transition:name={slug}
     >
-      Ir
-    </a>
+      {title}
+    </h1>
+    <ul>
+      <Link
+        className="bg-primary text-white w-fit px-4 rounded-xl shadow-2xl shadow-primary hover:opacity-80 capitalize"
+        href={href}
+        label={i18n.general.go}
+        target="_blank"
+      />
+    </ul>
 
-    <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-6">
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6 justify-items-center"
+    >
       {
         images.map((_, idx) => (
           <picture>
@@ -41,7 +54,7 @@ const { title, description, href, images, styles, technology, scripts } = data;
             <img
               src={`/images/${slug}/webp/${idx + 1}.webp`}
               alt=""
-              class="h-full max-w-full object-cover block"
+              class="max-w-full h-70 object-cover block rounded-xl shadow-md shadow-gray-300 dark:shadow-slate-600"
             />
           </picture>
         ))
@@ -51,15 +64,15 @@ const { title, description, href, images, styles, technology, scripts } = data;
       <slot />
     </div>
     <p class="text-slate-800 dark:text-gray-400">
-      <span class="font-bold uppercase">Description:</span>
+      <span class="font-bold uppercase">{i18n.general.description}:</span>
       {description}
     </p>
     <p class="text-slate-800 dark:text-gray-400">
-      <span class="font-bold uppercase">Technology:</span>
+      <span class="font-bold uppercase">{i18n.general.technology}:</span>
       {technology}
     </p>
     <p class="text-slate-800 dark:text-gray-400">
-      <span class="font-bold uppercase">Styles:</span>
+      <span class="font-bold uppercase">{i18n.general.styles}:</span>
       {styles}
     </p>
     <p class="text-slate-800 dark:text-gray-400">

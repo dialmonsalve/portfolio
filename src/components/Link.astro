@@ -3,15 +3,15 @@ interface Props {
   href: string;
   label: string;
   className?: string;
-  isExternal?: boolean;
+  target?: "_blank" | "_self" | "_parent" | "_top";
 }
 
-const { href, label, className, isExternal = false } = Astro.props;
+const { href, label, className, target =  "_self"  } = Astro.props;
 
-const target = isExternal ? "_blank" : "_self";
+
 ---
 
-<li>
+<li class="list-none">
   <a target={target} referrerpolicy="no-referrer" href={href} class={className}>
     {label}
   </a>

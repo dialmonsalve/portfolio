@@ -3,8 +3,10 @@
     "configurations": "configuraciones",
     "language": "idioma",
     "theme": "tema",
-    "technology":"Tecnología",
-    "styles":"Estilos"
+    "technology": "Tecnología",
+    "styles": "Estilos",
+    "go": "ir",
+    "description":"descripción"
   },
   "GENERAL": {
     "MORE": "más",
@@ -31,16 +33,30 @@
         "SLUG": "convert-images"
       }
     ],
-    "WEB_COMPONENTS":[
+    "WEB_COMPONENTS": [
       {
         "TITLE": "TEXTO",
-        "INPUTS" : [ "heading", "paragraph"]
+        "INPUTS": [
+          "heading",
+          "paragraph"
+        ]
       },
       {
         "TITLE": "INPUTS",
-        "INPUTS" : [ 
-          "text", "email", "phone", "number", "password", "date", "time", "select", 
-          "signature", "checkbox", "radio-buttons", "textarea", "files"
+        "INPUTS": [
+          "text",
+          "email",
+          "phone",
+          "number",
+          "password",
+          "date",
+          "time",
+          "select",
+          "signature",
+          "checkbox",
+          "radio-buttons",
+          "textarea",
+          "files"
         ]
       }
     ]

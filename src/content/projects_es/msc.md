@@ -9,24 +9,17 @@ images: [
   "/images/msc/webp/5.webp",
   "/images/msc/webp/6.webp",
   "/images/msc/webp/7.webp",
-  # "/images/msc/png/1.png", 
-  # "/images/msc/png/2.png",
-  # "/images/msc/png/3.png",
-  # "/images/msc/png/4.png", 
-  # "/images/msc/png/5.png",
-  # "/images/msc/png/6.png",
-  # "/images/msc/png/7.png",
 ]
 isExternalProject: true
 scripts: "typescript" 
 styles: "scss - sass"
 technology: Astro
 title: "marble slab creamery"
-
 ---
 
-Static page created for Scgroup and its franchise Marble Slab Creamery in Puerto Rico, made 100% with TypeScript and web components in its dynamic parts. It is built as a PWA and is also available in responsive design for mobiles and tablets.
+<p class="leading-7 my-4">Página estática creada para Scgroup y su franquicia Marble Slab Creamery en Puerto Rico, hecha 100% con TypeScript y componentes web en sus partes dinámicas. Está construida como una PWA y también está disponible en diseño responsivo para móviles y tabletas.</p>
 
-The page has 10 routes and is bilingual in both English and Spanish. The banner on the main page is created dynamically, meaning if they decide to add a seasonal image, it will be displayed in an image slider. Currently, it only has one image.
+<p class="leading-7 my-4">
+La página tiene 10 rutas y es bilingüe en inglés y español. El banner en la página principal se crea dinámicamente, lo que significa que si deciden agregar una imagen de temporada, se mostrará en un slider de imágenes. Actualmente, solo tiene una imagen.</p>
 
-The contact form is made 100% with Astro actions.
+<p class="leading-7 my-4">El formulario de contacto está hecho 100% con acciones de Astro. </p>

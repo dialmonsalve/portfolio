@@ -9,13 +9,6 @@ images: [
   "/images/dialui-components/webp/5.webp",
   "/images/dialui-components/webp/6.webp",
   "/images/dialui-components/webp/7.webp",
-  # "/images/dialui-components/png/1.png", 
-  # "/images/dialui-components/png/2.png",
-  # "/images/dialui-components/png/3.png",
-  # "/images/dialui-components/png/4.png", 
-  # "/images/dialui-components/png/5.png",
-  # "/images/dialui-components/png/6.png",
-  # "/images/dialui-components/png/7.png",
 ]
 isExternalProject: true
 scripts: "react"
@@ -24,9 +17,9 @@ technology: "React"
 title: "dialui-components"
 ---
 
-Es es mi set de componentes para react. Con este set se pueden construir interfaces amigables y sin gastar mucho tiempo en los diseños, se puede instalar mediante npm: https://www.npmjs.com/package/dialui-components.
+<p class="leading-7 my-4"> "This is my component set for React. With this set, you can build user-friendly interfaces without spending much time on designs. It can be installed via npm: <a class="text-blue-500 dark:text-green-700" href="https://www.npmjs.com/package/dialui-components" > https://www.npmjs.com/package/dialui-components.</a></p>
 
-El sitio web está hecho 100% en react y react router dom sin frameworks ni librerías adicionales, en inglés y español, modo light y dark, adicional es responsive para todas las pantallas
+<p class="leading-7 my-4">The website is built 100% with React and React Router DOM without additional frameworks or libraries. It supports both English and Spanish, light and dark modes, and is responsive for all screen sizes.</p>
 
 Tiene componentes como:
 <ul class="px-4" >
