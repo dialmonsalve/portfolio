@@ -23,9 +23,15 @@ const { title, description, href, images, styles, technology, scripts } = data;
 ---
 
 <Layout>
-  <section class="flex flex-col gap-2 lg:w-2/3 lg:mx-auto">
-    <h1 class="uppercase text-center text-3xl text-primary ">{title}</h1>
-    <a class="bg-primary text-white w-fit px-4 rounded-xl shadow-2xl shadow-primary hover:opacity-80" href={href}>Ir</a>
+  <section class="flex flex-col gap-5 w-80/100 mx-auto">
+    <h1 class="uppercase text-center text-3xl text-primary">{title}</h1>
+    <a
+      class="bg-primary text-white w-fit px-4 rounded-xl shadow-2xl shadow-primary hover:opacity-80"
+      href={href}
+      target="_blank"
+    >
+      Ir
+    </a>
 
     <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-6">
       {
@@ -41,12 +47,24 @@ const { title, description, href, images, styles, technology, scripts } = data;
         ))
       }
     </div>
-    <div class="text-slate-800 dark:text-white" >
+    <div class="text-slate-800 dark:text-white">
       <slot />
     </div>
-    <p class="text-slate-800 dark:text-gray-400" > <span class="font-bold uppercase">Description:</span> {description}</p>
-    <p class="text-slate-800 dark:text-gray-400" > <span class="font-bold uppercase">Technology:</span> {technology}</p>
-    <p class="text-slate-800 dark:text-gray-400" > <span class="font-bold uppercase">Styles:</span> {styles}</p>
-    <p class="text-slate-800 dark:text-gray-400" > <span class="font-bold uppercase">Scripts:</span> {scripts}</p>
+    <p class="text-slate-800 dark:text-gray-400">
+      <span class="font-bold uppercase">Description:</span>
+      {description}
+    </p>
+    <p class="text-slate-800 dark:text-gray-400">
+      <span class="font-bold uppercase">Technology:</span>
+      {technology}
+    </p>
+    <p class="text-slate-800 dark:text-gray-400">
+      <span class="font-bold uppercase">Styles:</span>
+      {styles}
+    </p>
+    <p class="text-slate-800 dark:text-gray-400">
+      <span class="font-bold uppercase">Scripts:</span>
+      {scripts}
+    </p>
   </section>
 </Layout>

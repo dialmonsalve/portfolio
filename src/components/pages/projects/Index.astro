@@ -8,20 +8,22 @@ const currentLocale = Astro.currentLocale;
 
 const i18n = getI18N({ currentLocale });
 
-const projects = await getCollection(`projects_${currentLocale}` as "projects_es");
+const projects = await getCollection(
+  `projects_${currentLocale}` as "projects_es"
+);
 ---
 
 <Layout>
-  <h1
-    class="text-gray-800 uppercase text-center text-2xl dark:text-white"
-    transition:animate="slide"
-  >
-    {i18n.PROJECTS.TITLE}
-  </h1>
+  <section class="flex flex-col gap-15 w-80/100 mx-auto">
+    <h1
+      class="text-gray-800 uppercase text-center text-2xl dark:text-white"
+      transition:animate="slide"
+    >
+      {i18n.PROJECTS.TITLE}
+    </h1>
 
-  <section class="flex flex-col gap-10 p-10">
     <article
-      class="grid m-w-[80dvw] gap-4 grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5"
+      class="grid gap-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
     >
       {
         projects.map(({ data, slug }) => (
@@ -41,7 +43,7 @@ const projects = await getCollection(`projects_${currentLocale}` as "projects_es
     </article>
 
     <article
-      class="grid m-w-[80dvw] gap-4 grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5"
+      class="grid gap-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
     >
       {
         i18n.PROJECTS.INTERNAL_PROJECTS.map((project) => (

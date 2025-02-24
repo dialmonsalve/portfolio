@@ -18,7 +18,7 @@ function createBreadcrumbs(route: string) {
 
   return breadcrumbs.length > 0
     ? [
-        { name: "home", href: pathName.startsWith("/en") ? "/en" : "/" },
+        { name: "home", href: pathName.startsWith("/en") ? "/en/" : "/" },
         ...breadcrumbs,
       ].filter((route) => route.name !== "")
     : [];
@@ -74,7 +74,7 @@ const breadcrumbs = createBreadcrumbs(path);
   <body>
     <Header />
     <main
-      class="pt-22 px-2 lg:pt-18 xl:px-10 pb-5 max-h-screen h-screen overflow-auto bg-gray-200 dark:bg-slate-800"
+      class="pt-22 px-4 lg:pt-18 xl:px-10 pb-5 max-h-screen h-screen overflow-auto bg-gray-200 dark:bg-slate-800"
     >
       {
         breadcrumbs.length > 0 && (
