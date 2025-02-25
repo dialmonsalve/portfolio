@@ -12,9 +12,11 @@ images: [
 ]
 isExternalProject: true
 scripts: "react"
-styles: "scss - sass"
+styles: "sass"
 technology: "React"
 title: "dialui-components"
+pngImage: "/images/dialui-components/main.png"
+webpImage: "/images/dialui-components/main.webp"
 ---
 
 <p class="leading-7 my-4"> Es es mi set de componentes para react. Con este set se pueden construir interfaces amigables y sin gastar mucho tiempo en los diseños, se puede instalar mediante npm: <a class="text-blue-500 dark:text-green-700" href="https://www.npmjs.com/package/dialui-components" > https://www.npmjs.com/package/dialui-components.</a></p>

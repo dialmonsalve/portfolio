@@ -1,7 +1,8 @@
 ---
 interface Props {
   title: string;
-  image: string;
+  pngImage: string;
+  webpImage: string;
   description: string;
   slug: string;
   isExternalProject: boolean;
@@ -20,7 +21,8 @@ const i18n = getI18N({ currentLocale });
 
 const {
   title,
-  image,
+  pngImage,
+  webpImage,
   description,
   slug,
   isExternalProject,
@@ -32,7 +34,6 @@ const {
 const lang = getLangFromUrl(Astro.url);
 
 const translatePath = useTranslatedPath(lang);
-
 ---
 
 <div
@@ -48,7 +49,10 @@ const translatePath = useTranslatedPath(lang);
   </div>
 
   <div class="card__body">
-    <img class="card__body--image" src={image} alt={title} />
+    <picture>
+      <source srcset={webpImage} >
+      <img class="card__body--image" src={pngImage} alt={title} />
+    </picture>
     <div class="flex flex-col gap-1 py-2">
       {
         isExternalProject && (
@@ -83,20 +87,20 @@ const translatePath = useTranslatedPath(lang);
       isExternalProject ? (
         <>
           <Link
-            label={i18n.GENERAL.MORE}
+            label={i18n.general.more}
             className="py-1 px-3 rounded-sm uppercase text-md text-white transition-colors cursor-pointer bg-blue-500 shadow-lg shadow-blue-500/50 hover:opacity-85 active:shadow-inset buttons-more"
             href={`projects/${slug}`}
           />
           <Link
             target="_blank"
-            label={i18n.GENERAL.GO}
+            label={i18n.general.go}
             className="py-1 px-3 rounded-sm uppercase text-md text-white transition-colors cursor-pointer bg-indigo-500 shadow-lg shadow-indigo-500/50 hover:opacity-85 active:shadow-inset"
             href={href}
           />
         </>
       ) : (
         <Link
-          label={i18n.GENERAL.GO}
+          label={i18n.general.go}
           className="py-1 px-3 rounded-sm uppercase text-md text-white transition-colors cursor-pointer bg-indigo-500 shadow-lg shadow-indigo-500/50 hover:opacity-85 active:shadow-inset"
           href={translatePath(`/${href ? href : ""}`, lang)}
         />

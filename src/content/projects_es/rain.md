@@ -9,22 +9,17 @@ images: [
   "/images/rain/webp/5.webp",
   "/images/rain/webp/6.webp",
   "/images/rain/webp/7.webp",
-  # "/images/rain/png/1.png", 
-  # "/images/rain/png/2.png",
-  # "/images/rain/png/3.png",
-  # "/images/rain/png/4.png", 
-  # "/images/rain/png/5.png",
-  # "/images/rain/png/6.png",
-  # "/images/rain/png/7.png",
 ]
 isExternalProject: true
 scripts: "typescript"
-styles: "scss - sass"
+styles: "css"
 technology: "Laravel"
 title: "rain"
+pngImage: "/images/rain/main.png"
+webpImage: "/images/rain/main.webp"
 ---
 <p class="leading-7 my-4" >
-"Este proyecto es una aplicación web privada para los empleados de Sc Group, una empresa con sede en Puerto Rico que cuenta con las subsidiarias Skytel Puerto Rico y Truconnect. Entre sus franquicias se encuentran Antoninos Pizza, Marble Slab Creamery y Fatburger. Esta empresa es la única autorizada para vender estas franquicias en Puerto Rico.
+Este proyecto es una aplicación web privada para los empleados de Sc Group, una empresa con sede en Puerto Rico que cuenta con las subsidiarias Skytel Puerto Rico y Truconnect. Entre sus franquicias se encuentran Antoninos Pizza, Marble Slab Creamery y Fatburger. Esta empresa es la única autorizada para vender estas franquicias en Puerto Rico.
 </p>
 
 <p class="leading-7 my-4" >

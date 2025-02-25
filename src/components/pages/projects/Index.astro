@@ -14,12 +14,12 @@ const projects = await getCollection(
 ---
 
 <Layout>
-  <section class="flex flex-col gap-15 w-80/100 mx-auto">
+  <section class="flex flex-col gap-15 w-80/100 mx-auto pt-10">
     <h1
       class="text-gray-800 uppercase text-center text-2xl dark:text-white"
       transition:animate="slide"
     >
-      {i18n.PROJECTS.TITLE}
+      {i18n.projects.title}
     </h1>
 
     <article
@@ -29,7 +29,8 @@ const projects = await getCollection(
         projects.map(({ data, slug }) => (
           <Card
             title={data.title}
-            image={data.images[0]}
+            pngImage={data.pngImage}
+            webpImage={data.webpImage}
             description={data.description}
             isExternalProject={true}
             href={data.href}
@@ -46,19 +47,22 @@ const projects = await getCollection(
       class="grid gap-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
     >
       {
-        i18n.PROJECTS.INTERNAL_PROJECTS.map((project) => (
-          <Card
-            title={project.TITLE}
-            image={project.IMAGE}
-            description={project.DESCRIPTION}
-            slug={project.SLUG}
-            isExternalProject={false}
-            href={project.HREF}
-            styles=""
-            technology=""
-            scripts=""
-          />
-        ))
+        i18n.projects.internal_projects.map(
+          ({ description, href, pngImage ,webpImage, slug, title }) => (
+            <Card
+              title={title}
+              pngImage={pngImage}
+              webpImage={webpImage}
+              description={description}
+              slug={slug}
+              isExternalProject={false}
+              href={href}
+              styles=""
+              technology=""
+              scripts=""
+            />
+          )
+        )
       }
     </article>
   </section>

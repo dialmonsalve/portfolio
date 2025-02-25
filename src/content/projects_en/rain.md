@@ -12,9 +12,11 @@ images: [
 ]
 isExternalProject: true
 scripts: "typescript"
-styles: "scss - sass"
+styles: "css"
 technology: "Laravel"
 title: "rain"
+pngImage: "/images/rain/main.png"
+webpImage: "/images/rain/main.webp"
 ---
 
 <p class="leading-7 my-4" >

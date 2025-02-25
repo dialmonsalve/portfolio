@@ -17,20 +17,29 @@ const LINKS: Link[] = [
     hasChildren: true,
     subMenu: [
       {
-        name: Translate["nav.dialui-components"],
-        href: "https://dialui-components.netlify.app",
-        target: "_blank",
-      },
-
-      {
         name: Translate["nav.convert-images"],
         href: "/projects/convert-images",
         target: "_self",
       },
       {
-        name: Translate["nav.web-components"],
+        name: Translate["nav.form"],
         href: "/projects/web-components",
         target: "_self",
+      },
+      {
+        name: Translate["nav.dialui-components"],
+        href: "https://dialui-components.netlify.app",
+        target: "_blank",
+      },
+      {
+        name: Translate["nav.msc"],
+        href: "https://www.marbleslabpr.com/",
+        target: "_blank",
+      },
+      {
+        name: Translate["nav.rain"],
+        href: "https://rain.scgroup.one/",
+        target: "_blank",
       },
     ],
   },

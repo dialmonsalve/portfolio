@@ -5,21 +5,26 @@ export const languages = {
 
 interface Routes {
   es: {
-    // about: string;
+    about: string;
     // services: string;
     projects: string;
     // contact: string;
-    "web-components": string;
+    "form": string;
     "convert-images": string;
+    "dialui-components": string;
+    msc: string;
+    rain: string;
   };
   en: {
-    // about: string;
+    about: string;
     // services: string;
     projects: string;
     // contact: string;
-    "projects/web-components": string;
+    "projects/form": string;
     "projects/convert-images": string;
-    // proyectos: string;
+    "projects/dialui-components": string;
+    "projects/msc": string;
+    "projects/rain": string;
   };
 }
 
@@ -33,9 +38,11 @@ export const ui = {
     "nav.services": "Services",
     "nav.projects": "Projects",
     "nav.contact": "Contact",
-    "nav.web-components" : "Web components",
-    "nav.convert-images" : "Convert Images",
-    "nav.dialui-components" : "Dial-UI components"
+    "nav.form": "Create Forms",
+    "nav.convert-images": "Convert Images",
+    "nav.dialui-components": "Dial-UI components",
+    "nav.msc": "Marble Slab Creamery",
+    "nav.rain": "Rain",
   },
   es: {
     "nav.home": "Inicio",
@@ -43,27 +50,35 @@ export const ui = {
     "nav.services": "Servicios",
     "nav.projects": "Proyectos",
     "nav.contact": "Contacto",
-    "nav.web-components" : "Componentes web",
-    "nav.convert-images" : "Convertidor de imágenes",
-    "nav.dialui-components" :"Dial-UI components"
+    "nav.form": "Crea Formularios",
+    "nav.convert-images": "Convertidor de imágenes",
+    "nav.dialui-components": "Dial-UI components",
+    "nav.msc": "Marble Slab Creamery",
+    "nav.rain": "Rain",
   },
 } as const;
 
 export const routes: Routes & { [key: string]: any } = {
   es: {
-    // about: "about",
+    about: "about",
     // services: "services",
     // contact: "contact",
     projects: "projects",
-    "web-components": "projects/web-components",
+    "form": "projects/form",
     "convert-images": "projects/convert-images",
+    "dialui-components": "projects/dialui-components",
+    msc: "projects/msc",
+    rain: "projects/rain",
   },
   en: {
-    // about: "about",
+    about: "about",
     // services: "services",
     // contact: "contact",
     projects: "projects",
-    "projects/web-components": "web-components",
+    "projects/form": "form",
     "projects/convert-images": "convert-images",
+    "projects/dialui-components": "dialui-components",
+    "projects/msc": "msc",
+    "projects/rain": "rain",
   },
 };

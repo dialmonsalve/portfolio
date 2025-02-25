@@ -12,12 +12,15 @@ images: [
 ]
 isExternalProject: true
 scripts: "react"
-styles: "scss - sass"
+styles: "sass"
 technology: "React"
 title: "dialui-components"
+
+pngImage: "/images/dialui-components/main.png"
+webpImage: "/images/dialui-components/main.webp"
 ---
 
-<p class="leading-7 my-4"> "This is my component set for React. With this set, you can build user-friendly interfaces without spending much time on designs. It can be installed via npm: <a class="text-blue-500 dark:text-green-700" href="https://www.npmjs.com/package/dialui-components" > https://www.npmjs.com/package/dialui-components.</a></p>
+<p class="leading-7 my-4"> This is my component set for React. With this set, you can build user-friendly interfaces without spending much time on designs. It can be installed via npm: <a class="text-blue-500 dark:text-green-700" href="https://www.npmjs.com/package/dialui-components" > https://www.npmjs.com/package/dialui-components.</a></p>
 
 <p class="leading-7 my-4">The website is built 100% with React and React Router DOM without additional frameworks or libraries. It supports both English and Spanish, light and dark modes, and is responsive for all screen sizes.</p>
 

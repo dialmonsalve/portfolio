@@ -11,10 +11,12 @@ images: [
   "/images/msc/webp/7.webp",
 ]
 isExternalProject: true
-scripts: "react"
-styles: "scss - sass"
-technology: "React"
+scripts: "typescript"
+styles: "sass"
+technology: "Astro"
 title: "marble slab creamery"
+pngImage: "/images/msc/main.png"
+webpImage: "/images/msc/main.webp"
 ---
 
 <p class="leading-7 my-4"> Static page created for Scgroup and its franchise Marble Slab Creamery in Puerto Rico, made 100% with TypeScript and web components in its dynamic parts. It is built as a PWA and is also available in responsive design for mobiles and tablets.</p>

@@ -19,7 +19,9 @@ export enum Translate {
   "nav.about" = "nav.about",
   "nav.services" = "nav.services",
   "nav.projects" = "nav.projects",
-  "nav.web-components" = "nav.web-components",
+  "nav.form" = "nav.form",
   "nav.convert-images" = "nav.convert-images",
-  "nav.dialui-components" = "nav.dialui-components"
+  "nav.dialui-components" = "nav.dialui-components",
+  "nav.msc" = "nav.msc",
+  "nav.rain" = "nav.rain",
 }
