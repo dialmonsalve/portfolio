@@ -1,0 +1,100 @@
+---
+import { getI18N } from "../i18n";
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+---
+
+<article class="fixed right-0 top-21 z-5">
+  <div class="absolute z-6 right-6 top-4">
+    <input id="menu-form" type="checkbox" class="menu-form" />
+    <label
+      class="px-5 py-2 cursor-pointer shadow-md shadow-primary rounded-full bg-primary"
+      for="menu-form"><span class="text-md"></span></label
+    >
+  </div>
+
+  <div
+    class="container-elements w-75 h-[75dvh] h-max-[75dvh] overflow-auto dark:bg-teal-800 border border-gray-400 px-2 rounded-md shadow-md shadow-teal-400 transition-transform duration-300 ease-in-jump"
+  >
+  <ul class="flex flex-col gap-2 pt-14" >
+    {
+      i18n.projects.web_components.map((component)=>(
+        <p  class="uppercase text-white bg-gray-500 w-full py-0.5 px-1 rounded-sm" >{component.title} </p>
+        <>
+            {
+              component.inputs.map(input=>(
+              <li
+                class="w-full"
+                >
+                <button class="w-full cursor-pointer bg-gray-200 text-primary border border-gray-400 transition-all py-0.5 rounded-md capitalize hover:bg-primary hover:text-white shadow-md shadow-gray-400 dark:shadow-teal-900 hover:shadow-gray-900 duration-500"
+                id={input}
+                  >{input}
+                </button>
+              </li>
+              ))
+            }
+        </>
+      ))
+    }
+    </ul>
+  </div>
+</article>
+
+<style>
+  .container-elements {
+    scrollbar-width: thin;
+    scrollbar-color: oklch(0.437 0.078 188.216) white;
+  }
+
+  label:active {
+    box-shadow: 1px -1px 8px var(--primary-color) inset;
+  }
+
+  .menu-form[type="checkbox"] {
+    opacity: 0;
+    display: none;
+  }
+
+  .menu-form[type="checkbox"]:checked ~ label {
+    box-shadow: 1px -1px 8px var(--primary-color) inset;
+  }
+
+  div:has(.menu-form[type="checkbox"]:not(:checked)) + .container-elements {
+    transform: translateX(105%);
+  }
+
+  div:has(.menu-form[type="checkbox"]:checked) + .container-elements {
+    transform: translateX(0);
+  }
+
+  span::after {
+    position: absolute;
+    width: 2px;
+    height: 20px;
+    content: "";
+    background-color: white;
+    transform: translate(0px, 2px);
+    transition: transform 0.3s cubic-bezier(0.98, 0.055, 0.09, 0.63);
+    font-size: 10px;
+  }
+
+  span::before {
+    position: absolute;
+    width: 20px;
+    height: 2px;
+    content: "";
+    background-color: white;
+    transform: translate(-9px, 12px);
+    transition: transform 0.3s cubic-bezier(0.98, 0.055, 0.09, 0.63);
+    font-size: 10px;
+  }
+
+  .menu-form[type="checkbox"]:checked + label > span::after {
+    transform: rotate(45deg) translate(2px, 1px);
+  }
+
+  .menu-form[type="checkbox"]:checked + label > span::before {
+    transform: rotate(-135deg) translate(-1px, -14px);
+  }
+</style>

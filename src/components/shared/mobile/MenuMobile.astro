@@ -1,0 +1,39 @@
+---
+import { Icon } from "astro-icon/components";
+import LINKS from "@constants/navLinks";
+import NavLink from "./NavLink.astro";
+
+import ConfigurationButton from "./ConfigurationButton.astro";
+---
+
+<div class="block lg:hidden">
+  <div class="container-menu">
+    <input id="menu" type="checkbox" class="menu opacity-0 hidden" />
+    <label for="menu" class="block rounded-md shadow shadow-primary active:shadow-inset-sm">
+      <Icon
+        name="menu"
+        size={30}
+        class="text-primary block lg:hidden"
+        id="menu"
+      />
+    </label>
+  </div>
+
+  <nav
+    class="container-elements w-screen h-screen overflow-y-auto absolute left-0 top-24 z-999 transition-transform duration-300 ease-in-jump  bg-linear-to-r/srgb from-white to-gray-200 dark:from-slate-900 dark:to-slate-800"
+  >
+    <accordion-dial>
+      <ul class="flex flex-col h-full max-h-full py-5">
+        {LINKS.map((link) => <NavLink link={link} />)}
+        <ConfigurationButton />
+        <label
+          for="menu"
+          class="block m-auto text-center p-2 mt-2 shadow rounded-full w-10 h-10 text-primary bg-white dark:text-gray-800 shadow-primary"
+          >x</label
+        >
+      </ul>
+    </accordion-dial>
+  </nav>
+</div>
+
+<script src="@lib/accordion"></script>

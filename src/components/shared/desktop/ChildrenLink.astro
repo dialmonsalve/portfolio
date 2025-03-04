@@ -1,0 +1,55 @@
+---
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations,
+} from "@i18n/utils";
+import { type Submenu } from "@interfaces/links";
+
+interface Props {
+  submenu?: Submenu[];
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+const currentPath = Astro.url.pathname;
+
+const { submenu } = Astro.props;
+
+const suffix = lang === "en" ? "/en" : "";
+---
+
+<div class="absolute w-55 translate-y-0.5 submenu Z-10 hidden py-2">
+  <ul class="bg-white py-4 px-4 rounded-md shadow-xl flex flex-col gap-1">
+    {
+      submenu?.map((sub) => {
+        const isSamePath = currentPath === `${suffix}${sub.href}`;
+        const href = sub.href.startsWith("https")
+          ? sub.href
+          : translatePath(`${sub.href ? sub.href : ""}`, lang);
+        return (
+          <li class="">
+            <a
+              class:list={[
+                "flex items-center gap-1 text-sm transition-colors capitalize",
+                {
+                  "text-blue-700 dark:text-green-700 hover:opacity-80":
+                    !isSamePath,
+                },
+                {
+                  "text-primary dark:text-slate-800": isSamePath,
+                },
+              ]}
+              href={href}
+              target={sub.target}
+            >
+              {t(sub.name)}
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
+</div>

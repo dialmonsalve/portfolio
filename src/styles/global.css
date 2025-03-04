@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("/fonts/Poppins/Poppins-Medium.ttf");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-poppins: Poppins, sans-serif;
+  --ease-in-jump: cubic-bezier(0.42, 0, 0.58, 1.8);
+  --color-primary: #4682b4;
+  --shadow-inset: 1px 1px 8px #0000007a inset, 2px 2px 16px #0000007a inset;
+}
+
+input[type=number] {
+  appearance: none !important;
+}
+
+/* @view-transition {
+  navigation: auto; 
+} */
+
+.dark {
+  --color-primary: oklch(0.702 0.183 293.541);
+}
+
+html {
+  font-family: var(--font-poppins);
+}
+
+.menu[type="checkbox"]:checked ~ .container-menu__label {
+  box-shadow: 1px -1px 8px rgba(0, 0, 0, 0.477) inset;
+}
+
+div:has(.menu[type="checkbox"]:not(:checked)) + .container-elements {
+  transform: translateX(-110%);
+}
+
+div:has(.menu[type="checkbox"]:checked) + .container-elements {
+  transform: translateX(0);
+}
+
+@media (width >= 64rem) {
+  div:has(.menu[type="checkbox"]:not(:checked)) + .container-elements {
+    transform: translateX(-225%);
+  }
+  div:has(.menu[type="checkbox"]:checked) + .container-elements {
+    transform: translateX(12px);
+  }
+}
+
+@media (width >= 80rem) {
+  div:has(.menu[type="checkbox"]:checked) + .container-elements {
+    transform: translateX(16px);
+  }
+}
+
+@media (width >= 96rem) {
+  div:has(.menu[type="checkbox"]:checked) + .container-elements {
+    transform: translateX(40px);
+  }
+}

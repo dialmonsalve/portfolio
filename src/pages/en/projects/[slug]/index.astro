@@ -1,0 +1,26 @@
+---
+import ExternalProjects from "@components/pages/projects/externalProjects/ExternalProjects.astro";
+import { getCollection, render } from "astro:content";
+
+export const getStaticPaths = async () => {
+  const projects = await getCollection("projects_en");
+
+  return projects.map((project) => ({
+    params: {
+      slug: project.slug,
+    },
+    props: {
+      project,
+    },
+  }));
+};
+
+const { slug } = Astro.params;
+const { project } = Astro.props;
+
+const { Content } = await render(project);
+---
+
+<ExternalProjects data={project.data} slug={slug}>
+  <Content />
+</ExternalProjects>

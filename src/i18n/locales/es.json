@@ -1,0 +1,91 @@
+{
+  "general": {
+    "configurations": "configuraciones",
+    "language": "idioma",
+    "theme": "tema",
+    "technology": "Tecnología",
+    "styles": "Estilos",
+    "go": "ir",
+    "description": "descripción",
+    "more": "más"
+  },
+  "home": {
+    "title": "hola"
+  },
+  "projects": {
+    "title": "proyectos",
+    "internal_projects": [
+      {
+        "title": "formularios",
+        "pngImage": "/images/internal-projects/forms.png",
+        "webpImage": "/images/internal-projects/forms.webp",
+        "description": "crea tus formularios",
+        "slug": "project-form",
+        "href": "projects/form"
+      },
+      {
+        "title": "conversor de imágenes",
+        "pngImage": "/images/internal-projects/convert-image.png",
+        "webpImage": "/images/internal-projects/convert-image.webp",
+        "description": "cambie el formato de sus imagenes",
+        "href": "projects/convert-images",
+        "slug": "convert-images"
+      }
+    ],
+    "web_components": [
+      {
+        "title": "texto",
+        "inputs": [
+          "heading",
+          "paragraph"
+        ]
+      },
+      {
+        "title": "inputs",
+        "inputs": [
+          "text",
+          "email",
+          "phone",
+          "number",
+          "password",
+          "date",
+          "time",
+          "select",
+          "signature",
+          "checkbox",
+          "radio-buttons",
+          "textarea",
+          "files"
+        ]
+      }
+    ]
+  },
+  "about": {
+    "title": "¿Quién Soy?",
+    "subtitle1": "De profesión:",
+    "contentSubtitle1": "Ingeniero de productividad y calidad",
+    "subtitle2": "Por pasión y convicción:",
+    "contentSubtitle2": "Desarrollador web",
+    "path": {
+      "title": "Trayectoria",
+      "p1": "Desde que inicié mi vida laboral a los 18 años, he mantenido un progreso constante, enfrentando los desafíos que la vida presenta en el camino.",
+      "p2": "Con más de 10 años de experiencia en logística y gestión de inventarios, 1 año en producción y 1 año como desarrollador web, cuento con la experiencia necesaria para guiar a las compañías en la creación y mantenimiento de software a medida, adaptado a sus necesidades específicas.",
+      "p3": "Este año como desarrollador web me ha permitido evolucionar de una manera que nunca había imaginado. Inicialmente comencé a usar Laravel con PHP, un lenguaje que no dominaba, pero gracias a la ayuda de mis compañeros logramos llevar a cabo el proyecto más ambicioso de la compañía: una aplicación para empleados.",
+      "p4": "Ahora he trabajado con tecnologías que antes no había utilizado profesionalmente, sino más como un pasatiempo, lo cual ha fortalecido mis conocimientos en áreas como Astro, Vue, CSS, Sass, Tailwind, entre otros.",
+      "p5": "Durante este tiempo he podido realizar proyectos increíbles para la compañía en la que trabajo. Estos proyectos se pueden encontrar en la sección de esta web catalogada como proyectos externos."
+    },
+    "iLike": {
+      "title": "¿Y... que me gusta?",
+      "p1": "Siento una gran pasión por mi familia, el desarrollo web y las tareas que requieren un esfuerzo mental.",
+      "p2": "Valoro las relaciones interpersonales y busco enriquecer mi conocimiento a través de la interacción con los demás.",
+      "p3": "Me entusiasma abordar cada actividad con pasión y dedicación. Además, disfruto pasar tiempo con personas amenas y enriquecedoras. Me considero una persona sociable y abierta a nuevos retos.",
+      "p4": "Mi vida social no entorpece mi compromiso laboral, lo que me permite llevar una vida tranquila y armoniosa, siempre con un profundo amor por los animales y la naturaleza.",
+      "p5": "Como toque final en mi rutina, la taza de café es un elemento imprescindible en mi mesa.",
+      "p6": "Mi pasión por el desarrollo ha trascendido más de lo que había imaginado, con un repositorio en GitHub que crece continuamente. También me gusta crear mis propios componentes en TypeScript puro, algunos de los cuales se pueden visualizar en esta web, catalogados como proyectos internos.",
+      "p7a": "Finalmente, mi producto al que más cariño tengo y que por motivos laborales no he podido mantener es mi set de componentes para React, alojado en",
+      "p7b": "Toda la documentación en inglés y español se puede encontrar en:",
+      "p7c": "componentes para React",
+      "p8": "Finalmente como meta personal quiero aprender Rust"
+    }
+  }
+}

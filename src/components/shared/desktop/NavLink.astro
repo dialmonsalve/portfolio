@@ -1,0 +1,92 @@
+---
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations,
+} from "@i18n/utils";
+import type { Link } from "@interfaces/links";
+import { Icon } from "astro-icon/components";
+
+import ChildrenLink from "./ChildrenLink.astro";
+
+interface Props {
+  link: Link;
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+const suffix = lang === "en" ? "/en" : "";
+
+const currentPath = Astro.url.pathname;
+const { link } = Astro.props;
+
+const isSamePath = currentPath === `${suffix}${link.href}`;
+---
+
+<li class="sub-menu-has-children">
+  {
+    isSamePath && !link.hasChildren ? (
+      <span 
+      
+      class="flex lg:gap-1 text-primary items-center xl:text-md 2xl:text-xl">
+        <Icon name={link.icon} size={20} />
+        {t(link.name)}
+      </span>
+    ) : (
+      <a
+        
+        class="flex items-center lg:gap-1  text-primary hover:opacity-80 xl:text-md 2xl:text-xl text-center border-b-transparent capitalize"
+        href={translatePath(`${link.href ? link.href : ""}`, lang)}
+        target={link.target}
+      >
+        <Icon name={link.icon} size={20} />
+        {t(link.name)} {link.hasChildren && <Icon name="arrow-down" />}
+      </a>
+    )
+  }
+
+  {link.hasChildren && <ChildrenLink submenu={link.subMenu} />}
+
+  {
+    isSamePath && (
+      <div
+        transition:name="next-anchor"
+        class:list={["transition-colors border-b-2 border-primary"]}
+      />
+    )
+  }
+</li>
+
+<style is:global>
+  .sub-menu-has-children:hover > .submenu {
+    display: block;
+    transition: all 0.4s ease-in-out;
+    opacity: 1;
+    top: 60%;
+
+    @starting-style {
+      opacity: 0;
+    }
+  }
+
+  .submenu li > a {
+    position: relative;
+  }
+  .submenu li > a::after {
+    content: "";
+    height: 1px;
+    width: 0;
+    position: absolute;
+    transition: all 0.2s ease-in-out;
+    background-color: var(--color-primary);
+    right: 0;
+    bottom: 0;
+  }
+
+  li > a:hover::after {
+    width: 100%;
+  }
+
+</style>

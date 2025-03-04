@@ -1,0 +1,78 @@
+---
+import Layout from "@layouts/Layout.astro";
+import { getI18N } from "../../../i18n";
+import Menu from "../../Menu.astro";
+import "@styles/components/pages/create-inputs/inputs.css";
+import "@styles/components/components2/modal.css";
+import "@styles/components/components2/button.css";
+import "@styles/components/components2/signature.css";
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+---
+
+<Layout>
+  <forms-app>
+    <section class="relative flex flex-col gap-4 pt-20" id="section-forms">
+      <Menu />
+      <h1
+        class="text-center text-2xl uppercase text-primary"
+        transition:name="project-form"
+      >
+        {i18n.projects.internal_projects[0].title}
+      </h1>
+
+      <article
+        class="container-forms flex flex-col gap-10 mx-auto"
+        id="container-cards"
+      >
+        <div
+          class="container-card-form card relative p-8 min-w-162 flex flex-col gap-8 border border-gray-400 w-162 opacity-100 rounded-xl"
+          id="card-1"
+        >
+          <button class="card__button-add" id="add-page"
+            >add page<span class="button-square-add"></span>
+          </button>
+        </div>
+      </article>
+    </section>
+  </forms-app>
+</Layout>
+
+<script src="@lib/forms/create/app.ts"></script>
+
+<style is:global>
+  .container-card-form {
+    transition:
+      opacity 0.3s ease-in-out,
+      display 1s ease-in-out allow-discrete;
+    @starting-style {
+      opacity: 0;
+    }
+  }
+
+  .heading2 {
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  .heading3 {
+    font-size: 1.6rem;
+  }
+
+  .heading4 {
+    font-size: 1.4rem;
+  }
+
+  .heading5 {
+    font-size: 1.2rem;
+  }
+
+  .heading6 {
+    font-size: 1rem;
+  }
+  .paragraph {
+    font-size: 0.9rem;
+  }
+</style>

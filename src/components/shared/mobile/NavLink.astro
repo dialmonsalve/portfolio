@@ -1,0 +1,51 @@
+---
+import { getLangFromUrl, useTranslatedPath, useTranslations } from "@i18n/utils";
+import type { Link } from "@interfaces/links";
+import { Icon } from "astro-icon/components";
+
+import ChildrenLink from "./ChildrenLink.astro";
+
+import { getLinkClasses } from "@constants/functionClasses";
+
+interface Props {
+  link: Link;
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+const currentPath = Astro.url.pathname;
+
+const { link } = Astro.props;
+
+const suffix = lang === "en" ? "/en" : "";
+
+const isSamePath = currentPath === `${suffix}${link.href}`;
+---
+
+<li
+  class:list={[
+    "first:border-t border-primary py-2 border-b sub-menu-has-children px-2",
+  ]}
+>
+  {
+    !isSamePath && !link.hasChildren ? (
+      <a
+        class="flex items-center gap-1 text-md transition-colors capitalize text-primary"
+        href={translatePath(`${link.href ? link.href : ""}`, lang)}
+      >
+        <Icon name={link.icon} size={20} class="text-primary" />
+        {t(link.name)}
+      </a>
+    ) : (
+      <button
+        class:list={[getLinkClasses(isSamePath), "accordion-header w-full"]}
+      >
+        <Icon name={link.icon} size={20} class="text-primary" />
+        {t(link.name)} {link.hasChildren && <span id="icon-link">+</span>}
+      </button>
+    )
+  }
+  {link.hasChildren && <ChildrenLink submenu={link.subMenu} />}
+</li>

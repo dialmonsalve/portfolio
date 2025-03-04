@@ -1,0 +1,83 @@
+---
+import Link from "@components/Link.astro";
+import Layout from "@layouts/Layout.astro";
+import { getI18N } from "@i18n/index";
+
+interface Props {
+  slug: string;
+  data: Data;
+}
+
+interface Data {
+  title: string;
+  description: string;
+  images: string[];
+  isExternalProject: boolean;
+  href: string;
+  technology: string;
+  scripts: string;
+  styles: string;
+}
+
+const { data, slug } = Astro.props;
+
+const { title, description, href, images, styles, technology, scripts } = data;
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+---
+
+<Layout>
+  <section class="flex flex-col gap-5 lg:w-80/100 mx-auto pt-10">
+    <h1
+      class="uppercase text-center text-3xl text-primary"
+      transition:name={slug}
+    >
+      {title}
+    </h1>
+    <ul>
+      <Link
+        className="bg-primary text-white w-fit px-4 rounded-xl shadow-2xl shadow-primary hover:opacity-80 capitalize"
+        href={href}
+        label={i18n.general.go}
+        target="_blank"
+      />
+    </ul>
+
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6 justify-items-center"
+    >
+      {
+        images.map((_, idx) => (
+          <picture>
+            <source srcset={`/images/${slug}/webp/${idx + 1}.webp`} type="image/webp" />
+            <img
+              src={`/images/${slug}/png/${idx + 1}.png`}
+              alt=""
+              class="max-w-full h-70 object-cover block rounded-xl shadow-md shadow-gray-300 dark:shadow-slate-600"
+            />
+          </picture>
+        ))
+      }
+    </div>
+    <div class="text-slate-800 dark:text-white">
+      <slot />
+    </div>
+    <p class="text-slate-800 dark:text-gray-400">
+      <span class="font-bold uppercase">{i18n.general.description}:</span>
+      {description}
+    </p>
+    <p class="text-slate-800 dark:text-gray-400">
+      <span class="font-bold uppercase">{i18n.general.technology}:</span>
+      {technology}
+    </p>
+    <p class="text-slate-800 dark:text-gray-400">
+      <span class="font-bold uppercase">{i18n.general.styles}:</span>
+      {styles}
+    </p>
+    <p class="text-slate-800 dark:text-gray-400">
+      <span class="font-bold uppercase">Scripts:</span>
+      {scripts}
+    </p>
+  </section>
+</Layout>

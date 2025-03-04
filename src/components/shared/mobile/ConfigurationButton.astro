@@ -1,0 +1,60 @@
+---
+import { Icon } from "astro-icon/components";
+
+import {
+  useTranslatedPath,
+  getLangFromUrl,
+  getRouteFromUrl,
+} from "@i18n/utils";
+
+import { getI18N } from "@i18n/index";
+
+import { languages } from "@i18n/ui";
+
+import { getLinkClasses } from "@constants/functionClasses";
+import Theme from "@components/shared/Theme.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+const route = getRouteFromUrl(Astro.url);
+
+const currentLocale = Astro.currentLocale;
+const i18n = getI18N({ currentLocale });
+---
+
+<button
+  class:list={[
+    getLinkClasses(false),
+    "accordion-header p-2 border-gray-300 w-full",
+  ]}
+>
+  <Icon name="configuration" size={20} class="text-primary" />
+  {i18n.general.configurations}
+  <span id="icon-link">+</span>
+</button>
+<ul
+  class="max-h-0 overflow-hidden transition-all flex flex-col items-start border-b border-primary "
+>
+  <p class="pl-4 capitalize text-md text-primary mt-2">
+    {i18n.general.language}
+  </p>
+  <ul class="py-1 w-full justify-evenly border-b border-gray-300">
+    {
+      Object.entries(languages).map(([lang, label]) => (
+        <li class="text-primary pl-8">
+          <a class="" href={translatePath(`/${route ? route : ""}`, lang)}>
+            {label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  <p class="pl-4 capitalize text-md text-primary mt-2">
+    {i18n.general.theme}
+  </p>
+  <ul class="py-1 w-full justify-evenly">
+    <theme-dial class="block pl-8">
+      <Theme />
+    </theme-dial>
+  </ul>
+</ul>

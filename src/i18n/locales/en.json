@@ -1,0 +1,92 @@
+{
+  "general": {
+    "configurations": "configurations",
+    "language": "language",
+    "theme": "theme",
+    "technology": "Technology",
+    "styles": "Styles",
+    "go": "go",
+    "description": "description",
+    "more": "more"
+  },
+  "home": {
+    "title": "hello"
+  },
+  "projects": {
+    "title": "projects",
+    "internal_projects": [
+      {
+        "title": "forms",
+        "pngImage": "/images/internal-projects/forms.png",
+        "webpImage": "/images/internal-projects/forms.webp",
+        "description": "create your forms",
+        "slug": "project-form",
+        "href": "projects/form"
+      },
+      {
+        "title": "convert images",
+        "pngImage": "/images/internal-projects/convert-image.png",
+        "webpImage": "/images/internal-projects/convert-image.webp",
+        "description": "change your image format",
+        "slug": "convert-images",
+        "href": "projects/convert-images"
+      }
+    ],
+    "web_components": [
+      {
+        "title": "text",
+        "inputs": [
+          "heading",
+          "paragraph"
+        ]
+      },
+      {
+        "title": "inputs",
+        "inputs": [
+          "text",
+          "email",
+          "phone",
+          "number",
+          "password",
+          "date",
+          "time",
+          "select",
+          "signature",
+          "checkbox",
+          "radio-buttons",
+          "textarea",
+          "files"
+        ]
+      }
+    ]
+  },
+  
+  "about": {
+    "title": "Who am I?",
+    "subtitle1": "By profession",
+    "contentSubtitle1": " Productivity and quality engineer",
+    "subtitle2": "By passion and conviction",
+    "contentSubtitle2": "Web developer",
+    "path": {
+      "title": "Path",
+      "p1": "Since I started my working life at the age of 18, I have maintained constant progress, facing the challenges that life presents along the way.",
+      "p2": "With over 10 years of experience in logistics and inventory management, 1 year in production, and 1 year as a web developer, I have the necessary expertise to guide companies in creating and maintaining custom software tailored to their specific needs.",
+      "p3": "This year as a web developer has allowed me to evolve in ways I never imagined. Initially, I started using Laravel with PHP, a language I was not familiar with, but thanks to my colleagues' help, we managed to carry out the company's most ambitious project: an employee application.",
+      "p4": "Now I have worked with technologies that I had not used professionally before, but rather as a hobby, which has strengthened my knowledge in areas such as Astro, Vue, CSS, Sass, Tailwind, among others.",
+      "p5": "During this time, I have been able to undertake amazing projects for the company I work for. These projects can be found in the section of this website cataloged as external projects."
+    },
+    "iLike": {
+      "title": "And... what do I like?",
+      "p1": "I have a great passion for my family, web development, and tasks that  require mental effort.",
+      "p2": "I value interpersonal relationships and seek to enrich my knowledge through interaction with others.",
+      "p3": "I am enthusiastic about tackling every activity with passion and dedication. Additionally, I enjoy spending time with pleasant and enriching people. I consider myself a sociable person, open to new challenges.",
+      "p4": "My social life does not hinder my work commitment, which allows me to lead a peaceful and harmonious life, always with a deep love for animals and nature.",
+      "p5": "As a final touch to my routine, a cup of coffee is an essential element on my table.",
+      "p6": "My passion for development has transcended more than I had imagined, with a GitHub repository that continues to grow. I also enjoy creating my own components in pure TypeScript, some of which can be viewed on this website, categorized as internal projects.",
+      "p7a": "Finally, my most cherished product, which I have not been able to maintain due to work commitments, is my set of React components hosted on",
+      "p7b": "All documentation in English and Spanish can be found at:",
+      "p7c": "React components",
+      "p8": "Finally, as a personal goal I want to learn Rust"
+    }
+  }
+}

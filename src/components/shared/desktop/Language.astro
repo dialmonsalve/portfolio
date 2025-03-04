@@ -1,0 +1,76 @@
+---
+import { languages } from "@i18n/ui";
+
+import {
+  useTranslatedPath,
+  getLangFromUrl,
+  getRouteFromUrl,
+} from "@i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+const route = getRouteFromUrl(Astro.url);
+---
+
+<div class="flex gap-8 item">
+  <div class="relative">
+    <button-language>
+      <button
+        id="language"
+        class="block hover:opacity-80 text-primary cursor-pointer dark:hover:text-white text-sm xl:text-xl"
+        >{lang === "es" ? "Español" : "English"}</button
+      >
+      <ul
+        id="language-container"
+        class="absolute hidden bg-white border border-primary p-2 dark:bg-white rounded translate-y-1 z-3 language"
+      >
+        {
+          Object.entries(languages).map(([lang, label]) => (
+            <li class="text-primary  transition-colors lg:text-[12px] text-sm xl:text-xl">
+              <a class="" href={translatePath(`/${route ? route : ""}`, lang)}>
+                {label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </button-language>
+  </div>
+</div>
+
+<script>
+  class ButtonLanguage extends HTMLElement {
+    constructor() {
+      super();
+      const buttonLanguage = this.querySelector("#language");
+      const language = this.querySelector("#language-container");
+
+      const container = document.querySelector("body");
+
+      buttonLanguage?.addEventListener("click", (evt) => {
+        evt.stopPropagation();
+        language?.classList.toggle("hidden");
+      });
+
+      container?.addEventListener("click", () => {
+        if (!language?.classList.contains("hidden")) {
+          language?.classList.add("hidden");
+        }
+      });
+    }
+  }
+
+  customElements.define("button-language", ButtonLanguage);
+</script>
+
+<style>
+  .language {
+    opacity: 1;
+    transition:
+      opacity 0.3s ease-in-out,
+      display 0.1s ease-in-out allow-discrete;
+    @starting-style {
+      opacity: 0;
+    }
+  }
+</style>

@@ -1,0 +1,69 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<div class="w-6 h-6">
+  <button
+    class="container-themes__theme block cursor-pointer transition-opacity ease-in-out"
+    id="dark"
+  >
+    <Icon name="dark-theme" size={25} />
+  </button>
+  <button
+    id="light"
+    class="container-themes__theme block cursor-pointer transition-opacity ease-in-out"
+  >
+    <Icon name="sun-light" class="text-white cursor-pointer lg:font-[12px]" size={25} />
+  </button>
+</div>
+
+<script>
+  class ThemeDial extends HTMLElement {
+    constructor() {
+      super();
+      const element = document.documentElement;
+
+      const btnLight = this.querySelector("#light");
+      const btnDark = this.querySelector("#dark");
+      const isDarkSelected = localStorage.getItem("theme");
+
+      if (isDarkSelected === "dark") {
+        btnDark?.classList.add("hide-btn-theme");
+      } else {
+        btnLight?.classList.add("hide-btn-theme");
+      }
+
+      const setLightTheme = () => {
+        btnLight?.classList.add("hide-btn-theme");
+        btnDark?.classList.remove("hide-btn-theme");
+        element.classList.remove("dark");
+        localStorage.setItem("theme", "light");
+      };
+
+      const setDarkTheme = () => {
+        btnDark?.classList.add("hide-btn-theme");
+        btnLight?.classList.remove("hide-btn-theme");
+        element.classList.add("dark");
+        localStorage.setItem("theme", "dark");
+      };
+      btnLight?.addEventListener("click", setLightTheme);
+      btnDark?.addEventListener("click", setDarkTheme);
+    }
+  }
+
+  customElements.define("theme-dial", ThemeDial);
+</script>
+
+<style>
+  .container-themes__theme {
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+    @starting-style {
+      opacity: 0;
+    }
+  }
+  .hide-btn-theme {
+    display: none;
+    opacity: 0;
+  }
+</style>
