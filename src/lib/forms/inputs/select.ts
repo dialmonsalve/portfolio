@@ -2,7 +2,6 @@ import modal from "../components/modal";
 import button from "../components/button";
 import bodyModal from "../components/bodySelectRadio";
 import removeElementForm from "../utils/removeElements";
-import storage from "../utils/saveAtLocalStorage";
 import cleanTextInputs from "../utils/cleanTextInputs";
 import addRequiredToInput from "../utils/addRequiredToInput";
 import { AppInput, AppRadioButtons, AppTextarea } from "../../web-components";
@@ -107,20 +106,6 @@ export function create({ incrementId }: { incrementId: number }) {
 
   $lastChildren?.appendChild($parentDiv);
 
-  const updateInputs: Inputs = {
-    buttonIdRemove,
-    buttonIdUpdate,
-    containerId,
-    disposition: "row",
-    id,
-    label: newLabel,
-    name,
-    object: "Select",
-    options: [],
-    required: false,
-  };
-
-  storage.create($lastChildren, updateInputs);
 }
 
 export function update(
@@ -208,13 +193,6 @@ export function update(
     $select?.appendChild($option);
   });
 
-  const rest = {
-    name,
-    disposition: newCheckedPosition,
-    label: newLabel,
-    required: newCheckedRequired.trim() === "true",
-    options,
-  };
 
-  storage.update(target, rest);
+
 }

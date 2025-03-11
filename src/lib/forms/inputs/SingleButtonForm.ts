@@ -2,9 +2,6 @@ import button from "../components/button";
 
 import removeElementForm from "../utils/removeElements";
 
-import storage from "../utils/saveAtLocalStorage";
-import type { Inputs } from "../interfaces";
-
 const doc = document;
 
 const $ = (selector: string) => doc.querySelector(selector);
@@ -74,24 +71,6 @@ export function create({
 
   $lastChildren?.appendChild($parentDiv);
 
-  const updateInputs: Inputs = {
-    buttonIdRemove,
-    buttonIdUpdate: null,
-    containerId,
-    id,
-    name: containerId,
-    object: "NavigationButtons",
-    disposition: "row",
-    options: [
-      {
-        name: `btn-${type}`,
-        type: buttonType,
-        id: `btn-${id}`,
-        label: type,
-        style: style ? `style='width: ${style}%;` : null,
-      },
-    ],
-  };
 
-  storage.create($lastChildren, updateInputs);
+
 }

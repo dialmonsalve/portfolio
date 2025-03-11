@@ -4,13 +4,10 @@ import inputComponent from "../components/inputComponent";
 import removeElementForm from "../utils/removeElements";
 import { REQUIRED_RADIOS, POSITION_RADIOS } from "../const";
 
-import storage from "../utils/saveAtLocalStorage";
 import addRequiredToInput from "../utils/addRequiredToInput";
 import cleanTextInputs from "../utils/cleanTextInputs";
 import { AppInput, AppRadioButtons } from "../../web-components";
 
-const doc = document;
-const $ = (selector: string) => doc.querySelector(selector);
 
 const $containerCards = $(".container-forms");
 
@@ -28,13 +25,11 @@ interface OptionsUpdate {
   input: Input;
 }
 
-export function create({ incrementId, object, type, input }: OptionsCreate) {
+export function create({ incrementId,  type, input }: OptionsCreate) {
   const $parentDiv = document.createElement("div");
   const $parentInput = document.createElement("div");
   const isTextarea = input === "textarea" ? "textarea" : type;
 
-  const buttonIdRemove = `${isTextarea}-remove-${incrementId}`;
-  const buttonIdUpdate = `${isTextarea}-update-${incrementId}`;
   const containerId = `card-${isTextarea}-${incrementId}`;
 
   const buttonUpdate = button(
@@ -124,19 +119,6 @@ export function create({ incrementId, object, type, input }: OptionsCreate) {
   $parentDiv?.appendChild($parentInput);
   $lastChildren?.appendChild($parentDiv);
 
-  const updateInputs = {
-    buttonIdRemove,
-    buttonIdUpdate,
-    containerId,
-    disposition: isArea as "row",
-    id,
-    label: newLabel,
-    name,
-    object,
-    required: false,
-  };
-
-  storage.create($lastChildren, updateInputs);
 }
 
 export function bodyModal(target: HTMLButtonElement, { input = "input" }) {
@@ -247,12 +229,4 @@ export function update(
   $input?.setAttribute("data-required", newCheckedRequired);
   $input?.setAttribute("name", name);
 
-  const rest = {
-    disposition: newCheckedPosition,
-    name,
-    label: newLabel,
-    required: newCheckedRequired.trim() === "true",
-  };
-
-  storage.update(target, rest);
 }

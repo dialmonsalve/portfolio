@@ -1,6 +1,6 @@
-import { HandleFiles } from "src/lib/components/dial-drop-zone/handle-files";
-import HandleEvents from "../components/dial-drop-zone/handle-events";
-import { UpdateDOMToDownload } from "src/lib/components/dial-drop-zone/update-DOM-to-download";
+import { HandleFiles } from "@lib/dial-drop-zone/dial-drop-zone/handle-files";
+import HandleEvents from "../dial-drop-zone/handle-events";
+import { UpdateDOMToDownload } from "@lib/dial-drop-zone/dial-drop-zone/update-DOM-to-download";
 
 export class DialDownLoadDropZone extends HTMLElement {
   private dropZone = this.querySelector("#drop-zone") as HTMLLabelElement;

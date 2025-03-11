@@ -1,11 +1,6 @@
 import button from "../components/button";
-import storage from "./saveAtLocalStorage";
 import smooth from "./smoothWindow";
 import removePage from "./removePage";
-
-import { PAGES_STRING } from "../const";
-
-import type { Page } from "../interfaces";
 
 const doc = document;
 const $ = (selector: string) => doc.querySelector(selector);
@@ -52,29 +47,6 @@ export default function addPage(evt: Event, incrementId: number) {
   if (!parentButton) return;
 
   parentButton.remove();
-
-  const newPage = {
-    buttonIdRemove,
-    buttonIdUpdate: buttonIdCreate,
-    containerId: "",
-    containerPosition: incrementId,
-    id: page.id,
-    inputs: [],
-    page: "Container",
-  };
-
-  const pages = JSON.parse(
-    localStorage.getItem("pages") || PAGES_STRING,
-  ) as Page[];
-
-  const oldPage = pages.map((page) => {
-    return {
-      ...page,
-      buttonIdUpdate: null,
-    };
-  });
-  const updatedPages = [...oldPage, newPage];
-  storage.saveAtLocalStorage(updatedPages);
 
   smooth();
 }

@@ -49,7 +49,7 @@ interface CreateOptions {
 
 interface ConstructOptions {
   container: Container;
-  tag: "h2" | "p";
+  elementToCreate: "h2" | "p";
   type: "heading" | "paragraph";
   classes: string;
 }
@@ -59,10 +59,10 @@ export class Typography {
   private readonly elementToCreate;
   private readonly type;
   private readonly classes;
-  constructor({ container, tag, type, classes }: ConstructOptions) {
+  constructor({ container, elementToCreate, type, classes }: ConstructOptions) {
     this.classes = classes;
     this.container = container;
-    this.elementToCreate = tag;
+    this.elementToCreate = elementToCreate;
     this.type = type;
   }
   create = ({ incrementId, containerCards }: CreateOptions) => {
@@ -83,7 +83,7 @@ export class Typography {
       action: (evt) =>
         new Modal({
           twoButtons: true,
-          title: `update ${this.type}`,
+          title: "update title",
           content: () => this.bodyModal(evt.target as HTMLButtonElement),
           action: () => this.update(evt.target as HTMLButtonElement),
         }).build(),
@@ -92,13 +92,14 @@ export class Typography {
 
   private bodyModal = (target: HTMLButtonElement) => {
     const parentDiv = new ModalBody();
+  
     const parentContainer = target.closest(".container-components");
     const parentInputs = parentContainer?.lastElementChild;
     const containerInput = inputComponent({
-      name: "input-headings",
+      name: `input-${this.type}`,
       type: "text",
-      id: "container-input-headings",
-      label: "Edit",
+      id: `container-input-${this.type}`,
+      label: "sadfsdafsadf",
     });
 
     if (!parentInputs) {

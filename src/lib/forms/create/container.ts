@@ -1,8 +1,6 @@
 import button from "../components/button";
 import removeElementForm from "../utils/removeElements";
-import storage from "../utils/saveAtLocalStorage";
 
-import type { Inputs } from "../interfaces";
 
 interface OptionsCreate {
   containerCards: HTMLDivElement | null;
@@ -21,7 +19,6 @@ export class Container {
     incrementId,
     type,
     children,
-    name,
     action,
   }: OptionsCreate) => {
     const container = document.createElement("div");
@@ -88,22 +85,9 @@ export class Container {
     container.appendChild(buttonUpdate);
     container.appendChild(parentElement);
 
-    const updateInputs: Inputs = {
-      buttonIdRemove,
-      buttonIdUpdate,
-      containerId: container.id,
-      disposition: "row",
-      heading: "h2",
-      id: name,
-      label: "Edit title",
-      name,
-      object: "Heading",
-    };
     const lastChildren = containerCards?.lastElementChild;
 
     lastChildren?.appendChild(container);
-
-    storage.create(lastChildren, updateInputs);
 
     return {
       container,

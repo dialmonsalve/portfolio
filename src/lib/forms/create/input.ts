@@ -1,47 +1,11 @@
-import modal from "../components/modal";
 import inputComponent from "../components/inputComponent";
 
-import storage from "../utils/saveAtLocalStorage";
-
-import type {
-  AppInput,
-  AppRadioButtons,
-  ModalBody,
-} from "../../web-components";
+import { AppInput, AppRadioButtons, ModalBody } from "../../web-components";
 import { type Container } from "../create/container";
-
-const radioButtonsData = [
-  {
-    name: "heading",
-    value: "h2",
-    labelText: "title",
-    id: "h2",
-  },
-  {
-    name: "heading",
-    value: "h3",
-    labelText: "subtitle",
-    id: "h3",
-  },
-  {
-    name: "heading",
-    value: "h4",
-    labelText: "subtitle 2",
-    id: "h4",
-  },
-  {
-    name: "heading",
-    value: "h5",
-    labelText: "normal",
-    id: "h5",
-  },
-  {
-    name: "heading",
-    value: "h6",
-    labelText: "normal 2",
-    id: "h6",
-  },
-];
+import Modal from "@lib/components/modal";
+import cleanTextInputs from "../utils/cleanTextInputs";
+import { POSITION_RADIOS, REQUIRED_RADIOS } from "../const";
+import addRequiredToInput from "../utils/addRequiredToInput";
 
 interface CreateOptions {
   incrementId: number;
@@ -92,6 +56,7 @@ export class Input {
     input.className = `${this.classes} ${
       this.type === "checkbox" ? "-order-1" : ""
     }`;
+
     input.setAttribute("autocomplete", "on");
     input.setAttribute("data-required", "false");
 
@@ -102,23 +67,23 @@ export class Input {
       name,
       children: [label, input],
       action: (evt) =>
-        modal({
-          title: "update title",
+        new Modal({
+          title: `update ${this.type}`,
           content: () => this.bodyModal(evt.target as HTMLButtonElement),
           action: () => this.update(evt.target as HTMLButtonElement),
-        }),
+        }).build(),
     });
   };
 
   private bodyModal = (target: HTMLButtonElement) => {
-    const parentDiv = document.createElement("app-modal-body") as ModalBody;
+    const parentDiv = new ModalBody();
     const parentContainer = target.closest(".container-components");
     const parentInputs = parentContainer?.lastElementChild;
-    const containerInput = inputComponent({
-      name: "input-headings",
+    const container = inputComponent({
+      name: "input-label",
       type: "text",
-      id: "container-input-headings",
-      label: "title",
+      label: "Label",
+      id: "container-input-label",
     });
 
     if (!parentInputs) {
@@ -132,141 +97,115 @@ export class Input {
     }
 
     if (this.type === "checkbox") {
-      return this.createHeading(parentDiv, element, containerInput);
     }
 
     if (this.type === "date") {
-      return this.createParagraph(parentDiv, element, containerInput);
+      return this.createDate(parentDiv, target, container);
     }
 
     throw new Error(`This ${this.type} is not allowed`);
   };
 
-  private createHeading = (
+  createDate(
     parentDiv: ModalBody,
-    element: Element,
-    containerInput: HTMLElement
-  ) => {
-    const radioButtons = document.createElement(
-      "app-radio-buttons"
-    ) as AppRadioButtons;
+    target: HTMLButtonElement,
+    container: AppInput
+  ) {
+    const radioButtonsRequired = new AppRadioButtons();
+    const radioButtonsPosition = new AppRadioButtons();
 
-    radioButtons.id = "container-radios-headings";
-    radioButtons.setAttribute("name", "headings");
+    radioButtonsRequired.setAttribute("label", "Required:");
+    radioButtonsRequired.id = "container-radios-required";
+    radioButtonsRequired.setAttribute("name", "inputs-required");
 
-    const tagName = element?.tagName;
-    const oldLabel = element?.textContent?.trim();
-    const newLabel = radioButtons.change ? radioButtons.value : oldLabel || "";
+    radioButtonsPosition.setAttribute("name", "inputs-position");
+    radioButtonsPosition.setAttribute("label", "Position:");
+    radioButtonsPosition.id = "container-radios-position";
 
-    const updatedRadios = radioButtonsData.map((radio) => ({
+    const parentContainer = target.closest(".container-components");
+
+    const parentInputs = parentContainer?.lastElementChild;
+
+    if (!parentInputs) return;
+
+    const label = parentInputs.querySelector("label");
+    const input = parentInputs.querySelector("input");
+
+    const labelText = cleanTextInputs(label);
+
+    const newCheckedPosition = parentInputs.getAttribute("disposition");
+    const newCheckedRequired = input?.getAttribute("data-required");
+
+    const updatedRequiredRadios = REQUIRED_RADIOS.map((radio) => ({
       ...radio,
-      isChecked: radio.value.toUpperCase() === tagName,
+      isChecked: radio.value === newCheckedRequired,
     }));
 
-    containerInput.setAttribute("new_value", newLabel);
+    const updatedPositionRadios = POSITION_RADIOS.map((radio) => ({
+      ...radio,
+      isChecked: radio.value === newCheckedPosition,
+    }));
 
-    radioButtons.setAttribute("radios", JSON.stringify(updatedRadios));
+    container.setAttribute("new_value", labelText);
+    radioButtonsRequired.setAttribute(
+      "radios",
+      JSON.stringify(updatedRequiredRadios)
+    );
+    radioButtonsPosition.setAttribute(
+      "radios",
+      JSON.stringify(updatedPositionRadios)
+    );
 
-    parentDiv.appendChild(containerInput);
-    parentDiv.appendChild(radioButtons);
+    parentDiv.appendChild(container);
+    parentDiv.appendChild(radioButtonsRequired);
+    parentDiv.appendChild(radioButtonsPosition);
 
     return parentDiv;
-  };
-
-  private createParagraph = (
-    parentDiv: ModalBody,
-    element: Element,
-    containerInput: HTMLElement
-  ) => {
-    const newTitle = element?.textContent?.trim();
-    containerInput.setAttribute("new_value", newTitle || "");
-    parentDiv.appendChild(containerInput);
-
-    return parentDiv;
-  };
+  }
 
   update(target: HTMLButtonElement) {
     const parentContainer = target.closest(".container-components");
-    const parentInputs = parentContainer?.lastElementChild;
+    const parentInputs = parentContainer?.lastElementChild as HTMLDivElement;
+    const radioButtonsRequired = document.querySelector(
+      "#container-radios-required"
+    ) as AppRadioButtons;
+    const radioButtonsPosition = document.querySelector(
+      "#container-radios-position"
+    ) as AppRadioButtons;
+    const containerInputLabel = document.querySelector(
+      "#container-input-label"
+    ) as AppInput;
 
-    let rest = {};
-    if (!parentInputs) {
-      throw new Error(`Not parent input`);
-    }
+    const label = parentContainer?.querySelector("label") as HTMLLabelElement;
+    const input = parentContainer?.querySelector("input");
 
-    if (this.type === "paragraph") {
-      const paragraph = parentInputs.querySelector(this.elementToCreate);
-      const containerInput = document.querySelector(
-        "#container-input-headings"
-      ) as AppInput;
+    const labelText = cleanTextInputs(label);
 
-      if (!paragraph) {
-        throw new Error(`Not paragraph selected`);
-      }
+    const newLabel = containerInputLabel.change
+      ? containerInputLabel.value
+      : labelText;
 
-      paragraph.className = this.classes;
+    const newCheckedRequired = radioButtonsRequired.change
+      ? radioButtonsRequired.value
+      : input?.getAttribute("data-required") || "false";
 
-      const newValue = containerInput.change
-        ? containerInput.value.trim()
-        : paragraph?.textContent?.trim() || "";
+    const newCheckedPosition = radioButtonsPosition.change
+      ? radioButtonsPosition.value
+      : parentInputs?.getAttribute("disposition") || "row";
 
-      if (newValue === "") return;
+    if (newLabel === "") return;
 
-      paragraph.textContent = newValue || "";
+    label.textContent = newLabel;
 
-      rest = {
-        label: newValue,
-      };
-    }
+    addRequiredToInput({
+      checkedRequired: newCheckedRequired as "false",
+      elementRequired: label,
+    });
 
-    if (this.type === "heading") {
-      const headingElement = parentInputs.lastElementChild;
+    parentInputs.className = "";
+    parentInputs?.classList.add(`container-control-${newCheckedPosition}`);
+    parentInputs?.setAttribute("disposition", newCheckedPosition);
 
-      const radioButtons = document.querySelector(
-        "#container-radios-headings"
-      ) as AppRadioButtons;
-      const containerInput = document.querySelector(
-        "#container-input-headings"
-      ) as AppInput;
-
-      const newChecked = radioButtons.change
-        ? radioButtons.value
-        : headingElement?.tagName.toLowerCase() || "";
-
-      const newValue = containerInput.change
-        ? containerInput.value
-        : headingElement?.textContent;
-
-      const id = headingElement?.id;
-      const name = headingElement?.getAttribute("name");
-
-      headingElement?.remove();
-
-      const $heading = document.createElement(newChecked) as HTMLHeadElement;
-      $heading.id = id!;
-      $heading.setAttribute("name", name || "");
-
-      const num =
-        newChecked === "h2"
-          ? "w-full text-center text-3xl uppercase text-zinc-600 dark:text-gray-200"
-          : newChecked === "h3"
-          ? "w-full text-2xl uppercase text-zinc-600 dark:text-gray-200"
-          : newChecked === "h4"
-          ? "w-full text-xl uppercase text-zinc-600 dark:text-gray-200"
-          : newChecked === "h5"
-          ? "w-full text-lg uppercase text-zinc-600 dark:text-gray-200"
-          : "w-full text-md uppercase text-zinc-600 dark:text-gray-200";
-
-      $heading.className = num;
-      $heading.textContent = newValue || "";
-
-      parentInputs?.appendChild($heading);
-
-      rest = {
-        heading: newChecked,
-        label: newValue,
-      };
-    }
-    storage.update(target, rest);
+    input?.setAttribute("data-required", newCheckedRequired);
   }
 }

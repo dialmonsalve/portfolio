@@ -1,19 +1,19 @@
-:host {
+.container-input {
     display: flex;
     align-items: center;
     gap: 1rem;
     justify-content: space-between
 }
 
-input[type="number"]::-webkit-inner-spin-button{
+.container-input input[type="number"]::-webkit-inner-spin-button{
     appearance: none;
 }
 
-input[type="number"]{
+.container-input input[type="number"]{
     appearance: none;
 }
 
-input {
+.container-input input {
     border: thin solid #80808087;
     border-radius: 8px;
     outline: none;
@@ -21,12 +21,13 @@ input {
     font-size: 1rem;
     transition: box-shadow 0.2s ease-in-out;
 }
-input:focus {
+
+.container-input input:focus {
     outline: thin solid rgb(130, 207, 104);
     box-shadow: 2px 2px 8px rgb(130, 207, 104);
 }
 
-label {
+.container-input label {
     text-transform: capitalize;
     font-size: 1.2rem;
 }

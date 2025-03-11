@@ -2,18 +2,14 @@ export default class AppTextarea extends HTMLElement {
   private label: string;
   private name: string;
   private input_class: string;
-  private input_id: string;
   private _value: string;
   private new_value: string;
   private _change: boolean;
   constructor() {
     super();
-
-    const shadow = this.attachShadow({ mode: "open" });
     this.label = "";
     this.name = "";
     this.input_class = "";
-    this.input_id = "";
     this._value = "";
     this.new_value = "";
     this._change = false;
@@ -22,26 +18,28 @@ export default class AppTextarea extends HTMLElement {
     link.rel = "stylesheet";
     link.href = new URL("./styles/textarea.css", import.meta.url).href;
 
-    shadow.appendChild(link);
+    this.appendChild(link);
   }
 
   connectedCallback() {
     const textarea = document.createElement("textarea");
     const className = this.input_class === "" ? "textarea" : this.input_class;
     textarea.name = this.name;
-    textarea.id = this.input_id;
+    textarea.id = "area-form";
     textarea.value = this.new_value;
     textarea.classList.add(className);
+    textarea.classList.add("dark:text-white");
 
     const label = document.createElement("label");
-    label.htmlFor = this.input_id;
+    label.htmlFor = "area-form";
     label.textContent = this.label;
     label.classList.add("label");
+    label.classList.add("dark:text-white");
 
     textarea.addEventListener("change", (evt) => this.onChange(evt));
 
-    this.shadowRoot?.appendChild(label);
-    this.shadowRoot?.appendChild(textarea);
+    this.appendChild(label);
+    this.appendChild(textarea);
   }
 
   attributeChangedCallback(name: string, _oldValue: string, newValue: string) {
@@ -54,9 +52,6 @@ export default class AppTextarea extends HTMLElement {
         break;
       case "input_class":
         this.input_class = newValue;
-        break;
-      case "input_id":
-        this.input_id = newValue;
         break;
       case "_value":
         this._value = newValue;
@@ -85,9 +80,7 @@ export default class AppTextarea extends HTMLElement {
 
   set value(newValue) {
     this._value = newValue;
-    const container = this.shadowRoot?.querySelector(
-      `#rain-input-form`,
-    ) as this;
+    const container = this.querySelector(`#area-form`) as this;
     container.value = newValue;
   }
 

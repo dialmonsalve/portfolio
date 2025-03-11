@@ -5,6 +5,7 @@
   width: 18px;
   height: 18px;
   background-size: cover;
+  cursor: pointer;
 }
 
 .button-square-update {

@@ -3,7 +3,6 @@ import button from "../components/button";
 import modal from "../components/modal";
 import { REQUIRED_RADIOS, POSITION_RADIOS } from "../const";
 import removeElementForm from "../utils/removeElements";
-import storage from "../utils/saveAtLocalStorage";
 import cleanTextInputs from "../utils/cleanTextInputs";
 import addRequiredToInput from "../utils/addRequiredToInput";
 import { AppInput, AppRadioButtons } from "../../web-components";
@@ -240,13 +239,5 @@ export function update(
   $input?.setAttribute("data-required", newCheckedRequired);
   $input?.setAttribute("name", name);
 
-  const rest = {
-    disposition: newCheckedPosition,
-    name,
-    label: newLabel,
-    placeholder: newPlaceholder.trim() !== "" ? `${newPlaceholder}` : null,
-    required: newCheckedRequired.trim() === "true",
-  };
 
-  storage.update(target, rest);
 }

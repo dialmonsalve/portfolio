@@ -3,11 +3,9 @@ import removeElementForm from "../utils/removeElements";
 import button from "../components/button";
 
 import bodyModal from "../components/bodySelectRadio";
-import storage from "../utils/saveAtLocalStorage";
 import addRequiredToInput from "../utils/addRequiredToInput";
 import cleanTextInputs from "../utils/cleanTextInputs";
 import { AppInput, AppRadioButtons, AppTextarea } from "../../web-components";
-import type { Inputs } from "../interfaces";
 
 interface Options {
   value: string;
@@ -105,20 +103,8 @@ export function create({ incrementId }: { incrementId: number }) {
 
   $lastChildren?.appendChild($parentDiv);
 
-  const updateInputs: Inputs = {
-    buttonIdRemove,
-    buttonIdUpdate,
-    containerId,
-    disposition: "row",
-    id,
-    label: newLabel,
-    name,
-    object: "RadioButton",
-    options: [],
-    required: false,
-  };
 
-  storage.create($lastChildren, updateInputs);
+
 }
 
 export function update(
@@ -210,13 +196,5 @@ export function update(
     $parentInputs?.appendChild($label);
   });
 
-  const rest = {
-    id,
-    disposition: newCheckedPosition,
-    name,
-    label: newLabel,
-    required: newCheckedRequired.trim() === "true",
-    options,
-  };
-  storage.update(target, rest);
+
 }

@@ -1,7 +1,7 @@
-import { HandleFiles } from "src/lib/components/dial-drop-zone/handle-files";
-import HandleEvents from "../components/dial-drop-zone/handle-events";
-import { UpdateDOMToSend } from "src/lib/components/dial-drop-zone/update-DOM-to-send";
-import type { ImageOptimized } from "@lib/components/dial-drop-zone/interfaces";
+import { HandleFiles } from "@lib/dial-drop-zone/dial-drop-zone/handle-files";
+import HandleEvents from "../dial-drop-zone/handle-events";
+import { UpdateDOMToSend } from "@lib/dial-drop-zone/dial-drop-zone/update-DOM-to-send";
+import type { ImageOptimized } from "@lib/dial-drop-zone/dial-drop-zone/interfaces";
 
 import { actions } from "astro:actions";
 

@@ -3,13 +3,11 @@ import button from "../components/button.js";
 import inputComponent from "../components/inputComponent.js";
 
 import removeElementForm from "../utils/removeElements.js";
-import storage from "../utils/saveAtLocalStorage.js";
 
 import { MULTIPLE_RADIOS, REQUIRED_RADIOS } from "../const";
 import cleanTextInputs from "../utils/cleanTextInputs.js";
 import addRequiredToInput from "../utils/addRequiredToInput.js";
 import { AppInput, AppRadioButtons } from "../../web-components";
-import type { Inputs } from "../interfaces";
 
 const checkboxFormats = [
   "doc",
@@ -178,21 +176,8 @@ export function create({ incrementId }: { incrementId: number }) {
 
   $lastChildren?.appendChild($parentDiv);
 
-  const updateInputs: Inputs = {
-    object: "Files",
-    id,
-    name,
-    label: label === "" ? null : label,
-    multiple: false,
-    accept: null,
-    required: false,
-    buttonIdUpdate,
-    buttonIdRemove,
-    containerId,
-    disposition: "column",
-  };
 
-  storage.create($lastChildren, updateInputs);
+
 }
 
 export function bodyModal(target: HTMLButtonElement) {
@@ -310,15 +295,7 @@ export function update(
   $input?.setAttribute("data-required", newCheckedRequired);
   $input?.setAttribute("multiple", newCheckedMultiple);
 
-  const name = `files-${incrementId}-${newLabel}`;
 
-  const rest = {
-    multiple: newCheckedMultiple.trim() === "true",
-    name,
-    label: newLabel,
-    required: newCheckedRequired.trim() === "true",
-    accept,
-  };
 
-  storage.update(target, rest);
+
 }

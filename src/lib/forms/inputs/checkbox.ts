@@ -4,9 +4,8 @@ import { REQUIRED_RADIOS } from "../const";
 import addRequiredToInput from "../utils/addRequiredToInput";
 import cleanTextInputs from "../utils/cleanTextInputs";
 import removeElementForm from "../utils/removeElements";
-import storage from "../utils/saveAtLocalStorage";
 import { AppRadioButtons, AppTextarea } from "../../web-components";
-import type { Inputs } from "../interfaces";
+
 
 const doc = document;
 
@@ -90,19 +89,6 @@ export function create({ incrementId }: { incrementId: number }) {
 
   $lastChildren?.appendChild($parentDiv);
 
-  const updateInputs: Inputs = {
-    buttonIdRemove,
-    buttonIdUpdate,
-    containerId,
-    disposition: "row",
-    id,
-    label: newLabel,
-    name,
-    object: "Checkbox",
-    required: false,
-  };
-
-  storage.create($lastChildren, updateInputs);
 }
 
 export function bodyModal(target: HTMLButtonElement) {
@@ -181,13 +167,5 @@ export function update(
   });
 
   $input?.setAttribute("data-required", newCheckedRequired);
-  const name = `checkbox-${incrementId}-${newLabel}`;
 
-  const rest = {
-    name,
-    label: `${newLabel}`,
-    required: newCheckedRequired.trim() === "true",
-  };
-
-  storage.update(target, rest);
 }

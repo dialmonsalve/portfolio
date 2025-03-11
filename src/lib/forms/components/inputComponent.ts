@@ -1,3 +1,5 @@
+import { AppInput } from "@lib/web-components";
+
 interface InputComponent {
   name: string;
   type: string;
@@ -11,12 +13,11 @@ export default function inputComponent({
   label,
   id,
 }: InputComponent) {
-  const containerInput = document.createElement("app-input");
+  const containerInput = new AppInput();
 
   containerInput.setAttribute("name", name);
   containerInput.setAttribute("type", type);
   containerInput.setAttribute("label", label);
-  containerInput.setAttribute("input_id", name);
   containerInput.id = id;
 
   return containerInput;

@@ -1,7 +1,5 @@
 import button from "../components/button";
 import removeElementForm from "../utils/removeElements";
-import storage from "../utils/saveAtLocalStorage";
-import type { Inputs } from "../interfaces";
 
 interface OptionsCreate {
   type: "submit" | "next";
@@ -72,32 +70,5 @@ export function create({ type, incrementId, buttonType }: OptionsCreate) {
 
   $lastChildren?.appendChild($parentDiv);
 
-  const updateInputs: Inputs = {
-    buttonIdRemove,
-    buttonIdUpdate: null,
-    class: null,
-    containerId,
-    id,
-    name: `card-btn-${type}-${incrementId}`,
-    object: "NavigationButtons",
-    disposition: "row",
-    options: [
-      {
-        name: btnBack,
-        type: "button",
-        id: `btn-${btnBack}`,
-        label: "back",
-        style: null,
-      },
-      {
-        name: btnNext,
-        type: buttonType as "submit",
-        id: `btn-${btnNext}`,
-        label: type,
-        style: null,
-      },
-    ],
-  };
 
-  storage.create($lastChildren, updateInputs);
 }

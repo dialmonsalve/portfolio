@@ -1,24 +1,17 @@
 export default class ModalBody extends HTMLElement {
-  static css = `
-    :host {      
-      display:flex;
-      flex-direction:column;
-      gap: 1rem; 
-      width:100%;
-    }
-  `;
 
   constructor() {
     super();
 
-    const shadow = this.attachShadow({ mode: "open" });
-
-    shadow.innerHTML = `<style>${ModalBody.css}</style>`;
+    this.style.display = "flex";
+    this.style.flexDirection = "column";
+    this.style.gap = "1rem";
+    this.style.width = "100%";
   }
 
   connectedCallback() {
-    const slot = document.createElement("SLOT");
-    this.shadowRoot?.appendChild(slot);
+    const slot = document.createElement("slot");
+    this.appendChild(slot);
   }
 }
 

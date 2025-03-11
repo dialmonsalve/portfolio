@@ -4,10 +4,10 @@ export default class AppRadioButtons extends HTMLElement {
   private label: string;
   private _change: boolean;
   private name: string;
+
   constructor() {
     super();
 
-    const shadow = this.attachShadow({ mode: "open" });
     this.radios = [];
     this._value = "";
     this.label = "";
@@ -17,15 +17,16 @@ export default class AppRadioButtons extends HTMLElement {
     const link = document.createElement("link");
     link.rel = "stylesheet";
     link.href = new URL("./styles/radio-buttons.css", import.meta.url).href;
+    this.className = "container-radios"
 
-    shadow.appendChild(link);
+    this.appendChild(link);
   }
 
   connectedCallback() {
     if (this.label !== "") {
       const $paragraph = document.createElement("P");
       $paragraph.textContent = this.label;
-      this.shadowRoot?.appendChild($paragraph);
+      this.appendChild($paragraph);
     }
 
     this.updateRadioButtons();
@@ -62,7 +63,6 @@ export default class AppRadioButtons extends HTMLElement {
   }
 
   updateRadioButtons() {
-    const shadow = this.shadowRoot;
     this.radios.forEach(({ value, labelText, id, isChecked = false }) => {
       const radioButton = document.createElement("input");
       radioButton.type = "radio";
@@ -75,14 +75,14 @@ export default class AppRadioButtons extends HTMLElement {
       const label = document.createElement("label");
       label.htmlFor = id;
       label.textContent = labelText;
-      label.classList.add("label");
+      label.classList.add("label-radio");
 
       radioButton.addEventListener("change", (evt) => {
         this.onChange(evt);
       });
 
-      shadow?.appendChild(radioButton);
-      shadow?.appendChild(label);
+      this.appendChild(radioButton);
+      this.appendChild(label);
     });
   }
 }

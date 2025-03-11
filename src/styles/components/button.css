@@ -5,6 +5,7 @@
   width: 18px;
   height: 18px;
   background-size: cover;
+  cursor: pointer;
 }
 
 .button-square-update {
@@ -29,6 +30,7 @@
   position: absolute;
   left: -10px;
   top: -20px;
+  cursor: pointer;
 }
 
 .inputs-btn-update:hover > .button-square-update {

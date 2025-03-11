@@ -10,7 +10,7 @@ import { Input } from "./input";
 interface ITypography {
   element: HTMLParagraphElement | HTMLHeadingElement | null;
   containerCards: HTMLDivElement | null;
-  elementToCreate: "h2" | "p";
+  tag: "h2" | "p";
   type: "paragraph" | "heading";
   classes: string;
 }
@@ -35,7 +35,8 @@ class FormsApp extends HTMLElement {
   constructor() {
     super();
 
-    const classes =  "block px-3 py-2 bg-white border border-gray-300 rounded-md text-sm shadow-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+    const classes =
+      "block px-3 py-2 bg-white border border-gray-300 rounded-md text-sm shadow-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500";
 
     const containerCards =
       this.querySelector<HTMLDivElement>(".container-forms");
@@ -44,7 +45,7 @@ class FormsApp extends HTMLElement {
     this.createTypography({
       element: heading,
       containerCards,
-      elementToCreate: "h2",
+      tag: "h2",
       type: "heading",
       classes:
         "w-full text-center text-2xl uppercase text-zinc-600 dark:text-gray-200",
@@ -54,7 +55,7 @@ class FormsApp extends HTMLElement {
     this.createTypography({
       element: paragraph,
       containerCards,
-      elementToCreate: "p",
+      tag: "p",
       type: "paragraph",
       classes: "w-full text-lg text-zinc-600 dark:text-gray-200",
     });
@@ -117,25 +118,21 @@ class FormsApp extends HTMLElement {
       classes,
     });
 
-    
-
     const radio = this.querySelector<HTMLInputElement>("#radio-buttons");
     this.createInput({
       type: "radio",
       containerCards,
       element: radio,
-      classes:"",
+      classes: "",
     });
 
-    
     const number = this.querySelector<HTMLInputElement>("#number");
     this.createInput({
       type: "number",
       containerCards,
       element: number,
-      classes:`${classes} [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none`,
+      classes: `${classes} [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none`,
     });
-
 
     // signature();
     // select();
@@ -146,7 +143,7 @@ class FormsApp extends HTMLElement {
   createTypography = ({
     element,
     containerCards,
-    elementToCreate,
+    tag,
     type,
     classes,
   }: ITypography) => {
@@ -157,7 +154,7 @@ class FormsApp extends HTMLElement {
 
       const typography = new Typography({
         container: new Container(),
-        elementToCreate,
+        tag,
         type,
         classes,
       });

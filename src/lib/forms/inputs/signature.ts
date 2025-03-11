@@ -2,7 +2,6 @@ import modal from "../components/modal";
 import button from "../components/button";
 
 import removeElementForm from "../utils/removeElements";
-import storage from "../utils/saveAtLocalStorage";
 
 import { REQUIRED_RADIOS } from "../const";
 import cleanTextInputs from "../utils/cleanTextInputs";
@@ -119,19 +118,8 @@ export function create({ incrementId }: { incrementId: number }) {
     clear: `clear-${id}`,
   });
 
-  const updateInputs: Inputs = {
-    buttonIdRemove,
-    buttonIdUpdate,
-    containerId,
-    id,
-    label: newLabel,
-    name,
-    object: "Signature",
-    required: false,
-    disposition: "column",
-  };
 
-  storage.create($lastChildren, updateInputs);
+
 }
 
 export function bodyModal(target: HTMLButtonElement) {
@@ -208,11 +196,4 @@ export function update(
   $canvas?.setAttribute("data-required", newCheckedRequired);
   $canvas?.setAttribute("name", name);
 
-  const rest = {
-    name,
-    label: newLabel,
-    required: newCheckedRequired.trim() === "true",
-  };
-
-  storage.update(target, rest);
 }

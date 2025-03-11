@@ -15,13 +15,13 @@ interface IModal {
 
 export default class Modal {
   private readonly title: string;
-  private readonly type?: Color;
+  // private readonly type?: Color;
   private readonly twoButtons?: boolean;
   private content?: () => HTMLElement | undefined;
   private action?: (e: MouseEvent) => void;
 
-  constructor({ title, type, twoButtons, content, action }: IModal) {
-    this.type = type;
+  constructor({ title, twoButtons, content, action }: IModal) {
+    // this.type = type;
     this.title = title;
     this.content = content;
     this.twoButtons = twoButtons;
@@ -35,11 +35,23 @@ export default class Modal {
 
     const body = document.querySelector("body");
 
-    const $modal = document.createElement("div");
-    $modal.classList.add("modal", "show-modal");
+    const modal = document.createElement("div");
+    modal.classList.add(
+      "modal",
+      "show-modal",
+      "absolute",
+      "w-full",
+      "h-screen",
+      "top-0",
+      "z-999",
+      "flex",
+      "bg-white/10",
+      "dark:bg-slate/10",
+      "backdrop-blur-xs"
+    );
 
-    const $containerModal = document.createElement("div");
-    $containerModal.classList.add(
+    const containerModal = document.createElement("div");
+    containerModal.classList.add(
       "rounded-md",
       "max-w-100",
       "w-100",
@@ -52,86 +64,109 @@ export default class Modal {
       "flex-col",
       "items-center",
       "gap-6",
-      "border-t-4", "border-green-500"
+      "border-t-4",
+      "border-green-500"
     );
 
-    const $modalHeader = this.header();
+    const modalHeader = this.header();
 
-    $containerModal.appendChild($modalHeader);
+    containerModal.appendChild(modalHeader);
 
-    const $nodeChild = this.body();
-    $containerModal.appendChild($nodeChild);
+    const nodeChild = this.body();
+    containerModal.appendChild(nodeChild);
 
-    const $modalFooter = this.footer($modal);
+    const modalFooter = this.footer(modal);
 
-    $containerModal.appendChild($modalFooter);
+    containerModal.appendChild(modalFooter);
 
-    $modal.appendChild($containerModal);
+    modal.appendChild(containerModal);
 
-    $modal.addEventListener("click", (e) => {
+    modal.addEventListener("click", (e) => {
       const target = e.target as HTMLDivElement;
       if (target.classList.contains("show-modal")) this.closeModal(target);
     });
 
     window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") this.closeModal($modal);
+      if (e.key === "Escape") this.closeModal(modal);
     });
 
-    body?.appendChild($modal);
+    body?.appendChild(modal);
   };
 
-  header = () => {
-    const $modalHeader = document.createElement("div");
-    $modalHeader.classList.add("modal-header");
+  private header = () => {
+    const modalHeader = document.createElement("div");
+    modalHeader.classList.add("modal-header");
 
-    const $titleModal = document.createElement("p");
-    $titleModal.classList.add("modal-header__title");
-    $titleModal.textContent = this.title;
-    $modalHeader.appendChild($titleModal);
-    return $modalHeader;
+    const titleModal = document.createElement("p");
+    titleModal.classList.add("uppercase", "dark:text-white");
+    titleModal.textContent = this.title;
+    modalHeader.appendChild(titleModal);
+    return modalHeader;
   };
 
-  body = () => {
-    const $element = document.createElement("div");
+  private body = () => {
+    const element = document.createElement("div");
 
-    const $nodeChild = this.content ? this.content() : $element;
-    $element?.classList.add("modal-body");
+    const nodeChild = this.content ? this.content() : element;
 
-    if (!$nodeChild) return $element;
+    if (!nodeChild) return element;
 
-    return $nodeChild;
+    return nodeChild;
   };
 
-  footer = (modal: HTMLDivElement) => {
-    const $modalFooter = document.createElement("div");
-    $modalFooter.classList.add("modal-footer");
 
-    const $buttonFooter1 = document.createElement("button");
-    $buttonFooter1.classList.add("modal-footer__button-1");
-    $buttonFooter1.textContent = "ok";
+  private footer = (modal: HTMLDivElement) => {
+    const modalFooter = document.createElement("div");
+    modalFooter.classList.add("flex", "self-end", "gap-4");
 
-    const $buttonFooter2 = document.createElement("button");
-    $buttonFooter2.classList.add("modal-footer__button-2");
-    $buttonFooter2.textContent = "Cancel";
+    const buttonFooter1 = document.createElement("button");
+    buttonFooter1.classList.add(
+      "text-white",
+      "py-2",
+      "px-4",
+      "rounded-md",
+      "shadow-2xs",
+      "shadow-gray-300",
+      "uppercase",
+      "bg-green-600",
+      "cursor-pointer",
+      "hover:opacity-80"
+    );
+    buttonFooter1.textContent = "ok";
 
-    $modalFooter.appendChild($buttonFooter1);
-    if (this.twoButtons) $modalFooter.appendChild($buttonFooter2);
+    const buttonFooter2 = document.createElement("button");
+    buttonFooter2.classList.add(
+      "text-white",
+      "py-2",
+      "px-4",
+      "rounded-md",
+      "shadow-2xs",
+      "shadow-gray-300",
+      "uppercase",
+      "bg-red-400",
+      "cursor-pointer",
+      "hover:opacity-80"
+    );
+    buttonFooter2.textContent = "Cancel";
+
+    modalFooter.appendChild(buttonFooter1);
+    if (this.twoButtons) modalFooter.appendChild(buttonFooter2);
 
     if (this.action) {
-      $buttonFooter1.addEventListener("click", this.action);
+      buttonFooter1.addEventListener("click", this.action);
     }
 
-    $buttonFooter1.addEventListener("click", () => this.closeModal(modal));
+    buttonFooter1.addEventListener("click", () => this.closeModal(modal));
 
-    $buttonFooter2.addEventListener("click", () => this.closeModal(modal));
+    buttonFooter2.addEventListener("click", () => this.closeModal(modal));
 
-    return $modalFooter;
+    return modalFooter;
   };
 
-  closeModal = ($modal: HTMLDivElement) => {
-    $modal.classList.add("hide-modal");
+  closeModal = (modal: HTMLDivElement) => {
+    modal.classList.add("hide-modal");
     setTimeout(() => {
-      $modal.remove();
+      modal.remove();
     }, 300);
   };
 }

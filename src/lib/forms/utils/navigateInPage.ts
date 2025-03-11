@@ -1,4 +1,4 @@
-import smooth from "./smoothWindow.js";
+import smooth from "./smoothWindow";
 
 const doc = document;
 const $ = (selector: string) => doc.querySelector(selector);

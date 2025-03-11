@@ -1,4 +1,4 @@
-.container-inputs {
+/* .container-inputs {
   position: absolute;
   top: -5rem;
   right: -4rem;
@@ -148,4 +148,4 @@ div:has(.menu[type="checkbox"]:checked) + .container-elements {
 
 .container-elements__btn:active {
   box-shadow: 4px 4px 16px rgba(255, 255, 255, 0.6) inset;
-}
+} */

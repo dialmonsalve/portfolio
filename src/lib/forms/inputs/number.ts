@@ -2,7 +2,6 @@ import modal from "../components/modal";
 import button from "../components/button";
 import inputComponent from "../components/inputComponent";
 
-import storage from "../utils/saveAtLocalStorage";
 import removeElementForm from "../utils/removeElements";
 import cleanTextInputs from "../utils/cleanTextInputs";
 import addRequiredToInput from "../utils/addRequiredToInput";
@@ -111,7 +110,6 @@ export function create({ incrementId }: { incrementId: number }) {
     required: false,
   };
 
-  storage.create($lastChildren, updateInputs);
 }
 
 export function bodyModal(target: HTMLButtonElement) {
@@ -288,5 +286,4 @@ export function update(
     max: newMax?.trim() === "" ? null : newMax?.trim(),
   };
 
-  storage.update(target, rest);
 }
