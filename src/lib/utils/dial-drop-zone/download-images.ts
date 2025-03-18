@@ -4,17 +4,16 @@ export class DownLoadImages {
   private static crcTable: Uint32Array;
   constructor() {}
 
-  simple(link: HTMLAnchorElement) {
-    const $img = document.querySelector("#converted-image") as HTMLImageElement;
+  simple(link: HTMLAnchorElement, img:ImageOptimized | undefined) {
 
-    if (!$img) return;
-    const name = $img.getAttribute("data-name");
-    link.href = $img?.src;
+    const name = img?.webpImage.name;
+    link.href = img?.url || "";
     if (!name) return;
     link.download = name;
   }
 
   async multiple(images: ImageOptimized[]): Promise<Blob> {
+
     const zip = DownLoadImages.createZipBlob(images);
 
     return zip;
@@ -129,8 +128,11 @@ export class DownLoadImages {
     let offset = 0;
 
     for (const image of images) {
-      const data = await this.blobToUint8Array(image.urlObj);
-      const fileName = `${image.fileName}.${image.ext}`;
+      const data = await this.blobToUint8Array(image.url);
+      const name = image.webpImage.name
+      const extension = image.webpImage.type.split("/").at(-1)
+      
+      const fileName = `${name}.${extension}`;
       const crc = this.crc32(data);
 
       const localHeader = this.createLocalHeader(fileName, crc, data.length);

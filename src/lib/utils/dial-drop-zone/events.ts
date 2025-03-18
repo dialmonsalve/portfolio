@@ -1,13 +1,13 @@
 import { StylesDropZone } from "./styles-drop-zone";
 
-export default class HandleEvents {
+export class Events {
   constructor() {}
 
-  static onDragEvents = (dropZone: HTMLLabelElement) => {
+  public handleDragEvents = (dropZone: HTMLLabelElement) => {
     (["dragenter", "dragover", "dragleave", "drop"] as const).forEach(
       (eventName) => {
-        dropZone.addEventListener(eventName, HandleEvents.preventDefaults);
-        document.body.addEventListener(eventName, HandleEvents.preventDefaults);
+        dropZone.addEventListener(eventName, this.preventDefaults);
+        document.body.addEventListener(eventName, this.preventDefaults);
       }
     );
 
@@ -26,7 +26,7 @@ export default class HandleEvents {
     });
   };
 
-  static preventDefaults = (e: DragEvent) => {
+  private preventDefaults = (e: DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
   };

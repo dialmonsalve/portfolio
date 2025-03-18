@@ -4,7 +4,7 @@ import { Icon } from "astro-icon/components";
 
 <article class="w-full md:w-4/5">
   <div class="mt-4">
-    <dial-download-drop-zone class="">
+    <dial-upload-drop-zone class="">
       <div
         class="flex flex-col items-center justify-center w-full gap-2 min-h-70"
         id="parent-drop-zone"
@@ -22,7 +22,7 @@ import { Icon } from "astro-icon/components";
             <p class="mb-2 text-sm text-gray-500">
               <span class="font-semibold">Click aquí </span> o arrastra los archivos
             </p>
-            <p class="text-xs text-gray-500">SVG, PNG, JPG or GIF</p>
+            <p class="text-xs text-gray-500">WEBP, PNG, JPEG O JPG</p>
           </div>
           <input
             id="file-download"
@@ -37,8 +37,8 @@ import { Icon } from "astro-icon/components";
           0 archivos seleccionados
         </p>
       </div>
-    </dial-download-drop-zone>
+    </dial-upload-drop-zone>
   </div>
 </article>
 
-<script src="@lib/dial-drop-zone/dial-download-drop-zone"></script>
+<script src="@lib/dial-drop-zone"></script>
