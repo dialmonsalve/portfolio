@@ -14,6 +14,10 @@
   },
   "projects": {
     "title": "proyectos",
+    "subtitle":"Reduzca hasta un 50% el peso de sus imágenes y conviértelas de formatos como png, jpg o jpeg a webp de manera fácil y rápida",
+    "click":"Click aquí",
+    "drag":"o arrastra las imágenes",
+    "files":"0 archivos seleccionados",
     "internal_projects": [
       {
         "title": "formularios",
@@ -27,7 +31,7 @@
         "title": "conversor de imágenes",
         "pngImage": "/images/internal-projects/convert-image.png",
         "webpImage": "/images/internal-projects/convert-image.webp",
-        "description": "cambie el formato de sus imagenes",
+        "description": "cambie el formato de sus imágenes",
         "href": "projects/convert-images",
         "slug": "convert-images"
       }

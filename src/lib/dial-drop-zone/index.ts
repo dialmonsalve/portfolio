@@ -20,7 +20,7 @@ export class UploadDropZone extends HTMLElement {
       animationOnDeleteImage: "spinOut",
       format: "jpeg",
       conserveOriginalName: false,
-      quality: 20,
+      quality: 50,
     }).handleAction(this.action);
   }
 

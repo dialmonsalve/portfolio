@@ -7,8 +7,6 @@ import DownloadImages from "@components/DownloadImages.astro";
 const { currentLocale } = Astro;
 const i18n = getI18N({ currentLocale });
 
-const selectFormat = ["jpeg", "png", "jpg", "webp"];
-const selectQuantity = ["95", "30", "40", "50", "60", "70", "80", "90"];
 ---
 
 <Layout>
@@ -19,36 +17,7 @@ const selectQuantity = ["95", "30", "40", "50", "60", "70", "80", "90"];
     >
       {i18n.projects.internal_projects[1].title}
     </h1>
-
-    <article class="flex flex-col gap-3">
-      <div class="flex gap-2 items-center">
-        <label
-          for="select-format"
-          class="text-gray-900 uppercase dark:text-white text-[10px] md:text-lg"
-          >format</label
-        >
-        <select
-          id="select-format"
-          class="border border-primary px-2 py-1 rounded-md text-primary cursor-pointer text-[10px] md:text-lg"
-        >
-          {selectFormat.map((sel) => <option value={sel}>{sel}</option>)}
-        </select>
-      </div>
-      <div class="flex gap-2 items-center">
-        <label
-          for="select-quality"
-          class="text-gray-900 uppercase dark:text-white text-[10px] md:text-lg"
-          >Quality</label
-        >
-        <select
-          id="select-quality"
-          class="border border-primary px-2 py-1 rounded-md text-primary cursor-pointer text-[10px] md:text-lg"
-        >
-          {selectQuantity.map((sel) => <option value={sel}>{sel} %</option>)}
-        </select>
-      </div>
-    </article>
-
+    <h2 class="text-primary" >{i18n.projects.subtitle}</h2>
     <DownloadImages />
   </section>
 </Layout>

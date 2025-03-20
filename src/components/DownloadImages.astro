@@ -1,5 +1,10 @@
 ---
+import { getI18N } from "@i18n/index";
 import { Icon } from "astro-icon/components";
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+
 ---
 
 <article class="w-full md:w-4/5">
@@ -20,7 +25,7 @@ import { Icon } from "astro-icon/components";
               class="text-2xl text-gray-700 dark:text-gray-300"
             />
             <p class="mb-2 text-sm text-gray-500">
-              <span class="font-semibold">Click aquí </span> o arrastra los archivos
+              <span class="font-semibold">{i18n.projects.click} </span> {i18n.projects.drag}
             </p>
             <p class="text-xs text-gray-500">WEBP, PNG, JPEG O JPG</p>
           </div>
@@ -34,7 +39,7 @@ import { Icon } from "astro-icon/components";
           />
         </label>
         <p class="my-2 text-sm text-gray-500" id="lbl-selected-files">
-          0 archivos seleccionados
+          {i18n.projects.files}
         </p>
       </div>
     </dial-upload-drop-zone>

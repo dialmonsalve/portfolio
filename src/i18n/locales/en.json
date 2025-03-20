@@ -14,6 +14,10 @@
   },
   "projects": {
     "title": "projects",
+    "subtitle":"Reduce the weight of your images by up to 50% and convert them from formats like PNG, JPG or JPEG to WebP quickly and easily.",
+    "click":"Click here",
+    "drag":"or drag the images",
+    "files":"0 files selected",
     "internal_projects": [
       {
         "title": "forms",
