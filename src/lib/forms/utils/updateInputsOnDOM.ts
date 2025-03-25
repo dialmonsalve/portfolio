@@ -23,7 +23,8 @@ export class UpdateInputsOnDOM {
     private readonly target: HTMLButtonElement,
     private readonly type: InputTypes,
     private readonly incrementId: number,
-    private readonly inputType :|"input" | "textarea" | "select" 
+    private readonly inputType :|"input" | "textarea" | "select",
+    private readonly tagType : | "label" | "p" = "label"
   ) {}
 
   private parentDiv() {
@@ -35,14 +36,14 @@ export class UpdateInputsOnDOM {
     }
 
     const input = parentInputs.querySelector(this.inputType);
-    const label = parentInputs.querySelector("label");
+    const label = parentInputs.querySelector(this.tagType);
 
     if (!input) {
       throw new Error("Input doesn't exist");
     }
 
     if (!label) {
-      throw new Error("Label down't exist");
+      throw new Error("Label doesn't exist");
     }
 
     return {
@@ -176,11 +177,6 @@ export class UpdateInputsOnDOM {
     const labelText = cleanTextInputs(paragraph);
     const $paragraph = parentInputs?.querySelector("p") as HTMLParagraphElement;
 
-    // const newCheckedRequired = this.updateRadiosRequired()
-
-    // const input = parentInputs?.querySelector("input");
-
-    // input?.setAttribute("data-required", newCheckedRequired);
     const paragraphText = cleanTextInputs($paragraph);
 
     const newLabel = containerArea?.change
@@ -194,7 +190,6 @@ export class UpdateInputsOnDOM {
     $paragraph.textContent = newLabel;
 
     containerArea.setAttribute("new_value", `${labelText}`);
-    // input!.setAttribute("data-required", newCheckedRequired);
 
     return { input, paragraph };
   }

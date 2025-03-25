@@ -1,6 +1,4 @@
 import {
-  AppInput,
-  AppRadioButtons,
   AppTextarea,
   ModalBody,
 } from "../../web-components";
@@ -10,9 +8,7 @@ import addRequiredToInput from "../utils/addRequiredToInput";
 import { UpdateInputsOnDOM } from "../utils/updateInputsOnDOM";
 import { createInputsOnDOM } from "../utils/createInputsOnDOM";
 import type { ConstructorCheckbox, CreateOptions } from "../interfaces";
-import { POSITION_RADIOS, REQUIRED_RADIOS } from "../const";
-import cleanTextInputs from "../utils/cleanTextInputs";
-import inputComponent from "../components/inputComponent";
+
 
 interface OptionsSelect extends ConstructorCheckbox {
   tag: "input" | "select";
@@ -97,13 +93,13 @@ export class SingleSelect {
 
     containerArea.id = "container-area-label";
 
-    const $options = parentInputs.querySelectorAll(this.tagOptions);
+    const options = parentInputs.querySelectorAll(this.tagOptions);
 
     let newOptions = "";
 
-    $options.forEach((node, index) => {
+    options.forEach((node, index) => {
       newOptions += node.textContent;
-      if (index < $options.length - 1) {
+      if (index < options.length - 1) {
         newOptions += "\n";
       }
     });
@@ -118,168 +114,115 @@ export class SingleSelect {
   };
 
   update(target: HTMLButtonElement, incrementId: number) {
-    if (this.tag === "input") {
-      const $parentContainer = target.closest(".container-components");
-      const $parentInputs = $parentContainer?.lastElementChild;
-      const $paragraph = $parentInputs?.querySelector("p");
-      const $input = $parentInputs?.querySelector("input");
+    const parentContainer = target.closest(".container-components");
+    const parentInputs = parentContainer?.lastElementChild;
+    const paragraph = parentInputs?.querySelector("p");
 
-      const $radioButtonsRequired = document.querySelector(
-        "#container-radios-required"
-      ) as AppRadioButtons;
-      const $radioButtonsPosition = document.querySelector(
-        "#container-radios-position"
-      ) as AppRadioButtons;
-      const $containerInputLabel = document.querySelector(
-        "#container-input-label"
-      ) as AppInput;
-      const $containerArea = document.querySelector(
+    if (this.tag === "input") {
+      const updateInputsOnDOM = new UpdateInputsOnDOM(
+        target,
+        "number",
+        incrementId,
+        "input",
+        "p"
+      );
+
+      updateInputsOnDOM.updateInputLabel();
+      const newCheckedRequired = updateInputsOnDOM.updateRadiosRequired();
+      updateInputsOnDOM.updateRadiosPosition();
+
+      const containerArea = document.querySelector(
         "#container-area-label"
       ) as AppTextarea;
 
-      const paragraphText = cleanTextInputs($paragraph);
-
-      const $options = $parentInputs?.querySelectorAll("label");
+      const labels = parentInputs?.querySelectorAll("label");
 
       let oldOptions = "";
 
-      $options?.forEach((node, index) => {
+      labels?.forEach((node, index) => {
         oldOptions += node.textContent;
-        if (index < $options.length - 1) {
+        if (index < options.length - 1) {
           oldOptions += "\n";
         }
       });
 
-      const newLabel = $containerInputLabel.change
-        ? $containerInputLabel.value
-        : paragraphText || "";
-
-      const newCheckedRequired = $radioButtonsRequired.change
-        ? $radioButtonsRequired.value
-        : $input?.getAttribute("data-required") || "false";
-
-      const newCheckedPosition = $radioButtonsPosition.change
-        ? $radioButtonsPosition.value
-        : $parentInputs?.getAttribute("disposition") || "row";
-
-      const newOptions = $containerArea.change
-        ? $containerArea.value
+      const newOptions = containerArea.change
+        ? containerArea.value
         : oldOptions;
-
-      if (newLabel === "" || newOptions === "") return;
-
-      $paragraph!.textContent = newLabel;
 
       addRequiredToInput({
         checkedRequired: newCheckedRequired as "false",
-        elementRequired: $paragraph!,
+        elementRequired: paragraph!,
       });
-
-      $parentInputs!.className = "";
-      $parentInputs?.classList.add(`container-control-${newCheckedPosition}`);
-      $parentInputs?.setAttribute("disposition", newCheckedPosition);
-
-      const name = `radio-buttons-${incrementId}-${newLabel}`;
 
       const options: Options[] = [];
 
       const optionsLabel: string[] = newOptions.split("\n");
-      const allRadios = $parentInputs?.querySelectorAll('input[type="radio"]');
-      const allLabels = $parentInputs?.querySelectorAll("label");
+      const allRadios = parentInputs?.querySelectorAll('input[type="radio"]');
+      const allLabels = parentInputs?.querySelectorAll("label");
       allRadios?.forEach((radio) => radio.remove());
       allLabels?.forEach((label) => label.remove());
 
       optionsLabel.forEach((elem, idx) => {
-        const $label = document.createElement("label");
-        const $radio = document.createElement("input");
+        const label = document.createElement("label");
+        const radio = document.createElement("input");
         const valueOpt = `radio-buttons-${incrementId}-${idx + 1}`;
         const nameOpt = elem;
 
-        $label.htmlFor = valueOpt;
-        $label.textContent = nameOpt;
+        label.htmlFor = valueOpt;
+        label.textContent = nameOpt;
 
-        $radio.type = "radio";
-        $radio.setAttribute("data-required", newCheckedRequired);
-        $radio.setAttribute("name", name);
-        $radio.id = valueOpt;
+        radio.type = "radio";
+        radio.setAttribute("data-required", newCheckedRequired);
+        radio.setAttribute("name", valueOpt);
+        radio.id = valueOpt;
 
         options.push({ value: nameOpt, id: valueOpt, valueToShow: nameOpt });
 
-        $parentInputs?.appendChild($radio);
-        $parentInputs?.appendChild($label);
+        parentInputs?.appendChild(radio);
+        parentInputs?.appendChild(label);
       });
     } else if (this.tag === "select") {
-      const $parentContainer = target.closest(".container-components");
-      const $parentInputs = $parentContainer?.lastElementChild;
-      const $paragraph = $parentInputs?.querySelector("p");
-      const $select = $parentInputs?.querySelector("select");
+      const select = parentInputs?.querySelector("select");
 
       const updateInputsOnDOM = new UpdateInputsOnDOM(
         target,
         "number",
         incrementId,
-        "select"
+        "select",
+        "p"
       );
 
-      updateInputsOnDOM.updateInputLabel()
+      updateInputsOnDOM.updateInputLabel();
+      const newCheckedRequired = updateInputsOnDOM.updateRadiosRequired();
+      updateInputsOnDOM.updateRadiosPosition();
 
-      const $radioButtonsRequired = document.querySelector(
-        "#container-radios-required"
-      ) as AppRadioButtons;
-      const $radioButtonsPosition = document.querySelector(
-        "#container-radios-position"
-      ) as AppRadioButtons;
-      // const $containerInputLabel = document.querySelector(
-      //   "#container-input-label"
-      // ) as AppInput;
-      const $containerArea = document.querySelector(
+      const containerArea = document.querySelector(
         "#container-area-label"
       ) as AppTextarea;
 
-      // const paragraphText = cleanTextInputs($paragraph);
-
-      const $options = $parentInputs?.querySelectorAll("option");
+      const option = parentInputs?.querySelectorAll("option");
 
       let oldOptions = "";
 
-      $options?.forEach((node, index) => {
+      option?.forEach((node, index) => {
         oldOptions += node.textContent;
-        if (index < $options.length - 1) {
+        if (index < options.length - 1) {
           oldOptions += "\n";
         }
       });
 
-      // const newLabel = $containerInputLabel.change
-      //   ? $containerInputLabel.value
-      //   : paragraphText || "";
-
-      const newCheckedRequired = $radioButtonsRequired.change
-        ? $radioButtonsRequired.value
-        : $select?.getAttribute("data-required") || "false";
-
-      const newCheckedPosition = $radioButtonsPosition.change
-        ? $radioButtonsPosition.value
-        : $parentInputs?.getAttribute("disposition") || "row";
-
-      const newOptions = $containerArea.change
-        ? $containerArea.value
+      const newOptions = containerArea.change
+        ? containerArea.value
         : oldOptions;
-
-      // if (newLabel === "" || newOptions === "") return;
-
-      // $paragraph!.textContent = newLabel;
 
       addRequiredToInput({
         checkedRequired: newCheckedRequired as "false",
-        elementRequired: $paragraph!,
+        elementRequired: paragraph!,
       });
 
-      $parentInputs!.className = "";
-      $parentInputs?.classList.add(`container-control-${newCheckedPosition}`);
-      $parentInputs?.setAttribute("disposition", newCheckedPosition);
-
-      $select?.setAttribute("data-required", newCheckedRequired);
-      const allOptions = $parentInputs?.querySelectorAll("select option");
+      select?.setAttribute("data-required", newCheckedRequired);
+      const allOptions = parentInputs?.querySelectorAll("select option");
 
       allOptions?.forEach((option) => option.remove());
 
@@ -288,11 +231,11 @@ export class SingleSelect {
       const optionsLabel: string[] = newOptions.split("\n");
 
       optionsLabel.forEach((elem, idx) => {
-        const $option = document.createElement("option");
-        $option.setAttribute("name", `option-${incrementId}-${idx + 1}`);
-        $option.id = `option-${incrementId}-${idx + 1}`;
-        $option.value = elem;
-        $option.textContent = elem;
+        const opt = document.createElement("option");
+        opt.setAttribute("name", `option-${incrementId}-${idx + 1}`);
+        opt.id = `option-${incrementId}-${idx + 1}`;
+        opt.value = elem;
+        opt.textContent = elem;
 
         options.push({
           value: elem,
@@ -300,7 +243,7 @@ export class SingleSelect {
           id: `option-${idx + 1}`,
         });
 
-        $select?.appendChild($option);
+        select?.appendChild(opt);
       });
     }
   }
