@@ -1,4 +1,4 @@
-import modal from "./modal";
+// import modal from "./modal";
 
 export default function uploadFiles({
   containerId,

@@ -24,7 +24,7 @@ export default function addPage({
       id: buttonIdCreate,
       text: "add-page",
       spanClass: "button-square-add",
-      buttonClass: "card__button-add",
+      buttonClass: "absolute -top-5 right-0 text-primary text-xs flex gap-1 items-center cursor-pointer hover:scale-130 transition-all",
     },
     (evt) =>
       addPage({
@@ -39,9 +39,9 @@ export default function addPage({
       id: buttonIdRemove,
       text: "remove-page",
       spanClass: "button-square-remove",
-      buttonClass: "card__button-remove",
+      buttonClass: "absolute -top-5 left-0 text-red-400 text-xs flex gap-1 items-center cursor-pointer hover:scale-130 transition-all",
     },
-    (evt) => removePage(evt, incrementId)
+    (evt) => removePage(evt, { containerForms, incrementId})
   );
 
   page.classList.add("container-card-form", "card");

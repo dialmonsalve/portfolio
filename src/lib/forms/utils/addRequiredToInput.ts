@@ -58,9 +58,7 @@ function span({ label, quantity }: { label: string; quantity?: number }) {
     const $span = doc.createElement("SPAN");
     const textNode = document.createTextNode(quantity ? `${label}: ${quantity}` : label);
     $span.appendChild(textNode);
-    $span.className = "text-danger";
-    $span.style.fontSize = "10px";
-    $span.style.marginLeft = "4px";
+    $span.className = "text-red-400 text-[10px] ml-2";
     $span.id = label.toLocaleLowerCase();
 
     return $span;

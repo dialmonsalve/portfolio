@@ -28,7 +28,7 @@ const i18n = getI18N({ currentLocale });
           class="container-card-form card relative p-8 min-w-162 flex flex-col gap-8 border border-gray-400 w-162 opacity-100 rounded-xl"
           id="card-1"
         >
-          <button class="card__button-add" id="add-page"
+          <button class="absolute -top-5 right-0 text-primary text-xs flex gap-1 items-center cursor-pointer hover:scale-130 transition-all" id="add-page"
             >add page<span class="button-square-add"></span>
           </button>
         </div>
@@ -37,8 +37,8 @@ const i18n = getI18N({ currentLocale });
   </forms-app>
 </Layout>
 
-<script src="@lib/forms/create/app.ts"></script>
-<script src="@lib/web-components/AppInput.ts"></script>
+<script src="@lib/forms"></script>
+<!-- <script src="@lib/web-components/AppInput.ts"></script> -->
 
 <style is:global>
   .container-card-form {

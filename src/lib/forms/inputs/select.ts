@@ -5,7 +5,6 @@ import removeElementForm from "../utils/removeElements";
 import cleanTextInputs from "../utils/cleanTextInputs";
 import addRequiredToInput from "../utils/addRequiredToInput";
 import { AppInput, AppRadioButtons, AppTextarea } from "../../web-components";
-import type { Inputs } from "../interfaces";
 
 interface Options {
   value: string;

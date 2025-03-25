@@ -7,16 +7,15 @@ interface Button {
 
 export default function button(
   { text, id, spanClass, buttonClass }: Button,
-  fn: (evt: MouseEvent) => void,
+  fn: (evt: MouseEvent) => void
 ): HTMLButtonElement {
-
   const button = document.createElement("button");
   const span = document.createElement("span");
 
   const buttonText = document.createTextNode(text);
 
   button.id = id;
-  button.classList.add(buttonClass);
+  button.className = buttonClass;
 
   span.classList.add(spanClass);
 

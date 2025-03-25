@@ -1,26 +1,17 @@
 import button from "../components/button";
 import removeElementForm from "../utils/removeElements";
 
+import type { OptionsCreate } from "../interfaces";
 
-interface OptionsCreate {
-  containerCards: HTMLDivElement | null;
-  type: string;
-  incrementId: number;
-  children: HTMLElement[];
-  name: string;
-  action: (evt: MouseEvent) => void;
-}
+type InputType = "input" | "textarea";
 
 export class Container {
   constructor() {}
 
-  create = ({
-    containerCards,
-    incrementId,
-    type,
-    children,
-    action,
-  }: OptionsCreate) => {
+  create = (
+    inputType: InputType,
+    { containerCards, incrementId, type, children, action }: OptionsCreate
+  ) => {
     const container = document.createElement("div");
     const parentElement = document.createElement("div");
 
@@ -72,13 +63,19 @@ export class Container {
       "items-center",
       "px-1",
       "w-full",
-      "gap-2",
+      "gap-2"
     );
+
+    if (inputType === "textarea") {
+      parentElement.classList.add("flex-col", "items-start");
+    }
 
     parentElement.setAttribute("disposition", "row");
 
     children.forEach((element) => {
-      parentElement.append(element);
+      if(element.tagName !== "SPAN"){
+        parentElement.append(element);
+      }
     });
 
     container.appendChild(buttonDelete);

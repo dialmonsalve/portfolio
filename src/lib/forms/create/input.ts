@@ -1,66 +1,54 @@
-import inputComponent from "../components/inputComponent";
-
-import { AppInput, AppRadioButtons, ModalBody } from "../../web-components";
-import { type Container } from "../create/container";
+import { ModalBody } from "../../web-components";
 import Modal from "@lib/components/modal";
-import cleanTextInputs from "../utils/cleanTextInputs";
-import { POSITION_RADIOS, REQUIRED_RADIOS } from "../const";
+
 import addRequiredToInput from "../utils/addRequiredToInput";
+import { UpdateInputsOnDOM } from "../utils/updateInputsOnDOM";
+import { createInputsOnDOM } from "../utils/createInputsOnDOM";
+import type { ConstructOptions, CreateOptions } from "../interfaces";
 
-interface CreateOptions {
-  incrementId: number;
-  containerCards: HTMLDivElement | null;
-}
-
-interface ConstructOptions {
-  container: Container;
-  type?:
-    | "text"
-    | "email"
-    | "tel"
-    | "password"
-    | "number"
-    | "date"
-    | "time"
-    | "checkbox"
-    | "radio";
-  classes: string;
-}
+type InputType = "input" | "textarea";
 
 export class Input {
   private readonly container;
   private readonly type;
   private readonly classes;
-  constructor({ container, classes, type = "text" }: ConstructOptions) {
+  private readonly inputType:InputType
+  constructor(inputType:InputType, { container, classes, type = "text" }: ConstructOptions) {
+    this.inputType = inputType
     this.classes = classes;
     this.container = container;
     this.type = type;
   }
   create = ({ incrementId, containerCards }: CreateOptions) => {
     const label = document.createElement("label");
-    const input = document.createElement("input");
+    const input = document.createElement(this.inputType);
 
     const newLabel = `edit ${this.type}`;
     const id = `${this.type}-${incrementId}`;
-    const name = `${this.type}-${incrementId}-${newLabel}`;
+    const name = `${this.type}-${incrementId}`;
 
     label.classList.add("capitalize", "text-zinc-600", "dark:text-gray-200");
     label.htmlFor = id;
     label.textContent = newLabel;
 
-    const isPassword = this.type === "password" ? "text" : this.type;
+    if(input instanceof HTMLInputElement){
+      const isPassword = this.type === "password" ? "text" : this.type;  
+      input.type = isPassword;
+      input.className = `${this.classes}`;
+    }
 
-    input.type = isPassword;
     input.setAttribute("name", name);
     input.id = id;
-    input.className = `${this.classes} ${
-      this.type === "checkbox" ? "-order-1" : ""
-    }`;
+
+
+    if(input instanceof HTMLTextAreaElement){
+      input.classList = `${this.classes} block  w-full resize-none h-[150px]`
+    }
 
     input.setAttribute("autocomplete", "on");
     input.setAttribute("data-required", "false");
 
-    this.container.create({
+    this.container.create(this.inputType,{
       containerCards,
       incrementId,
       type: this.type,
@@ -70,142 +58,113 @@ export class Input {
         new Modal({
           title: `update ${this.type}`,
           content: () => this.bodyModal(evt.target as HTMLButtonElement),
-          action: () => this.update(evt.target as HTMLButtonElement),
+          action: () =>
+            this.update(evt.target as HTMLButtonElement, incrementId),
         }).build(),
     });
   };
 
   private bodyModal = (target: HTMLButtonElement) => {
-    const parentDiv = new ModalBody();
-    const parentContainer = target.closest(".container-components");
-    const parentInputs = parentContainer?.lastElementChild;
-    const container = inputComponent({
-      name: "input-label",
-      type: "text",
-      label: "Label",
-      id: "container-input-label",
-    });
 
-    if (!parentInputs) {
-      throw new Error(`Not parent input`);
+    if (this.inputType === "input"){
+      const modalBody = new ModalBody();
+      const inputDOM = new createInputsOnDOM(target);
+      const inputLabel = inputDOM.createInputLabel();
+      const radioButtonsRequired = inputDOM.createRadiosRequired("input");
+      const radioButtonsPosition = inputDOM.createRadiosPosition();
+  
+      modalBody.appendChild(inputLabel);
+  
+      const inputPlaceholder = inputDOM.createInputPlaceholder();
+      if (
+        this.type === "text" ||
+        this.type === "tel" ||
+        this.type === "password" ||
+        this.type === "email"
+      ) {
+        modalBody.appendChild(inputPlaceholder);
+      }
+  
+      if (this.type === "number") {
+        const inputMin = inputDOM.createInputMin();
+        const inputMax = inputDOM.createInputMax();
+  
+        modalBody.appendChild(inputPlaceholder);
+        modalBody.appendChild(inputMin);
+        modalBody.appendChild(inputMax);
+      }
+  
+      modalBody.appendChild(radioButtonsRequired);
+      modalBody.appendChild(radioButtonsPosition);
+      return modalBody;
+
+    }else if (this.inputType === "textarea"){
+      const modalBody = new ModalBody();
+      const inputDOM = new createInputsOnDOM(target);
+
+      const inputLabel = inputDOM.createInputLabel();
+      const radioButtonsRequired = inputDOM.createRadiosRequired("textarea");
+  
+      modalBody.appendChild(inputLabel); 
+      modalBody.appendChild(radioButtonsRequired);
+      return modalBody;
+
     }
-
-    const element = parentInputs.lastElementChild;
-
-    if (!element) {
-      throw new Error(`Not element has been created`);
-    }
-
-    if (this.type === "checkbox") {
-    }
-
-    if (this.type === "date") {
-      return this.createDate(parentDiv, target, container);
-    }
-
-    throw new Error(`This ${this.type} is not allowed`);
   };
 
-  createDate(
-    parentDiv: ModalBody,
-    target: HTMLButtonElement,
-    container: AppInput
-  ) {
-    const radioButtonsRequired = new AppRadioButtons();
-    const radioButtonsPosition = new AppRadioButtons();
+  update(target: HTMLButtonElement, incrementId: number) {
 
-    radioButtonsRequired.setAttribute("label", "Required:");
-    radioButtonsRequired.id = "container-radios-required";
-    radioButtonsRequired.setAttribute("name", "inputs-required");
+    if (this.inputType === "input"){
+      const updateInputsOnDOM = new UpdateInputsOnDOM(
+        target,
+        "number",
+        incrementId,
+        "input"
+      );
+      const label = updateInputsOnDOM.updateInputLabel();
+      updateInputsOnDOM.updateRadiosPosition();
+      const newCheckedRequired = updateInputsOnDOM.updateRadiosRequired();
+  
+      if (
+        this.type === "text" ||
+        this.type === "tel" ||
+        this.type === "password" ||
+        this.type === "email"
+      ) {
+        updateInputsOnDOM.updateInputPlaceholder();
+      }
+  
+      if (this.type === "number") {
+        updateInputsOnDOM.updateInputPlaceholder();
+        const newMin = updateInputsOnDOM.updateInputMin();
+        const newMax = updateInputsOnDOM.updateInputMax();
+        addRequiredToInput({
+          checkedRequired: newCheckedRequired,
+          elementRequired: label,
+          min: Number(newMin),
+          max: Number(newMax),
+        });
+      } else {
+        addRequiredToInput({
+          checkedRequired: newCheckedRequired,
+          elementRequired: label,
+        });
+      }
 
-    radioButtonsPosition.setAttribute("name", "inputs-position");
-    radioButtonsPosition.setAttribute("label", "Position:");
-    radioButtonsPosition.id = "container-radios-position";
+    }else if (this.inputType === "textarea"){
+      const updateInputsOnDOM = new UpdateInputsOnDOM(
+        target,
+        "area",
+        incrementId,
+        "textarea"
+      );
+      const label = updateInputsOnDOM.updateInputLabel();
+      const newCheckedRequired = updateInputsOnDOM.updateRadiosRequired();
 
-    const parentContainer = target.closest(".container-components");
-
-    const parentInputs = parentContainer?.lastElementChild;
-
-    if (!parentInputs) return;
-
-    const label = parentInputs.querySelector("label");
-    const input = parentInputs.querySelector("input");
-
-    const labelText = cleanTextInputs(label);
-
-    const newCheckedPosition = parentInputs.getAttribute("disposition");
-    const newCheckedRequired = input?.getAttribute("data-required");
-
-    const updatedRequiredRadios = REQUIRED_RADIOS.map((radio) => ({
-      ...radio,
-      isChecked: radio.value === newCheckedRequired,
-    }));
-
-    const updatedPositionRadios = POSITION_RADIOS.map((radio) => ({
-      ...radio,
-      isChecked: radio.value === newCheckedPosition,
-    }));
-
-    container.setAttribute("new_value", labelText);
-    radioButtonsRequired.setAttribute(
-      "radios",
-      JSON.stringify(updatedRequiredRadios)
-    );
-    radioButtonsPosition.setAttribute(
-      "radios",
-      JSON.stringify(updatedPositionRadios)
-    );
-
-    parentDiv.appendChild(container);
-    parentDiv.appendChild(radioButtonsRequired);
-    parentDiv.appendChild(radioButtonsPosition);
-
-    return parentDiv;
-  }
-
-  update(target: HTMLButtonElement) {
-    const parentContainer = target.closest(".container-components");
-    const parentInputs = parentContainer?.lastElementChild as HTMLDivElement;
-    const radioButtonsRequired = document.querySelector(
-      "#container-radios-required"
-    ) as AppRadioButtons;
-    const radioButtonsPosition = document.querySelector(
-      "#container-radios-position"
-    ) as AppRadioButtons;
-    const containerInputLabel = document.querySelector(
-      "#container-input-label"
-    ) as AppInput;
-
-    const label = parentContainer?.querySelector("label") as HTMLLabelElement;
-    const input = parentContainer?.querySelector("input");
-
-    const labelText = cleanTextInputs(label);
-
-    const newLabel = containerInputLabel.change
-      ? containerInputLabel.value
-      : labelText;
-
-    const newCheckedRequired = radioButtonsRequired.change
-      ? radioButtonsRequired.value
-      : input?.getAttribute("data-required") || "false";
-
-    const newCheckedPosition = radioButtonsPosition.change
-      ? radioButtonsPosition.value
-      : parentInputs?.getAttribute("disposition") || "row";
-
-    if (newLabel === "") return;
-
-    label.textContent = newLabel;
-
-    addRequiredToInput({
-      checkedRequired: newCheckedRequired as "false",
-      elementRequired: label,
-    });
-
-    parentInputs.className = "";
-    parentInputs?.classList.add(`container-control-${newCheckedPosition}`);
-    parentInputs?.setAttribute("disposition", newCheckedPosition);
-
-    input?.setAttribute("data-required", newCheckedRequired);
+      addRequiredToInput({
+        checkedRequired: newCheckedRequired,
+        elementRequired: label,
+      });
+    }
   }
 }

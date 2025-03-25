@@ -6,41 +6,10 @@ import {
   AppTextarea,
   ModalBody,
 } from "../../web-components";
-import { type Container } from "../create/container";
+import { type Container } from "../utils/container";
 import Modal from "@lib/components/modal";
+import { RADIO_BUTTONS_HEADING } from "../const";
 
-const radioButtonsData = [
-  {
-    name: "heading",
-    value: "h2",
-    labelText: "title",
-    id: "h2",
-  },
-  {
-    name: "heading",
-    value: "h3",
-    labelText: "subtitle",
-    id: "h3",
-  },
-  {
-    name: "heading",
-    value: "h4",
-    labelText: "subtitle 2",
-    id: "h4",
-  },
-  {
-    name: "heading",
-    value: "h5",
-    labelText: "normal",
-    id: "h5",
-  },
-  {
-    name: "heading",
-    value: "h6",
-    labelText: "normal 2",
-    id: "h6",
-  },
-];
 
 interface CreateOptions {
   incrementId: number;
@@ -74,7 +43,7 @@ export class Typography {
     element.className = this.classes;
     element.textContent = `Edit ${this.type}`;
 
-    this.container.create({
+    this.container.create("input", {
       containerCards,
       incrementId,
       type: this.type,
@@ -136,7 +105,7 @@ export class Typography {
     const oldLabel = element?.textContent?.trim();
     const newLabel = radioButtons.change ? radioButtons.value : oldLabel || "";
 
-    const updatedRadios = radioButtonsData.map((radio) => ({
+    const updatedRadios = RADIO_BUTTONS_HEADING.map((radio) => ({
       ...radio,
       isChecked: radio.value.toUpperCase() === tagName,
     }));

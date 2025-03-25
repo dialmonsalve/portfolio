@@ -15,13 +15,11 @@ interface IModal {
 
 export default class Modal {
   private readonly title: string;
-  // private readonly type?: Color;
   private readonly twoButtons?: boolean;
   private content?: () => HTMLElement | undefined;
   private action?: (e: MouseEvent) => void;
 
   constructor({ title, twoButtons, content, action }: IModal) {
-    // this.type = type;
     this.title = title;
     this.content = content;
     this.twoButtons = twoButtons;

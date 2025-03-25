@@ -44,29 +44,3 @@
   display: flex;
 }
 
-.card__button-add,
-.card__button-remove {
-  position: absolute;
-  top: -20px;
-  font-size: 0.8rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-.card__button-add {
-  right: 0;
-  color: var(--green);
-}
-
-.card__button-remove {
-  left: 0;
-  color: var(--red);
-}
-
-.card__button-add:hover > .button-square-add {
-  transform: scale(1.3);
-}
-
-.inputs-btn-delete:hover > .button-square-remove {
-  transform: scale(1.3);
-}

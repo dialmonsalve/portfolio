@@ -7,7 +7,6 @@ import { REQUIRED_RADIOS } from "../const";
 import cleanTextInputs from "../utils/cleanTextInputs";
 import addRequiredToInput from "../utils/addRequiredToInput";
 import { AppInput, AppTextarea } from "../../web-components";
-import type { Inputs } from "../interfaces";
 import sign from "../components/signature.ts";
 
 const doc = document;
