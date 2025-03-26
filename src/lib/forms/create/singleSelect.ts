@@ -141,7 +141,7 @@ export class SingleSelect {
 
       labels?.forEach((node, index) => {
         oldOptions += node.textContent;
-        if (index < options.length - 1) {
+        if (index < labels.length - 1) {
           oldOptions += "\n";
         }
       });
@@ -173,8 +173,10 @@ export class SingleSelect {
         label.textContent = nameOpt;
 
         radio.type = "radio";
+        radio.className = "radio"
+        label.className = "label-radio"
         radio.setAttribute("data-required", newCheckedRequired);
-        radio.setAttribute("name", valueOpt);
+        radio.setAttribute("name", `radio-buttons-${incrementId}`);
         radio.id = valueOpt;
 
         options.push({ value: nameOpt, id: valueOpt, valueToShow: nameOpt });
@@ -201,13 +203,13 @@ export class SingleSelect {
         "#container-area-label"
       ) as AppTextarea;
 
-      const option = parentInputs?.querySelectorAll("option");
+      const oldTagOptions = parentInputs?.querySelectorAll("option");
 
       let oldOptions = "";
 
-      option?.forEach((node, index) => {
+      oldTagOptions?.forEach((node, index) => {
         oldOptions += node.textContent;
-        if (index < options.length - 1) {
+        if (index < oldTagOptions.length - 1) {
           oldOptions += "\n";
         }
       });

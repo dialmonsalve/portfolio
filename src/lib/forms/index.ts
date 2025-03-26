@@ -6,6 +6,7 @@ import { Input } from "./create/input";
 import { Typography } from "./create/typography";
 import { Checkbox } from "./create/checkbox";
 import { SingleSelect } from "./create/singleSelect";
+import { create } from "./inputs/signature";
 
 interface Options {
   classes: string;
@@ -53,6 +54,7 @@ class FormsApp extends HTMLElement {
   private buttonCreate!: HTMLButtonElement | null;
   private radio!: HTMLInputElement | null;
   private select!: HTMLSelectElement | null;
+  private signature!: HTMLButtonElement | null;
 
   constructor() {
     super();
@@ -88,6 +90,8 @@ class FormsApp extends HTMLElement {
     this.radio = this.querySelector<HTMLInputElement>("#radio-buttons");
     this.textarea = this.querySelector<HTMLTextAreaElement>("#textarea");
     this.select = this.querySelector<HTMLSelectElement>("#select");
+  
+    this.signature = this.querySelector<HTMLButtonElement>("#signature")
   }
 
   private setupEventListeners() {
@@ -227,12 +231,17 @@ class FormsApp extends HTMLElement {
     this.select?.addEventListener("click", () => {
       incrementId++;
       this.createSingleOption({
-        classes: "",
+        classes,
         incrementId,
         tag: "select",
         tagOptions: "option",
       });
     });
+
+    this.signature?.addEventListener("click", ()=>{
+      incrementId++
+      create({incrementId, containerCards:this.containerCards})
+    })
   }
 
   createTypography = ({ tag, type, classes, incrementId }: ITypography) => {

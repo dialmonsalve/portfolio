@@ -1,4 +1,3 @@
-import modal from "../components/modal";
 import button from "../components/button";
 
 import removeElementForm from "../utils/removeElements";
@@ -6,22 +5,19 @@ import removeElementForm from "../utils/removeElements";
 import { REQUIRED_RADIOS } from "../const";
 import cleanTextInputs from "../utils/cleanTextInputs";
 import addRequiredToInput from "../utils/addRequiredToInput";
-import { AppInput, AppTextarea } from "../../web-components";
+import { AppInput, AppRadioButtons, AppTextarea, ModalBody } from "../../web-components";
 import sign from "../components/signature.ts";
+import Modal from "@lib/components/modal.ts";
 
-const doc = document;
-const $ = (selector: string) => doc.querySelector(selector);
 
-const $containerCards = $(".container-forms");
-
-export function create({ incrementId }: { incrementId: number }) {
-  const $parentDiv = doc.createElement("div");
-  const $parentSignature = doc.createElement("div");
-  const $signature = doc.createElement("div");
-  const $inputHidden = doc.createElement("input");
-  const $label = doc.createElement("label");
-  const $canvas = doc.createElement("canvas");
-  const $buttonClear = doc.createElement("button");
+export function create({ incrementId, containerCards }: { incrementId: number, containerCards:HTMLDivElement | null }) {
+  const $parentDiv = document.createElement("div");
+  const $parentSignature = document.createElement("div");
+  const $signature = document.createElement("div");
+  const $inputHidden = document.createElement("input");
+  const $label = document.createElement("label");
+  const $canvas = document.createElement("canvas");
+  const $buttonClear = document.createElement("button");
 
   const buttonIdUpdate = `signature-update-${incrementId}`;
   const buttonIdRemove = `signature-remove-${incrementId}`;
@@ -30,7 +26,14 @@ export function create({ incrementId }: { incrementId: number }) {
   const newLabel = "Edit signature";
   const id = `signature-${incrementId}`;
 
-  $parentSignature.classList.add("flex", "items-center", "justify-between", "px-1", "w-full", "gap-2");
+  $parentSignature.classList.add(
+    "flex",
+    "items-center",
+    "justify-between",
+    "px-1",
+    "w-full",
+    "gap-2"
+  );
   $parentSignature.setAttribute("disposition", "row");
 
   $signature.classList.add("container-signature");
@@ -63,12 +66,14 @@ export function create({ incrementId }: { incrementId: number }) {
       spanClass: "button-square-update",
       buttonClass: "inputs-btn-update",
     },
-    (evt) =>
-      modal({
+    (evt) => {
+      const modal = new Modal({
         title: "update signature",
         content: () => bodyModal(evt.target as HTMLButtonElement),
         action: () => update(evt.target as HTMLButtonElement, { incrementId }),
-      }),
+      });
+      modal.build();
+    }
   );
 
   const buttonDelete = button(
@@ -78,10 +83,10 @@ export function create({ incrementId }: { incrementId: number }) {
       spanClass: "button-square-remove",
       buttonClass: "inputs-btn-delete",
     },
-    removeElementForm,
+    removeElementForm
   );
 
-  const $lastChildren = $containerCards?.lastElementChild;
+  const $lastChildren = containerCards?.lastElementChild;
 
   $parentDiv.classList.add(
     "container-components",
@@ -116,15 +121,12 @@ export function create({ incrementId }: { incrementId: number }) {
     name: `hidden-${incrementId}`,
     clear: `clear-${id}`,
   });
-
-
-
 }
 
 export function bodyModal(target: HTMLButtonElement) {
-  const $parentDiv = doc.createElement("app-modal-body");
-  const $radioButtonsRequired = doc.createElement("app-radio-buttons");
-  const $containerArea = doc.createElement("app-textarea");
+  const $parentDiv = new ModalBody()
+  const $radioButtonsRequired = new AppRadioButtons();
+  const $containerArea =new AppTextarea();
 
   $radioButtonsRequired.setAttribute("label", "Required:");
   $radioButtonsRequired.id = "container-radios-required";
@@ -153,7 +155,7 @@ export function bodyModal(target: HTMLButtonElement) {
   $containerArea.setAttribute("new_value", labelText);
   $radioButtonsRequired.setAttribute(
     "radios",
-    JSON.stringify(updatedRequiredRadios),
+    JSON.stringify(updatedRequiredRadios)
   );
 
   $parentDiv.appendChild($containerArea);
@@ -164,10 +166,10 @@ export function bodyModal(target: HTMLButtonElement) {
 
 export function update(
   target: HTMLButtonElement,
-  { incrementId }: { incrementId: number },
+  { incrementId }: { incrementId: number }
 ) {
-  const $radioButtonsRequired = $("#container-radios-required") as AppInput;
-  const $containerArea = $("#container-area-label") as AppTextarea;
+  const $radioButtonsRequired = document.querySelector("#container-radios-required") as AppInput;
+  const $containerArea = document.querySelector("#container-area-label") as AppTextarea;
   const $parentInputs = target.closest(".container-components");
 
   const $canvas = $parentInputs?.querySelector("canvas");
@@ -194,5 +196,4 @@ export function update(
 
   $canvas?.setAttribute("data-required", newCheckedRequired);
   $canvas?.setAttribute("name", name);
-
 }

@@ -158,7 +158,7 @@ export class UpdateInputsOnDOM {
     const position =
       newCheckedPosition === "row"
         ? "flex items-center gap-2"
-        : "flex flex-col gap-2";
+        : "flex flex-col gap-2 items-start";
 
     parentInputs.className = position;
 
