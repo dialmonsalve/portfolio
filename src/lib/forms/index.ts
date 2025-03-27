@@ -2,11 +2,12 @@ import addPage from "./utils/addPage";
 
 import { Container } from "./utils/container";
 
-import { Input } from "./create/input";
-import { Typography } from "./create/typography";
-import { Checkbox } from "./create/checkbox";
-import { SingleSelect } from "./create/singleSelect";
+import { Input } from "./inputs/input";
+import { Typography } from "./inputs/typography";
+import { Checkbox } from "./inputs/checkbox";
+import { SingleSelect } from "./inputs/singleSelect";
 import { create } from "./inputs/signature";
+import { createFiles } from "./inputs/files";
 
 interface Options {
   classes: string;
@@ -40,27 +41,25 @@ interface IInput {
 
 class FormsApp extends HTMLElement {
   private containerCards!: HTMLDivElement | null;
-  private heading!: HTMLHeadingElement | null;
-  private paragraph!: HTMLParagraphElement | null;
-  private text!: HTMLInputElement | null;
-  private time!: HTMLInputElement | null;
-  private email!: HTMLInputElement | null;
-  private password!: HTMLInputElement | null;
-  private phone!: HTMLInputElement | null;
-  private date!: HTMLInputElement | null;
-  private checkbox!: HTMLInputElement | null;
-  private number!: HTMLInputElement | null;
-  private textarea!: HTMLTextAreaElement | null;
+  private heading!: HTMLButtonElement | null;
+  private paragraph!: HTMLButtonElement | null;
+  private text!: HTMLButtonElement | null;
+  private time!: HTMLButtonElement | null;
+  private email!: HTMLButtonElement | null;
+  private password!: HTMLButtonElement | null;
+  private phone!: HTMLButtonElement | null;
+  private date!: HTMLButtonElement | null;
+  private checkbox!: HTMLButtonElement | null;
+  private number!: HTMLButtonElement | null;
+  private textarea!: HTMLButtonElement | null;
   private buttonCreate!: HTMLButtonElement | null;
-  private radio!: HTMLInputElement | null;
-  private select!: HTMLSelectElement | null;
+  private radio!: HTMLButtonElement | null;
+  private select!: HTMLButtonElement | null;
   private signature!: HTMLButtonElement | null;
+  private files!: HTMLButtonElement | null;
 
   constructor() {
     super();
-    // signature();
-
-    // files();
   }
 
   connectedCallback() {
@@ -75,23 +74,24 @@ class FormsApp extends HTMLElement {
     this.buttonCreate = document.querySelector<HTMLButtonElement>("#add-page");
 
     // typography
-    this.heading = this.querySelector<HTMLHeadingElement>("#heading");
-    this.paragraph = this.querySelector<HTMLParagraphElement>("#paragraph");
+    this.heading = this.querySelector<HTMLButtonElement>("#heading");
+    this.paragraph = this.querySelector<HTMLButtonElement>("#paragraph");
 
     //inputs
-    this.text = this.querySelector<HTMLInputElement>("#text");
-    this.time = this.querySelector<HTMLInputElement>("#time");
-    this.email = this.querySelector<HTMLInputElement>("#email");
-    this.password = this.querySelector<HTMLInputElement>("#password");
-    this.phone = this.querySelector<HTMLInputElement>("#phone");
-    this.date = this.querySelector<HTMLInputElement>("#date");
-    this.checkbox = this.querySelector<HTMLInputElement>("#checkbox");
-    this.number = this.querySelector<HTMLInputElement>("#number");
-    this.radio = this.querySelector<HTMLInputElement>("#radio-buttons");
-    this.textarea = this.querySelector<HTMLTextAreaElement>("#textarea");
-    this.select = this.querySelector<HTMLSelectElement>("#select");
-  
-    this.signature = this.querySelector<HTMLButtonElement>("#signature")
+    this.text = this.querySelector<HTMLButtonElement>("#text");
+    this.time = this.querySelector<HTMLButtonElement>("#time");
+    this.email = this.querySelector<HTMLButtonElement>("#email");
+    this.password = this.querySelector<HTMLButtonElement>("#password");
+    this.phone = this.querySelector<HTMLButtonElement>("#phone");
+    this.date = this.querySelector<HTMLButtonElement>("#date");
+    this.checkbox = this.querySelector<HTMLButtonElement>("#checkbox");
+    this.number = this.querySelector<HTMLButtonElement>("#number");
+    this.radio = this.querySelector<HTMLButtonElement>("#radio-buttons");
+    this.textarea = this.querySelector<HTMLButtonElement>("#textarea");
+    this.select = this.querySelector<HTMLButtonElement>("#select");
+    this.files = this.querySelector<HTMLButtonElement>("#files");
+
+    this.signature = this.querySelector<HTMLButtonElement>("#signature");
   }
 
   private setupEventListeners() {
@@ -238,10 +238,15 @@ class FormsApp extends HTMLElement {
       });
     });
 
-    this.signature?.addEventListener("click", ()=>{
-      incrementId++
-      create({incrementId, containerCards:this.containerCards})
-    })
+    this.signature?.addEventListener("click", () => {
+      incrementId++;
+      create({ incrementId, containerCards: this.containerCards });
+    });
+
+    this.files?.addEventListener("click", () => {
+      incrementId++;
+      createFiles({ incrementId, containerCards: this.containerCards });
+    });
   }
 
   createTypography = ({ tag, type, classes, incrementId }: ITypography) => {

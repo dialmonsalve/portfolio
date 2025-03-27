@@ -29,7 +29,7 @@ export default function sign({ id, name, clear }: Signature) {
     context.beginPath();
     context.moveTo(initialX, initialY);
     context.lineWidth = 2;
-    context.strokeStyle = "#000";
+    context.strokeStyle = "#61a132";
     context.lineCap = "round";
     context.lineJoin = "miter";
     context.lineTo(cursorX, cursorY);

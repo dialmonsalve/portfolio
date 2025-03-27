@@ -1,4 +1,3 @@
-import modal from "../components/modal.js";
 import button from "../components/button.js";
 import inputComponent from "../components/inputComponent.js";
 
@@ -8,6 +7,7 @@ import { MULTIPLE_RADIOS, REQUIRED_RADIOS } from "../const";
 import cleanTextInputs from "../utils/cleanTextInputs.js";
 import addRequiredToInput from "../utils/addRequiredToInput.js";
 import { AppInput, AppRadioButtons } from "../../web-components";
+import Modal from "@lib/components/modal.js";
 
 const checkboxFormats = [
   "doc",
@@ -36,12 +36,8 @@ const checkboxFormats = [
   "rtf",
 ];
 
-const doc = document;
-const $ = (selector: string) => doc.querySelector(selector);
-const $containerCards = $(".container-forms");
-
 const elementsCheck = (elementChecked = "") => {
-  const $parentCheckbox = doc.createElement("DIV");
+  const $parentCheckbox = document.createElement("DIV");
   $parentCheckbox.classList.add("container-modal-checkbox");
 
   checkboxFormats.map((check) => {
@@ -71,17 +67,23 @@ const elementsCheck = (elementChecked = "") => {
   return $parentCheckbox;
 };
 
-export function create({ incrementId }: { incrementId: number }) {
+export function createFiles({
+  incrementId,
+  containerCards,
+}: {
+  incrementId: number;
+  containerCards: HTMLDivElement | null;
+}) {
   const $parentDiv = document.createElement("div");
   const $parentImage = document.createElement("div");
   const $paragraph = document.createElement("p");
   const $containerVoucher = document.createElement("div");
   const $label = document.createElement("label");
   const $labelImage = document.createElement("span");
-  const $image = doc.createElement("img");
-  const $input = doc.createElement("input");
+  const $image = document.createElement("img");
+  const $input = document.createElement("input");
   const $containerNameFiles = document.createElement("div");
-  const $lastChildren = $containerCards?.lastElementChild;
+  const $lastChildren = containerCards?.lastElementChild;
 
   const buttonIdUpdate = `files-update-${incrementId}`;
   const buttonIdRemove = `files-remove-${incrementId}`;
@@ -141,12 +143,13 @@ export function create({ incrementId }: { incrementId: number }) {
       spanClass: "button-square-update",
       buttonClass: "inputs-btn-update",
     },
-    (evt) =>
-      modal({
+    (evt) => {
+      new Modal({
         title: "configure files",
         content: () => bodyModal(evt.target as HTMLButtonElement),
         action: () => update(evt.target as HTMLButtonElement, { incrementId }),
-      }),
+      }).build();
+    }
   );
 
   const buttonDelete = button(
@@ -156,7 +159,7 @@ export function create({ incrementId }: { incrementId: number }) {
       spanClass: "button-square-remove",
       buttonClass: "inputs-btn-delete",
     },
-    removeElementForm,
+    removeElementForm
   );
 
   $labelImage.appendChild($image);
@@ -175,15 +178,12 @@ export function create({ incrementId }: { incrementId: number }) {
   $parentDiv.appendChild($parentImage);
 
   $lastChildren?.appendChild($parentDiv);
-
-
-
 }
 
 export function bodyModal(target: HTMLButtonElement) {
-  const $parentDiv = doc.createElement("app-modal-body");
-  const $radioButtonsRequired = doc.createElement("app-radio-buttons");
-  const $radioButtonsMultiple = doc.createElement("app-radio-buttons");
+  const $parentDiv = document.createElement("app-modal-body");
+  const $radioButtonsRequired = document.createElement("app-radio-buttons");
+  const $radioButtonsMultiple = document.createElement("app-radio-buttons");
 
   $radioButtonsRequired.setAttribute("label", "Required:");
   $radioButtonsRequired.setAttribute("name", "inputs-required");
@@ -227,11 +227,11 @@ export function bodyModal(target: HTMLButtonElement) {
 
   $radioButtonsRequired.setAttribute(
     "radios",
-    JSON.stringify(updatedRequiredRadios),
+    JSON.stringify(updatedRequiredRadios)
   );
   $radioButtonsMultiple.setAttribute(
     "radios",
-    JSON.stringify(updatedPositionRadios),
+    JSON.stringify(updatedPositionRadios)
   );
 
   const accept = $input?.getAttribute("accept") || "";
@@ -246,19 +246,19 @@ export function bodyModal(target: HTMLButtonElement) {
 
 export function update(
   target: HTMLButtonElement,
-  { incrementId }: { incrementId: number },
+  { incrementId }: { incrementId: number }
 ) {
-  const $parentDiv = $("app-modal-body");
+  const $parentDiv = document.querySelector("app-modal-body");
   const $parentElement = target.closest(".container-components");
   const $checkboxChecked = $parentDiv?.querySelectorAll(
-    '.container-modal-checkbox input[type="checkbox"]:checked',
+    '.container-modal-checkbox input[type="checkbox"]:checked'
   ) as NodeListOf<HTMLInputElement>;
-  const $containerInputLabel = $("#container-input-label") as AppInput;
-  const $radioButtonsRequired = $(
-    "#container-radios-required",
+  const $containerInputLabel = document.querySelector("#container-input-label") as AppInput;
+  const $radioButtonsRequired = document.querySelector(
+    "#container-radios-required"
   ) as AppRadioButtons;
-  const $radioButtonsMultiple = $(
-    "#container-radios-multiple",
+  const $radioButtonsMultiple = document.querySelector(
+    "#container-radios-multiple"
   ) as AppRadioButtons;
 
   const $input = $parentElement?.querySelector("input");
@@ -294,8 +294,4 @@ export function update(
   $input?.setAttribute("accept", accept.slice(0, -1));
   $input?.setAttribute("data-required", newCheckedRequired);
   $input?.setAttribute("multiple", newCheckedMultiple);
-
-
-
-
 }

@@ -5,19 +5,29 @@ import removeElementForm from "../utils/removeElements";
 import { REQUIRED_RADIOS } from "../const";
 import cleanTextInputs from "../utils/cleanTextInputs";
 import addRequiredToInput from "../utils/addRequiredToInput";
-import { AppInput, AppRadioButtons, AppTextarea, ModalBody } from "../../web-components";
+import {
+  AppInput,
+  AppRadioButtons,
+  AppTextarea,
+  ModalBody,
+} from "../../web-components";
 import sign from "../components/signature.ts";
 import Modal from "@lib/components/modal.ts";
 
-
-export function create({ incrementId, containerCards }: { incrementId: number, containerCards:HTMLDivElement | null }) {
-  const $parentDiv = document.createElement("div");
-  const $parentSignature = document.createElement("div");
-  const $signature = document.createElement("div");
-  const $inputHidden = document.createElement("input");
-  const $label = document.createElement("label");
-  const $canvas = document.createElement("canvas");
-  const $buttonClear = document.createElement("button");
+export function create({
+  incrementId,
+  containerCards,
+}: {
+  incrementId: number;
+  containerCards: HTMLDivElement | null;
+}) {
+  const parentDiv = document.createElement("div");
+  const parentSignature = document.createElement("div");
+  const signature = document.createElement("div");
+  const inputHidden = document.createElement("input");
+  const label = document.createElement("label");
+  const canvas = document.createElement("canvas");
+  const buttonClear = document.createElement("button");
 
   const buttonIdUpdate = `signature-update-${incrementId}`;
   const buttonIdRemove = `signature-remove-${incrementId}`;
@@ -26,7 +36,7 @@ export function create({ incrementId, containerCards }: { incrementId: number, c
   const newLabel = "Edit signature";
   const id = `signature-${incrementId}`;
 
-  $parentSignature.classList.add(
+  parentSignature.classList.add(
     "flex",
     "items-center",
     "justify-between",
@@ -34,30 +44,31 @@ export function create({ incrementId, containerCards }: { incrementId: number, c
     "w-full",
     "gap-2"
   );
-  $parentSignature.setAttribute("disposition", "row");
+  parentSignature.setAttribute("disposition", "row");
 
-  $signature.classList.add("container-signature");
+  signature.classList.add("container-signature");
 
-  $label.classList.add("capitalize");
-  $label.textContent = newLabel;
+  label.classList.add("capitalize");
+  label.textContent = newLabel;
 
-  $inputHidden.type = "hidden";
-  $inputHidden.id = `hidden-${incrementId}`;
+  inputHidden.type = "hidden";
+  inputHidden.id = `hidden-${incrementId}`;
 
   const name = `signature-${incrementId}-${newLabel}`;
 
-  $canvas.setAttribute("data-required", "false");
-  $canvas.setAttribute("name", `canvas-${name}`);
-  $canvas.id = `canvas-${id}`;
-  $canvas.className = "canvas-signature";
+  canvas.setAttribute("data-required", "false");
+  canvas.setAttribute("name", `canvas-${name}`);
+  canvas.id = `canvas-${id}`;
+  canvas.className = "border border-gray-400 rounded-md";
 
-  $buttonClear.id = `clear-${id}`;
-  $buttonClear.className = "btn-clear-signature";
-  $buttonClear.type = "button";
-  $buttonClear.textContent = "clear";
+  buttonClear.id = `clear-${id}`;
+  buttonClear.className =
+    "cursor-pointer bg-red-400 text-white px-2 py-1 rounded-md hover:bg-red-600";
+  buttonClear.type = "button";
+  buttonClear.textContent = "clear";
 
-  $canvas.height = 150;
-  $canvas.width = 400;
+  canvas.height = 150;
+  canvas.width = 400;
 
   const buttonUpdate = button(
     {
@@ -86,9 +97,9 @@ export function create({ incrementId, containerCards }: { incrementId: number, c
     removeElementForm
   );
 
-  const $lastChildren = containerCards?.lastElementChild;
+  const lastChildren = containerCards?.lastElementChild;
 
-  $parentDiv.classList.add(
+  parentDiv.classList.add(
     "container-components",
     "isDraggable",
     "relative",
@@ -100,21 +111,21 @@ export function create({ incrementId, containerCards }: { incrementId: number, c
     "w-full",
     "border-gray-500"
   );
-  $parentDiv.id = containerId;
+  parentDiv.id = containerId;
 
-  $parentDiv.appendChild(buttonDelete);
-  $parentDiv.appendChild(buttonUpdate);
+  parentDiv.appendChild(buttonDelete);
+  parentDiv.appendChild(buttonUpdate);
 
-  $signature.appendChild($label);
-  $signature.appendChild($canvas);
-  $signature.appendChild($inputHidden);
-  $signature.appendChild($buttonClear);
+  signature.appendChild(label);
+  signature.appendChild(canvas);
+  signature.appendChild(inputHidden);
+  signature.appendChild(buttonClear);
 
-  $parentSignature.appendChild($signature);
+  parentSignature.appendChild(signature);
 
-  $parentDiv.appendChild($parentSignature);
+  parentDiv.appendChild(parentSignature);
 
-  $lastChildren?.appendChild($parentDiv);
+  lastChildren?.appendChild(parentDiv);
 
   sign({
     id: `canvas-${id}`,
@@ -124,76 +135,78 @@ export function create({ incrementId, containerCards }: { incrementId: number, c
 }
 
 export function bodyModal(target: HTMLButtonElement) {
-  const $parentDiv = new ModalBody()
-  const $radioButtonsRequired = new AppRadioButtons();
-  const $containerArea =new AppTextarea();
+  const parentDiv = new ModalBody();
+  const radioButtonsRequired = new AppRadioButtons();
+  const containerArea = new AppTextarea();
 
-  $radioButtonsRequired.setAttribute("label", "Required:");
-  $radioButtonsRequired.id = "container-radios-required";
-  $radioButtonsRequired.setAttribute("name", "inputs-required");
+  radioButtonsRequired.setAttribute("label", "Required:");
+  radioButtonsRequired.id = "container-radios-required";
+  radioButtonsRequired.setAttribute("name", "inputs-required");
 
-  $containerArea.setAttribute("label", "Label");
-  $containerArea.setAttribute("input_id", "area");
-  $containerArea.id = "container-area-label";
+  containerArea.setAttribute("label", "Label");
+  containerArea.setAttribute("input_id", "area");
+  containerArea.id = "container-area-label";
 
-  const $parentInputs = target.closest(".container-components");
+  const parentInputs = target.closest(".container-components");
 
-  if (!$parentInputs) return;
+  if (!parentInputs) return;
 
-  const $canvas = $parentInputs.querySelector("canvas");
-  const $label = $parentInputs.querySelector("label");
+  const canvas = parentInputs.querySelector("canvas");
+  const label = parentInputs.querySelector("label");
 
-  const labelText = cleanTextInputs($label);
+  const labelText = cleanTextInputs(label);
 
-  const newCheckedRequired = $canvas?.getAttribute("data-required");
+  const newCheckedRequired = canvas?.getAttribute("data-required");
 
   const updatedRequiredRadios = REQUIRED_RADIOS.map((radio) => ({
     ...radio,
     isChecked: radio.value === newCheckedRequired,
   }));
 
-  $containerArea.setAttribute("new_value", labelText);
-  $radioButtonsRequired.setAttribute(
+  containerArea.setAttribute("new_value", labelText);
+  radioButtonsRequired.setAttribute(
     "radios",
     JSON.stringify(updatedRequiredRadios)
   );
 
-  $parentDiv.appendChild($containerArea);
-  $parentDiv.appendChild($radioButtonsRequired);
+  parentDiv.appendChild(containerArea);
+  parentDiv.appendChild(radioButtonsRequired);
 
-  return $parentDiv;
+  return parentDiv;
 }
 
 export function update(
   target: HTMLButtonElement,
   { incrementId }: { incrementId: number }
 ) {
-  const $radioButtonsRequired = document.querySelector("#container-radios-required") as AppInput;
-  const $containerArea = document.querySelector("#container-area-label") as AppTextarea;
-  const $parentInputs = target.closest(".container-components");
+  const radioButtonsRequired = document.querySelector(
+    "#container-radios-required"
+  ) as AppInput;
+  const containerArea = document.querySelector(
+    "#container-area-label"
+  ) as AppTextarea;
+  const parentInputs = target.closest(".container-components");
 
-  const $canvas = $parentInputs?.querySelector("canvas");
-  const $label = $parentInputs?.querySelector("label");
+  const canvas = parentInputs?.querySelector("canvas");
+  const label = parentInputs?.querySelector("label");
 
-  const labelText = cleanTextInputs($label);
+  const labelText = cleanTextInputs(label);
 
-  const newLabel = $containerArea.change
-    ? $containerArea.value
-    : labelText || "";
+  const newLabel = containerArea.change ? containerArea.value : labelText || "";
 
-  const newCheckedRequired = $radioButtonsRequired.change
-    ? $radioButtonsRequired.value
-    : $canvas?.getAttribute("data-required") || "false";
+  const newCheckedRequired = radioButtonsRequired.change
+    ? radioButtonsRequired.value
+    : canvas?.getAttribute("data-required") || "false";
 
-  $label!.textContent = newLabel;
+  label!.textContent = newLabel;
 
   addRequiredToInput({
     checkedRequired: newCheckedRequired as "false",
-    elementRequired: $label!,
+    elementRequired: label!,
   });
 
   const name = `signature-${incrementId}-${newLabel}`;
 
-  $canvas?.setAttribute("data-required", newCheckedRequired);
-  $canvas?.setAttribute("name", name);
+  canvas?.setAttribute("data-required", newCheckedRequired);
+  canvas?.setAttribute("name", name);
 }

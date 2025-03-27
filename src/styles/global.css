@@ -40,7 +40,7 @@ html {
 }
 
 .menu[type="checkbox"]:checked ~ .container-menu__label {
-  box-shadow: 1px -1px 8px rgba(0, 0, 0, 0.477) inset;
+  box-shadow: 1px -1px 8px #65e60a inset;
 }
 
 div:has(.menu[type="checkbox"]:not(:checked)) + .container-elements {
@@ -147,4 +147,8 @@ div:has(.menu[type="checkbox"]:checked) + .container-elements {
     opacity: 0;
     transform: translateY(-20px);
   }
+}
+
+.x{
+  color: #61a132
 }
