@@ -6,7 +6,7 @@ import { Input } from "./inputs/input";
 import { Typography } from "./inputs/typography";
 import { Checkbox } from "./inputs/checkbox";
 import { SingleSelect } from "./inputs/singleSelect";
-import { create } from "./inputs/signature";
+import { Signature } from "./inputs/signature";
 import { createFiles } from "./inputs/files";
 
 interface Options {
@@ -208,6 +208,7 @@ class FormsApp extends HTMLElement {
         classes: `${classes}`,
         incrementId,
       });
+
     });
 
     this.checkbox?.addEventListener("click", () => {
@@ -216,6 +217,7 @@ class FormsApp extends HTMLElement {
         classes,
         incrementId,
       });
+
     });
 
     this.radio?.addEventListener("click", () => {
@@ -240,12 +242,17 @@ class FormsApp extends HTMLElement {
 
     this.signature?.addEventListener("click", () => {
       incrementId++;
-      create({ incrementId, containerCards: this.containerCards });
+      new Signature().create({
+        incrementId,
+        containerCards: this.containerCards,
+      });
+      this.smooth();
     });
 
     this.files?.addEventListener("click", () => {
       incrementId++;
       createFiles({ incrementId, containerCards: this.containerCards });
+      this.smooth();
     });
   }
 

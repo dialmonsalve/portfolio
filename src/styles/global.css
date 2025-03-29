@@ -27,9 +27,6 @@ input[type=number] {
   appearance: none !important;
 }
 
-/* @view-transition {
-  navigation: auto; 
-} */
 
 .dark {
   --color-primary: oklch(0.702 0.183 293.541);
@@ -147,8 +144,4 @@ div:has(.menu[type="checkbox"]:checked) + .container-elements {
     opacity: 0;
     transform: translateY(-20px);
   }
-}
-
-.x{
-  color: #61a132
 }

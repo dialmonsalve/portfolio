@@ -112,7 +112,7 @@ export class Input {
     }
   };
 
-  update(target: HTMLButtonElement, incrementId: number) {
+  private update(target: HTMLButtonElement, incrementId: number) {
 
     if (this.inputType === "input"){
       const updateInputsOnDOM = new UpdateInputsOnDOM(

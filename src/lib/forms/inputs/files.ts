@@ -37,34 +37,34 @@ const checkboxFormats = [
 ];
 
 const elementsCheck = (elementChecked = "") => {
-  const $parentCheckbox = document.createElement("DIV");
-  $parentCheckbox.classList.add("container-modal-checkbox");
+  const parentCheckbox = document.createElement("DIV");
+  parentCheckbox.classList.add("container-modal-checkbox");
 
   checkboxFormats.map((check) => {
-    const $containerCheck = document.createElement("div");
+    const containerCheck = document.createElement("div");
 
-    $containerCheck.className = "form-check form-switch";
+    containerCheck.className = "form-check form-switch";
 
     const isChecked = !!elementChecked?.split(",").includes(`.${check}`);
 
-    const $paragraph = document.createElement("p");
-    const $input = document.createElement("input");
+    const paragraph = document.createElement("p");
+    const input = document.createElement("input");
 
-    $input.className = "form-check-input accept";
-    $input.type = "checkbox";
-    $input.checked = isChecked;
-    $input.id = check;
-    $input.value = `.${check}`;
-    $input.setAttribute("name", check);
+    input.className = "form-check-input accept";
+    input.type = "checkbox";
+    input.checked = isChecked;
+    input.id = check;
+    input.value = `.${check}`;
+    input.setAttribute("name", check);
 
-    $paragraph.textContent = check;
+    paragraph.textContent = check;
 
-    $containerCheck.appendChild($input);
-    $containerCheck.appendChild($paragraph);
-    $parentCheckbox.appendChild($containerCheck);
+    containerCheck.appendChild(input);
+    containerCheck.appendChild(paragraph);
+    parentCheckbox.appendChild(containerCheck);
   });
 
-  return $parentCheckbox;
+  return parentCheckbox;
 };
 
 export function createFiles({
@@ -74,26 +74,26 @@ export function createFiles({
   incrementId: number;
   containerCards: HTMLDivElement | null;
 }) {
-  const $parentDiv = document.createElement("div");
-  const $parentImage = document.createElement("div");
-  const $paragraph = document.createElement("p");
-  const $containerVoucher = document.createElement("div");
-  const $label = document.createElement("label");
-  const $labelImage = document.createElement("span");
-  const $image = document.createElement("img");
-  const $input = document.createElement("input");
-  const $containerNameFiles = document.createElement("div");
-  const $lastChildren = containerCards?.lastElementChild;
+  const parentDiv = document.createElement("div");
+  const parentImage = document.createElement("div");
+  const paragraph = document.createElement("p");
+  const containerVoucher = document.createElement("div");
+  const label = document.createElement("label");
+  const labelImage = document.createElement("span");
+  const image = document.createElement("img");
+  const input = document.createElement("input");
+  const containerNameFiles = document.createElement("div");
+  const lastChildren = containerCards?.lastElementChild;
 
   const buttonIdUpdate = `files-update-${incrementId}`;
   const buttonIdRemove = `files-remove-${incrementId}`;
   const containerId = `card-files-${incrementId}`;
 
-  const label = $paragraph.textContent || "";
+  const textLabel = paragraph.textContent || "";
   const id = `files-${incrementId}`;
-  const name = `files-${incrementId}-${label}`;
+  const name = `files-${incrementId}-${textLabel}`;
 
-  $parentDiv.classList.add(
+  parentDiv.classList.add(
     "container-components",
     "isDraggable",
     "relative",
@@ -105,36 +105,36 @@ export function createFiles({
     "w-full",
     "border-gray-500"
   );
-  $parentDiv.id = containerId;
+  parentDiv.id = containerId;
 
-  $parentImage.classList.add("container-components__image");
-  $parentImage.id = `parent-${id}`;
+  parentImage.classList.add("container-components__image");
+  parentImage.id = `parent-${id}`;
 
-  $paragraph.className = "text-capitalize text-voucher";
-  $paragraph.id = `label-${incrementId}`;
+  paragraph.className = "text-capitalize text-voucher";
+  paragraph.id = `label-${incrementId}`;
 
-  $label.classList.add("voucher-upload");
-  $label.htmlFor = id;
-  $label.id = "input-files";
-  $label.textContent = "upload files";
+  label.classList.add("voucher-upload");
+  label.htmlFor = id;
+  label.id = "input-files";
+  label.textContent = "upload files";
 
-  $labelImage.classList.add("voucher");
+  labelImage.classList.add("voucher");
 
-  $image.classList.add("voucher-img");
-  $image.src = "/icons/upload.svg";
-  $image.alt = "voucher upload";
+  image.classList.add("voucher-img");
+  image.src = "/icons/upload.svg";
+  image.alt = "voucher upload";
 
-  $input.classList.add("voucher-input");
-  $input.type = "file";
-  $input.id = id;
-  $input.setAttribute("name", name);
-  $input.setAttribute("data-required", "false");
-  $input.setAttribute("multiple", "false");
+  input.classList.add("voucher-input");
+  input.type = "file";
+  input.id = id;
+  input.setAttribute("name", name);
+  input.setAttribute("data-required", "false");
+  input.setAttribute("multiple", "false");
 
-  $containerVoucher.classList.add("container-voucher");
+  containerVoucher.classList.add("container-voucher");
 
-  $containerNameFiles.id = `name-${id}`;
-  $containerNameFiles.classList.add("container-name-files");
+  containerNameFiles.id = `name-${id}`;
+  containerNameFiles.classList.add("container-name-files");
 
   const buttonUpdate = button(
     {
@@ -162,56 +162,56 @@ export function createFiles({
     removeElementForm
   );
 
-  $labelImage.appendChild($image);
+  labelImage.appendChild(image);
 
-  $containerVoucher.appendChild($label);
-  $containerVoucher.appendChild($labelImage);
-  $containerVoucher.appendChild($input);
+  containerVoucher.appendChild(label);
+  containerVoucher.appendChild(labelImage);
+  containerVoucher.appendChild(input);
 
-  $parentImage.appendChild($paragraph);
-  $parentImage.appendChild($containerVoucher);
-  $parentImage.appendChild($containerNameFiles);
+  parentImage.appendChild(paragraph);
+  parentImage.appendChild(containerVoucher);
+  parentImage.appendChild(containerNameFiles);
 
-  $parentDiv.appendChild(buttonUpdate);
-  $parentDiv.appendChild(buttonDelete);
+  parentDiv.appendChild(buttonUpdate);
+  parentDiv.appendChild(buttonDelete);
 
-  $parentDiv.appendChild($parentImage);
+  parentDiv.appendChild(parentImage);
 
-  $lastChildren?.appendChild($parentDiv);
+ lastChildren?.appendChild(parentDiv);
 }
 
 export function bodyModal(target: HTMLButtonElement) {
-  const $parentDiv = document.createElement("app-modal-body");
-  const $radioButtonsRequired = document.createElement("app-radio-buttons");
-  const $radioButtonsMultiple = document.createElement("app-radio-buttons");
+  const parentDiv = document.createElement("app-modal-body");
+  const radioButtonsRequired = document.createElement("app-radio-buttons");
+  const radioButtonsMultiple = document.createElement("app-radio-buttons");
 
-  $radioButtonsRequired.setAttribute("label", "Required:");
-  $radioButtonsRequired.setAttribute("name", "inputs-required");
-  $radioButtonsRequired.id = "container-radios-required";
+  radioButtonsRequired.setAttribute("label", "Required:");
+  radioButtonsRequired.setAttribute("name", "inputs-required");
+  radioButtonsRequired.id = "container-radios-required";
 
-  $radioButtonsMultiple.setAttribute("label", "Multiple:");
-  $radioButtonsMultiple.setAttribute("name", "inputs-multiple");
-  $radioButtonsMultiple.id = "container-radios-multiple";
+  radioButtonsMultiple.setAttribute("label", "Multiple:");
+  radioButtonsMultiple.setAttribute("name", "inputs-multiple");
+  radioButtonsMultiple.id = "container-radios-multiple";
 
-  const $ContainerInputLabel = inputComponent({
+  const ContainerInputLabel = inputComponent({
     name: "input-label",
     type: "text",
     label: "Label",
     id: `container-input-label`,
   });
 
-  const $parentInputs = target.closest(".container-components");
+  const parentInputs = target.closest(".container-components");
 
-  const $paragraph = $parentInputs?.querySelector("p");
-  const $input = $parentInputs?.querySelector("input");
+  const paragraph = parentInputs?.querySelector("p");
+  const input = parentInputs?.querySelector("input");
 
-  const labelParagraph = cleanTextInputs($paragraph);
+  const labelParagraph = cleanTextInputs(paragraph);
 
-  const newCheckedMultiple = $input?.getAttribute("multiple");
+  const newCheckedMultiple = input?.getAttribute("multiple");
 
-  const newCheckedRequired = $input?.getAttribute("data-required");
+  const newCheckedRequired = input?.getAttribute("data-required");
 
-  if (!$parentInputs) return;
+  if (!parentInputs) return;
 
   const updatedRequiredRadios = REQUIRED_RADIOS.map((radio) => ({
     ...radio,
@@ -223,75 +223,75 @@ export function bodyModal(target: HTMLButtonElement) {
     isChecked: radio.value === newCheckedMultiple,
   }));
 
-  $ContainerInputLabel.setAttribute("new_value", `${labelParagraph}`);
+  ContainerInputLabel.setAttribute("new_value", `${labelParagraph}`);
 
-  $radioButtonsRequired.setAttribute(
+  radioButtonsRequired.setAttribute(
     "radios",
     JSON.stringify(updatedRequiredRadios)
   );
-  $radioButtonsMultiple.setAttribute(
+  radioButtonsMultiple.setAttribute(
     "radios",
     JSON.stringify(updatedPositionRadios)
   );
 
-  const accept = $input?.getAttribute("accept") || "";
+  const accept = input?.getAttribute("accept") || "";
 
-  $parentDiv.appendChild($ContainerInputLabel);
-  $parentDiv.appendChild(elementsCheck(accept));
-  $parentDiv.appendChild($radioButtonsRequired);
-  $parentDiv.appendChild($radioButtonsMultiple);
+  parentDiv.appendChild(ContainerInputLabel);
+  parentDiv.appendChild(elementsCheck(accept));
+  parentDiv.appendChild(radioButtonsRequired);
+  parentDiv.appendChild(radioButtonsMultiple);
 
-  return $parentDiv;
+  return parentDiv;
 }
 
 export function update(
   target: HTMLButtonElement,
   { incrementId }: { incrementId: number }
 ) {
-  const $parentDiv = document.querySelector("app-modal-body");
-  const $parentElement = target.closest(".container-components");
-  const $checkboxChecked = $parentDiv?.querySelectorAll(
+  const parentDiv = document.querySelector("app-modal-body");
+  const parentElement = target.closest(".container-components");
+  const checkboxChecked = parentDiv?.querySelectorAll(
     '.container-modal-checkbox input[type="checkbox"]:checked'
   ) as NodeListOf<HTMLInputElement>;
-  const $containerInputLabel = document.querySelector("#container-input-label") as AppInput;
-  const $radioButtonsRequired = document.querySelector(
+  const containerInputLabel = document.querySelector("#container-input-label") as AppInput;
+  const radioButtonsRequired = document.querySelector(
     "#container-radios-required"
   ) as AppRadioButtons;
-  const $radioButtonsMultiple = document.querySelector(
+  const radioButtonsMultiple = document.querySelector(
     "#container-radios-multiple"
   ) as AppRadioButtons;
 
-  const $input = $parentElement?.querySelector("input");
-  const $paragraph = $parentElement?.querySelector("p") as HTMLParagraphElement;
+  const input = parentElement?.querySelector("input");
+  const paragraph = parentElement?.querySelector("p") as HTMLParagraphElement;
 
   let accept = "";
 
-  for (const checkbox of $checkboxChecked) {
+  for (const checkbox of checkboxChecked) {
     accept = accept.concat(checkbox.value, ",");
   }
 
-  const textParagraph = cleanTextInputs($paragraph);
+  const textParagraph = cleanTextInputs(paragraph);
 
-  const newLabel = $containerInputLabel.change
-    ? $containerInputLabel.value
+  const newLabel = containerInputLabel.change
+    ? containerInputLabel.value
     : textParagraph || "";
 
-  const newCheckedRequired = $radioButtonsRequired.change
-    ? $radioButtonsRequired.value
-    : $input?.getAttribute("data-required") || "false";
+  const newCheckedRequired = radioButtonsRequired.change
+    ? radioButtonsRequired.value
+    : input?.getAttribute("data-required") || "false";
 
-  const newCheckedMultiple = $radioButtonsMultiple.change
-    ? $radioButtonsMultiple.value
-    : $input?.getAttribute("multiple") || "false";
+  const newCheckedMultiple = radioButtonsMultiple.change
+    ? radioButtonsMultiple.value
+    : input?.getAttribute("multiple") || "false";
 
-  $paragraph.textContent = newLabel;
+  paragraph.textContent = newLabel;
 
   addRequiredToInput({
     checkedRequired: newCheckedRequired as "false",
-    elementRequired: $paragraph,
+    elementRequired: paragraph,
   });
 
-  $input?.setAttribute("accept", accept.slice(0, -1));
-  $input?.setAttribute("data-required", newCheckedRequired);
-  $input?.setAttribute("multiple", newCheckedMultiple);
+  input?.setAttribute("accept", accept.slice(0, -1));
+  input?.setAttribute("data-required", newCheckedRequired);
+  input?.setAttribute("multiple", newCheckedMultiple);
 }

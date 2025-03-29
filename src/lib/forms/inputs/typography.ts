@@ -133,9 +133,9 @@ export class Typography {
 
     if (!parentInputs) return;
 
-    const $paragraph = parentInputs.lastElementChild?.querySelector("p");
+    const paragraph = parentInputs.lastElementChild?.querySelector("p");
 
-    const newTitle = $paragraph?.innerHTML;
+    const newTitle = paragraph?.innerHTML;
 
     const textContent = newTitle?.replace(/<br\s*\/?>/gi, "\n");
 
@@ -146,7 +146,7 @@ export class Typography {
     return parentDiv;
   };
 
-  update(target: HTMLButtonElement) {
+  private update(target: HTMLButtonElement) {
     const parentContainer = target.closest(".container-components");
     const parentInputs = parentContainer?.lastElementChild;
 
@@ -200,9 +200,9 @@ export class Typography {
 
       headingElement?.remove();
 
-      const $heading = document.createElement(newChecked) as HTMLHeadElement;
-      $heading.id = id!;
-      $heading.setAttribute("name", name || "");
+      const heading = document.createElement(newChecked) as HTMLHeadElement;
+      heading.id = id!;
+      heading.setAttribute("name", name || "");
 
       const num =
         newChecked === "h2"
@@ -215,10 +215,10 @@ export class Typography {
           ? "w-full text-lg uppercase text-zinc-600 dark:text-gray-200"
           : "w-full text-md uppercase text-zinc-600 dark:text-gray-200";
 
-      $heading.className = num;
-      $heading.textContent = newValue || "";
+      heading.className = num;
+      heading.textContent = newValue || "";
 
-      parentInputs?.appendChild($heading);
+      parentInputs?.appendChild(heading);
     }
   }
 }

@@ -70,7 +70,7 @@ export class Checkbox {
     return modalBody;
   };
 
-  update(target: HTMLButtonElement, incrementId: number) {
+  private update(target: HTMLButtonElement, incrementId: number) {
     const updateInputsOnDOM = new UpdateInputsOnDOM(
       target,
       "checkbox",

@@ -14,199 +14,202 @@ import {
 import sign from "../components/signature.ts";
 import Modal from "@lib/components/modal.ts";
 
-export function create({
-  incrementId,
-  containerCards,
-}: {
-  incrementId: number;
-  containerCards: HTMLDivElement | null;
-}) {
-  const parentDiv = document.createElement("div");
-  const parentSignature = document.createElement("div");
-  const signature = document.createElement("div");
-  const inputHidden = document.createElement("input");
-  const label = document.createElement("label");
-  const canvas = document.createElement("canvas");
-  const buttonClear = document.createElement("button");
+import type { CreateOptions } from "../interfaces";
 
-  const buttonIdUpdate = `signature-update-${incrementId}`;
-  const buttonIdRemove = `signature-remove-${incrementId}`;
-  const containerId = `card-signature-${incrementId}`;
+export class Signature {
+  constructor() {}
 
-  const newLabel = "Edit signature";
-  const id = `signature-${incrementId}`;
+  create = ({ incrementId, containerCards }: CreateOptions) => {
+    const parentDiv = document.createElement("div");
+    const parentSignature = document.createElement("div");
+    const signature = document.createElement("div");
+    const inputHidden = document.createElement("input");
+    const label = document.createElement("label");
+    const canvas = document.createElement("canvas");
+    const buttonClear = document.createElement("button");
 
-  parentSignature.classList.add(
-    "flex",
-    "items-center",
-    "justify-between",
-    "px-1",
-    "w-full",
-    "gap-2"
-  );
-  parentSignature.setAttribute("disposition", "row");
+    const buttonIdUpdate = `signature-update-${incrementId}`;
+    const buttonIdRemove = `signature-remove-${incrementId}`;
+    const containerId = `card-signature-${incrementId}`;
 
-  signature.classList.add("container-signature");
+    const newLabel = "Edit signature";
+    const id = `signature-${incrementId}`;
 
-  label.classList.add("capitalize");
-  label.textContent = newLabel;
+    parentSignature.classList.add(
+      "flex",
+      "items-center",
+      "justify-between",
+      "px-1",
+      "w-full",
+      "gap-2"
+    );
+    parentSignature.setAttribute("disposition", "row");
 
-  inputHidden.type = "hidden";
-  inputHidden.id = `hidden-${incrementId}`;
+    signature.classList.add("flex", "flex-col", "gap-1", );
 
-  const name = `signature-${incrementId}-${newLabel}`;
+    label.classList.add("capitalize", "text-slate-600", "dark:text-white");
+    label.textContent = newLabel;
 
-  canvas.setAttribute("data-required", "false");
-  canvas.setAttribute("name", `canvas-${name}`);
-  canvas.id = `canvas-${id}`;
-  canvas.className = "border border-gray-400 rounded-md";
+    inputHidden.type = "hidden";
+    inputHidden.id = `hidden-${incrementId}`;
 
-  buttonClear.id = `clear-${id}`;
-  buttonClear.className =
-    "cursor-pointer bg-red-400 text-white px-2 py-1 rounded-md hover:bg-red-600";
-  buttonClear.type = "button";
-  buttonClear.textContent = "clear";
+    const name = `signature-${incrementId}-${newLabel}`;
 
-  canvas.height = 150;
-  canvas.width = 400;
+    canvas.setAttribute("data-required", "false");
+    canvas.setAttribute("name", `canvas-${name}`);
+    canvas.id = `canvas-${id}`;
+    canvas.className = "border border-gray-400 rounded-md";
 
-  const buttonUpdate = button(
-    {
-      id: buttonIdUpdate,
-      text: "",
-      spanClass: "button-square-update",
-      buttonClass: "inputs-btn-update",
-    },
-    (evt) => {
-      const modal = new Modal({
-        title: "update signature",
-        content: () => bodyModal(evt.target as HTMLButtonElement),
-        action: () => update(evt.target as HTMLButtonElement, { incrementId }),
-      });
-      modal.build();
-    }
-  );
+    buttonClear.id = `clear-${id}`;
+    buttonClear.className =
+      "cursor-pointer bg-red-400 text-white px-2 py-1 rounded-md hover:bg-red-600 w-fit";
+    buttonClear.type = "button";
+    buttonClear.textContent = "clear";
 
-  const buttonDelete = button(
-    {
-      id: buttonIdRemove,
-      text: "",
-      spanClass: "button-square-remove",
-      buttonClass: "inputs-btn-delete",
-    },
-    removeElementForm
-  );
+    canvas.height = 150;
+    canvas.width = 400;
 
-  const lastChildren = containerCards?.lastElementChild;
+    const buttonUpdate = button(
+      {
+        id: buttonIdUpdate,
+        text: "",
+        spanClass: "button-square-update",
+        buttonClass: "inputs-btn-update",
+      },
+      (evt) => {
+        const modal = new Modal({
+          title: "update signature",
+          content: () => this.bodyModal(evt.target as HTMLButtonElement),
+          action: () =>
+            this.update(evt.target as HTMLButtonElement, { incrementId }),
+        });
+        modal.build();
+      }
+    );
 
-  parentDiv.classList.add(
-    "container-components",
-    "isDraggable",
-    "relative",
-    "flex",
-    "gap-4",
-    "p-4",
-    "border",
-    "rounded-sm",
-    "w-full",
-    "border-gray-500"
-  );
-  parentDiv.id = containerId;
+    const buttonDelete = button(
+      {
+        id: buttonIdRemove,
+        text: "",
+        spanClass: "button-square-remove",
+        buttonClass: "inputs-btn-delete",
+      },
+      removeElementForm
+    );
 
-  parentDiv.appendChild(buttonDelete);
-  parentDiv.appendChild(buttonUpdate);
+    const lastChildren = containerCards?.lastElementChild;
 
-  signature.appendChild(label);
-  signature.appendChild(canvas);
-  signature.appendChild(inputHidden);
-  signature.appendChild(buttonClear);
+    parentDiv.classList.add(
+      "container-components",
+      "isDraggable",
+      "relative",
+      "flex",
+      "gap-4",
+      "p-4",
+      "border",
+      "rounded-sm",
+      "w-full",
+      "border-gray-500"
+    );
+    parentDiv.id = containerId;
 
-  parentSignature.appendChild(signature);
+    parentDiv.appendChild(buttonDelete);
+    parentDiv.appendChild(buttonUpdate);
 
-  parentDiv.appendChild(parentSignature);
+    signature.appendChild(label);
+    signature.appendChild(canvas);
+    signature.appendChild(inputHidden);
+    signature.appendChild(buttonClear);
 
-  lastChildren?.appendChild(parentDiv);
+    parentSignature.appendChild(signature);
 
-  sign({
-    id: `canvas-${id}`,
-    name: `hidden-${incrementId}`,
-    clear: `clear-${id}`,
-  });
-}
+    parentDiv.appendChild(parentSignature);
 
-export function bodyModal(target: HTMLButtonElement) {
-  const parentDiv = new ModalBody();
-  const radioButtonsRequired = new AppRadioButtons();
-  const containerArea = new AppTextarea();
+    lastChildren?.appendChild(parentDiv);
 
-  radioButtonsRequired.setAttribute("label", "Required:");
-  radioButtonsRequired.id = "container-radios-required";
-  radioButtonsRequired.setAttribute("name", "inputs-required");
+    sign({
+      id: `canvas-${id}`,
+      name: `hidden-${incrementId}`,
+      clear: `clear-${id}`,
+    });
+  };
 
-  containerArea.setAttribute("label", "Label");
-  containerArea.setAttribute("input_id", "area");
-  containerArea.id = "container-area-label";
+  private bodyModal(target: HTMLButtonElement) {
+    const parentDiv = new ModalBody();
+    const radioButtonsRequired = new AppRadioButtons();
+    const containerArea = new AppTextarea();
 
-  const parentInputs = target.closest(".container-components");
+    radioButtonsRequired.setAttribute("label", "Required:");
+    radioButtonsRequired.id = "container-radios-required";
+    radioButtonsRequired.setAttribute("name", "inputs-required");
 
-  if (!parentInputs) return;
+    containerArea.setAttribute("label", "Label");
+    containerArea.setAttribute("input_id", "area");
+    containerArea.id = "container-area-label";
 
-  const canvas = parentInputs.querySelector("canvas");
-  const label = parentInputs.querySelector("label");
+    const parentInputs = target.closest(".container-components");
 
-  const labelText = cleanTextInputs(label);
+    if (!parentInputs) return;
 
-  const newCheckedRequired = canvas?.getAttribute("data-required");
+    const canvas = parentInputs.querySelector("canvas");
+    const label = parentInputs.querySelector("label");
 
-  const updatedRequiredRadios = REQUIRED_RADIOS.map((radio) => ({
-    ...radio,
-    isChecked: radio.value === newCheckedRequired,
-  }));
+    const labelText = cleanTextInputs(label);
 
-  containerArea.setAttribute("new_value", labelText);
-  radioButtonsRequired.setAttribute(
-    "radios",
-    JSON.stringify(updatedRequiredRadios)
-  );
+    const newCheckedRequired = canvas?.getAttribute("data-required");
 
-  parentDiv.appendChild(containerArea);
-  parentDiv.appendChild(radioButtonsRequired);
+    const updatedRequiredRadios = REQUIRED_RADIOS.map((radio) => ({
+      ...radio,
+      isChecked: radio.value === newCheckedRequired,
+    }));
 
-  return parentDiv;
-}
+    containerArea.setAttribute("new_value", labelText);
+    radioButtonsRequired.setAttribute(
+      "radios",
+      JSON.stringify(updatedRequiredRadios)
+    );
 
-export function update(
-  target: HTMLButtonElement,
-  { incrementId }: { incrementId: number }
-) {
-  const radioButtonsRequired = document.querySelector(
-    "#container-radios-required"
-  ) as AppInput;
-  const containerArea = document.querySelector(
-    "#container-area-label"
-  ) as AppTextarea;
-  const parentInputs = target.closest(".container-components");
+    parentDiv.appendChild(containerArea);
+    parentDiv.appendChild(radioButtonsRequired);
 
-  const canvas = parentInputs?.querySelector("canvas");
-  const label = parentInputs?.querySelector("label");
+    return parentDiv;
+  }
 
-  const labelText = cleanTextInputs(label);
+  private update(
+    target: HTMLButtonElement,
+    { incrementId }: { incrementId: number }
+  ) {
+    const radioButtonsRequired = document.querySelector(
+      "#container-radios-required"
+    ) as AppInput;
+    const containerArea = document.querySelector(
+      "#container-area-label"
+    ) as AppTextarea;
+    const parentInputs = target.closest(".container-components");
 
-  const newLabel = containerArea.change ? containerArea.value : labelText || "";
+    const canvas = parentInputs?.querySelector("canvas");
+    const label = parentInputs?.querySelector("label");
 
-  const newCheckedRequired = radioButtonsRequired.change
-    ? radioButtonsRequired.value
-    : canvas?.getAttribute("data-required") || "false";
+    const labelText = cleanTextInputs(label);
 
-  label!.textContent = newLabel;
+    const newLabel = containerArea.change
+      ? containerArea.value
+      : labelText || "";
 
-  addRequiredToInput({
-    checkedRequired: newCheckedRequired as "false",
-    elementRequired: label!,
-  });
+    const newCheckedRequired = radioButtonsRequired.change
+      ? radioButtonsRequired.value
+      : canvas?.getAttribute("data-required") || "false";
 
-  const name = `signature-${incrementId}-${newLabel}`;
+    label!.textContent = newLabel;
 
-  canvas?.setAttribute("data-required", newCheckedRequired);
-  canvas?.setAttribute("name", name);
+    addRequiredToInput({
+      checkedRequired: newCheckedRequired as "false",
+      elementRequired: label!,
+    });
+
+    const name = `signature-${incrementId}-${newLabel}`;
+
+    canvas?.setAttribute("data-required", newCheckedRequired);
+    canvas?.setAttribute("name", name);
+  }
 }

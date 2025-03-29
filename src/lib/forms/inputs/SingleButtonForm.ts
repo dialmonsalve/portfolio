@@ -2,11 +2,7 @@ import button from "../components/button";
 
 import removeElementForm from "../utils/removeElements";
 
-const doc = document;
-
-const $ = (selector: string) => doc.querySelector(selector);
-
-const $containerCards = $(".container-forms");
+const containerCards = document.querySelector(".container-forms");
 
 interface OptionsButton {
   type: "next" | "submit";
@@ -21,8 +17,8 @@ export function create({
   buttonType,
   style,
 }: OptionsButton) {
-  const $parentDiv = document.createElement("div");
-  const $buttonForm = document.createElement("button");
+  const parentDiv = document.createElement("div");
+  const buttonForm = document.createElement("button");
   const buttonIdRemove = `btn-${type}-remove-${incrementId}`;
   const containerId = `card-btn-${type}-${incrementId}`;
 
@@ -38,7 +34,7 @@ export function create({
     removeElementForm,
   );
 
-  $parentDiv.classList.add(
+  parentDiv.classList.add(
     "container-components",
     "isDraggable",
     "relative",
@@ -51,25 +47,25 @@ export function create({
     "border-gray-500"
   );
   
-  $parentDiv.style.justifyContent = "flex-end";
-  $parentDiv.id = containerId;
+  parentDiv.style.justifyContent = "flex-end";
+  parentDiv.id = containerId;
 
-  $buttonForm.className = `btn-${type} capitalize`;
-  $buttonForm.id = id;
-  $buttonForm.setAttribute("name", `btn-${type}`);
-  $buttonForm.textContent = type;
-  $buttonForm.type = buttonType;
+  buttonForm.className = `btn-${type} capitalize`;
+  buttonForm.id = id;
+  buttonForm.setAttribute("name", `btn-${type}`);
+  buttonForm.textContent = type;
+  buttonForm.type = buttonType;
 
   if (style && style > 1) {
-    $buttonForm.style.width = `${style}%`;
+    buttonForm.style.width = `${style}%`;
   }
 
-  $parentDiv.appendChild(buttonDelete);
-  $parentDiv.appendChild($buttonForm);
+  parentDiv.appendChild(buttonDelete);
+  parentDiv.appendChild(buttonForm);
 
-  const $lastChildren = $containerCards?.lastElementChild;
+  const lastChildren = containerCards?.lastElementChild;
 
-  $lastChildren?.appendChild($parentDiv);
+  lastChildren?.appendChild(parentDiv);
 
 
 

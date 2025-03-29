@@ -113,7 +113,7 @@ export class SingleSelect {
     return modalBody;
   };
 
-  update(target: HTMLButtonElement, incrementId: number) {
+  private update(target: HTMLButtonElement, incrementId: number) {
     const parentContainer = target.closest(".container-components");
     const parentInputs = parentContainer?.lastElementChild;
     const paragraph = parentInputs?.querySelector("p");
