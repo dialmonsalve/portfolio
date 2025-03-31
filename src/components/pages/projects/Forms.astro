@@ -2,7 +2,6 @@
 import Layout from "@layouts/Layout.astro";
 import { getI18N } from "../../../i18n";
 import Menu from "../../Menu.astro";
-import "@styles/button.css";
 
 const { currentLocale } = Astro;
 const i18n = getI18N({ currentLocale });
@@ -24,7 +23,7 @@ const i18n = getI18N({ currentLocale });
         id="container-cards"
       >
         <div
-          class="container-card-form card relative p-8 min-w-162 flex flex-col gap-8 border border-gray-400 w-162 opacity-100 rounded-xl"
+          class="container-card-form card relative p-8 flex flex-col gap-8 border border-gray-400 opacity-100 rounded-xl w-70 xs:w-95 sm:w-150 lg:w-200"
           id="card-1"
         >
           <button

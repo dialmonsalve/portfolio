@@ -7,7 +7,7 @@ import { Typography } from "./inputs/typography";
 import { Checkbox } from "./inputs/checkbox";
 import { SingleSelect } from "./inputs/singleSelect";
 import { Signature } from "./inputs/signature";
-import { createFiles } from "./inputs/files";
+import { InputFiles } from "./inputs/files";
 
 interface Options {
   classes: string;
@@ -208,7 +208,6 @@ class FormsApp extends HTMLElement {
         classes: `${classes}`,
         incrementId,
       });
-
     });
 
     this.checkbox?.addEventListener("click", () => {
@@ -217,7 +216,6 @@ class FormsApp extends HTMLElement {
         classes,
         incrementId,
       });
-
     });
 
     this.radio?.addEventListener("click", () => {
@@ -251,12 +249,20 @@ class FormsApp extends HTMLElement {
 
     this.files?.addEventListener("click", () => {
       incrementId++;
-      createFiles({ incrementId, containerCards: this.containerCards });
+
+      new InputFiles({
+        container: new Container(),
+      }).create({ incrementId, containerCards: this.containerCards });
       this.smooth();
     });
   }
 
-  createTypography = ({ tag, type, classes, incrementId }: ITypography) => {
+  private createTypography = ({
+    tag,
+    type,
+    classes,
+    incrementId,
+  }: ITypography) => {
     const typography = new Typography({
       container: new Container(),
       tag,
@@ -268,7 +274,7 @@ class FormsApp extends HTMLElement {
     this.smooth();
   };
 
-  createInput = ({ classes, incrementId, type, inputType }: IInput) => {
+  private createInput = ({ classes, incrementId, type, inputType }: IInput) => {
     const input = new Input(inputType, {
       container: new Container(),
       type,
@@ -279,7 +285,7 @@ class FormsApp extends HTMLElement {
     this.smooth();
   };
 
-  createCheckbox = ({
+  private createCheckbox = ({
     classes,
     incrementId,
   }: {
@@ -295,7 +301,12 @@ class FormsApp extends HTMLElement {
     this.smooth();
   };
 
-  createSingleOption = ({ classes, incrementId, tag, tagOptions }: Options) => {
+  private createSingleOption = ({
+    classes,
+    incrementId,
+    tag,
+    tagOptions,
+  }: Options) => {
     incrementId++;
     const radios = new SingleSelect({
       container: new Container(),
@@ -308,7 +319,7 @@ class FormsApp extends HTMLElement {
     this.smooth();
   };
 
-  smooth() {
+  private smooth() {
     const scroller = document.querySelector("main");
     scroller?.scrollTo({
       top: scroller.scrollHeight - window.innerHeight + 220,

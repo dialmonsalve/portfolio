@@ -27,7 +27,7 @@ export class Input {
     const id = `${this.type}-${incrementId}`;
     const name = `${this.type}-${incrementId}`;
 
-    label.classList.add("capitalize", "text-zinc-600", "dark:text-gray-200");
+    label.classList.add("capitalize", "text-zinc-600", "dark:text-gray-200", "text-xs", "md:text-md");
     label.htmlFor = id;
     label.textContent = newLabel;
 

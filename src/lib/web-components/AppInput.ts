@@ -1,70 +1,96 @@
 export default class AppInput extends HTMLElement {
-  private label: string = "";
-  private type: string = "";
-  private name: string = "";
-  private _value: string = "";
-  private new_value: string = "";
-  private _change: boolean = false;
+  private label: string;
+  private type: string;
+  private name: string;
+  private input_class: string;
+  private input_id: string;
+  private _value: string;
+  private new_value: string;
+  private _change: boolean;
 
   constructor() {
     super();
 
+    const shadow = this.attachShadow({ mode: "open" });
+    this.label = "";
+    this.type = "";
+    this.name = "";
+    this.input_class = "";
+    this.input_id = "";
+    this._value = "";
+    this.new_value = "";
+    this._change = false;
+
+    new URL("./styles/inputs.css", import.meta.url).href;
+
     const link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = new URL("./styles/input.css", import.meta.url).href;
-    this.classList ="container-input"
+    link.href = new URL("./styles/inputs.css", import.meta.url).href;
 
-    this.appendChild(link);
+    shadow.appendChild(link);
   }
 
   connectedCallback() {
     const input = document.createElement("input");
+    const className = this.input_class === "" ? "input" : this.input_class;
     input.type = this.type;
     input.name = this.name;
-    input.id = "app-input";
+    input.id = this.input_id;
     input.value = this.new_value;
-    input.classList.add("input");
-    input.classList.add("dark:text-white");
+    input.classList.add(className);
 
     const label = document.createElement("label");
-    label.htmlFor = "app-input";
+    label.htmlFor = this.input_id;
     label.textContent = this.label;
     label.classList.add("label");
-    label.classList.add("dark:text-white");
 
     input.addEventListener("change", (evt) => this.onChange(evt));
 
-    this.appendChild(label);
-    this.appendChild(input);
+    this.shadowRoot?.appendChild(label);
+    this.shadowRoot?.appendChild(input);
   }
 
   attributeChangedCallback(name: string, _oldValue: string, newValue: string) {
     switch (name) {
       case "label":
         this.label = newValue;
-        return;
+        break;
       case "type":
         this.type = newValue;
-        return;
+        break;
       case "name":
         this.name = newValue;
-        return;
+        break;
+      case "input_class":
+        this.input_class = newValue;
+        break;
+      case "input_id":
+        this.input_id = newValue;
+        break;
       case "_value":
         this._value = newValue;
-        return;
+        break;
       case "new_value":
         this.new_value = newValue;
-        return;
+        break;
       default:
-        console.warn(`Unrecognized attribute: ${name}`);
+        console.warn(`Atributo no reconocido: ${name}`);
     }
   }
 
   static get observedAttributes() {
-    return ["type", "name", "_value", "new_value", "label", "input_id"];
+    return [
+      "type",
+      "name",
+      "_value",
+      "new_value",
+      "label",
+      "input_class",
+      "input_id",
+    ];
   }
 
-  onChange(evt: Event) {    
+  onChange(evt: Event) {
     const target = evt.target as HTMLInputElement;
     this._value = target.value;
     this._change = true;
@@ -80,7 +106,9 @@ export default class AppInput extends HTMLElement {
 
   set value(newValue) {
     this._value = newValue;
-    const container = this.querySelector(`#app-input`) as HTMLInputElement;
+    const container = this.shadowRoot?.querySelector(
+      `#rain-input-form`
+    ) as this;
     container.value = newValue;
   }
 }

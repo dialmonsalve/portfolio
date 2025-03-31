@@ -1,0 +1,33 @@
+:host {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+input[type="number"]::-webkit-inner-spin-button {
+  appearance: none;
+}
+
+input[type="number"] {
+  appearance: none;
+}
+
+input {
+  border: thin solid #80808087;
+  border-radius: 8px;
+  outline: none;
+  padding: 0.3rem 0.5rem;
+  font-size: 1.2rem;
+  transition: box-shadow 0.2s ease-in-out;
+  width: 50%;
+}
+input:focus {
+  outline: thin solid rgb(130, 207, 104);
+  box-shadow: 2px 2px 8px rgb(130, 207, 104);
+}
+
+label {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}

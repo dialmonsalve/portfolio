@@ -41,7 +41,7 @@ html {
 }
 
 div:has(.menu[type="checkbox"]:not(:checked)) + .container-elements {
-  transform: translateX(-110%);
+  transform: translateX(-100%);
 }
 
 div:has(.menu[type="checkbox"]:checked) + .container-elements {
@@ -50,7 +50,7 @@ div:has(.menu[type="checkbox"]:checked) + .container-elements {
 
 @media (width >= 64rem) {
   div:has(.menu[type="checkbox"]:not(:checked)) + .container-elements {
-    transform: translateX(-225%);
+    transform: translateX(-105%);
   }
   div:has(.menu[type="checkbox"]:checked) + .container-elements {
     transform: translateX(12px);

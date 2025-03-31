@@ -4,7 +4,7 @@ class AccordionDial extends HTMLElement {
     const accordions = this.querySelectorAll(".accordion-header");
 
     accordions.forEach((header) => {
-      header.addEventListener("click", function (evt) {
+      header.addEventListener("click",  (evt) => {
         const tar = evt.target as HTMLButtonElement;
         const target = tar.closest(".accordion-header");
 

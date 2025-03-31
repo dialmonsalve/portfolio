@@ -1,13 +1,15 @@
-import button from "../components/button.js";
+import Modal from "@lib/components/modal.js";
 import inputComponent from "../components/inputComponent.js";
 
-import removeElementForm from "../utils/removeElements.js";
+import { AppInput, AppRadioButtons, ModalBody } from "../../web-components";
+
+import addRequiredToInput from "../utils/addRequiredToInput.js";
+import cleanTextInputs from "../utils/cleanTextInputs.js";
 
 import { MULTIPLE_RADIOS, REQUIRED_RADIOS } from "../const";
-import cleanTextInputs from "../utils/cleanTextInputs.js";
-import addRequiredToInput from "../utils/addRequiredToInput.js";
-import { AppInput, AppRadioButtons } from "../../web-components";
-import Modal from "@lib/components/modal.js";
+
+import type { Container } from "../utils/container.js";
+import type { CreateOptions } from "../interfaces/index.js";
 
 const checkboxFormats = [
   "doc",
@@ -36,262 +38,229 @@ const checkboxFormats = [
   "rtf",
 ];
 
-const elementsCheck = (elementChecked = "") => {
-  const parentCheckbox = document.createElement("DIV");
-  parentCheckbox.classList.add("container-modal-checkbox");
+export class InputFiles {
+  private readonly container;
 
-  checkboxFormats.map((check) => {
-    const containerCheck = document.createElement("div");
-
-    containerCheck.className = "form-check form-switch";
-
-    const isChecked = !!elementChecked?.split(",").includes(`.${check}`);
-
+  constructor({ container }: { container: Container }) {
+    this.container = container;
+  }
+  create = ({ incrementId, containerCards }: CreateOptions) => {
+    const parentImage = document.createElement("div");
     const paragraph = document.createElement("p");
+    const containerVoucher = document.createElement("div");
+    const label = document.createElement("label");
+    const image = document.createElement("img");
     const input = document.createElement("input");
+    const containerNameFiles = document.createElement("div");
 
-    input.className = "form-check-input accept";
-    input.type = "checkbox";
-    input.checked = isChecked;
-    input.id = check;
-    input.value = `.${check}`;
-    input.setAttribute("name", check);
+    const textLabel = paragraph.textContent || "";
+    const id = `files-${incrementId}`;
+    const name = `files-${incrementId}-${textLabel}`;
 
-    paragraph.textContent = check;
+    parentImage.classList.add("container-components__image");
+    parentImage.id = `parent-${id}`;
 
-    containerCheck.appendChild(input);
-    containerCheck.appendChild(paragraph);
-    parentCheckbox.appendChild(containerCheck);
-  });
+    paragraph.className = "capitalize text-primary";
+    paragraph.id = `label-${incrementId}`;
 
-  return parentCheckbox;
-};
+    label.classList.add("text-primary", "cursor-pointer");
+    label.htmlFor = id;
+    label.id = "input-files";
+    label.textContent = "upload files";
 
-export function createFiles({
-  incrementId,
-  containerCards,
-}: {
-  incrementId: number;
-  containerCards: HTMLDivElement | null;
-}) {
-  const parentDiv = document.createElement("div");
-  const parentImage = document.createElement("div");
-  const paragraph = document.createElement("p");
-  const containerVoucher = document.createElement("div");
-  const label = document.createElement("label");
-  const labelImage = document.createElement("span");
-  const image = document.createElement("img");
-  const input = document.createElement("input");
-  const containerNameFiles = document.createElement("div");
-  const lastChildren = containerCards?.lastElementChild;
+    image.classList.add("h-20", "shadow", "rounded-md", "active:shadow-inset");
+    image.src = "/upload.svg";
+    image.alt = "voucher upload";
 
-  const buttonIdUpdate = `files-update-${incrementId}`;
-  const buttonIdRemove = `files-remove-${incrementId}`;
-  const containerId = `card-files-${incrementId}`;
+    input.classList.add("voucher-input", "hidden");
+    input.type = "file";
+    input.id = id;
+    input.setAttribute("name", name);
+    input.setAttribute("data-required", "false");
+    input.setAttribute("multiple", "false");
 
-  const textLabel = paragraph.textContent || "";
-  const id = `files-${incrementId}`;
-  const name = `files-${incrementId}-${textLabel}`;
+    containerVoucher.classList.add("container-voucher");
 
-  parentDiv.classList.add(
-    "container-components",
-    "isDraggable",
-    "relative",
-    "flex",
-    "gap-4",
-    "p-4",
-    "border",
-    "rounded-sm",
-    "w-full",
-    "border-gray-500"
-  );
-  parentDiv.id = containerId;
+    containerNameFiles.id = `name-${id}`;
+    containerNameFiles.classList.add("container-name-files");
 
-  parentImage.classList.add("container-components__image");
-  parentImage.id = `parent-${id}`;
+    label.appendChild(image);
 
-  paragraph.className = "text-capitalize text-voucher";
-  paragraph.id = `label-${incrementId}`;
+    containerVoucher.appendChild(label);
+    containerVoucher.appendChild(input);
 
-  label.classList.add("voucher-upload");
-  label.htmlFor = id;
-  label.id = "input-files";
-  label.textContent = "upload files";
+    parentImage.appendChild(paragraph);
+    parentImage.appendChild(containerVoucher);
+    parentImage.appendChild(containerNameFiles);
 
-  labelImage.classList.add("voucher");
+    this.container.create("input", {
+      containerCards,
+      incrementId,
+      type: "",
+      name,
+      children: [parentImage],
+      action: (evt) =>
+        new Modal({
+          title: `update input file`,
+          content: () => this.bodyModal(evt.target as HTMLButtonElement),
+          action: () => this.update(evt.target as HTMLButtonElement),
+        }).build(),
+    });
+  };
 
-  image.classList.add("voucher-img");
-  image.src = "/icons/upload.svg";
-  image.alt = "voucher upload";
+  private bodyModal(target: HTMLButtonElement) {
+    const parentDiv = new ModalBody();
+    const radioButtonsRequired = new AppRadioButtons();
+    const radioButtonsMultiple = new AppRadioButtons();
 
-  input.classList.add("voucher-input");
-  input.type = "file";
-  input.id = id;
-  input.setAttribute("name", name);
-  input.setAttribute("data-required", "false");
-  input.setAttribute("multiple", "false");
+    radioButtonsRequired.setAttribute("label", "Required:");
+    radioButtonsRequired.setAttribute("name", "inputs-required");
+    radioButtonsRequired.id = "container-radios-required";
 
-  containerVoucher.classList.add("container-voucher");
+    radioButtonsMultiple.setAttribute("label", "Multiple:");
+    radioButtonsMultiple.setAttribute("name", "inputs-multiple");
+    radioButtonsMultiple.id = "container-radios-multiple";
 
-  containerNameFiles.id = `name-${id}`;
-  containerNameFiles.classList.add("container-name-files");
+    const ContainerInputLabel = inputComponent({
+      name: "input-label",
+      type: "text",
+      label: "Label",
+      id: `container-input-label`,
+    });
 
-  const buttonUpdate = button(
-    {
-      id: buttonIdUpdate,
-      text: "",
-      spanClass: "button-square-update",
-      buttonClass: "inputs-btn-update",
-    },
-    (evt) => {
-      new Modal({
-        title: "configure files",
-        content: () => bodyModal(evt.target as HTMLButtonElement),
-        action: () => update(evt.target as HTMLButtonElement, { incrementId }),
-      }).build();
-    }
-  );
+    const parentInputs = target.closest(".container-components");
 
-  const buttonDelete = button(
-    {
-      id: buttonIdRemove,
-      text: "",
-      spanClass: "button-square-remove",
-      buttonClass: "inputs-btn-delete",
-    },
-    removeElementForm
-  );
+    const paragraph = parentInputs?.querySelector("p");
+    const input = parentInputs?.querySelector("input");
 
-  labelImage.appendChild(image);
+    const labelParagraph = cleanTextInputs(paragraph);
 
-  containerVoucher.appendChild(label);
-  containerVoucher.appendChild(labelImage);
-  containerVoucher.appendChild(input);
+    const newCheckedMultiple = input?.getAttribute("multiple");
 
-  parentImage.appendChild(paragraph);
-  parentImage.appendChild(containerVoucher);
-  parentImage.appendChild(containerNameFiles);
+    const newCheckedRequired = input?.getAttribute("data-required");
 
-  parentDiv.appendChild(buttonUpdate);
-  parentDiv.appendChild(buttonDelete);
+    if (!parentInputs) return;
 
-  parentDiv.appendChild(parentImage);
+    const updatedRequiredRadios = REQUIRED_RADIOS.map((radio) => ({
+      ...radio,
+      isChecked: radio.value === newCheckedRequired,
+    }));
 
- lastChildren?.appendChild(parentDiv);
-}
+    const updatedPositionRadios = MULTIPLE_RADIOS.map((radio) => ({
+      ...radio,
+      isChecked: radio.value === newCheckedMultiple,
+    }));
 
-export function bodyModal(target: HTMLButtonElement) {
-  const parentDiv = document.createElement("app-modal-body");
-  const radioButtonsRequired = document.createElement("app-radio-buttons");
-  const radioButtonsMultiple = document.createElement("app-radio-buttons");
+    ContainerInputLabel.setAttribute("new_value", `${labelParagraph}`);
 
-  radioButtonsRequired.setAttribute("label", "Required:");
-  radioButtonsRequired.setAttribute("name", "inputs-required");
-  radioButtonsRequired.id = "container-radios-required";
+    radioButtonsRequired.setAttribute(
+      "radios",
+      JSON.stringify(updatedRequiredRadios)
+    );
+    radioButtonsMultiple.setAttribute(
+      "radios",
+      JSON.stringify(updatedPositionRadios)
+    );
 
-  radioButtonsMultiple.setAttribute("label", "Multiple:");
-  radioButtonsMultiple.setAttribute("name", "inputs-multiple");
-  radioButtonsMultiple.id = "container-radios-multiple";
+    const accept = input?.getAttribute("accept") || "";
 
-  const ContainerInputLabel = inputComponent({
-    name: "input-label",
-    type: "text",
-    label: "Label",
-    id: `container-input-label`,
-  });
+    parentDiv.appendChild(ContainerInputLabel);
+    parentDiv.appendChild(this.elementsCheck(accept));
+    parentDiv.appendChild(radioButtonsRequired);
+    parentDiv.appendChild(radioButtonsMultiple);
 
-  const parentInputs = target.closest(".container-components");
-
-  const paragraph = parentInputs?.querySelector("p");
-  const input = parentInputs?.querySelector("input");
-
-  const labelParagraph = cleanTextInputs(paragraph);
-
-  const newCheckedMultiple = input?.getAttribute("multiple");
-
-  const newCheckedRequired = input?.getAttribute("data-required");
-
-  if (!parentInputs) return;
-
-  const updatedRequiredRadios = REQUIRED_RADIOS.map((radio) => ({
-    ...radio,
-    isChecked: radio.value === newCheckedRequired,
-  }));
-
-  const updatedPositionRadios = MULTIPLE_RADIOS.map((radio) => ({
-    ...radio,
-    isChecked: radio.value === newCheckedMultiple,
-  }));
-
-  ContainerInputLabel.setAttribute("new_value", `${labelParagraph}`);
-
-  radioButtonsRequired.setAttribute(
-    "radios",
-    JSON.stringify(updatedRequiredRadios)
-  );
-  radioButtonsMultiple.setAttribute(
-    "radios",
-    JSON.stringify(updatedPositionRadios)
-  );
-
-  const accept = input?.getAttribute("accept") || "";
-
-  parentDiv.appendChild(ContainerInputLabel);
-  parentDiv.appendChild(elementsCheck(accept));
-  parentDiv.appendChild(radioButtonsRequired);
-  parentDiv.appendChild(radioButtonsMultiple);
-
-  return parentDiv;
-}
-
-export function update(
-  target: HTMLButtonElement,
-  { incrementId }: { incrementId: number }
-) {
-  const parentDiv = document.querySelector("app-modal-body");
-  const parentElement = target.closest(".container-components");
-  const checkboxChecked = parentDiv?.querySelectorAll(
-    '.container-modal-checkbox input[type="checkbox"]:checked'
-  ) as NodeListOf<HTMLInputElement>;
-  const containerInputLabel = document.querySelector("#container-input-label") as AppInput;
-  const radioButtonsRequired = document.querySelector(
-    "#container-radios-required"
-  ) as AppRadioButtons;
-  const radioButtonsMultiple = document.querySelector(
-    "#container-radios-multiple"
-  ) as AppRadioButtons;
-
-  const input = parentElement?.querySelector("input");
-  const paragraph = parentElement?.querySelector("p") as HTMLParagraphElement;
-
-  let accept = "";
-
-  for (const checkbox of checkboxChecked) {
-    accept = accept.concat(checkbox.value, ",");
+    return parentDiv;
   }
 
-  const textParagraph = cleanTextInputs(paragraph);
+  private update(target: HTMLButtonElement) {
+    const parentDiv = document.querySelector("app-modal-body");
+    const parentElement = target.closest(".container-components");
+    const checkboxChecked = parentDiv?.querySelectorAll(
+      '.container-checkbox input[type="checkbox"]:checked'
+    ) as NodeListOf<HTMLInputElement>;
+    const containerInputLabel = document.querySelector(
+      "#container-input-label"
+    ) as AppInput;
+    const radioButtonsRequired = document.querySelector(
+      "#container-radios-required"
+    ) as AppRadioButtons;
+    const radioButtonsMultiple = document.querySelector(
+      "#container-radios-multiple"
+    ) as AppRadioButtons;
 
-  const newLabel = containerInputLabel.change
-    ? containerInputLabel.value
-    : textParagraph || "";
+    const input = parentElement?.querySelector("input");
+    const paragraph = parentElement?.querySelector("p") as HTMLParagraphElement;
 
-  const newCheckedRequired = radioButtonsRequired.change
-    ? radioButtonsRequired.value
-    : input?.getAttribute("data-required") || "false";
+    let accept = "";
 
-  const newCheckedMultiple = radioButtonsMultiple.change
-    ? radioButtonsMultiple.value
-    : input?.getAttribute("multiple") || "false";
+    for (const checkbox of checkboxChecked) {
+      accept = accept.concat(checkbox.value, ",");
+    }
 
-  paragraph.textContent = newLabel;
+    const textParagraph = cleanTextInputs(paragraph);
 
-  addRequiredToInput({
-    checkedRequired: newCheckedRequired as "false",
-    elementRequired: paragraph,
-  });
+    const newLabel = containerInputLabel.change
+      ? containerInputLabel.value
+      : textParagraph || "";
 
-  input?.setAttribute("accept", accept.slice(0, -1));
-  input?.setAttribute("data-required", newCheckedRequired);
-  input?.setAttribute("multiple", newCheckedMultiple);
+    const newCheckedRequired = radioButtonsRequired.change
+      ? radioButtonsRequired.value
+      : input?.getAttribute("data-required") || "false";
+
+    const newCheckedMultiple = radioButtonsMultiple.change
+      ? radioButtonsMultiple.value
+      : input?.getAttribute("multiple") || "false";
+
+    paragraph.textContent = newLabel;
+
+    addRequiredToInput({
+      checkedRequired: newCheckedRequired as "false",
+      elementRequired: paragraph,
+    });
+
+    input?.setAttribute("accept", accept.slice(0, -1));
+    input?.setAttribute("data-required", newCheckedRequired);
+    input?.setAttribute("multiple", newCheckedMultiple);
+  }
+
+  private elementsCheck = (elementChecked = "") => {
+    const parentCheckbox = document.createElement("DIV");
+    parentCheckbox.classList.add("container-checkbox");
+    parentCheckbox.classList.add("grid", "grid-cols-3", "gap-2");
+  
+    checkboxFormats.map((check) => {
+      const containerCheck = document.createElement("div");
+      const label = document.createElement("label");
+  
+      containerCheck.className =
+        "relative w-11 h-6 bg-gray-400 rounded-full peer dark:bg-gray-200 peer-focus:ring-4 peer-focus:ring-purple-300 dark:peer-focus:ring-purple-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-purple-600 dark:peer-checked:bg-purple-600";
+  
+      const isChecked = !!elementChecked?.split(",").includes(`.${check}`);
+  
+      const paragraph = document.createElement("p");
+      const input = document.createElement("input");
+  
+      input.className = "sr-only peer";
+      input.value = "";
+      input.type = "checkbox";
+      input.checked = isChecked;
+      input.id = check;
+      input.value = `.${check}`;
+      input.setAttribute("name", check);
+  
+      label.className = "flex gap-2 items-center me-5 cursor-pointer";
+      label.htmlFor = check;
+  
+      paragraph.textContent = check;
+      paragraph.classList.add("text-slate-600");
+  
+      label.appendChild(input);
+      label.appendChild(containerCheck);
+      label.appendChild(paragraph);
+  
+      parentCheckbox.appendChild(label);
+    });
+  
+    return parentCheckbox;
+  };
 }
