@@ -78,7 +78,7 @@ const breadcrumbs = createBreadcrumbs(path);
     >
       {
         breadcrumbs.length > 0 && (
-          <ul class="flex gap-1 py-4 lg:py-14 lg:fixed">
+          <ul class="flex gap-1 py-4 lg:py-14">
             {breadcrumbs.map(({ href, name }) => (
               <li class="flex gap-1 items-center text-[12px]">
                 {href !== Astro.url.pathname ? (
@@ -99,6 +99,9 @@ const breadcrumbs = createBreadcrumbs(path);
         )
       }
       <slot />
+      <footer>
+        footer
+      </footer>
     </main>
   </body>
 </html>

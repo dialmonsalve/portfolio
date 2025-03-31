@@ -1,0 +1,33 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"label"> {
+  label: string;
+  absolute?: boolean;
+  required?: boolean;
+  className?: string;
+}
+
+const {
+  label,
+  className = "",
+  absolute = false,
+  required = false,
+  ...rest
+} = Astro.props;
+---
+
+<label
+  class:list={[
+    "cursor-text bg-gray-200 dark:bg-slate-800 px-1 left-2.5 top-2.5 text-slate-400 text-sm transition-all transform origin-left",
+    "peer-focus:-top-2 peer-focus:left-2.5 peer-focus:text-xs peer-focus:text-slate-400 peer-focus:scale-90",
+    "peer-[:not(:placeholder-shown)]:-top-2 peer-[:not(:placeholder-shown)]:left-2.5 peer-[:not(:placeholder-shown)]:text-xs",
+    "peer-[:not(:placeholder-shown)]:scale-90",
+    { absolute: absolute },
+    className,
+  ]}
+  {...rest}
+>
+  {label}
+  {required && <span class="text-red-400">*</span>}
+</label>

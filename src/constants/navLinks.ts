@@ -50,7 +50,7 @@ const LINKS: Link[] = [
     target: "_self",
   },
   {
-    href: "/contacto",
+    href: "/contact",
     name: Translate["nav.contact"],
     icon: "contact",
     target: "_self",
