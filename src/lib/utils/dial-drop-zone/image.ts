@@ -18,7 +18,7 @@ export class Image {
         const img = await createImageBitmap(file, {
           resizeQuality: "high",
           premultiplyAlpha: "premultiply",
-          imageOrientation: "none",
+          imageOrientation: "from-image",
         });
 
         drawer.height = img.height;

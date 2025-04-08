@@ -1,0 +1,60 @@
+---
+import Layout from "@layouts/Layout.astro";
+import { getI18N } from "../../../i18n";
+
+import Carousel from "@components/web-components/Carousel.astro";
+import MultiTabs from "@components/web-components/MultiTabs.astro";
+import MultiSelect from "@components/web-components/MultiSelect.astro";
+import Tags from "@components/web-components/Tags.astro";
+import SingleDropZone from "@components/web-components/SingleDropZone.astro";
+
+const { currentLocale } = Astro;
+
+const i18n = getI18N({ currentLocale });
+
+const title = i18n.projects.web_components.title;
+---
+
+<Layout>
+  <section class="flex flex-col gap-4">
+    <h1
+      class="text-2xl dark:text-white text-slate-700 text-center uppercase"
+      transition:name="web-components"
+    >
+      {title}
+    </h1>
+
+    <article class="flex flex-col gap-5 mx-auto items-center w-100">
+      <Carousel />
+
+      <div class="flex flex-col gap-1">
+        <h2 class="uppercase text-slate-700 dark:text-gray-400">Multi Tabs</h2>
+        <MultiTabs />
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <h2 class="uppercase text-slate-700 dark:text-gray-400">
+          Multi Select
+          <h4 class="text-xs text-gray-400 dark:text-white"> Press Enter, click or backspace to select option</h4>
+          <h4 class="text-xs text-gray-400 dark:text-white">Press kye up or key down to navigate among options </h4>
+        </h2>
+        <MultiSelect />
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <h2 class="uppercase text-slate-700 dark:text-gray-400">
+          Tags
+        </h2>
+        <Tags />
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <h2 class="uppercase text-slate-700 dark:text-gray-400">
+          Dial Drop Zone
+        </h2>
+        <SingleDropZone />
+      </div>
+
+    </article>
+  </section>
+</Layout>

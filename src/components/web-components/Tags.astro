@@ -1,0 +1,24 @@
+---
+import Input from "@components/shared/Input.astro";
+import Label from "@components/shared/Label.astro";
+---
+
+<dial-multi-tags>
+  <div class="relative flex flex-col gap-2 w-[400px]">
+    <Input id="input-tags" name="input-tags"  />
+    <Label for="input-tags" absolute label="tags" />
+    <button
+      type="button"
+      class="absolute right-3 top-1.5 text-[10px] cursor-pointer py-1 px-2 border border-gray-300 bg-blue-500 text-white text-center rounded-full hover:opacity-80"
+      >+</button
+    >
+
+    <div
+      id="tags"
+      class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border rounded-md px-3 py-2 transition-all duration-300 ease outline-none border-gray-400 min-h-[40px] flex flex-wrap items-start gap-0.5"
+    >
+    </div>
+  </div>
+</dial-multi-tags>
+
+<script src="@lib/multi-tags"></script>

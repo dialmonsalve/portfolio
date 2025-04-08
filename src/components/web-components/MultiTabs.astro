@@ -1,0 +1,90 @@
+---
+const items = [
+  { label: "Tab 1" },
+  { label: "Tab 2" },
+  { label: "Tab 3" },
+  { label: "Tab 4" },
+  { label: "Tab 5" },
+];
+---
+
+<div
+  class="flex flex-col gap-5 w-100 border p-4 dark:border-gray-300 border-slate-700 rounded-md"
+>
+  <dial-tabs class="flex flex-col gap-3 h-120">
+    <div class:list={["tabs flex gap-2"]}>
+      {
+        items.map(({ label }, idx) => (
+          <button
+            class:list={[
+              "text-brand-100 p-2 border border-gray-300 rounded-sm shadow-2xl text-xs dark:text-gray-400 cursor-pointer",
+            ]}
+            data-tab={`tab-${idx + 1}`}
+            type="button"
+          >
+            {label}
+          </button>
+        ))
+      }
+    </div  >
+    <div id="tab-1" class="tab-content hidden">
+      <div
+        class="flex flex-col h-80 items-center w-full justify-center text-5xl text-red-400"
+      >
+        TAB 1
+      </div>
+    </div>
+
+    <div id="tab-2" class="tab-content hidden">
+      <div
+        class="flex flex-col h-80 items-center w-full justify-center text-5xl text-blue-700"
+      >
+        TAB 2
+      </div>
+    </div>
+
+    <div id="tab-3" class="tab-content hidden">
+      <div
+        class="flex flex-col h-80 items-center w-full justify-center text-5xl text-yellow-500"
+      >
+        TAB 3
+      </div>
+    </div>
+
+    <div id="tab-4" class="tab-content hidden">
+      <div
+        class="flex flex-col h-80 items-center w-full justify-center text-5xl text-green-500"
+      >
+        TAB 4
+      </div>
+    </div>
+
+    <div id="tab-5" class="tab-content hidden">
+      <div
+        class="flex flex-col h-80 items-center w-full justify-center text-5xl text-purple-600"
+      >
+        TAB 5
+      </div>
+    </div>
+  </dial-tabs>
+</div>
+
+<style>
+  .tab-content {
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+    @starting-style {
+      opacity: 0;
+    }
+  }
+  .tab-content.active {
+    display: block;
+  }
+
+  .tabs button.active {
+    background-color: #00aeee;
+    color: white;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.313) inset;
+  }
+</style>
+<script src="@lib/tabs"></script>

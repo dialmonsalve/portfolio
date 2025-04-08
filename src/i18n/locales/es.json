@@ -34,9 +34,17 @@
         "description": "cambie el formato de sus imágenes",
         "href": "projects/convert-images",
         "slug": "convert-images"
+      },
+      {
+        "title": "Componentes web",
+        "pngImage": "/images/internal-projects/web-components.png",
+        "webpImage": "/images/internal-projects/web-components.webp",
+        "description": "Este es mi set de componentes web hechos 100% en javascript",
+        "slug": "web-components",
+        "href": "projects/web-components"
       }
     ],
-    "web_components": [
+    "forms": [
       {
         "title": "texto",
         "inputs": [
@@ -62,7 +70,10 @@
           "files"
         ]
       }
-    ]
+    ],
+    "web_components":{
+      "title" :"Componentes web"
+    }
   },
   "about": {
     "title": "¿Quién Soy?",

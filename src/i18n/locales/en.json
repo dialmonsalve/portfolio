@@ -34,9 +34,17 @@
         "description": "change your image format",
         "slug": "convert-images",
         "href": "projects/convert-images"
+      },
+      {
+        "title": "web components",
+        "pngImage": "/images/internal-projects/web-components.png",
+        "webpImage": "/images/internal-projects/web-components.webp",
+        "description": "This is my set of javascript web components",
+        "slug": "web-components",
+        "href": "projects/web-components"
       }
     ],
-    "web_components": [
+    "forms": [
       {
         "title": "text",
         "inputs": [
@@ -62,7 +70,10 @@
           "files"
         ]
       }
-    ]
+    ],
+    "web_components":{
+      "title" :"web components"
+    }
   },
   
   "about": {

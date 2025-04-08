@@ -1,0 +1,40 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<dial-single-drop-zone
+  data-folder=""
+  data-type="desktop"
+  data-page=""
+  data-aspect="single-drop-zone"
+  data-height={720}
+  data-width={516}
+>
+  <div
+    class="flex flex-col gap-2 h-130 w-[400px] items-center"
+    id="parent-single-drop-zone"
+  >
+    <label
+      for="single-file-upload"
+      class="flex flex-col items-center justify-center border-2 border-dashed border-gray-400 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-700 dark:border-blue-800 single-drop-zone h-130 w-[400px]"
+      id="single-drop-zone"
+    >
+      <div class="flex flex-col items-center justify-center pt-5 pb-6">
+        <Icon name="upload" class="text-2xl text-gray-700 dark:text-gray-300" />
+        <p class="mb-2 text-sm text-gray-500">
+          <span class="font-semibold">Click aquí </span> o arrastre la imagen
+        </p>
+        <p class="text-xs text-gray-500">WEBP, PNG, JPG or JEPG</p>
+      </div>
+      <input
+        id="single-file-upload"
+        name="imageFiles"
+        type="file"
+        accept="image/*"
+        class="hidden"
+      />
+    </label>
+  </div>
+</dial-single-drop-zone>
+
+<script src="@lib/single-drop-zone"></script>

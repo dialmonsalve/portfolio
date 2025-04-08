@@ -1,0 +1,69 @@
+---
+const data = [
+  { name: "Select 1" },
+  { name: "Select 2" },
+  { name: "Select 3" },
+  { name: "Select 4" },
+  { name: "Select 5" },
+  { name: "Select 6" },
+  { name: "Select 7" },
+  { name: "Select 8" },
+  { name: "Select 9" },
+  { name: "Select 10" },
+  { name: "Select 11" },
+];
+---
+
+<dial-multi-select
+  name={"dial-multi-select"}
+  placeholder={"Elija sus opciones"}
+>
+  <div class="relative w-[400px]">
+    <div
+      tabindex="0"
+      class="px-2 py-1 outline-none border border-gray-400 rounded-md focus:ring-2 focus:ring-blue-600 focus:outline-2 focus:outline-offset-4 transition-all hover:cursor-pointer min-h-9 shadow select-none"
+      id="container-multi-select"
+    >
+    </div>
+    <ul
+      class="hidden absolute bg-white w-full left-0 z-10 px-2 py-1.5 border border-gray-200 rounded-md max-h-50 min-h-5 overflow-y-auto un-order-list"
+    >
+      {
+        data.map(({ name }, idx) => (
+          <li
+            data-id={idx + 1}
+            class="cursor-pointer hover:shadow p-0.5 rounded-md transition-all hover:bg-blue-500 text-xs hover:text-white py-2 px-2"
+          >
+            {name}
+          </li>
+        ))
+      }
+    </ul>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.2"
+      stroke="currentColor"
+      class="absolute h-5 top-25/100 right-2.5"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"></path>
+    </svg>
+  </div>
+</dial-multi-select>
+
+<style>
+  .un-order-list {
+    opacity: 1;
+    transition:
+      opacity 0.3s ease-in-out,
+      display 0.1s ease-in-out allow-discrete;
+    @starting-style {
+      opacity: 0;
+    }
+  }
+</style>
+<script src="@lib/multi-select"></script>

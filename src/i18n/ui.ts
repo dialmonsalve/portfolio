@@ -11,6 +11,7 @@ interface Routes {
     form: string;
     "convert-images": string;
     "dialui-components": string;
+    "web-components": string;
     msc: string;
     rain: string;
   };
@@ -21,6 +22,7 @@ interface Routes {
     "projects/form": string;
     "projects/convert-images": string;
     "projects/dialui-components": string;
+    "projects/web-components": string;
     "projects/msc": string;
     "projects/rain": string;
   };
@@ -49,7 +51,7 @@ export const ui = {
     "nav.projects": "Proyectos",
     "nav.contact": "Contacto",
     "nav.form": "Crea Formularios",
-    "nav.convert-images": "Convertidor de imágenes",
+    "nav.convert-images": "Conversor de imágenes",
     "nav.dialui-components": "Dial-UI components",
     "nav.msc": "Marble Slab Creamery",
     "nav.rain": "Rain",
@@ -64,6 +66,7 @@ export const routes: Routes & { [key: string]: any } = {
     form: "projects/form",
     "convert-images": "projects/convert-images",
     "dialui-components": "projects/dialui-components",
+    "web-components": "projects/web-components",
     msc: "projects/msc",
     rain: "projects/rain",
   },
@@ -74,6 +77,7 @@ export const routes: Routes & { [key: string]: any } = {
     "projects/form": "form",
     "projects/convert-images": "convert-images",
     "projects/dialui-components": "dialui-components",
+    "projects/web-components": "web-components",
     "projects/msc": "msc",
     "projects/rain": "rain",
   },

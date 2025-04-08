@@ -37,7 +37,7 @@ const sendEmail = defineAction({
       .nonempty(),
     description: z
       .string({ message: "Tu opinion Debe tener al menos 3 caracteres" })
-      .min(1, "Tu opinión es importante y es requerida")
+      .min(1, "Tu opinión es importante y requerida")
       .nonempty(),
     phone: z.string().optional(),
   }),
@@ -82,4 +82,4 @@ const sendEmail = defineAction({
   },
 });
 
-export const server = { sendEmail };
+export const server = { sendEmail};
