@@ -19,7 +19,7 @@
 @theme {
   --font-poppins: Poppins, sans-serif;
   --ease-in-jump: cubic-bezier(0.42, 0, 0.58, 1.8);
-  --color-primary: #4682b4;
+  --color-primary: oklch(0.879 0.169 91.605);
   --shadow-inset: 1px 1px 8px #0000007a inset, 2px 2px 16px #0000007a inset;
 }
 
@@ -34,7 +34,7 @@ input[type=number] {
 
 
 .dark {
-  --color-primary: oklch(0.702 0.183 293.541);
+  --color-primary: oklch(69.976% 0.17614 294.526);
 }
 
 html {

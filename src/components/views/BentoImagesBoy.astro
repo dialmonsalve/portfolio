@@ -1,0 +1,57 @@
+---
+const bent = [
+  {
+    className: "col-span-2 row-span-2 col-start-2 row-start-1",
+    src: "/images/bento-boy/jean.webp",
+    imageClassName:"",
+    alt: "",
+  },
+  {
+    className: "row-span-1 col-start-1 row-start-1 rounded-tl-2xl",
+    imageClassName:"rounded-tl-md",
+    src: "/images/bento-boy/boots.webp",
+    alt: "",
+  },
+  {
+    className: "row-span-3 col-start-4",
+    src: "/images/bento-boy/full-body-without-hat.webp",
+    imageClassName:"rounded-tr-md rounded-br-md",
+    alt: "",
+  },
+  {
+    className: "row-span-1 col-start-2 row-start-3",
+    src: "/images/bento-boy/full-body.webp",
+    imageClassName:"",
+    alt: "",
+  },
+  {
+    className: "row-span-1 col-start-3 row-start-3",
+    src: "/images/bento-boy/full-body-back.webp",
+    imageClassName:"",
+    alt: "",
+  },
+  {
+    className: "row-span-1 col-start-1 row-start-2",
+    src: "/images/bento-boy/first_steps.webp",
+    imageClassName:"",
+    alt: "",
+  },
+    {
+    className: "row-span-1 row-start-3",
+    src: "/images/bento-boy/shirt.webp",
+    imageClassName:"rounded-bl-md",
+    alt: "",
+  },
+];
+---
+
+<article class="grid grid-cols-4 grid-rows-3 gap-2 p-4 rounded-md lg:w-2/3 mx-auto shadow-2xl backdrop-blur-xs ">
+{
+  bent.map(({alt, className, src, imageClassName}) => (
+    <div class={className},
+    >
+      <img src={src} alt={alt} class={imageClassName}/>
+    </div>
+
+  ))
+}

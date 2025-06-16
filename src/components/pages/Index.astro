@@ -1,16 +1,22 @@
 ---
 import Layout from "@layouts/Layout.astro";
-
-import { getI18N } from "@i18n/index";
-
-const currentLocale = Astro.currentLocale;
-
-const i18n = getI18N({ currentLocale });
-
+import Hero from "@components/views/Hero.astro";
+import ContactForm from "@components/views/ContactForm.astro";
+import BentoImagesBoy from "@components/views/BentoImagesBoy.astro";
+import BentoDioram from "@components/views/BentoDioram.astro";
+import Technologies from "@components/views/Technologies.astro";
 ---
 
 <Layout>
-  <h1 class="text-primary">{i18n.home.title}</h1>
-
-
+  <section class="flex flex-col gap-4 lg:gap-8" >
+    <Hero />
+    <Technologies />
+    <article class="flex flex-col gap-4 my-8 lg:gap-8" >
+      <h2 class="text-center text-2xl text-primary dark:text-white">My blender projects</h2>
+      <BentoImagesBoy />
+      <BentoDioram />
+    </article>
+    <ContactForm />
+  </section>
 </Layout>
+<script src="@lib/actions/sendForm.ts"></script>

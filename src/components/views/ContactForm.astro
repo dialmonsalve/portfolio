@@ -1,0 +1,76 @@
+---
+import Input from "@components/shared/Input.astro";
+import Label from "@components/shared/Label.astro";
+import { getI18N } from "@i18n/index";
+
+const currentLocale = Astro.currentLocale;
+const i18n = getI18N({ currentLocale });
+
+interface Form {
+  type: astroHTML.JSX.HTMLInputTypeAttribute | null | undefined;
+  name: string;
+  label: string;
+  required: boolean;
+}
+
+const inputs: Form[] = [
+  {
+    type: "text",
+    name: "name",
+    label: "Nombre",
+    required: true,
+  },
+  {
+    type: "email",
+    name: "email",
+    label: "Correo electrónico",
+    required: true,
+  },
+  {
+    type: "tel",
+    name: "phone",
+    label: "Teléfono",
+    required: false,
+  },
+];
+---
+
+<article class="container mx-auto">
+  <send-form>
+    <form
+      action=""
+      class="flex flex-col gap-2 border border-slate-300 rounded-md p-4 shadow-2xl"
+    >
+      {
+        inputs.map(({ label, name, required, type }) => (
+          <div class="relative flex flex-col gap-2">
+            <Input type={type} name={name} id={name} />
+            <Label label={label} for={name} required={required} absolute />
+          </div>
+        ))
+      }
+
+      <div class="flex flex-col gap-1">
+        <Label
+          label="Description"
+          for="description"
+          required={true}
+          className="ml-2"
+        />
+        <textarea
+          name="description"
+          id="description"
+          class:list={[
+            "peer bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-300 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow h-30 resize-none dark:text-white",
+          ]}></textarea>
+      </div>
+      <div class="self-center">
+        <button
+          type="submit"
+          class="mx-auto bg-primary text-white px-4 py-1 rounded-md hover:opacity-80 cursor-pointer capitalize"
+          >{i18n.home.send}</button
+        >
+      </div>
+    </form>
+  </send-form>
+</article>

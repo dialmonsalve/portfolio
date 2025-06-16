@@ -10,7 +10,8 @@
     "more": "more"
   },
   "home": {
-    "title": "hello"
+    "title": "hello",
+    "send":"send"
   },
   "projects": {
     "title": "projects",
@@ -81,7 +82,7 @@
     "subtitle1": "By profession",
     "contentSubtitle1": " Productivity and quality engineer",
     "subtitle2": "By passion and conviction",
-    "contentSubtitle2": "Web developer",
+    "contentSubtitle2": "Web developer expert in Javascript and libraries",
     "path": {
       "title": "Path",
       "p1": "Since I started my working life at the age of 18, I have maintained constant progress, facing the challenges that life presents along the way.",

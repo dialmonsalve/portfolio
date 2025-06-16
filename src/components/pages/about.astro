@@ -6,100 +6,131 @@ import { getI18N } from "@i18n/index";
 const currentLocale = Astro.currentLocale;
 
 const i18n = getI18N({ currentLocale });
+
+const abilities = [
+  "soft skills",
+  "Teamwork",
+  "SEO",
+  "RESTful APIs",
+  "UI/UX Design",
+  "Responsive Design",
+  "Version Control",
+  "Serverless Computing",
+  "Containerization",
+  "Server Management",
+  "Network Security",
+  "Database Management",
+  "Progressive Web Apps (PWA)",
+];
 ---
 
-
 <Layout>
-  <section class="flex flex-col lg:w-85/100 lg:mx-auto gap-3 pt-10">
+  <section class="flex flex-col lg:w-85/100 lg:mx-auto gap-3">
+    <ul class="flex flex-wrap gap-x-2 gap-y-1 lg:w-4/5 mx-auto mt-4">
+      {
+        abilities.map((ability) => (
+          <li class="border border-gray-300 rounded-full text-xs w-fit px-2 py-1 bg-violet-500 text-white hover:bg-white hover:text-violet-500 transition-colors cursor-pointer">
+            {ability}
+          </li>
+        ))
+      }
+    </ul>
     <article class="flex flex-col gap-2 self-center">
       <h1
-        class="mt-8 mb-1.5 font-bold leading-5 text-2xl text-primary text-center"
+        class="mt-8 mb-8 font-bold leading-5 text-2xl text-primary text-center"
       >
         {i18n.about.title}
       </h1>
-      <div class="">
-        <picture>
-          <source srcset="/dialmonsalve.webp" type="image/webp" />
-          <img
-            src="/dialmonsalve.png"
-            alt="dialmonsalve"
-            class="rounded-full block mx-auto"
-          />
-        </picture>
-      </div>
-      <p class="text-gray-700 dark:text-gray-300 text-center leading-7">
-        Diego Monsalve
-      </p>
-      <p class="text-gray-700 dark:text-gray-300 text-center leading-7">
-        <span class="uppercase text-primary font-semibold"
-          >{i18n.about.subtitle1}</span
-        >
-        {i18n.about.contentSubtitle1}
-      </p>
-      <p class="text-gray-700 dark:text-gray-300 text-center leading-7">
-        <span class="uppercase text-primary font-semibold"
-          >{i18n.about.subtitle2}</span
-        >
-        {i18n.about.contentSubtitle2}
-      </p>
     </article>
     <article class="grid grid-cols-1 lg:grid-cols-2 gap-2">
-      <div class="border p-4 shadow-2xl border-gray-300 rounded-xl dark:border-slate-700 dark:shadow-md bg-white dark:bg-slate-700 dark:shadow-slate-400">
-        <h4 class="text-center text-[18px] font-bold text-blue-400 dark:text-blue-300 md:text-xl">
+      <div
+        class="border p-4 shadow-2xl border-gray-300 rounded-xl dark:border-slate-700 dark:shadow-md bg-white dark:bg-slate-700 dark:shadow-slate-400"
+      >
+        <h4
+          class="text-center text-[18px] font-bold text-blue-400 dark:text-blue-300 md:text-xl"
+        >
           {i18n.about.path.title}
         </h4>
-        <p class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm">
+        <p
+          class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
+        >
           {i18n.about.path.p1}
         </p>
 
-        <p class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm">
+        <p
+          class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
+        >
           {i18n.about.path.p2}
         </p>
 
-        <p class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm">
+        <p
+          class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
+        >
           {i18n.about.path.p3}
         </p>
 
-        <p class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm">
+        <p
+          class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
+        >
           {i18n.about.path.p4}
         </p>
 
-        <p class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm">
+        <p
+          class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
+        >
           {i18n.about.path.p5}
         </p>
       </div>
-      <div class="hidden lg:block" ></div>
-      <div class="hidden lg:block" ></div>
-      <div class="border p-4 shadow-2xl border-gray-300 rounded-xl dark:border-slate-700 dark:shadow-md bg-white dark:bg-slate-700 dark:shadow-slate-400">
-        <h4 class="text-center text-[18px] font-bold text-blue-400 dark:text-blue-300 md:text-xl">
+      <div class="hidden lg:block"></div>
+      <div class="hidden lg:block"></div>
+      <div
+        class="border p-4 shadow-2xl border-gray-300 rounded-xl dark:border-slate-700 dark:shadow-md bg-white dark:bg-slate-700 dark:shadow-slate-400"
+      >
+        <h4
+          class="text-center text-[18px] font-bold text-blue-400 dark:text-blue-300 md:text-xl"
+        >
           {i18n.about.iLike.title}
         </h4>
 
-        <p class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm">
+        <p
+          class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
+        >
           {i18n.about.iLike.p1}
         </p>
 
-        <p class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm">
+        <p
+          class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
+        >
           {i18n.about.iLike.p2}
         </p>
 
-        <p class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm">
+        <p
+          class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
+        >
           {i18n.about.iLike.p3}
         </p>
 
-        <p class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm">
+        <p
+          class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
+        >
           {i18n.about.iLike.p4}
         </p>
 
-        <p class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm">
+        <p
+          class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
+        >
           {i18n.about.iLike.p5}
         </p>
 
-        <p class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm">
+        <p
+          class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
+        >
           {i18n.about.iLike.p6}
         </p>
 
-        <p class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm">
+        <p
+          class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
+        >
           {i18n.about.iLike.p7a}
           <a href="https://www.npmjs.com/package/dialui-components">npm</a>. {
             i18n.about.iLike.p7b
@@ -110,7 +141,9 @@ const i18n = getI18N({ currentLocale });
             >{i18n.about.iLike.p7c}</a
           >.
         </p>
-        <p class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm">
+        <p
+          class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
+        >
           {i18n.about.iLike.p8}
         </p>
       </div>

@@ -7,7 +7,6 @@ interface Routes {
   es: {
     about: string;
     projects: string;
-    contact: string;
     form: string;
     "convert-images": string;
     "dialui-components": string;
@@ -18,7 +17,6 @@ interface Routes {
   en: {
     about: string;
     projects: string;
-    contact: string;
     "projects/form": string;
     "projects/convert-images": string;
     "projects/dialui-components": string;
@@ -37,8 +35,8 @@ export const ui = {
     "nav.about": "About",
     "nav.services": "Services",
     "nav.projects": "Projects",
-    "nav.contact": "Contact",
     "nav.form": "Create Forms",
+    "nav.web-components" : "web components",
     "nav.convert-images": "Convert Images",
     "nav.dialui-components": "Dial-UI components",
     "nav.msc": "Marble Slab Creamery",
@@ -49,8 +47,8 @@ export const ui = {
     "nav.about": "Acerca de",
     "nav.services": "Servicios",
     "nav.projects": "Proyectos",
-    "nav.contact": "Contacto",
     "nav.form": "Crea Formularios",
+    "nav.web-components" : "componentes web",
     "nav.convert-images": "Conversor de imágenes",
     "nav.dialui-components": "Dial-UI components",
     "nav.msc": "Marble Slab Creamery",
@@ -61,7 +59,6 @@ export const ui = {
 export const routes: Routes & { [key: string]: any } = {
   es: {
     about: "about",
-    contact: "contact",
     projects: "projects",
     form: "projects/form",
     "convert-images": "projects/convert-images",
@@ -72,7 +69,6 @@ export const routes: Routes & { [key: string]: any } = {
   },
   en: {
     about: "about",
-    contact: "contact",
     projects: "projects",
     "projects/form": "form",
     "projects/convert-images": "convert-images",

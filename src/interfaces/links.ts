@@ -24,4 +24,5 @@ export enum Translate {
   "nav.dialui-components" = "nav.dialui-components",
   "nav.msc" = "nav.msc",
   "nav.rain" = "nav.rain",
+  "nav.web-components" = "nav.web-components"
 }

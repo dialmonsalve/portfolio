@@ -10,7 +10,8 @@
     "more": "más"
   },
   "home": {
-    "title": "hola"
+    "title": "hola",
+    "send":"enviar"
   },
   "projects": {
     "title": "proyectos",
@@ -80,7 +81,7 @@
     "subtitle1": "De profesión:",
     "contentSubtitle1": "Ingeniero de productividad y calidad",
     "subtitle2": "Por pasión y convicción:",
-    "contentSubtitle2": "Desarrollador web",
+    "contentSubtitle2": "Desarrollador web experto en Javascript y librerías",
     "path": {
       "title": "Trayectoria",
       "p1": "Desde que inicié mi vida laboral a los 18 años, he mantenido un progreso constante, enfrentando los desafíos que la vida presenta en el camino.",

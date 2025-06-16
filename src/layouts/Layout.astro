@@ -74,34 +74,125 @@ const breadcrumbs = createBreadcrumbs(path);
   <body>
     <Header />
     <main
-      class="pt-22 px-4 lg:pt-18 xl:px-10 pb-5 max-h-screen h-screen overflow-auto bg-gray-200 dark:bg-slate-800"
+      id="main-scroll-container"
+      class="max-h-screen h-screen overflow-auto relative pt-22 lg:pt-18"
     >
-      {
-        breadcrumbs.length > 0 && (
-          <ul class="flex gap-1 py-4 lg:py-14">
-            {breadcrumbs.map(({ href, name }) => (
-              <li class="flex gap-1 items-center text-[12px]">
-                {href !== Astro.url.pathname ? (
-                  <a
-                    class="block py-0.5 px-2 bg-green-400 rounded-r-xl text-white text-[8px] md:text-sm"
-                    href={href}
-                  >
-                    {name}
-                  </a>
-                ) : (
-                  <span class="block py-0.5 px-2 bg-gray-300 rounded-r-xl text-gray-600  text-[8px] md:text-sm">
-                    {name}
-                  </span>
-                )}
-              </li>
-            ))}
-          </ul>
-        )
-      }
-      <slot />
-      <footer>
-        footer
-      </footer>
+      <obs-obs>
+        <div
+          class="fixed top-0 left-0 w-screen h-screen bg-cover bg-bottom bg-no-repeat -z-1 bg-[url(/img/nebula.jpg)] transition-all duration-50"
+          id="background-nebula"
+          style="transform: scale(1.20);"
+        >
+        </div>
+        {
+          breadcrumbs.length > 0 && (
+            <ul class="flex gap-1 pt-4 lg:pt-10 lg:pl-10 fixed">
+              {breadcrumbs.map(({ href, name }) => (
+                <li class="flex gap-1 items-center text-[12px]">
+                  {href !== Astro.url.pathname ? (
+                    <a
+                      class="block py-0.5 px-2 bg-green-400 rounded-r-xl text-white text-[8px] md:text-sm"
+                      href={href}
+                    >
+                      {name}
+                    </a>
+                  ) : (
+                    <span class="block py-0.5 px-2 bg-gray-300 rounded-r-xl text-gray-600  text-[8px] md:text-sm">
+                      {name}
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          )
+        }
+        <div class="pt-22 px-4 lg:pt-18 xl:px-10 pb-3">
+          <slot />
+        </div>
+      </obs-obs>
+      <footer class="h-50 bg-black w-full">footer</footer>
     </main>
-  </body>
+  </body><script>
+    class ObserverBg extends HTMLElement {
+      constructor() {
+        super();
+        const background = this.querySelector(
+          "#background-nebula"
+        ) as HTMLDivElement;
+        const mainScrollContainer = document.getElementById(
+          "main-scroll-container"
+        );
+
+        if (!mainScrollContainer || !background) {
+          console.warn("Elementos necesarios no encontrados para ObserverBg.");
+          return;
+        }
+
+        const scrollProgressTracker = document.createElement("div");
+        scrollProgressTracker.id = "scroll-progress-tracker";
+        scrollProgressTracker.style.height = "100vh";
+        scrollProgressTracker.style.width = "1px";
+        scrollProgressTracker.style.position = "absolute";
+        scrollProgressTracker.style.top = "0";
+        scrollProgressTracker.style.left = "0";
+        scrollProgressTracker.style.pointerEvents = "none";
+        scrollProgressTracker.style.opacity = "0";
+
+        this.appendChild(scrollProgressTracker);
+
+        const updateScale = () => {
+          const scrollTop = mainScrollContainer.scrollTop;
+          const scrollHeight = mainScrollContainer.scrollHeight;
+          const clientHeight = mainScrollContainer.clientHeight;
+          const maxScrollTop = scrollHeight - clientHeight;
+
+          let progress = 0;
+          if (maxScrollTop > 0) {
+            progress = scrollTop / maxScrollTop;
+          }
+
+          progress = Math.min(1, Math.max(0, progress));
+
+          const initialScale = 1.25;
+          const finalScale = 1;
+          const scaleRange = initialScale - finalScale;
+          const currentScale = initialScale - progress * scaleRange;
+          background.style.transform = `scale(${currentScale})`;
+        };
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            if (entries[0].isIntersecting) {
+              updateScale();
+            }
+          },
+          {
+            root: mainScrollContainer,
+            rootMargin: "0px",
+
+            threshold: [0, 1],
+          }
+        );
+
+        observer.observe(scrollProgressTracker);
+
+        let ticking = false;
+
+        mainScrollContainer.addEventListener("scroll", () => {
+          if (!ticking) {
+            window.requestAnimationFrame(() => {
+              updateScale();
+              ticking = false;
+            });
+            ticking = true;
+          }
+        });
+
+        // También actualizamos la escala al cargar la página para asegurar la escala inicial
+        updateScale();
+      }
+    }
+
+    customElements.define("obs-obs", ObserverBg);
+  </script>
 </html>

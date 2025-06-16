@@ -27,6 +27,11 @@ const LINKS: Link[] = [
         target: "_self",
       },
       {
+        name: Translate["nav.web-components"],
+        href: "/projects/web-components",
+        target: "_self",
+      },
+      {
         name: Translate["nav.dialui-components"],
         href: "https://dialui-components.netlify.app",
         target: "_blank",
@@ -47,12 +52,6 @@ const LINKS: Link[] = [
     href: "/about",
     name: Translate["nav.about"],
     icon: "logo",
-    target: "_self",
-  },
-  {
-    href: "/contact",
-    name: Translate["nav.contact"],
-    icon: "contact",
     target: "_self",
   },
 ];
