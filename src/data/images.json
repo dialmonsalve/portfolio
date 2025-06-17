@@ -1,0 +1,16 @@
+{
+  "images": [
+    {
+      "srcMobile": "/images/banner/NewHero_Mobile-01.webp",
+      "srcDesktop": "/images/banner/MSC_Header-01.webp",
+      "dataId": "0",
+      "slug": "MSC-Header"
+    },
+    {
+      "srcMobile": "/images/banner/NewHero_Mobile-01.webp",
+      "srcDesktop": "/images/banner/MSC_Header-01.webp",
+      "dataId": "1",
+      "slug": "MSC-Header"
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+---
+import { getI18N } from "@i18n/index";
+import { Icon } from "astro-icon/components";
+
+import { getCollection } from "astro:content";
+
+const currentLocale = Astro.currentLocale;
+
+const i18n = getI18N({ currentLocale });
+
+const projects = await getCollection(
+  `projects_${currentLocale}` as "projects_es"
+);
+
+const internalProjects = i18n.projects.internal_projects;
+
+const allProjects = [
+  ...projects,
+  ...internalProjects.map((i) => {
+    return {
+      data: {
+        href: i.href,
+        pngImage: i.pngImage,
+        webpImage: i.webpImage,
+        title: i.title,
+        description: i.description,
+      },
+      slug: i.slug,
+    };
+  }),
+];
+---
+
+
+<mini-dial-carousel
+class="xl:w-2/3 lg:mx-auto"
+data-total-images={projects.length}
+>
+<h4 class="text-center text-xl uppercase text-primary dark:text-white">My web projects</h4>
+  <div class="relative">
+    <button
+      class="absolute z-999 top-45 left-0 -translate-x-3 rounded-full bg-gray-400 text-white flex flex-col h-10 w-10 items-center justify-center hover:text-blue-500 transition-colors cursor-pointer hover:bg-white button"
+      id="left"><Icon name="caret-left" class="text-center" size={30} /></button
+    >
+    <button
+      class="absolute z-999 top-45 right-0 translate-x-5 border rounded-full bg-gray-400 text-white flex flex-col h-10 w-10 items-center justify-center hover:text-blue-500 transition-colors cursor-pointer hover:bg-white button"
+      id="right"
+      ><Icon name="caret-right" class="text-center" size={30} /></button
+    >
+    <ul class="p-2 flex gap-2 overflow-hidden scroll-smooth" id="carousel">
+      {
+        allProjects.map(({ slug, data }) => (
+          <li class="flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 flex flex-col gap-5 shadow-2xl border-2 border-gray-400 hover:border-blue-400 transition-all h-full rounded-xl bg-white dark:bg-slate-700 p-4.5 select-none" draggable="false" >
+            <img
+              src={data.pngImage}
+              alt={slug}
+              class="w-full aspect-[16/9] object-cover rounded-lg border border-gray-400 pointer-events-none"
+              draggable="false"
+            />
+            <h4 class="text-blue-500 uppercase text-md bg-blue-200 py-1 px-4 w-fit rounded-full">
+              {data.title}
+            </h4>
+            <p class="text-slate-700 dark:text-gray-300 h-20">
+              {data.description}
+            </p>
+            <a
+              class="cursor-pointer px-2 flex items-center gap-2 border rounded-full border-blue-400 w-fit text-blue-400 hover:text-white transition-colors hover:bg-blue-400"
+              target="_blank"
+              href={data.href}
+            >
+              <button class="-rotate-45  cursor-pointer">
+                <Icon name="arrow-right" class="" size={30} />
+              </button>
+              Ir
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+  <style>
+    .carousel.dragging {
+      scroll-behavior: auto;
+      cursor: grab;
+    }
+
+  </style>
+</mini-dial-carousel>
+
+<script src="@lib/carousel/mini-carousel"></script>

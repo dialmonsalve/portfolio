@@ -77,7 +77,7 @@ const breadcrumbs = createBreadcrumbs(path);
       id="main-scroll-container"
       class="max-h-screen h-screen overflow-auto relative pt-22 lg:pt-18"
     >
-      <obs-obs>
+      <change-bg>
         <div
           class="fixed top-0 left-0 w-screen h-screen bg-cover bg-bottom bg-no-repeat -z-1 bg-[url(/img/nebula.jpg)] transition-all duration-50"
           id="background-nebula"
@@ -106,93 +106,12 @@ const breadcrumbs = createBreadcrumbs(path);
             </ul>
           )
         }
-        <div class="pt-22 px-4 lg:pt-18 xl:px-10 pb-3">
+        <div class="pt-22 px-4 lg:pt-18 xl:px-10 pb-3 min-h-[69.5dvh]">
           <slot />
         </div>
-      </obs-obs>
-      <footer class="h-50 bg-black w-full">footer</footer>
+      </change-bg>
+      <footer class="h-50 bg-white dark:bg-slate-800 w-full mt-8">footer</footer>
     </main>
-  </body><script>
-    class ObserverBg extends HTMLElement {
-      constructor() {
-        super();
-        const background = this.querySelector(
-          "#background-nebula"
-        ) as HTMLDivElement;
-        const mainScrollContainer = document.getElementById(
-          "main-scroll-container"
-        );
-
-        if (!mainScrollContainer || !background) {
-          console.warn("Elementos necesarios no encontrados para ObserverBg.");
-          return;
-        }
-
-        const scrollProgressTracker = document.createElement("div");
-        scrollProgressTracker.id = "scroll-progress-tracker";
-        scrollProgressTracker.style.height = "100vh";
-        scrollProgressTracker.style.width = "1px";
-        scrollProgressTracker.style.position = "absolute";
-        scrollProgressTracker.style.top = "0";
-        scrollProgressTracker.style.left = "0";
-        scrollProgressTracker.style.pointerEvents = "none";
-        scrollProgressTracker.style.opacity = "0";
-
-        this.appendChild(scrollProgressTracker);
-
-        const updateScale = () => {
-          const scrollTop = mainScrollContainer.scrollTop;
-          const scrollHeight = mainScrollContainer.scrollHeight;
-          const clientHeight = mainScrollContainer.clientHeight;
-          const maxScrollTop = scrollHeight - clientHeight;
-
-          let progress = 0;
-          if (maxScrollTop > 0) {
-            progress = scrollTop / maxScrollTop;
-          }
-
-          progress = Math.min(1, Math.max(0, progress));
-
-          const initialScale = 1.25;
-          const finalScale = 1;
-          const scaleRange = initialScale - finalScale;
-          const currentScale = initialScale - progress * scaleRange;
-          background.style.transform = `scale(${currentScale})`;
-        };
-
-        const observer = new IntersectionObserver(
-          (entries) => {
-            if (entries[0].isIntersecting) {
-              updateScale();
-            }
-          },
-          {
-            root: mainScrollContainer,
-            rootMargin: "0px",
-
-            threshold: [0, 1],
-          }
-        );
-
-        observer.observe(scrollProgressTracker);
-
-        let ticking = false;
-
-        mainScrollContainer.addEventListener("scroll", () => {
-          if (!ticking) {
-            window.requestAnimationFrame(() => {
-              updateScale();
-              ticking = false;
-            });
-            ticking = true;
-          }
-        });
-
-        // También actualizamos la escala al cargar la página para asegurar la escala inicial
-        updateScale();
-      }
-    }
-
-    customElements.define("obs-obs", ObserverBg);
-  </script>
+  </body>
+  <script src="@lib/bg">  </script>
 </html>

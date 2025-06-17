@@ -23,7 +23,7 @@ const projects = await getCollection(
     </h1>
 
     <article
-      class="grid gap-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
+      class="grid gap-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 xl:w-3/4 mx-auto"
     >
       {
         projects.map(({ data, slug }) => (
@@ -44,7 +44,7 @@ const projects = await getCollection(
     </article>
 
     <article
-      class="grid gap-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
+      class="grid gap-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 xl:w-3/4 mx-auto"
     >
       {
         i18n.projects.internal_projects.map(

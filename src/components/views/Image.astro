@@ -1,0 +1,50 @@
+---
+interface Props {
+  srcMobile: string;
+  srcDesktop: string;
+  srcTablet?: string;
+  dataId: string;
+  classContainer: string;
+  classImage: string;
+  alt: string;
+}
+
+const {
+  alt,
+  srcMobile,
+  srcDesktop,
+  srcTablet,
+  dataId,
+  classImage,
+  classContainer,
+} = Astro.props;
+---
+
+<div class={`${classContainer} relative`} data-id={dataId}>
+  <picture>
+    <source
+    media="(max-width: 639px)"
+    srcset={srcMobile}
+    data-lazy-srcset={srcMobile}
+  />
+
+  <source
+    media="(min-width: 640px) and (max-width: 1023px)"
+    srcset={srcTablet}
+    data-lazy-srcset={srcTablet}
+  />
+
+  <source
+    media="(min-width: 1024px)"
+    srcset={srcDesktop}
+    data-lazy-srcset={srcDesktop}
+  />
+    <img
+      src={srcDesktop}
+      alt={alt}
+      class={`${classImage} h-auto object-cover duration-500 ease-out`}
+      loading="lazy"
+      decoding="async"
+    />
+  </picture>
+</div>

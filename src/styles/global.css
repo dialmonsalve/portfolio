@@ -31,6 +31,10 @@ input[type=number] {
     backdrop-filter: blur(10px);
   }
 
+  @utility calc {
+    width: calc(100% / 3);
+  }
+
 
 
 .dark {
@@ -188,4 +192,26 @@ div:has(.menu[type="checkbox"]:checked) + .container-elements {
   }
 }
 
+.image-hero__slides {
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
 
+.intro-heading__container-links {
+  display: flex;
+  gap: 3.5rem;
+}
+
+.intro-heading__buttons-slide::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  transition: all 0.3s ease;
+  background: url("/icons/slick-dot.svg") no-repeat center;
+  background-size: 20px 20px;
+}
+
+.intro-heading__buttons-slide.active-link::before {
+  background: url("/icons/slick-dot-active.svg") no-repeat center;
+  background-size: 20px 20px;
+} 

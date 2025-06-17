@@ -2,9 +2,10 @@
 import Layout from "@layouts/Layout.astro";
 import Hero from "@components/views/Hero.astro";
 import ContactForm from "@components/views/ContactForm.astro";
-import BentoImagesBoy from "@components/views/BentoImagesBoy.astro";
-import BentoDioram from "@components/views/BentoDioram.astro";
+import BentImagesBoy from "@components/views/BentImagesBoy.astro";
+import BentDiorama from "@components/views/BentDiorama.astro";
 import Technologies from "@components/views/Technologies.astro";
+import Carousel from "@components/views/Carousel.astro";
 ---
 
 <Layout>
@@ -12,10 +13,11 @@ import Technologies from "@components/views/Technologies.astro";
     <Hero />
     <Technologies />
     <article class="flex flex-col gap-4 my-8 lg:gap-8" >
-      <h2 class="text-center text-2xl text-primary dark:text-white">My blender projects</h2>
-      <BentoImagesBoy />
-      <BentoDioram />
+      <h4 class="text-center text-xl text-primary dark:text-white uppercase">My blender projects</h4>
+      <BentImagesBoy />
+      <BentDiorama />
     </article>
+    <Carousel />
     <ContactForm />
   </section>
 </Layout>
