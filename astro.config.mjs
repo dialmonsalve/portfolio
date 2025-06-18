@@ -19,6 +19,7 @@ export default defineConfig({
       prefixDefaultLocale: false,
     },
   },
+  output: "server",
   integrations: [icon()],
   adapter: cloudflare({
     imageService:"compile"

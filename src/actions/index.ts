@@ -1,5 +1,3 @@
-export const prerender = false;
-
 import { ActionError, defineAction } from "astro:actions";
 import { z } from "astro:schema";
 
