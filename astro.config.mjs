@@ -4,11 +4,14 @@ import tailwindcss from "@tailwindcss/vite";
 
 import icon from "astro-icon";
 
+import cloudflare from "@astrojs/cloudflare";
+
 // https://astro.build/config
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+
   i18n: {
     defaultLocale: "es",
     locales: ["es", "en"],
@@ -16,6 +19,10 @@ export default defineConfig({
       prefixDefaultLocale: false,
     },
   },
-
+  output: 'server',
   integrations: [icon()],
+  adapter: cloudflare({
+    imageService:"compile"
+  }),
+
 });
