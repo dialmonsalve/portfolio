@@ -21,8 +21,6 @@ export default defineConfig({
   },
   output: "server",
   integrations: [icon()],
-  adapter: cloudflare({
-    imageService:"compile"
-  }),
+  adapter: cloudflare(),
 
 });
