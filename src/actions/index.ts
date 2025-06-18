@@ -65,6 +65,8 @@ const sendEmail = defineAction({
 
       return !!data
     } catch (error: any) {
+      console.log(error);
+      
       if (error) {
         if (resp?.rejected) {
           throw new ActionError({
