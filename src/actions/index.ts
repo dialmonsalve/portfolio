@@ -1,3 +1,5 @@
+export const prerender = false;
+
 import { ActionError, defineAction } from "astro:actions";
 import { z } from "astro:schema";
 
@@ -50,7 +52,7 @@ const sendEmail = defineAction({
     const mailOptions = {
       from: email,
       to: MAILER_SECRET_NAME,
-      subject: "Mensaje desde https://dialmonsalve.com",
+      subject: "Mensaje desde https://misitioweb.com",
       text: `Hola, Acabas de recibir un mensaje de ${name}!`,
       html: html({ description, email, name, phone }),
     };
