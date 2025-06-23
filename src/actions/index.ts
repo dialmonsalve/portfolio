@@ -11,7 +11,7 @@ interface Form {
   phone?: string;
 }
 
-const RESEND_API_KEY = import.meta.env.RESEND_API_KEY;
+const RESEND_API_KEY = import.meta.env.PUBLIC_RESEND_API_KEY;
 
 
 const html = ({ name, email, description, phone }: Form) => `
