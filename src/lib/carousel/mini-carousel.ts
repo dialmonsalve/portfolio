@@ -1,8 +1,5 @@
 class MiniDialCarousel extends HTMLElement {
   private carousel!: HTMLDivElement;
-  private isDragStart!: boolean;
-  private prevPageX!: number;
-  private prevScrollLeft!: number;
   private buttons!: NodeListOf<HTMLButtonElement>;
   private firstImage!: HTMLLIElement;
   private widthImage!: number;
@@ -13,30 +10,7 @@ class MiniDialCarousel extends HTMLElement {
     super();
   }
 
-  private mouseMove = (e: MouseEvent | TouchEvent) => {
-    if (!this.isDragStart) return;
-    e.preventDefault();
-    this.carousel.classList.add("dragging");
-    const positionDiff =
-      e instanceof MouseEvent
-        ? e.pageX - this.prevPageX
-        : e.touches[0].pageX - this.prevPageX;
-    this.carousel.scrollLeft = this.prevScrollLeft - positionDiff;
-  };
-
-  private mouseDown = (e: MouseEvent | TouchEvent) => {
-    this.isDragStart = true;
-    this.prevPageX = e instanceof MouseEvent ? e.pageX : e.touches[0].pageX;
-    this.prevScrollLeft = this.carousel.scrollLeft;
-  };
-
-  private mouseUp = () => {
-    this.isDragStart = false;
-    this.carousel.classList.remove("dragging");
-  };
-
   private initializeElements() {
-    this.isDragStart = false;
     this.carousel = this.querySelector("#carousel") as HTMLDivElement;
     this.buttons = this.querySelectorAll(".button");
     this.firstImage = this.carousel.querySelectorAll("li")[0];
@@ -50,35 +24,14 @@ class MiniDialCarousel extends HTMLElement {
   }
 
   private setupEventListeners() {
-    this.carousel?.addEventListener("mousedown", this.mouseDown);
-    this.carousel.addEventListener("mousemove", this.mouseMove);
-    this.carousel?.addEventListener("mouseup", this.mouseUp);
-    this.carousel?.addEventListener("mouseleave", this.mouseUp);
-
-    this.carousel?.addEventListener("touchstart", this.mouseDown);
-    this.carousel.addEventListener("touchmove", this.mouseMove);
-    this.carousel?.addEventListener("touchend", this.mouseUp);
 
     this.buttons.forEach((button) => {
       button.addEventListener("click", () => {
         this.handleButtonClick(button);
-        this.resetAutoSlideTimer(); // Reiniciar temporizador al interactuar
-      });
-    });
-
-    const pauseEvents = ["mousedown", "touchstart"];
-    pauseEvents.forEach((ev) => {
-      this.carousel.addEventListener(ev, () => {
-        clearInterval(this.autoSlideInterval);
-      });
-    });
-
-    const resumeEvents = ["mouseup", "touchend"];
-    resumeEvents.forEach((ev) => {
-      this.carousel.addEventListener(ev, () => {
         this.resetAutoSlideTimer();
       });
     });
+
   }
 
   private handleButtonClick = (button: HTMLButtonElement) => {
@@ -121,7 +74,7 @@ class MiniDialCarousel extends HTMLElement {
 
     this.interactionTimeout = window.setTimeout(() => {
       this.startAutoSlide();
-    }, 3000);
+    }, 2000);
   };
 
   disconnectedCallback() {

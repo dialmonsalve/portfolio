@@ -34,7 +34,7 @@ export class Checkbox {
     label.htmlFor = id;
 
     paragraph.className =
-      "ms-3 text-sm font-medium text-gray-900 dark:text-gray-300  ";
+      "ms-3 text-sm font-medium text-gray-900 dark:text-white";
     paragraph.textContent = "edit";
 
     label.appendChild(input);

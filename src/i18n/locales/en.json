@@ -11,7 +11,14 @@
   },
   "home": {
     "title": "hello",
-    "send":"send"
+    "send":"send",
+    "iAm":"I'm, Diego Monsalve",
+    "subtitle1": "By profession",
+    "contentSubtitle1": " Productivity and quality engineer",
+    "subtitle2": "By passion and conviction",
+    "contentSubtitle2": "Web developer expert in Javascript and libraries",
+    "blenderTitle":"My blender projects",
+    "projectsWebTitle":"My web projects"
   },
   "projects": {
     "title": "projects",
@@ -24,7 +31,7 @@
         "title": "forms",
         "pngImage": "/images/internal-projects/forms.png",
         "webpImage": "/images/internal-projects/forms.webp",
-        "description": "create your forms",
+        "description": "create your forms, this project is made 100% in typescript without any js library",
         "slug": "project-form",
         "href": "projects/form"
       },
@@ -32,7 +39,7 @@
         "title": "convert images",
         "pngImage": "/images/internal-projects/convert-image.png",
         "webpImage": "/images/internal-projects/convert-image.webp",
-        "description": "change your image format",
+        "description": "change your image format to webp",
         "slug": "convert-images",
         "href": "projects/convert-images"
       },
@@ -40,7 +47,7 @@
         "title": "web components",
         "pngImage": "/images/internal-projects/web-components.png",
         "webpImage": "/images/internal-projects/web-components.webp",
-        "description": "This is my set of javascript web components",
+        "description": "This is my set of javascript web components, made 100% in typescript",
         "slug": "web-components",
         "href": "projects/web-components"
       }
@@ -79,10 +86,7 @@
   
   "about": {
     "title": "Who am I?",
-    "subtitle1": "By profession",
-    "contentSubtitle1": " Productivity and quality engineer",
-    "subtitle2": "By passion and conviction",
-    "contentSubtitle2": "Web developer expert in Javascript and libraries",
+
     "path": {
       "title": "Path",
       "p1": "Since I started my working life at the age of 18, I have maintained constant progress, facing the challenges that life presents along the way.",

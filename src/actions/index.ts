@@ -1,7 +1,8 @@
 import { ActionError, defineAction } from "astro:actions";
 import { z } from "astro:schema";
+import { Resend } from "resend";
 
-import nodemailer from "nodemailer";
+export const prerender = false;
 
 interface Form {
   name: string;
@@ -10,12 +11,12 @@ interface Form {
   phone?: string;
 }
 
-const MAILER_SECRET_NAME = import.meta.env.MAILER_SECRET_NAME;
-const MAILER_SECRET_KEY = import.meta.env.MAILER_SECRET_KEY;
-const SERVICE =  import.meta.env.SERVICE;
+const RESEND_API_KEY = import.meta.env.RESEND_API_KEY;
+const SENDER_EMAIL = import.meta.env.SENDER_EMAIL;
+const RECEIVER_EMAIL = import.meta.env.RECEIVER_EMAIL;
 
 const html = ({ name, email, description, phone }: Form) => `
-  <h2>Nuevo mensaje desde mi sitio web</h2>
+  <h2>Nuevo mensaje desde <a href='dialmonsalve.com' >dialmonsalve.com</a></h2>
   <p>Ha recibido un nuevo mensaje de ${name}! </p>
   <p>Email: ${email}</p>
   <p>Teléfono: ${!phone ? "No registra teléfono" : phone}</p>
@@ -41,45 +42,32 @@ const sendEmail = defineAction({
   }),
 
   handler: async ({ description, email, name, phone }) => {
-    const transporter = nodemailer.createTransport({
-      service: SERVICE,
-      secure: true,
-      auth: { user: MAILER_SECRET_NAME, pass: MAILER_SECRET_KEY },
-    });
-
-    const mailOptions = {
-      from: email,
-      to: MAILER_SECRET_NAME,
-      subject: "Mensaje desde https://misitioweb.com",
-      text: `Hola, Acabas de recibir un mensaje de ${name}!`,
-      html: html({ description, email, name, phone }),
-    };
-
-    let resp;
+    const resend = new Resend(RESEND_API_KEY);
 
     try {
-      resp = await transporter.sendMail(mailOptions);
-      const data = resp.accepted;
+      const { data, error } = await resend.emails.send({
+        from: SENDER_EMAIL,
+        to: RECEIVER_EMAIL,
+        subject: `Mensaje de ${name} desde dialmonsalve.com`,
+        html: html({ description, email, name, phone }),
+      });
 
-      return !!data
-    } catch (error: any) {
-      console.log(error);
-      
       if (error) {
-        if (resp?.rejected) {
-          throw new ActionError({
-            code: "BAD_REQUEST",
-            message: "Errores de validación",
-          });
-        }
-
+        console.error("Error al enviar el email con Resend:", error);
         throw new ActionError({
           code: "INTERNAL_SERVER_ERROR",
-          message: error,
+          message: "Error al enviar el email. Inténtalo de nuevo más tarde.",
         });
       }
+      return !!data;
+    } catch (error: any) {
+      console.error("Error inesperado en sendEmail handler:", error);
+      throw new ActionError({
+        code: "INTERNAL_SERVER_ERROR",
+        message: error.message || "Error desconocido al enviar el email.",
+      });
     }
   },
 });
 
-export const server = { sendEmail};
+export const server = { sendEmail };

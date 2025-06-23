@@ -1,3 +1,5 @@
+const supportedFiles = ["image/png","image/jpeg","image/jpg","image/webp","image/avif"]
+
 export class Errors {
   constructor() {}
 
@@ -9,7 +11,8 @@ export class Errors {
 
   public handleFiles = (files: FileList, fileInput: HTMLInputElement) => {
     const validFiles = Array.from(files).filter((file) => {
-      if (file.type.startsWith("image/")) {
+      
+      if (supportedFiles.includes(file.type)) {
         return true;
       } else {
         throw new Error("Archivo o archivos no soportados");

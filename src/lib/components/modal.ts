@@ -53,7 +53,6 @@ export default class Modal {
       "rounded-md",
       "max-w-100",
       "w-100",
-      "dark:bg-slate-900",
       "bg-gray-100",
       "mx-auto",
       "my-auto",
@@ -96,7 +95,7 @@ export default class Modal {
     modalHeader.classList.add("modal-header");
 
     const titleModal = document.createElement("p");
-    titleModal.classList.add("uppercase", "dark:text-white");
+    titleModal.classList.add("uppercase", "dark:text-slate-800");
     titleModal.textContent = this.title;
     modalHeader.appendChild(titleModal);
     return modalHeader;

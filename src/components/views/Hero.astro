@@ -3,20 +3,26 @@ import { getI18N } from "@i18n/index";
 
 const currentLocale = Astro.currentLocale;
 const i18n = getI18N({ currentLocale });
+
+const { home } = i18n;
 ---
 
 <article class="flex flex-col gap-2 self-center">
-  <p class="text-white text-center leading-7 text-xl">
-    <span class="uppercase text-primary font-semibold dark:text-cyan-200"
-      >{i18n.about.subtitle2}</span
-    >
-    <span class="text-white">{i18n.about.contentSubtitle2}</span>
+  <p class="text-center leading-7 text-xl">
+    <span class="uppercase text-primary font-semibold dark:text-sky-300">
+      {home.subtitle2}
+    </span>
+    <span class="text-sky-500 dark:text-amber-400">
+      {home.contentSubtitle2}
+    </span>
   </p>
-  <p class="text-white text-center leading-7 text-xl">
-    <span class="uppercase text-primary font-semibold dark:text-cyan-200"
-      >{i18n.about.subtitle1}</span
-    >
-    <span class="text-white">{i18n.about.contentSubtitle1},</span>
+  <p class="text-center leading-7 text-xl">
+    <span class="uppercase text-primary font-semibold dark:text-sky-300">
+      {home.subtitle1}
+    </span>
+    <span class="text-sky-500 dark:text-amber-400">
+      {home.contentSubtitle1},
+    </span>
   </p>
 
   <picture>
@@ -24,10 +30,12 @@ const i18n = getI18N({ currentLocale });
     <img
       src="/dialmonsalve.png"
       alt="dialmonsalve"
-      class="rounded-full block mx-auto mt-8"
+      class="rounded-full block mx-auto mt-8 lg:mt-10"
     />
   </picture>
-  <h1 class="text-white text-center leading-11 text-2xl lg:text-5xl">
-    I'm, Diego Monsalve
+  <h1
+    class="text-sky-500 dark:text-amber-400 text-center leading-11 text-2xl lg:text-5xl"
+  >
+    {home.iAm}
   </h1>
 </article>

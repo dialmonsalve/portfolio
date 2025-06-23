@@ -11,20 +11,27 @@
   },
   "home": {
     "title": "hola",
-    "send":"enviar"
+    "send": "enviar",
+    "iAm": "Soy, Diego Monsalve",
+    "subtitle1": "De profesión:",
+    "contentSubtitle1": "Ingeniero de productividad y calidad",
+    "subtitle2": "Por pasión y convicción:",
+    "contentSubtitle2": "Desarrollador web experto en Javascript y librerías",
+    "blenderTitle":"Mis proyectos de blender",
+    "projectsWebTitle":"Mis proyectos web"
   },
   "projects": {
     "title": "proyectos",
-    "subtitle":"Reduzca hasta un 50% el peso de sus imágenes y conviértelas de formatos como png, jpg o jpeg a webp de manera fácil y rápida",
-    "click":"Click aquí",
-    "drag":"o arrastra las imágenes",
-    "files":"0 archivos seleccionados",
+    "subtitle": "Reduzca hasta un 50% el peso de sus imágenes y conviértelas de formatos como png, jpg o jpeg a webp de manera fácil y rápida",
+    "click": "Click aquí",
+    "drag": "o arrastra las imágenes",
+    "files": "0 archivos seleccionados",
     "internal_projects": [
       {
         "title": "formularios",
         "pngImage": "/images/internal-projects/forms.png",
         "webpImage": "/images/internal-projects/forms.webp",
-        "description": "crea tus formularios",
+        "description": "crea tus formularios, este proyecto está hecho 100% en typescript sin librerías js",
         "slug": "project-form",
         "href": "projects/form"
       },
@@ -32,7 +39,7 @@
         "title": "conversor de imágenes",
         "pngImage": "/images/internal-projects/convert-image.png",
         "webpImage": "/images/internal-projects/convert-image.webp",
-        "description": "cambie el formato de sus imágenes",
+        "description": "cambie el formato de sus imágenes a webp",
         "href": "projects/convert-images",
         "slug": "convert-images"
       },
@@ -72,16 +79,12 @@
         ]
       }
     ],
-    "web_components":{
-      "title" :"Componentes web"
+    "web_components": {
+      "title": "Componentes web"
     }
   },
   "about": {
     "title": "¿Quién Soy?",
-    "subtitle1": "De profesión:",
-    "contentSubtitle1": "Ingeniero de productividad y calidad",
-    "subtitle2": "Por pasión y convicción:",
-    "contentSubtitle2": "Desarrollador web experto en Javascript y librerías",
     "path": {
       "title": "Trayectoria",
       "p1": "Desde que inicié mi vida laboral a los 18 años, he mantenido un progreso constante, enfrentando los desafíos que la vida presenta en el camino.",

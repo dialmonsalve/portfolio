@@ -8,7 +8,7 @@
 
 @font-face {
   font-family: "Poppins";
-  src: url("/fonts/Poppins/Poppins-Medium.woff") format('woff');
+  src: url("/fonts/Poppins/Poppins-Medium.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -19,23 +19,26 @@
 @theme {
   --font-poppins: Poppins, sans-serif;
   --ease-in-jump: cubic-bezier(0.42, 0, 0.58, 1.8);
-  --color-primary: oklch(0.879 0.169 91.605);
+  --color-primary: oklch(42.711% 0.24553 230);
   --shadow-inset: 1px 1px 8px #0000007a inset, 2px 2px 16px #0000007a inset;
 }
 
-input[type=number] {
+input[type="number"] {
   appearance: none !important;
 }
 
 @utility backdrop-2 {
-    backdrop-filter: blur(10px);
-  }
+  backdrop-filter: blur(10px);
+}
 
-  @utility calc {
-    width: calc(100% / 3);
-  }
+@utility calc {
+  width: calc(100% / 3);
+}
 
-
+@utility scroll {
+  scrollbar-width: thin;
+  scrollbar-color: white oklch(42.711% 0.24553 219);
+}
 
 .dark {
   --color-primary: oklch(69.976% 0.17614 294.526);
@@ -79,9 +82,7 @@ div:has(.menu[type="checkbox"]:checked) + .container-elements {
 }
 
 .show-modal {
-  transition:
-    opacity 0.25s ease-in-out,
-    display 0.25s ease-in-out;
+  transition: opacity 0.25s ease-in-out, display 0.25s ease-in-out;
   transition-behavior: allow-discrete;
   opacity: 1;
   @starting-style {
@@ -92,7 +93,6 @@ div:has(.menu[type="checkbox"]:checked) + .container-elements {
 .hide-modal {
   opacity: 0;
 }
-
 
 @keyframes alertFade {
   0% {
@@ -214,4 +214,4 @@ div:has(.menu[type="checkbox"]:checked) + .container-elements {
 .intro-heading__buttons-slide.active-link::before {
   background: url("/icons/slick-dot-active.svg") no-repeat center;
   background-size: 20px 20px;
-} 
+}

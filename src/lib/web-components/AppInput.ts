@@ -42,9 +42,8 @@ export default class AppInput extends HTMLElement {
     const label = document.createElement("label");
     label.htmlFor = this.input_id;
     label.textContent = this.label;
-    label.classList.add("label");
-
-    input.addEventListener("change", (evt) => this.onChange(evt));
+    label.classList.add("label", )
+      input.addEventListener("change", (evt) => this.onChange(evt));
 
     this.shadowRoot?.appendChild(label);
     this.shadowRoot?.appendChild(input);
