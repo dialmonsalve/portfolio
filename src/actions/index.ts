@@ -40,7 +40,7 @@ const sendEmail = defineAction({
   }),
 
   handler: async ({ description, email, name, phone }) => {
-    const resend = new Resend(RESEND_API_KEY);
+    const resend = new Resend("re_jPS9fnJA_G18N12K6hTUnrwE9BWzvmArv");
 
     try {
       const { data, error } = await resend.emails.send({
