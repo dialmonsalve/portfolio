@@ -58,7 +58,8 @@ export class Errors {
       "rounded-md",
       "text-xs",
       "animate-message",
-      "absolute"
+      "absolute",
+      "z-4"
     );
     paragraph.textContent = message;
     const paragraphs = parent?.querySelectorAll("p");
