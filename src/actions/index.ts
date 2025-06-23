@@ -13,6 +13,7 @@ interface Form {
 
 const RESEND_API_KEY = import.meta.env.RESEND_API_KEY;
 
+
 const html = ({ name, email, description, phone }: Form) => `
   <h2>Nuevo mensaje desde <a href='dialmonsalve.com' >dialmonsalve.com</a></h2>
   <p>Ha recibido un nuevo mensaje de ${name}! </p>
