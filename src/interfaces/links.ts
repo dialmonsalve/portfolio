@@ -15,7 +15,6 @@ export interface Submenu {
 
 export enum Translate {
   "nav.home" = "nav.home",
-  "nav.contact" = "nav.contact",
   "nav.about" = "nav.about",
   "nav.services" = "nav.services",
   "nav.projects" = "nav.projects",
