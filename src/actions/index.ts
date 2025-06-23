@@ -12,8 +12,6 @@ interface Form {
 }
 
 const RESEND_API_KEY = import.meta.env.RESEND_API_KEY;
-const SENDER_EMAIL = import.meta.env.SENDER_EMAIL;
-const RECEIVER_EMAIL = import.meta.env.RECEIVER_EMAIL;
 
 const html = ({ name, email, description, phone }: Form) => `
   <h2>Nuevo mensaje desde <a href='dialmonsalve.com' >dialmonsalve.com</a></h2>
@@ -46,8 +44,8 @@ const sendEmail = defineAction({
 
     try {
       const { data, error } = await resend.emails.send({
-        from: SENDER_EMAIL,
-        to: RECEIVER_EMAIL,
+        from: "Mi Web <diales1981@resend.dev>",
+        to: "diales1981@gmail.com",
         subject: `Mensaje de ${name} desde dialmonsalve.com`,
         html: html({ description, email, name, phone }),
       });
