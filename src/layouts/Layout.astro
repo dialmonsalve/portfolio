@@ -90,7 +90,8 @@ const breadcrumbs = createBreadcrumbs(path);
             <ul class="flex gap-1 pt-4 lg:pt-10 lg:pl-10 fixed">
               {breadcrumbs.map(({ href, name }) => (
                 <li class="flex gap-1 items-center text-[12px]">
-                  {href !== Astro.url.pathname ? (
+                  {href !== Astro.url.pathname &&
+                  href !== `${Astro.url.pathname}/` ? (
                     <a
                       class="block py-0.5 px-2 bg-green-400 rounded-r-xl text-white text-[12px] md:text-sm"
                       href={href}
@@ -107,12 +108,13 @@ const breadcrumbs = createBreadcrumbs(path);
             </ul>
           )
         }
-        <div class="pt-22 px-4 lg:pt-18 xl:px-10 pb-3 min-h-[71.9dvh] lg:min-h-[71dvh] xl:min-h-[73.6dvh]">
+        <div
+          class="pt-22 px-4 lg:pt-18 xl:px-10 pb-3 min-h-[71.9dvh] lg:min-h-[71dvh] xl:min-h-[73.6dvh]"
+        >
           <slot />
         </div>
       </change-bg>
       <Footer />
     </main>
-  </body>
-  <script src="@lib/bg">  </script>
+  </body><script src="@lib/bg"></script>
 </html>
