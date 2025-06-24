@@ -16,18 +16,18 @@ const i18n = getI18N({ currentLocale });
       >
         <label
           for="file-download"
-          class="flex flex-col items-center justify-center w-full h-52 border-2 border-dashed border-gray-400 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-700 dark:border-blue-800 drop-zone"
+          class="flex flex-col items-center justify-center w-full h-52 border-2 border-dashed border-gray-400 rounded-lg cursor-pointer hover:bg-gray-100/30 dark:hover:bg-slate-700/50 dark:border-blue-800 drop-zone"
           id="drop-zone"
         >
           <div class="flex flex-col items-center justify-center pt-5 pb-6">
             <Icon
               name="upload"
-              class="text-2xl text-gray-700 dark:text-gray-300"
+              class="text-2xl text-white dark:text-gray-300"
             />
-            <p class="mb-2 text-sm text-gray-500">
+            <p class="mb-2 text-sm text-gray-300">
               <span class="font-semibold">{i18n.projects.click} </span> {i18n.projects.drag}
             </p>
-            <p class="text-xs text-gray-500">WEBP, PNG, JPEG O JPG</p>
+            <p class="text-xs text-white">WEBP, PNG, JPEG O JPG</p>
           </div>
           <input
             id="file-download"
@@ -38,7 +38,7 @@ const i18n = getI18N({ currentLocale });
             class="hidden"
           />
         </label>
-        <p class="my-2 text-sm text-gray-500" id="lbl-selected-files">
+        <p class="my-2 text-sm text-white" id="lbl-selected-files">
           {i18n.projects.files}
         </p>
       </div>

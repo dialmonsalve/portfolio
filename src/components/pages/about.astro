@@ -7,23 +7,9 @@ const currentLocale = Astro.currentLocale;
 
 const i18n = getI18N({ currentLocale });
 
-const abilities = [
-  "soft skills",
-  "Teamwork",
-  "SEO",
-  "RESTful APIs",
-  "UI/UX Design",
-  "Responsive Design",
-  "Version Control",
-  "Serverless Computing",
-  "Containerization",
-  "Server Management",
-  "Network Security",
-  "Database Management",
-  "Progressive Web Apps (PWA)",
-];
----
+const abilities = i18n.general.abilities
 
+---
 <Layout>
   <section class="flex flex-col lg:w-85/100 lg:mx-auto gap-3">
     <ul class="flex flex-wrap gap-x-2 gap-y-1 lg:w-4/5 mx-auto mt-4">
@@ -37,7 +23,7 @@ const abilities = [
     </ul>
     <article class="flex flex-col gap-2 self-center">
       <h1
-        class="mt-8 mb-8 font-bold leading-5 text-2xl text-primary text-center"
+        class="mt-8 mb-8 font-bold leading-5 text-2xl text-amber-500 text-center"
       >
         {i18n.about.title}
       </h1>

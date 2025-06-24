@@ -3,6 +3,7 @@ import { ClientRouter } from "astro:transitions";
 
 import Header from "../components/layout/Header.astro";
 import "@styles/global.css";
+import Footer from "@components/layout/Footer.astro";
 
 function createBreadcrumbs(route: string) {
   const cleanRoute = route.replace(/^\/+/, "");
@@ -91,13 +92,13 @@ const breadcrumbs = createBreadcrumbs(path);
                 <li class="flex gap-1 items-center text-[12px]">
                   {href !== Astro.url.pathname ? (
                     <a
-                      class="block py-0.5 px-2 bg-green-400 rounded-r-xl text-white text-[8px] md:text-sm"
+                      class="block py-0.5 px-2 bg-green-400 rounded-r-xl text-white text-[12px] md:text-sm"
                       href={href}
                     >
                       {name}
                     </a>
                   ) : (
-                    <span class="block py-0.5 px-2 bg-gray-300 rounded-r-xl text-gray-600  text-[8px] md:text-sm">
+                    <span class="block py-0.5 px-2 bg-gray-300 rounded-r-xl text-gray-600  text-[12px] md:text-sm">
                       {name}
                     </span>
                   )}
@@ -106,11 +107,11 @@ const breadcrumbs = createBreadcrumbs(path);
             </ul>
           )
         }
-        <div class="pt-22 px-4 lg:pt-18 xl:px-10 pb-3 min-h-[69.5dvh]">
+        <div class="pt-22 px-4 lg:pt-18 xl:px-10 pb-3 min-h-[71.9dvh] lg:min-h-[71dvh] xl:min-h-[73.6dvh]">
           <slot />
         </div>
       </change-bg>
-      <footer class="h-50 bg-white dark:bg-slate-800 w-full mt-8">footer</footer>
+      <Footer />
     </main>
   </body>
   <script src="@lib/bg">  </script>

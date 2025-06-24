@@ -7,25 +7,38 @@
     "styles": "Styles",
     "go": "go",
     "description": "description",
-    "more": "more"
+    "more": "more",
+    "abilities": [
+      "soft skills",
+      "Teamwork",
+      "SEO",
+      "RESTful APIs",
+      "UI/UX Design",
+      "Responsive Design",
+      "Version Control",
+      "Serverless Computing",
+      "Containerization",
+      "Gestión de bases de datos",
+      "Aplicaciones Web Progresivas (PWA)"
+    ]
   },
   "home": {
     "title": "hello",
-    "send":"send",
-    "iAm":"I'm, Diego Monsalve",
+    "send": "send",
+    "iAm": "I'm, Diego Monsalve",
     "subtitle1": "By profession",
     "contentSubtitle1": " Productivity and quality engineer",
     "subtitle2": "By passion and conviction",
     "contentSubtitle2": "Web developer expert in Javascript and libraries",
-    "blenderTitle":"My blender projects",
-    "projectsWebTitle":"My web projects"
+    "blenderTitle": "My blender projects",
+    "projectsWebTitle": "My web projects"
   },
   "projects": {
     "title": "projects",
-    "subtitle":"Reduce the weight of your images by up to 50% and convert them from formats like PNG, JPG or JPEG to WebP quickly and easily.",
-    "click":"Click here",
-    "drag":"or drag the images",
-    "files":"0 files selected",
+    "subtitle": "Reduce the weight of your images by up to 50% and convert them from formats like PNG, JPG or JPEG to WebP quickly and easily.",
+    "click": "Click here",
+    "drag": "or drag the images",
+    "files": "0 files selected",
     "internal_projects": [
       {
         "title": "forms",
@@ -79,14 +92,12 @@
         ]
       }
     ],
-    "web_components":{
-      "title" :"web components"
+    "web_components": {
+      "title": "web components"
     }
   },
-  
   "about": {
     "title": "Who am I?",
-
     "path": {
       "title": "Path",
       "p1": "Since I started my working life at the age of 18, I have maintained constant progress, facing the challenges that life presents along the way.",
@@ -108,5 +119,8 @@
       "p7c": "React components",
       "p8": "Finally, as a personal goal I want to learn Rust"
     }
+  },
+  "footer": {
+    "astro": "Made with"
   }
 }

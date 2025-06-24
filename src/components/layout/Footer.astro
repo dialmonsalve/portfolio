@@ -1,0 +1,23 @@
+---
+import { Icon } from "astro-icon/components";
+import { getI18N } from "@i18n/index";
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+
+const { astro } = i18n.footer;
+
+const year = new Date().getFullYear();
+---
+
+<footer
+ class="bg-white/95 dark:bg-slate-700/95 w-full mt-8 py-2 px-4 flex flex-col gap-1 items-center"
+>
+  <p class="dark:text-white text-xs lg:text-xl">Envigado - Colombia</p>
+  <p class="dark:text-white text-xs lg:text-xl">{year}</p>
+  <p class="self-end text-xs flex items-center gap-2 dark:text-white">
+    {astro}
+    <a target="_blank" href="https://astro.build/"
+      ><Icon name="full-astro" class="dark:text-white" size={80} /></a>
+  </p>
+</footer>

@@ -7,7 +7,22 @@
     "styles": "Estilos",
     "go": "ir",
     "description": "descripción",
-    "more": "más"
+    "more": "más",
+    "abilities": [
+      "Habilidades blandas",
+      "Trabajo en equipo",
+      "SEO",
+      "RESTful APIs",
+      "Diseño UI/UX",
+      "Diseño responsivo",
+      "Control de versiones",
+      "Serverless",
+      "Containerization",
+      "Server Management",
+      "Network Security",
+      "Database Management",
+      "Progressive Web Apps (PWA)"
+    ]
   },
   "home": {
     "title": "hola",
@@ -17,8 +32,8 @@
     "contentSubtitle1": "Ingeniero de productividad y calidad",
     "subtitle2": "Por pasión y convicción:",
     "contentSubtitle2": "Desarrollador web experto en Javascript y librerías",
-    "blenderTitle":"Mis proyectos de blender",
-    "projectsWebTitle":"Mis proyectos web"
+    "blenderTitle": "Mis proyectos de blender",
+    "projectsWebTitle": "Mis proyectos web"
   },
   "projects": {
     "title": "proyectos",
@@ -106,5 +121,8 @@
       "p7c": "componentes para React",
       "p8": "Finalmente como meta personal quiero aprender Rust"
     }
+  },
+  "footer": {
+    "astro": "hecho con"
   }
 }
