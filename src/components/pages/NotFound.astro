@@ -12,14 +12,14 @@ const { subtitle, title, textButton, metaTitle, metaDescription} = i18n.notFound
 
 <Layout title={metaTitle} description={metaDescription} isNotFound>
 
-    <div class="w-full md:w-1/2 mx-auto">
+    <div class="w-full md:w-1/2 mx-auto min-h-[54dvh]">
       <NotFoundIcon />
     </div>
     <h1 class="text-center text-3xl text-white">{title}</h1>
 
     <p class="text-white" >{subtitle}</p>
 
-    <div>
+    <div >
       <button class="bg-white px-2 rounded-md text-2xl mt-4 shadow-lg shadow-white cursor-pointer" onclick="window.history.back()"
         >{textButton}</button
       >
