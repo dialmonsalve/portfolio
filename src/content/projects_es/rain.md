@@ -1,15 +1,16 @@
 ---
 description: "Este proyecto es una aplicación web privada para los empleados de Sc Group"
 href: "https://rain.scgroup.one/"
-images: [
-  "/images/rain/webp/1.webp", 
-  "/images/rain/webp/2.webp",
-  "/images/rain/webp/3.webp",
-  "/images/rain/webp/4.webp", 
-  "/images/rain/webp/5.webp",
-  "/images/rain/webp/6.webp",
-  "/images/rain/webp/7.webp",
-]
+images:
+  [
+    "/images/rain/webp/1.webp",
+    "/images/rain/webp/2.webp",
+    "/images/rain/webp/3.webp",
+    "/images/rain/webp/4.webp",
+    "/images/rain/webp/5.webp",
+    "/images/rain/webp/6.webp",
+    "/images/rain/webp/7.webp",
+  ]
 isExternalProject: true
 scripts: "typescript"
 styles: "css"
@@ -17,7 +18,11 @@ technology: "Laravel"
 title: "rain"
 pngImage: "/images/rain/main.png"
 webpImage: "/images/rain/main.webp"
+
+metaTitle: "Diego Monsalve | Aplicación Laravel de Gestión Empresarial"
+metaDescription: "Conoce el proyecto profesional en Laravel de Diego Monsalve: una aplicación interna integral que optimiza la gestión de inventarios, solicitudes de permisos y agenda para una empresa."
 ---
+
 <p class="leading-7 my-4" >
 Este proyecto es una aplicación web privada para los empleados de Sc Group, una empresa con sede en Puerto Rico que cuenta con las subsidiarias Skytel Puerto Rico y Truconnect. Entre sus franquicias se encuentran Antoninos Pizza, Marble Slab Creamery y Fatburger. Esta empresa es la única autorizada para vender estas franquicias en Puerto Rico.
 </p>
@@ -41,7 +46,6 @@ La aplicación cuenta con aproximadamente 25 módulos, y 3 rutas administrativas
   <ul class="px-4" >
     <li> - Layout general</li>
   </ul>
-
 
   <li class="leading-7 my-4"> 2. Modulo administrativo </li>
 

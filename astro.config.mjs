@@ -6,8 +6,11 @@ import icon from "astro-icon";
 
 import cloudflare from "@astrojs/cloudflare";
 
+import sitemap from "@astrojs/sitemap";
+
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://dialmonsalve.com',
   vite: {
     plugins: [tailwindcss()],
   },
@@ -19,7 +22,7 @@ export default defineConfig({
       prefixDefaultLocale: false,
     },
   },
-  integrations: [icon()],
+  integrations: [icon(), sitemap()],
   adapter: cloudflare(),
 
 });

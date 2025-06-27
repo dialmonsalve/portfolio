@@ -7,10 +7,12 @@ const currentLocale = Astro.currentLocale;
 
 const i18n = getI18N({ currentLocale });
 
-const abilities = i18n.general.abilities
+const abilities = i18n.general.abilities;
 
+const about = i18n.meta.about;
 ---
-<Layout>
+
+<Layout title={about.metaTitle} description={about.metaDescription}>
   <section class="flex flex-col lg:w-85/100 lg:mx-auto gap-3">
     <ul class="flex flex-wrap gap-x-2 gap-y-1 lg:w-4/5 mx-auto mt-4">
       {

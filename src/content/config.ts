@@ -1,4 +1,5 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
+import { z } from "astro:schema";
 
 const collectionProject = defineCollection({
   type: "content",
@@ -13,6 +14,8 @@ const collectionProject = defineCollection({
     styles: z.string().nonempty(),
     pngImage: z.string().nonempty(),
     webpImage: z.string().nonempty(),
+    metaTitle: z.string().nonempty(),
+    metaDescription: z.string().nonempty(),
   }),
 });
 

@@ -12,10 +12,10 @@ import { Icon } from "astro-icon/components";
 const currentLocale = Astro.currentLocale;
 const i18n = getI18N({ currentLocale });
 
-const { home } = i18n;
+const { home, meta } = i18n;
 ---
 
-<Layout>
+<Layout title={meta.home.metaTitle} description={meta.home.metaDescription} >
   <a
     href="https://github.com/dialmonsalve"
     target="_blank"

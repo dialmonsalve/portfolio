@@ -122,5 +122,38 @@
   },
   "footer": {
     "astro": "Made with"
+  },
+  "notFound": {
+    "metaTitle": "Page Not Found | dialmonsalve",
+    "metaDescription": "Sorry, we couldn't find this page. Browse our site to discover what you need.",
+    "title": "Page not found",
+    "subtitle": "Sorry, we couldn't find this page. Browse our site to discover what you need",
+    "textButton": "Back"
+  },
+  "meta": {
+    "home": {
+      "metaTitle": "Diego Monsalve | Web Developer Portfolio",
+      "metaDescription": "1+ year professional, 2+ years personal project experience. Specializing in React, Astro, Laravel, and more. See my work at dialmonsalve.com"
+    },
+    "projects": {
+      "metaTitle": "Diego Monsalve | Web Development Projects in Laravel, Astro, React",
+      "metaDescription": "Explore a diverse range of projects by Diego Monsalve, including a Laravel business application, Astro landing page, React component library, and custom web tools."
+    },
+    "formProjects": {
+      "metaTitle": "Diego Monsalve | Dynamic Form Builder Project",
+      "metaDescription": "Explore a versatile form creation tool developed by Diego Monsalve, offering flexible input types and form generation for various applications"
+    },
+    "convertImagesProjects": {
+      "metaTitle": "Diego Monsalve | Image to WebP Converter Project",
+      "metaDescription": "Efficiently convert JPG, JPEG, and PNG images to the optimized WebP format with this custom tool developed by Diego Monsalve for web performance."
+    },
+    "webComponentsProjects": {
+      "metaTitle": "Diego Monsalve | Reusable Web Components Library",
+      "metaDescription": "Discover a collection of self-built, framework-agnostic Web Components developed by Diego Monsalve for efficient and scalable web interfaces."
+    },
+    "about": {
+      "metaTitle": "Diego Monsalve | Experienced Developer & Problem Solver",
+      "metaDescription": "Discover Diego Monsalve: a web developer with a strong background in logistics, proficient in modern tech like Astro, React, and Laravel, driven by continuous learning and collaboration."
+    }
   }
 }

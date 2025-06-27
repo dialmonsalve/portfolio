@@ -5,9 +5,14 @@ import Menu from "../../Menu.astro";
 
 const { currentLocale } = Astro;
 const i18n = getI18N({ currentLocale });
+
+const formProjects = i18n.meta.formProjects;
 ---
 
-<Layout>
+<Layout
+  title={formProjects.metaTitle}
+  description={formProjects.metaDescription}
+>
   <forms-app>
     <section class="relative flex flex-col gap-4 pt-20" id="section-forms">
       <Menu />

@@ -124,5 +124,38 @@
   },
   "footer": {
     "astro": "hecho con"
+  },
+  "notFound": {
+    "metaTitle": "Página no encontrada - dialmonsalve",
+    "metaDescription": "Lo sentimos, la página que buscas no existe. Explora nuestro sitio para encontrar lo que necesitas.",
+    "title": "Página no encontrada",
+    "subtitle": "Lo sentimos, la página que buscas no existe. Explora nuestro sitio para encontrar lo que necesitas.",
+    "textButton": "Regresar"
+  },
+  "meta": {
+    "home": {
+      "metaTitle": "Diego Monsalve | Portafolio de Desarrollo Web",
+      "metaDescription": "1+ año de experiencia profesional, 2+ años con proyectos personales. Especialista en React, Astro, Laravel y más. Conoce mi trabajo en dialmonsalve.com"
+    },
+    "projects": {
+      "metaTitle": "Diego Monsalve | Proyectos de Desarrollo Web en Laravel, Astro, React",
+      "metaDescription": "Explora la variedad de proyectos de Diego Monsalve, incluyendo una aplicación de negocios en Laravel, landing page en Astro, librería de componentes React y herramientas web personalizadas.1+ año de experiencia profesional, 2+ años con proyectos personales. Especialista en React, Astro, Laravel y más. Conoce mi trabajo en dialmonsalve.com"
+    },
+    "formProjects": {
+      "metaTitle": "Diego Monsalve | Proyecto de Constructor de Formularios Dinámicos",
+      "metaDescription": "Explora una herramienta versátil de creación de formularios desarrollada por Diego Monsalve, que ofrece tipos de entrada flexibles y generación de formularios para diversas aplicaciones."
+    },
+    "convertImagesProjects": {
+      "metaTitle": "Diego Monsalve | Proyecto Conversor de Imágenes a WebP",
+      "metaDescription": "Convierte eficientemente imágenes JPG, JPEG y PNG al formato optimizado WebP con esta herramienta personalizada desarrollada por Diego Monsalve para mejorar el rendimiento web."
+    },
+    "webComponentsProjects": {
+      "metaTitle": "Diego Monsalve | Librería de Web Components Reutilizables",
+      "metaDescription": "Descubre una colección de Web Components auto-construidos e independientes de frameworks, desarrollados por Diego Monsalve para interfaces web eficientes y escalables."
+    },
+    "about": {
+      "metaTitle": "Diego Monsalve | Desarrollador Experimentado y Solucionador de Problemas",
+      "metaDescription": "Descubre a Diego Monsalve: desarrollador web con experiencia en logística, experto en tecnologías como Astro, React y Laravel, motivado por el aprendizaje continuo y la colaboración."
+    }
   }
 }

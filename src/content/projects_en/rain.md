@@ -1,15 +1,16 @@
 ---
 description: "This project is a private web application for the employees of Sc Group"
 href: "https://rain.scgroup.one/"
-images: [
-  "/images/rain/webp/1.webp", 
-  "/images/rain/webp/2.webp",
-  "/images/rain/webp/3.webp",
-  "/images/rain/webp/4.webp", 
-  "/images/rain/webp/5.webp",
-  "/images/rain/webp/6.webp",
-  "/images/rain/webp/7.webp",
-]
+images:
+  [
+    "/images/rain/webp/1.webp",
+    "/images/rain/webp/2.webp",
+    "/images/rain/webp/3.webp",
+    "/images/rain/webp/4.webp",
+    "/images/rain/webp/5.webp",
+    "/images/rain/webp/6.webp",
+    "/images/rain/webp/7.webp",
+  ]
 isExternalProject: true
 scripts: "typescript"
 styles: "css"
@@ -17,6 +18,9 @@ technology: "Laravel"
 title: "rain"
 pngImage: "/images/rain/main.png"
 webpImage: "/images/rain/main.webp"
+
+metaTitle: "Diego Monsalve | Laravel Business Management Application"
+metaDescription: "See Diego Monsalve's professional Laravel project: a comprehensive internal application streamlining inventory, permit requests, and agenda management for a company."
 ---
 
 <p class="leading-7 my-4" >
@@ -32,7 +36,6 @@ The application consists of approximately 25 modules, and 3 administrative route
   <li> 2. Route for restaurant personnel</li> 
   <li> 3. Route for administrative personnel</li>
 </ol>
-
 
 <ol class="px-4" >
 

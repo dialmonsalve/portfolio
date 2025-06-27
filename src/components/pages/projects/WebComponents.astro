@@ -13,9 +13,14 @@ const { currentLocale } = Astro;
 const i18n = getI18N({ currentLocale });
 
 const title = i18n.projects.web_components.title;
+
+const webComponentsProjects = i18n.meta.webComponentsProjects;
 ---
 
-<Layout>
+<Layout
+  title={webComponentsProjects.metaTitle}
+  description={webComponentsProjects.metaDescription}
+>
   <section class="flex flex-col gap-8 items-center">
     <h1
       class="text-2xl dark:text-white text-slate-700 text-center uppercase"

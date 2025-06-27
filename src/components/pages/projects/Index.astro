@@ -11,9 +11,14 @@ const i18n = getI18N({ currentLocale });
 const projects = await getCollection(
   `projects_${currentLocale}` as "projects_es"
 );
+
+const { meta } = i18n;
 ---
 
-<Layout>
+<Layout
+  title={meta.projects.metaTitle}
+  description={meta.projects.metaDescription}
+>
   <section class="flex flex-col gap-15 w-80/100 mx-auto">
     <h1
       class="text-amber-300 uppercase text-center text-2xl dark:text-white"
@@ -48,7 +53,7 @@ const projects = await getCollection(
     >
       {
         i18n.projects.internal_projects.map(
-          ({ description, href, pngImage ,webpImage, slug, title }) => (
+          ({ description, href, pngImage, webpImage, slug, title }) => (
             <Card
               title={title}
               pngImage={pngImage}

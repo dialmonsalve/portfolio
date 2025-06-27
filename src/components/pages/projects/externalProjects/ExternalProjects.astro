@@ -17,17 +17,29 @@ interface Data {
   technology: string;
   scripts: string;
   styles: string;
+  metaTitle: string;
+  metaDescription: string;
 }
 
 const { data, slug } = Astro.props;
 
-const { title, description, href, images, styles, technology, scripts } = data;
+const {
+  title,
+  description,
+  href,
+  images,
+  styles,
+  technology,
+  scripts,
+  metaTitle,
+  metaDescription,
+} = data;
 
 const { currentLocale } = Astro;
 const i18n = getI18N({ currentLocale });
 ---
 
-<Layout>
+<Layout title={metaTitle} description={metaDescription}>
   <section class="flex flex-col gap-5 lg:w-80/100 mx-auto pt-10">
     <h1
       class="uppercase text-center text-3xl text-primary"
@@ -50,7 +62,10 @@ const i18n = getI18N({ currentLocale });
       {
         images.map((_, idx) => (
           <picture>
-            <source srcset={`/images/${slug}/webp/${idx + 1}.webp`} type="image/webp" />
+            <source
+              srcset={`/images/${slug}/webp/${idx + 1}.webp`}
+              type="image/webp"
+            />
             <img
               src={`/images/${slug}/png/${idx + 1}.png`}
               alt=""
