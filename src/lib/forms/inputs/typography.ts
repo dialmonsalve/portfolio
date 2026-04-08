@@ -1,0 +1,225 @@
+import inputComponent from "../components/inputComponent";
+
+import {
+  AppInput,
+  AppRadioButtons,
+  AppTextarea,
+  ModalBody,
+} from "../../web-components";
+import { type Container } from "../utils/container";
+import Modal from "@/lib/components/modal";
+import { RADIO_BUTTONS_HEADING } from "../const";
+
+interface CreateOptions {
+  incrementId: number;
+  containerCards: HTMLDivElement | null;
+}
+
+interface ConstructOptions {
+  container: Container;
+  tag: "h2" | "p";
+  type: "heading" | "paragraph";
+  classes: string;
+}
+
+export class Typography {
+  private readonly container;
+  private readonly elementToCreate;
+  private readonly type;
+  private readonly classes;
+  constructor({ container, tag, type, classes }: ConstructOptions) {
+    this.classes = classes;
+    this.container = container;
+    this.elementToCreate = tag;
+    this.type = type;
+  }
+  create = ({ incrementId, containerCards }: CreateOptions) => {
+    const element = document.createElement(this.elementToCreate);
+
+    const name = `${this.type}-${incrementId}`;
+
+    element.id = name;
+    element.className = this.classes;
+    element.textContent = `Edit ${this.type}`;
+
+    this.container.create("input", {
+      containerCards,
+      incrementId,
+      type: this.type,
+      name: element.id,
+      children: [element],
+      action: (evt) =>
+        new Modal({
+          twoButtons: true,
+          title: `update ${this.type}`,
+          content: () => this.bodyModal(evt.target as HTMLButtonElement),
+          action: () => this.update(evt.target as HTMLButtonElement),
+        }).build(),
+    });
+  };
+
+  private bodyModal = (target: HTMLButtonElement) => {
+    const parentDiv = new ModalBody();
+    const parentContainer = target.closest(".container-components");
+    const parentInputs = parentContainer?.lastElementChild;
+    const containerInput = inputComponent({
+      name: "input-headings",
+      type: "text",
+      id: "container-input-headings",
+      label: "Edit",
+    });
+
+    if (!parentInputs) {
+      throw new Error(`Not parent input`);
+    }
+
+    const element = parentInputs.lastElementChild;
+
+    if (!element) {
+      throw new Error(`Not element has been created`);
+    }
+
+    if (this.type === "heading") {
+      return this.createHeading(parentDiv, element, containerInput);
+    }
+
+    if (this.type === "paragraph") {
+      return this.createParagraph(target);
+    }
+
+    throw new Error(`This ${this.type} is not allowed`);
+  };
+
+  private createHeading = (
+    parentDiv: ModalBody,
+    element: Element,
+    containerInput: HTMLElement,
+  ) => {
+    const radioButtons = new AppRadioButtons();
+
+    radioButtons.id = "container-radios-headings";
+    radioButtons.setAttribute("name", "headings");
+
+    const tagName = element?.tagName;
+    const oldLabel = element?.textContent?.trim();
+    const newLabel = radioButtons.change ? radioButtons.value : oldLabel || "";
+
+    const updatedRadios = RADIO_BUTTONS_HEADING.map((radio) => ({
+      ...radio,
+      isChecked: radio.value.toUpperCase() === tagName,
+    }));
+
+    containerInput.setAttribute("new_value", newLabel);
+
+    radioButtons.setAttribute("radios", JSON.stringify(updatedRadios));
+
+    parentDiv.appendChild(containerInput);
+    parentDiv.appendChild(radioButtons);
+
+    return parentDiv;
+  };
+
+  private createParagraph = (target: HTMLButtonElement) => {
+    const parentDiv = new ModalBody();
+    const containerInput = new AppTextarea();
+
+    containerInput.setAttribute("name", "input-headings");
+    containerInput.setAttribute("label", "title");
+    containerInput.setAttribute("input_id", "input-headings");
+    containerInput.id = "container-input-headings";
+
+    const parentInputs = target.closest(".container-components");
+
+    if (!parentInputs) return;
+
+    const paragraph = parentInputs.lastElementChild?.querySelector("p");
+
+    const newTitle = paragraph?.innerHTML;
+
+    const textContent = newTitle?.replace(/<br\s*\/?>/gi, "\n");
+
+    containerInput.setAttribute("new_value", textContent || "");
+
+    parentDiv.appendChild(containerInput);
+
+    return parentDiv;
+  };
+
+  private update(target: HTMLButtonElement) {
+    const parentContainer = target.closest(".container-components");
+    const parentInputs = parentContainer?.lastElementChild;
+
+    if (!parentInputs) {
+      throw new Error(`Not parent input`);
+    }
+
+    if (this.type === "paragraph") {
+      const paragraph = parentInputs.querySelector(this.elementToCreate);
+      const containerInput = document.querySelector(
+        "#container-input-headings",
+      ) as AppInput;
+
+      if (!paragraph) {
+        throw new Error(`Not paragraph selected`);
+      }
+
+      paragraph.className = this.classes;
+
+      const newValue = containerInput.change
+        ? containerInput.value.trim()
+        : paragraph?.innerHTML?.trim() || "";
+
+      if (newValue === "") return;
+
+      const text = newValue.replace(/\n/g, "<br>");
+
+      paragraph!.innerHTML = text || "";
+    }
+
+    if (this.type === "heading") {
+      const headingElement = parentInputs.lastElementChild;
+
+      const radioButtons = document.querySelector(
+        "#container-radios-headings",
+      ) as AppRadioButtons;
+      const containerInput = document.querySelector(
+        "#container-input-headings",
+      ) as AppInput;
+
+      const newChecked = radioButtons.change
+        ? radioButtons.value
+        : headingElement?.tagName.toLowerCase() || "";
+
+      const newValue = containerInput.change
+        ? containerInput.value
+        : headingElement?.textContent;
+
+      const id = headingElement?.id;
+      const name = headingElement?.getAttribute("name");
+
+      headingElement?.remove();
+
+      const heading = document.createElement(newChecked) as HTMLHeadElement;
+      heading.id = id!;
+      heading.setAttribute("name", name || "");
+
+      const classBase = "w-full uppercase";
+
+      const num =
+        newChecked === "h2"
+          ? "text-center text-3xl"
+          : newChecked === "h3"
+            ? "text-2xl"
+            : newChecked === "h4"
+              ? "text-xl"
+              : newChecked === "h5"
+                ? "text-lg"
+                : "text-md";
+
+      heading.className = `${num} ${classBase}`;
+      heading.textContent = newValue || "";
+
+      parentInputs?.appendChild(heading);
+    }
+  }
+}

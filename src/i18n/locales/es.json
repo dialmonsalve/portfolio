@@ -1,0 +1,177 @@
+{
+  "general": {
+    "configurations": "configuraciones",
+    "technology": "Tecnología",
+    "styles": "Estilos",
+    "go": "ir",
+    "description": "descripción",
+    "more": "más",
+    "abilities": [
+      "Habilidades blandas",
+      "Trabajo en equipo",
+      "SEO",
+      "RESTful APIs",
+      "Diseño UI/UX",
+      "Diseño responsivo",
+      "Control de versiones",
+      "Serverless",
+      "Containerization",
+      "Server Management",
+      "Network Security",
+      "Database Management",
+      "Apps Web Progresivas (PWA)"
+    ],
+    "theme": "Tema",
+    "themes": [
+      {
+        "value": "light",
+        "label": "Claro"
+      },
+      {
+        "value": "cupcake",
+        "label": "Pastel"
+      },
+      {
+        "value": "valentine",
+        "label": "San Valentín"
+      },
+      {
+        "value": "dark",
+        "label": "Oscuro"
+      }
+    ]
+  },
+  "home": {
+    "send": "enviar",
+    "iAm": "Soy, Diego Monsalve",
+    "subtitle1": "De profesión:",
+    "li1": "Más de 2 Años profesionales en desarrollo de software",
+    "li2": "Capacidad analítica para la resolución de problemas complejos y mejora continua de sistemas",
+    "li3": "Formación técnica en optimización de procesos, gestión de inventarios y logística, aplicada actualmente al diseño de arquitecturas de software eficientes",
+    "li4": "Experiencia en la creación de indicadores (KPIs), dashboards y automatización de flujos de trabajo (Macros/Google Data Studio)",
+    "projectsWebTitle": "Mi proyectos"
+  },
+  "projects": {
+    "title": "proyectos",
+    "subtitle": "Reduzca hasta un 50% el peso de sus imágenes y conviértelas de formatos como png, jpg o jpeg a webp de manera fácil y rápida",
+    "click": "Click aquí",
+    "drag": "o arrastra las imágenes",
+    "files": "0 archivos seleccionados",
+    "internal_projects": [
+      {
+        "title": "formularios",
+        "pngImage": "/images/internal-projects/forms.png",
+        "webpImage": "/images/internal-projects/forms.webp",
+        "description": "crea tus formularios, este proyecto está hecho 100% en typescript sin librerías js",
+        "slug": "project-form",
+        "href": "projects/form"
+      },
+      {
+        "title": "conversor de imágenes",
+        "pngImage": "/images/internal-projects/convert-image.png",
+        "webpImage": "/images/internal-projects/convert-image.webp",
+        "description": "cambie el formato de sus imágenes a webp",
+        "href": "projects/convert-images",
+        "slug": "convert-images"
+      },
+      {
+        "title": "Componentes web",
+        "pngImage": "/images/internal-projects/web-components.png",
+        "webpImage": "/images/internal-projects/web-components.webp",
+        "description": "Este es mi set de componentes web hechos 100% en javascript",
+        "slug": "web-components",
+        "href": "projects/web-components"
+      }
+    ],
+    "forms": [
+      {
+        "title": "texto",
+        "inputs": [
+          "heading",
+          "paragraph"
+        ]
+      },
+      {
+        "title": "inputs",
+        "inputs": [
+          "text",
+          "email",
+          "phone",
+          "number",
+          "password",
+          "date",
+          "time",
+          "select",
+          "signature",
+          "checkbox",
+          "radio-buttons",
+          "textarea",
+          "files"
+        ]
+      }
+    ],
+    "web_components": {
+      "title": "Componentes web"
+    }
+  },
+  "about": {
+    "title": "¿Quién Soy?",
+    "path": {
+      "title": "Trayectoria",
+      "p1": "Desde que inicié mi vida laboral a los 18 años, he mantenido un progreso constante, enfrentando los desafíos que la vida presenta en el camino.",
+      "p2": "Con más de 10 años de experiencia en logística y gestión de inventarios, 1 año en producción y 2+ años como desarrollador web, cuento con la experiencia necesaria para guiar a las compañías en la creación y mantenimiento de software a medida, adaptado a sus necesidades específicas.",
+      "p3": "Este año como desarrollador web me ha permitido evolucionar de una manera que nunca había imaginado. Inicialmente comencé a usar Laravel con PHP, un lenguaje que no dominaba, pero gracias a la ayuda de mis compañeros logramos llevar a cabo el proyecto más ambicioso de la compañía: una aplicación para empleados.",
+      "p4": "Ahora he trabajado con tecnologías que antes no había utilizado profesionalmente, sino más como un pasatiempo, lo cual ha fortalecido mis conocimientos en áreas como Astro, Vue, CSS, Sass, Tailwind, entre otros.",
+      "p5": "Durante este tiempo he podido realizar proyectos increíbles para la compañía en la que trabajo. Estos proyectos se pueden encontrar en la sección de esta web catalogada como proyectos externos."
+    },
+    "iLike": {
+      "title": "¿Y... que me gusta?",
+      "p1": "Siento una gran pasión por mi familia, el desarrollo web y las tareas que requieren un esfuerzo mental.",
+      "p2": "Valoro las relaciones interpersonales y busco enriquecer mi conocimiento a través de la interacción con los demás.",
+      "p3": "Me entusiasma abordar cada actividad con pasión y dedicación. Además, disfruto pasar tiempo con personas amenas y enriquecedoras. Me considero una persona sociable y abierta a nuevos retos.",
+      "p4": "Mi vida social no entorpece mi compromiso laboral, lo que me permite llevar una vida tranquila y armoniosa, siempre con un profundo amor por los animales y la naturaleza.",
+      "p5": "Como toque final en mi rutina, la taza de café es un elemento imprescindible en mi mesa.",
+      "p6": "Mi pasión por el desarrollo ha trascendido más de lo que había imaginado, con un repositorio en GitHub que crece continuamente. También me gusta crear mis propios componentes en TypeScript puro, algunos de los cuales se pueden visualizar en esta web, catalogados como proyectos internos.",
+      "p7a": "Finalmente, mi producto al que más cariño tengo y que por motivos laborales no he podido mantener es mi set de componentes para React, alojado en",
+      "p7b": "Toda la documentación en inglés y español se puede encontrar en:",
+      "p7c": "componentes para React",
+      "p8": "Finalmente como meta personal quiero aprender Rust"
+    }
+  },
+  "footer": {
+    "astro": "hecho con"
+  },
+  "notFound": {
+    "metaTitle": "Página no encontrada - dialmonsalve",
+    "metaDescription": "Lo sentimos, la página que buscas no existe. Explora nuestro sitio para encontrar lo que necesitas.",
+    "title": "Página no encontrada",
+    "subtitle": "Lo sentimos, la página que buscas no existe. Explora nuestro sitio para encontrar lo que necesitas.",
+    "textButton": "Regresar"
+  },
+  "meta": {
+    "home": {
+      "metaTitle": "Diego Monsalve | Portafolio de Desarrollo Web",
+      "metaDescription": "2+ años de experiencia profesional, 4+ años con proyectos personales. Especialista en React, Astro, Laravel y más. Conoce mi trabajo en dialmonsalve.com"
+    },
+    "projects": {
+      "metaTitle": "Diego Monsalve | Proyectos de Desarrollo Web en Laravel, Astro, React",
+      "metaDescription": "Explora la variedad de proyectos de Diego Monsalve, incluyendo una aplicación de negocios en Laravel, landing page en Astro, librería de componentes React y herramientas web personalizadas.1+ año de experiencia profesional, 2+ años con proyectos personales. Especialista en React, Astro, Laravel y más. Conoce mi trabajo en dialmonsalve.com"
+    },
+    "formProjects": {
+      "metaTitle": "Diego Monsalve | Proyecto de Constructor de Formularios Dinámicos",
+      "metaDescription": "Explora una herramienta versátil de creación de formularios desarrollada por Diego Monsalve, que ofrece tipos de entrada flexibles y generación de formularios para diversas aplicaciones."
+    },
+    "convertImagesProjects": {
+      "metaTitle": "Diego Monsalve | Proyecto Conversor de Imágenes a WebP",
+      "metaDescription": "Convierte eficientemente imágenes JPG, JPEG y PNG al formato optimizado WebP con esta herramienta personalizada desarrollada por Diego Monsalve para mejorar el rendimiento web."
+    },
+    "webComponentsProjects": {
+      "metaTitle": "Diego Monsalve | Librería de Web Components Reutilizables",
+      "metaDescription": "Descubre una colección de Web Components auto-construidos e independientes de frameworks, desarrollados por Diego Monsalve para interfaces web eficientes y escalables."
+    },
+    "about": {
+      "metaTitle": "Diego Monsalve | Desarrollador Experimentado y Solucionador de Problemas",
+      "metaDescription": "Descubre a Diego Monsalve: desarrollador web con experiencia en logística, experto en tecnologías como Astro, React y Laravel, motivado por el aprendizaje continuo y la colaboración."
+    }
+  }
+}

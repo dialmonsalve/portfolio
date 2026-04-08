@@ -1,0 +1,175 @@
+{
+  "general": {
+    "configurations": "configurations",
+    "language": "language",
+    "technology": "Technology",
+    "styles": "Styles",
+    "go": "go",
+    "description": "description",
+    "more": "more",
+    "abilities": [
+      "soft skills",
+      "Teamwork",
+      "SEO",
+      "RESTful APIs",
+      "UI/UX Design",
+      "Responsive Design",
+      "Version Control",
+      "Serverless Computing",
+      "Containerization",
+      "Gestión de bases de datos",
+      "Progressive Web Apps (PWA)"
+    ],
+    "theme": "Theme",
+    "themes": [
+      {
+        "value": "light",
+        "label": "Light"
+      },
+      {
+        "value": "cupcake",
+        "label": "Cupcake"
+      },
+      {
+        "value": "valentine",
+        "label": "Valentine"
+      },
+      {
+        "value": "dark",
+        "label": "Dark"
+      }
+    ]
+  },
+  "home": {
+    "send": "send",
+    "iAm": "I'm, Diego Monsalve",
+    "li1": "More than 2 years of professional experience in software development",
+    "li2": "Analytical ability to solve complex problems and continuously improve systems",
+    "li3": "Technical training in process optimization, inventory management and logistics, currently applied to the design of efficient software architectures",
+    "li4": "Experience in creating indicators (KPIs), dashboards and workflow automation (Macros/Google Data Studio)",
+    "projectsWebTitle": "Mi projects"
+  },
+  "projects": {
+    "title": "projects",
+    "subtitle": "Reduce the weight of your images by up to 50% and convert them from formats like PNG, JPG or JPEG to WebP quickly and easily.",
+    "click": "Click here",
+    "drag": "or drag the images",
+    "files": "0 files selected",
+    "internal_projects": [
+      {
+        "title": "forms",
+        "pngImage": "/images/internal-projects/forms.png",
+        "webpImage": "/images/internal-projects/forms.webp",
+        "description": "create your forms, this project is made 100% in typescript without any js library",
+        "slug": "project-form",
+        "href": "projects/form"
+      },
+      {
+        "title": "convert images",
+        "pngImage": "/images/internal-projects/convert-image.png",
+        "webpImage": "/images/internal-projects/convert-image.webp",
+        "description": "change your image format to webp",
+        "slug": "convert-images",
+        "href": "projects/convert-images"
+      },
+      {
+        "title": "web components",
+        "pngImage": "/images/internal-projects/web-components.png",
+        "webpImage": "/images/internal-projects/web-components.webp",
+        "description": "This is my set of javascript web components, made 100% in typescript",
+        "slug": "web-components",
+        "href": "projects/web-components"
+      }
+    ],
+    "forms": [
+      {
+        "title": "text",
+        "inputs": [
+          "heading",
+          "paragraph"
+        ]
+      },
+      {
+        "title": "inputs",
+        "inputs": [
+          "text",
+          "email",
+          "phone",
+          "number",
+          "password",
+          "date",
+          "time",
+          "select",
+          "signature",
+          "checkbox",
+          "radio-buttons",
+          "textarea",
+          "files"
+        ]
+      }
+    ],
+    "web_components": {
+      "title": "web components"
+    }
+  },
+  "about": {
+    "title": "Who am I?",
+    "path": {
+      "title": "Path",
+      "p1": "Since I started my working life at the age of 18, I have maintained constant progress, facing the challenges that life presents along the way.",
+      "p2": "With over 10 years of experience in logistics and inventory management, 1 year in production, and 2+ year as a web developer, I have the necessary expertise to guide companies in creating and maintaining custom software tailored to their specific needs.",
+      "p3": "This year as a web developer has allowed me to evolve in ways I never imagined. Initially, I started using Laravel with PHP, a language I was not familiar with, but thanks to my colleagues' help, we managed to carry out the company's most ambitious project: an employee application.",
+      "p4": "Now I have worked with technologies that I had not used professionally before, but rather as a hobby, which has strengthened my knowledge in areas such as Astro, Vue, CSS, Sass, Tailwind, among others.",
+      "p5": "During this time, I have been able to undertake amazing projects for the company I work for. These projects can be found in the section of this website cataloged as external projects."
+    },
+    "iLike": {
+      "title": "And... what do I like?",
+      "p1": "I have a great passion for my family, web development, and tasks that  require mental effort.",
+      "p2": "I value interpersonal relationships and seek to enrich my knowledge through interaction with others.",
+      "p3": "I am enthusiastic about tackling every activity with passion and dedication. Additionally, I enjoy spending time with pleasant and enriching people. I consider myself a sociable person, open to new challenges.",
+      "p4": "My social life does not hinder my work commitment, which allows me to lead a peaceful and harmonious life, always with a deep love for animals and nature.",
+      "p5": "As a final touch to my routine, a cup of coffee is an essential element on my table.",
+      "p6": "My passion for development has transcended more than I had imagined, with a GitHub repository that continues to grow. I also enjoy creating my own components in pure TypeScript, some of which can be viewed on this website, categorized as internal projects.",
+      "p7a": "Finally, my most cherished product, which I have not been able to maintain due to work commitments, is my set of React components hosted on",
+      "p7b": "All documentation in English and Spanish can be found at:",
+      "p7c": "React components",
+      "p8": "Finally, as a personal goal I want to learn Rust"
+    }
+  },
+  "footer": {
+    "astro": "Made with"
+  },
+  "notFound": {
+    "metaTitle": "Page Not Found | dialmonsalve",
+    "metaDescription": "Sorry, we couldn't find this page. Browse our site to discover what you need.",
+    "title": "Page not found",
+    "subtitle": "Sorry, we couldn't find this page. Browse our site to discover what you need",
+    "textButton": "Back"
+  },
+  "meta": {
+    "home": {
+      "metaTitle": "Diego Monsalve | Web Developer Portfolio",
+      "metaDescription": "2+ years of professional experience, 4+ years working on personal projects. Specialist in React, Astro, Laravel, and more. See my work at dialmonsalve.com"
+    },
+    "projects": {
+      "metaTitle": "Diego Monsalve | Web Development Projects in Laravel, Astro, React",
+      "metaDescription": "Explore a diverse range of projects by Diego Monsalve, including a Laravel business application, Astro landing page, React component library, and custom web tools."
+    },
+    "formProjects": {
+      "metaTitle": "Diego Monsalve | Dynamic Form Builder Project",
+      "metaDescription": "Explore a versatile form creation tool developed by Diego Monsalve, offering flexible input types and form generation for various applications"
+    },
+    "convertImagesProjects": {
+      "metaTitle": "Diego Monsalve | Image to WebP Converter Project",
+      "metaDescription": "Efficiently convert JPG, JPEG, and PNG images to the optimized WebP format with this custom tool developed by Diego Monsalve for web performance."
+    },
+    "webComponentsProjects": {
+      "metaTitle": "Diego Monsalve | Reusable Web Components Library",
+      "metaDescription": "Discover a collection of self-built, framework-agnostic Web Components developed by Diego Monsalve for efficient and scalable web interfaces."
+    },
+    "about": {
+      "metaTitle": "Diego Monsalve | Experienced Developer & Problem Solver",
+      "metaDescription": "Discover Diego Monsalve: a web developer with a strong background in logistics, proficient in modern tech like Astro, React, and Laravel, driven by continuous learning and collaboration."
+    }
+  }
+}

@@ -1,0 +1,31 @@
+---
+import Layout from "@/layouts/MainLayout.astro";
+
+import { getI18N } from "@/i18n";
+import DownloadImages from "@/components/DownloadImages.astro";
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+
+const convertImagesProjects = i18n.meta.convertImagesProjects;
+---
+
+<Layout
+  title={convertImagesProjects.metaTitle}
+  description={convertImagesProjects.metaDescription}
+>
+  <section
+    class="flex flex-col gap-4 lg:gap-15 w-80/100 mx-auto items-center pt-10 min-h-[72.2dvh] lg:min-h-[71dvh] 2xl:min-h-[73.8dvh] 3xl:min-h-[84dvh]"
+  >
+    <h1
+      transition:name="convert-images"
+      class="text-center text-2xl uppercase"
+    >
+      {i18n.projects.internal_projects[1].title}
+    </h1>
+    <h2 class="text-center lg:text-start">
+      {i18n.projects.subtitle}
+    </h2>
+    <DownloadImages />
+  </section>
+</Layout>

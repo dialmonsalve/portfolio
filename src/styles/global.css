@@ -1,0 +1,68 @@
+@import "tailwindcss";
+@import "./animations.css";
+@import "./media-queries.css";
+
+@plugin "daisyui" {
+  themes:
+    light --light,
+    dark --prefersdark,
+    cupcake,
+    valentine,
+    cupcake;
+}
+
+@font-face {
+  font-family: "poppins";
+  src: url("/fonts/Poppins-Medium.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-sans: "poppins", "sans-serif";
+}
+
+input[type="number"] {
+  appearance: none !important;
+}
+
+@utility backdrop-2 {
+  backdrop-filter: blur(10px);
+}
+
+@utility calc {
+  width: calc(100% / 3);
+}
+
+@utility scroll {
+  scrollbar-width: thin;
+  scrollbar-color: white oklch(42.711% 0.24553 219);
+}
+
+.menu[type="checkbox"]:checked ~ .container-menu__label {
+  box-shadow: 1px -1px 8px #65e60a inset;
+}
+
+div:has(.menu[type="checkbox"]:not(:checked)) + .container-elements {
+  transform: translateX(-100%);
+}
+
+div:has(.menu[type="checkbox"]:checked) + .container-elements {
+  transform: translateX(0);
+}
+
+.show-modal {
+  transition:
+    opacity 0.25s ease-in-out,
+    display 0.25s ease-in-out;
+  transition-behavior: allow-discrete;
+  opacity: 1;
+  @starting-style {
+    opacity: 0;
+  }
+}
+
+.hide-modal {
+  opacity: 0;
+}

@@ -1,0 +1,113 @@
+---
+export const prerender = true;
+import { getCollection, render } from "astro:content";
+import Link from "@/components/Link.astro";
+import Layout from "@/layouts/MainLayout.astro";
+import { getI18N } from "@/i18n";
+
+export const getStaticPaths = async () => {
+  const [projectsEs, projectsEn] = await Promise.all([
+    getCollection("projects_es"),
+    getCollection("projects_en"),
+  ]);
+
+  const pathsEs = projectsEs.map((p) => {
+    return {
+      params: { lang: "es", slug: p.data.slug },
+      props: { project: p },
+    };
+  });
+
+  const pathsEn = projectsEn.map((p) => {
+    return {
+      params: { lang: "en", slug: p.data.slug },
+      props: { project: p },
+    };
+  });
+
+  return [...pathsEs, ...pathsEn];
+};
+
+const { project } = Astro.props;
+
+if (!project) {
+  return Astro.redirect(`/404`);
+}
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+
+const {
+  metaTitle,
+  metaDescription,
+  description,
+  href,
+  images,
+  scripts,
+  styles,
+  technology,
+  title,
+  slug
+} = project.data;
+
+
+const { Content } = await render(project);
+---
+
+<Layout title={metaTitle} description={metaDescription}>
+  <section class="flex flex-col gap-5 lg:w-80/100 mx-auto pt-10">
+    <h1
+      class="uppercase text-center text-3xl text-primary"
+      transition:name={slug}
+    >
+      {title}
+    </h1>
+    <ul>
+      <Link
+        className="bg-primary text-white w-fit px-4 rounded-xl shadow-2xl shadow-primary hover:opacity-80 capitalize"
+        href={href}
+        label={i18n.general.go}
+        target="_blank"
+      />
+    </ul>
+
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6 justify-items-center"
+    >
+      {
+        images.map((_, idx) => (
+          <picture>
+            <source
+              srcset={`/images/${slug}/webp/${idx + 1}.webp`}
+              type="image/webp"
+            />
+            <img
+              src={`/images/${slug}/png/${idx + 1}.png`}
+              alt=""
+              class="max-w-full h-70 object-cover block rounded-xl shadow-md shadow-gray-300 dark:shadow-slate-600"
+            />
+          </picture>
+        ))
+      }
+    </div>
+    <div class="">
+      <Content />
+    </div>
+    <p class="text-base">
+      <span class="font-bold uppercase text-error">{i18n.general.description}:</span>
+      {description}
+    </p>
+    <p class="text-base">
+      <span class="font-bold uppercase text-error">{i18n.general.technology}:</span>
+      {technology}
+    </p>
+    <p class="text-base">
+      <span class="font-bold uppercase text-error">{i18n.general.styles}:</span>
+      {styles}
+    </p>
+    <p class="text-base">
+      <span class="font-bold uppercase text-error">Scripts:</span>
+      {scripts}
+    </p>
+  </section>
+</Layout>

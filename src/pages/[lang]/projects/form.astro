@@ -1,0 +1,154 @@
+---
+import Layout from "@/layouts/MainLayout.astro";
+import { getI18N } from "@/i18n";
+import FormMenu from "@/components/FormMenu.astro";
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+
+const formProjects = i18n.meta.formProjects;
+---
+
+<Layout
+  title={formProjects.metaTitle}
+  description={formProjects.metaDescription}
+>
+  <forms-app>
+    <section class="relative flex flex-col gap-4 pt-20 min-h-[72.2dvh] lg:min-h-[71dvh] 2xl:min-h-[73.8dvh] 3xl:min-h-[84dvh]" id="section-forms">
+      <FormMenu />
+      <h1
+        class="text-center text-2xl uppercase text-primary"
+        transition:name="project-form"
+      >
+        {i18n.projects.internal_projects[0].title}
+      </h1>
+
+      <article
+        class="container-forms flex flex-col gap-10 mx-auto"
+        id="container-cards"
+      >
+        <div
+          class="container-card-form card relative py-8 px-2 md:px-4 flex flex-col gap-8 border border-gray-400 opacity-100 rounded-xl w-100 xs:w-95 sm:w-150 lg:w-200"
+          id="card-1"
+        >
+          <button
+            class="absolute -top-5 right-0 text-primary text-xs flex gap-1 items-center cursor-pointer hover:scale-130 transition-all"
+            id="add-page"
+            >add page<span class="button-square-add"></span>
+          </button>
+        </div>
+      </article>
+    </section>
+  </forms-app>
+</Layout>
+
+<script src="@/lib/forms"></script>
+
+<style is:global   >
+  .container-card-form {
+    transition:
+      opacity 0.3s ease-in-out,
+      display 1s ease-in-out allow-discrete;
+    @starting-style {
+      opacity: 0;
+    }
+  }
+
+  .heading2 {
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  .heading3 {
+    font-size: 1.6rem;
+  }
+
+  .heading4 {
+    font-size: 1.4rem;
+  }
+
+  .heading5 {
+    font-size: 1.2rem;
+  }
+
+  .heading6 {
+    font-size: 1rem;
+  }
+  .paragraph {
+    font-size: 0.9rem;
+  }
+
+  .radio {
+    display: none;
+  }
+
+  .label-radio {
+    padding: 0.4rem 0.8rem;
+    border: 1px solid #80808051;
+    border-radius: 10px;
+    color: white;
+    transition:
+      background-color 0.5s ease,
+      color 0.3s ease;
+    font-size: 0.8rem;
+  }
+
+  .radio:checked + .label-radio {
+    background-color: green;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2) inset;
+  }
+
+  .radio:not(checked) + .label-radio {
+    background-color: #80808051;
+    box-shadow:
+      1px 1px 2px rgba(0, 0, 0, 0.2),
+      4px 4px 4px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+  }
+  .button-square-add,
+  .button-square-update,
+  .button-square-remove {
+    background-repeat: no-repeat;
+    width: 18px;
+    height: 18px;
+    background-size: cover;
+    cursor: pointer;
+  }
+
+  .button-square-update {
+    background-image: url("/img/configure.svg");
+    position: absolute;
+    left: 10px;
+    top: 0;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .button-square-add {
+    background-image: url("/img/add.svg");
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .button-square-remove {
+    background-image: url("/img/minus.svg");
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .inputs-btn-update {
+    position: absolute;
+    left: -10px;
+    top: -20px;
+  }
+
+  .inputs-btn-update:hover > .button-square-update {
+    background-image: url("/img/fullConfigure.svg");
+    rotate: 180deg;
+  }
+
+  .inputs-btn-delete {
+    position: absolute;
+    left: 25px;
+    top: -21px;
+    display: flex;
+  }
+</style>

@@ -1,0 +1,23 @@
+---
+import { getI18N } from "@/i18n";
+
+const currentLocale = Astro.currentLocale;
+
+const i18n = getI18N({ currentLocale });
+
+const themes = i18n.general.themes
+---
+
+{
+  themes.map((theme) => (
+    <li>
+      <input
+        type="radio"
+        name="theme-dropdown"
+        class="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start capitalize"
+        aria-label={theme.label}
+        value={theme.value}
+      />
+    </li>
+  ))
+}

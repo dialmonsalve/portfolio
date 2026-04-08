@@ -1,0 +1,53 @@
+---
+import Icon from '@Icon/Icon.astro';
+import DropDownButtons from './DropDownButtons.astro';
+
+import { getI18N } from '@/i18n/index';
+
+const currentLocale = Astro.currentLocale;
+
+const i18n = getI18N({ currentLocale });
+---
+
+<app-theme>
+  <div class="dropdown">
+    <div tabindex="0" role="button" class="btn m-1 btn-outline">
+      {i18n.general.theme}
+      <Icon name="arrow-down" class="w-2" />
+    </div>
+    <ul
+      tabindex="-1"
+      class="dropdown-content bg-base-300 rounded-box z-1 w-52 p-2 shadow-2xl -translate-x-30 md:-translate-x-25 lg:-translate-x-5"
+    >
+      <DropDownButtons />
+    </ul>
+  </div>
+</app-theme>
+
+<script>
+  class AppTheme extends HTMLElement {
+    constructor() {
+      super();
+      const element = document.documentElement;
+      const currentTheme = localStorage.getItem('theme') || 'light';
+
+      const radiosThemes = this.querySelectorAll<HTMLInputElement>(
+        'input[type="radio"]'
+      );
+
+      radiosThemes.forEach((radio) => {
+        if (radio.value === currentTheme) {
+          radio.checked = true;
+        }
+
+        radio.addEventListener('change', (e) => {
+          const target = e.target as HTMLInputElement;
+          element.setAttribute('data-theme', target.value);
+          localStorage.setItem('theme', target.value);
+        });
+      });
+    }
+  }
+
+  customElements.define('app-theme', AppTheme);
+</script>

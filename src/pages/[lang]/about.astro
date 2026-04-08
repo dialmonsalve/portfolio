@@ -1,0 +1,143 @@
+---
+import Layout from "@/layouts/MainLayout.astro";
+
+import { getI18N } from "@/i18n";
+
+const currentLocale = Astro.currentLocale;
+
+const i18n = getI18N({ currentLocale });
+
+const abilities = i18n.general.abilities;
+
+const about = i18n.meta.about;
+---
+
+<Layout title={about.metaTitle} description={about.metaDescription}>
+
+  <section class="flex flex-col lg:w-85/100 lg:mx-auto gap-3">
+    <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5 gap-2 xl:w-4/5 mx-auto mt-4">
+      {
+        abilities.map((ability) => (
+          <li class="badge text-xs badge-outline hover:bg-white hover:text-violet-500 transition-colors cursor-pointer">
+            {ability}
+          </li>
+        ))
+      }
+    </ul>
+    <article class="flex flex-col gap-2 self-center">
+      <h1
+        class="mt-8 mb-8 font-bold leading-5 text-2xl text-center"
+      >
+        {i18n.about.title}
+      </h1>
+    </article>
+    <article class="px-6">
+      <article class="grid grid-cols-1 lg:grid-cols-2 gap-2">
+        <div
+          class="border p-4 shadow-md border-primary rounded-md bg-white dark:bg-slate-700 shadow-primary"
+        >
+          <h4
+            class="text-center text-[18px] font-bold text-blue-400 md:text-xl"
+          >
+            {i18n.about.path.title}
+          </h4>
+          <p
+            class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
+          >
+            {i18n.about.path.p1}
+          </p>
+  
+          <p
+            class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
+          >
+            {i18n.about.path.p2}
+          </p>
+  
+          <p
+            class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
+          >
+            {i18n.about.path.p3}
+          </p>
+  
+          <p
+            class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
+          >
+            {i18n.about.path.p4}
+          </p>
+  
+          <p
+            class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
+          >
+            {i18n.about.path.p5}
+          </p>
+        </div>
+        <div class="hidden lg:block"></div>
+        <div class="hidden lg:block"></div>
+        <div
+         class="border p-4 shadow-md border-primary rounded-md bg-white dark:bg-slate-700 shadow-primary"
+        >
+          <h4
+            class="text-center text-[18px] font-bold text-blue-400 dark:text-blue-300 md:text-xl"
+          >
+            {i18n.about.iLike.title}
+          </h4>
+  
+          <p
+            class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
+          >
+            {i18n.about.iLike.p1}
+          </p>
+  
+          <p
+            class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
+          >
+            {i18n.about.iLike.p2}
+          </p>
+  
+          <p
+            class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
+          >
+            {i18n.about.iLike.p3}
+          </p>
+  
+          <p
+            class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
+          >
+            {i18n.about.iLike.p4}
+          </p>
+  
+          <p
+            class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
+          >
+            {i18n.about.iLike.p5}
+          </p>
+  
+          <p
+            class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
+          >
+            {i18n.about.iLike.p6}
+          </p>
+  
+          <p
+            class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
+          >
+            {i18n.about.iLike.p7a}
+            <a href="https://www.npmjs.com/package/dialui-components">npm</a>. {
+              i18n.about.iLike.p7b
+            }
+            <a
+              class="text-blue-400 dark:text-blue-300 hover:underline hover:opacity-80"
+              href="https://dialui-components.netlify.app/"
+              >{i18n.about.iLike.p7c}</a
+            >.
+          </p>
+          <p
+            class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
+          >
+            {i18n.about.iLike.p8}
+          </p>
+        </div>
+      </article>
+    </article>
+  </section>
+</Layout>

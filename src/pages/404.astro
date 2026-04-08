@@ -1,0 +1,31 @@
+---
+import Layout from "@/layouts/MainLayout.astro";
+import NotFoundIcon from "@/components/NotFound.astro";
+import { getI18N } from "@/i18n";
+
+const { currentLocale } = Astro;
+
+const i18n = getI18N({ currentLocale });
+
+const { subtitle, title, textButton, metaTitle, metaDescription} = i18n.notFound;
+---
+
+<Layout title={metaTitle} description={metaDescription} isNotFound>
+
+  <div class="flex flex-col gap-8 items-center justify-center lg:h-[90dvh] p-4" >
+
+    <div class="w-full md:w-1/2 mx-auto pt-10">
+      <NotFoundIcon />
+    </div>
+    <h1 class="text-center text-3xl">{title}</h1>
+    
+    <p class="" >{subtitle}</p>
+    
+    <div >
+      <button class="btn px-2 rounded-md  shadow-white cursor-pointer" onclick="window.history.back()"
+      >{textButton}</button
+      >
+    </div>
+  </div>
+
+</Layout>

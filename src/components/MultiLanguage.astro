@@ -1,0 +1,75 @@
+---
+import { LANGUAGES } from '@/const/languages';
+
+import {
+  useTranslatedPath,
+  getLangFromUrl,
+  getRouteFromUrl,
+} from '@/i18n/locales/utils';
+import Icon from '@Icon/Icon.astro';
+
+const lang: "es" | "en" = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+const route = getRouteFromUrl(Astro.url);
+---
+
+<div class="dropdown">
+  <div tabindex="0" role="button" class="btn btn-outline btn-primary">
+    {LANGUAGES[lang]}
+    <Icon name="arrow-down" class="w-3" />
+  </div>
+  <ul
+    tabindex="-1"
+    class="dropdown-content rounded-box z-1 bg-base-300 w-52 p-2 shadow-2xl"
+  >
+    {
+      Object.entries(LANGUAGES).map(([lang, label]) => (
+        <li>
+          <a
+            class="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start capitalize"
+            href={translatePath(`/${route ? route : '/'}`, lang)}
+          >
+            {label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<script>
+  class ButtonLanguage extends HTMLElement {
+    constructor() {
+      super();
+      const buttonLanguage = this.querySelector('#language');
+      const language = this.querySelector('#language-container');
+
+      const container = document.querySelector('body');
+
+      buttonLanguage?.addEventListener('click', (evt) => {
+        evt.stopPropagation();
+        language?.classList.toggle('hidden');
+      });
+
+      container?.addEventListener('click', () => {
+        if (!language?.classList.contains('hidden')) {
+          language?.classList.add('hidden');
+        }
+      });
+    }
+  }
+
+  customElements.define('button-language', ButtonLanguage);
+</script>
+
+<style>
+  .language {
+    opacity: 1;
+    transition:
+      opacity 0.3s ease-in-out,
+      display 0.1s ease-in-out allow-discrete;
+    @starting-style {
+      opacity: 0;
+    }
+  }
+</style>

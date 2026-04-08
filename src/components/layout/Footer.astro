@@ -1,0 +1,48 @@
+---
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations,
+} from "@/i18n/locales/utils";
+import Icon from "../Icon.astro";
+import { getI18N } from "@/i18n";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+const { currentLocale } = Astro;
+
+const i18n = getI18N({ currentLocale });
+---
+
+<footer
+  class="h-30 w-full bg-base-300 mt-8 flex flex-col items-center justify-center gap-4"
+>
+  <div class="flex gap-4">
+    <a
+      target="_blank"
+      href="https://www.linkedin.com/in/dialmonsalve"
+      class="flex fap-1 items-center hover:underline"
+    >
+      <Icon name="linkedin" class="w-6 text-white" />
+      Linkedin
+    </a>
+    <a
+      target="_blank"
+      href="https://github.com/dialmonsalve"
+      class="flex fap-1 items-center hover:underline"
+    >
+      <Icon name="github" class="w-6 text-white" style="fill:white;" />
+      Github
+    </a>
+    <a href={translatePath("/about", lang)} class="hover:underline"
+      >{t("about")}</a
+    >
+  </div>
+  <p class="text-[14px] flex items-center gap-1">
+    <Icon name="astro-pink" class="w-6" />
+    <a href="https://astro.build/" class="hover:underline"> {i18n.footer.astro} Astro </a> -
+    {new Date().getFullYear()}
+  </p>
+</footer>

@@ -1,0 +1,103 @@
+---
+interface Props {
+  title: string;
+  pngImage: string;
+  webpImage: string;
+  description: string;
+  slug: string;
+  isExternalProject: boolean;
+  href: string;
+  technology: string;
+  scripts: string;
+  styles: string;
+}
+import { getI18N } from "@/i18n";
+import { getLangFromUrl, useTranslatedPath } from "@/i18n/locales/utils";
+
+import Link from "./Link.astro";
+
+const i18n = getI18N({ currentLocale: Astro.currentLocale });
+
+const {
+  title,
+  pngImage,
+  webpImage,
+  description,
+  slug,
+  isExternalProject,
+  href,
+  scripts,
+  styles,
+  technology,
+} = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+
+const translatePath = useTranslatedPath(lang);
+---
+
+<div
+  class="flex flex-col gap-8 border border-primary p-4 rounded-sm shadow-primary shadow-md justify-between items-center bg-base-200"
+>
+  <h2
+    class="bg-primary text-white px-2 py-1 -translate-y-8 uppercase rounded"
+    transition:name={slug}
+  >
+    {title}
+  </h2>
+
+  <div>
+    <picture>
+      <source srcset={webpImage} />
+      <img src={pngImage} alt={title} />
+    </picture>
+    <div class="flex flex-col gap-1 py-2">
+      {
+        isExternalProject && (
+          <>
+            <p class="text-md  flex items-center gap-2">
+              {i18n.general.technology}:
+              <span class="text-slate-400 capitalize text-sm">
+                {technology}
+              </span>
+            </p>
+            <p class="text-md flex items-center gap-2">
+              {i18n.general.styles}:
+              <span class="text-slate-400 capitalize text-sm">{styles}</span>
+            </p>
+            <p class="text-md flex items-center gap-2">
+              Scripts:
+              <span class="text-slate-400 capitalize text-sm">{scripts}</span>
+            </p>
+          </>
+        )
+      }
+    </div>
+    <p class="text-gray-800 dark:text-gray-400 text-sm h-12">{description}</p>
+  </div>
+
+  <ul class="flex justify-around w-full">
+    {
+      isExternalProject ? (
+        <>
+          <Link
+            label={i18n.general.more}
+            className="py-1 px-3 rounded-sm uppercase text-md text-white transition-colors cursor-pointer bg-blue-500 shadow-lg shadow-blue-500/50 hover:opacity-85 active:shadow-inset buttons-more"
+            href={`projects/${slug}`}
+          />
+          <Link
+            target="_blank"
+            label={i18n.general.go}
+            className="py-1 px-3 rounded-sm uppercase text-md text-white transition-colors cursor-pointer bg-indigo-500 shadow-lg shadow-indigo-500/50 hover:opacity-85 active:shadow-inset"
+            href={href}
+          />
+        </>
+      ) : (
+        <Link
+          label={i18n.general.go}
+          className="py-1 px-3 rounded-sm uppercase text-md text-white transition-colors cursor-pointer bg-indigo-500 shadow-lg shadow-indigo-500/50 hover:opacity-85 active:shadow-inset"
+          href={translatePath(`/${href ? href : ""}`, lang)}
+        />
+      )
+    }
+  </ul>
+</div>

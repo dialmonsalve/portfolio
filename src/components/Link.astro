@@ -1,0 +1,16 @@
+---
+interface Props {
+  href: string;
+  label: string;
+  className?: string;
+  target?: "_blank" | "_self" | "_parent" | "_top";
+}
+
+const { href, label, className, target = "_self" } = Astro.props;
+---
+
+<li class="list-none">
+  <a target={target} referrerpolicy="no-referrer" href={href} class={className}>
+    {label}
+  </a>
+</li>

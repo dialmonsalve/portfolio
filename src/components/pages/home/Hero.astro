@@ -1,0 +1,38 @@
+---
+import { getI18N } from "@/i18n/";
+
+const currentLocale = Astro.currentLocale;
+const i18n = getI18N({ currentLocale });
+
+const { home } = i18n;
+---
+
+<article class="flex flex-col gap-2 self-center">
+  <picture class="w-25 block mx-auto">
+    <source srcset="/dialmonsalve.webp" type="image/webp" />
+    <img
+      src="/dialmonsalve.png"
+      alt="dialmonsalve"
+      class="rounded-full block mx-auto mt-8 lg:mt-10"
+    />
+  </picture>
+  <h1 class="text-center leading-11 text-2xl lg:text-5xl text-info lg:mt-10">
+    {home.iAm}
+  </h1>
+  <ul
+    class="flex flex-col gap-3 xl:w-3/4 xl:mx-auto xl:grid xl:grid-cols-2 mt-3"
+  >
+    <li class="leading-5 text-xs text-error xl:text-[15px]">
+      {home.li1}
+    </li>
+    <li class="leading-5 text-xs xl:text-[15px]">
+      {home.li2}
+    </li>
+    <li class="leading-5 text-xs xl:text-[15px]">
+      {home.li3}
+    </li>
+    <li class="leading-5 text-xs text-error xl:text-[15px]">
+      {home.li4}
+    </li>
+  </ul>
+</article>

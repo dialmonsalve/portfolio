@@ -1,0 +1,88 @@
+---
+import { ClientRouter } from "astro:transitions";
+import { getLangFromUrl } from "@/i18n/locales/utils";
+
+import Header from "@/components/layout/Header.astro";
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
+import FAB from "@/components/FAB.astro";
+
+import "../styles/global.css";
+import Footer from "@/components/layout/Footer.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  isNotFound?: boolean;
+}
+
+const { title, description, isNotFound = false } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+---
+
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.dialmonsalve.com" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_CO" />
+    <meta
+      property="og:site_name"
+      content="Portfolio Diego Monsalve - dialmonsalve"
+    />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content="https://www.dialmonsalve.com" />
+    <meta
+      property="og:image"
+      content="https://www.dialmonsalve.com/og-image.jpg"
+    />
+
+    <meta property="og:image:alt" content="Descripción de la imagen OG" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta
+      name="twitter:image"
+      content="https://www.dialmonsalve.com/twitter-image.jpg"
+    />
+
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <meta name="theme-color" content="#f0f0f0" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <title>{title}</title>
+    <script is:inline src="/js/theme.js"></script>
+    <ClientRouter />
+  </head>
+  <body
+    class="bg-[url('/images/background.webp')] bg-cover bg-center bg-no-repeat"
+  >
+    <Header />
+
+    <main class="pt-14 p-1 lg:pt-10">
+      <Breadcrumbs isNotFound={isNotFound} />
+      <FAB />
+    </main>
+    <slot />
+    <Footer />
+
+    <script src="@/lib/animations/setup.ts"></script>
+
+  </body>
+</html>

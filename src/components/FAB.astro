@@ -1,0 +1,64 @@
+---
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations,
+} from "@/i18n/locales/utils";
+import Icon from "./Icon.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+---
+
+<div class="fab">
+  <div tabindex="0" role="button" class="btn btn-lg btn-circle btn-success">
+    <Icon name="menu" class="w-7" />
+  </div>
+
+  <ul
+    class="menu bg-base-200 rounded-box flex flex-col justify-between content-between"
+  >
+    <li>
+      <a
+        class="tooltip tooltip-left"
+        href={translatePath("/", lang)}
+        data-tip={t("home")}
+      >
+        <Icon name="home" class="w-5" />
+        {t("home")}
+      </a>
+    </li>
+    <li>
+      <a
+        class="tooltip tooltip-left"
+        href={translatePath("/about", lang)}
+        data-tip={t("about")}
+      >
+        <Icon name="info" class="w-5" />
+        {t("about")}
+      </a>
+    </li>
+    <li>
+      <a
+        class="tooltip tooltip-left"
+        href={translatePath("/projects", lang)}
+        data-tip={t("projects")}
+      >
+        <Icon name="projects" class="w-5" />{t("projects")}
+      </a>
+    </li>
+  </ul>
+</div>
+
+<style>
+  @reference "../styles/global.css";
+  .fab {
+    opacity: 0;
+    transform: translateY(-100vh);
+    bottom: 8rem;
+  }
+  .fab {
+    @apply md:right-15 lg:right-20;
+  }
+</style>
