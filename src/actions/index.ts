@@ -2,8 +2,6 @@ import { ActionError, defineAction } from "astro:actions";
 import { z } from "astro/zod";
 
 import { Resend } from "resend";
-
-// import { env } from "cloudflare:workers";
 import { RESEND_API_KEY } from "astro:env/server";
 
 export const prerender = false;
@@ -14,8 +12,6 @@ interface Form {
   description: string;
   phone?: string;
 }
-
-// const RESEND_API_KEY = import.meta.env.RESEND_API_KEY;
 
 const html = ({ name, email, description, phone }: Form) => `
   <h2>Nuevo mensaje desde <a href='dialmonsalve.com' >dialmonsalve.com</a></h2>
@@ -44,8 +40,6 @@ const sendEmail = defineAction({
   }),
 
   handler: async ({ description, email, name, phone }) => {
-
-    // const apiKey = env.RESEND_API_KEY || RESEND_API_KEY;
 
     const resend = new Resend(RESEND_API_KEY);
 

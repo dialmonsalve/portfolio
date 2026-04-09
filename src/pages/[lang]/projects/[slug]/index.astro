@@ -1,34 +1,20 @@
 ---
-export const prerender = true;
-import { getCollection, render } from "astro:content";
+import { render } from "astro:content";
 import Link from "@/components/Link.astro";
 import Layout from "@/layouts/MainLayout.astro";
 import { getI18N } from "@/i18n";
 
-export const getStaticPaths = async () => {
-  const [projectsEs, projectsEn] = await Promise.all([
-    getCollection("projects_es"),
-    getCollection("projects_en"),
-  ]);
+import { getEntry } from "astro:content";
 
-  const pathsEs = projectsEs.map((p) => {
-    return {
-      params: { lang: "es", slug: p.data.slug },
-      props: { project: p },
-    };
-  });
+const { lang, slug } = Astro.params;
+const collection = lang === "es" ? "projects_es" : "projects_en";
 
-  const pathsEn = projectsEn.map((p) => {
-    return {
-      params: { lang: "en", slug: p.data.slug },
-      props: { project: p },
-    };
-  });
+if (!slug) {
+  return Astro.redirect(`/404`);
+}
+const project = await getEntry(collection, slug);
 
-  return [...pathsEs, ...pathsEn];
-};
-
-const { project } = Astro.props;
+// const { project } = Astro.props;
 
 if (!project) {
   return Astro.redirect(`/404`);
@@ -47,9 +33,7 @@ const {
   styles,
   technology,
   title,
-  slug
 } = project.data;
-
 
 const { Content } = await render(project);
 ---
@@ -94,11 +78,15 @@ const { Content } = await render(project);
       <Content />
     </div>
     <p class="text-base">
-      <span class="font-bold uppercase text-error">{i18n.general.description}:</span>
+      <span class="font-bold uppercase text-error"
+        >{i18n.general.description}:</span
+      >
       {description}
     </p>
     <p class="text-base">
-      <span class="font-bold uppercase text-error">{i18n.general.technology}:</span>
+      <span class="font-bold uppercase text-error"
+        >{i18n.general.technology}:</span
+      >
       {technology}
     </p>
     <p class="text-base">
