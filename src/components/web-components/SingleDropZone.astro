@@ -9,15 +9,16 @@ import Icon from "../Icon.astro";
   data-page=""
   data-aspect="single-drop-zone"
   data-height={720}
-  data-width={516}
+  data-width={480}
+
 >
   <div
-    class="flex flex-col gap-2 h-130 w-100 items-center"
+    class="flex flex-col gap-2 h-130 w-8/10  lg:w-auto items-center mx-auto"
     id="parent-single-drop-zone"
   >
     <label
       for="single-file-upload"
-      class="flex flex-col items-center justify-center border-2 border-dashed border-gray-400 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-700 dark:border-blue-800 single-drop-zone h-130 w-100"
+      class="flex flex-col items-center justify-center border-2 border-dashed border-gray-400 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-700 dark:border-blue-800 single-drop-zone h-130 w-62.5 md:w-75 lg:w-100"
       id="single-drop-zone"
     >
       <div class="flex flex-col items-center justify-center pt-5 pb-6">

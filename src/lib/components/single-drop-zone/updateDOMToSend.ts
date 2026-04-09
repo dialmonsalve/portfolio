@@ -80,6 +80,7 @@ export class UpdateDOMToSend {
     if (!this.parentImages) {
       const container = document.createElement("div");
       container.id = "parent-images";
+      container.classList.add("w-70")
       return container;
     }
 
@@ -89,7 +90,8 @@ export class UpdateDOMToSend {
       "w-full",
       "justify-items-center",
       "flex-col",
-      "gap-1"
+      "gap-1",
+      "max-w-70"
     );
     return this.parentImages as HTMLElement;
   };

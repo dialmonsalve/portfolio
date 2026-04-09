@@ -118,7 +118,8 @@ export abstract class AbstractUpdateDOM {
         "grid-cols-2",
         "w-full",
         "justify-items-center",
-        "items-center"
+        "items-center",
+        "max-w-70"
       );
       return container;
     }

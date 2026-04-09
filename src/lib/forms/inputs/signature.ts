@@ -67,7 +67,7 @@ export class Signature {
     buttonClear.textContent = "clear";
 
     canvas.height = 150;
-    canvas.width = 400;
+    canvas.width = 250;
 
     const buttonUpdate = button(
       {

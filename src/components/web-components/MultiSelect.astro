@@ -18,7 +18,7 @@ const data = [
   name={"dial-multi-select"}
   placeholder={"Elija sus opciones"}
 >
-  <div class="relative w-100">
+  <div class="relative w-75">
     <div
       tabindex="0"
       class="px-2 py-1 outline-none border border-gray-400 rounded-md focus:ring-2 focus:ring-blue-600 focus:outline-2 focus:outline-offset-4 transition-all hover:cursor-pointer min-h-9 shadow select-none"
@@ -26,7 +26,7 @@ const data = [
     >
     </div>
     <ul
-      class="hidden absolute w-full left-0 z-10 px-2 py-1.5 border border-gray-200 rounded-md max-h-50 min-h-5 overflow-y-auto un-order-list"
+      class="hidden absolute w-full left-0 z-10 px-2 py-1.5 border border-gray-200 rounded-md max-h-50 min-h-5 overflow-y-auto un-order-list bg-base-300"
     >
       {
         data.map(({ name }, idx) => (

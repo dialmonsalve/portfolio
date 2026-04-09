@@ -21,7 +21,7 @@ export default function sign({ id, name, clear }: Signature) {
   if (window.innerWidth > breakpoint) {
     signCanvas.width = 400;
   } else {
-    signCanvas.width = 200;
+    signCanvas.width = 250;
   }
 
   function draw(cursorX: number, cursorY: number) {

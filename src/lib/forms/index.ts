@@ -97,7 +97,7 @@ class FormsApp extends HTMLElement {
   private setupEventListeners() {
     let incrementId = 0;
     const classes =
-      "block px-3 py-2 border border-gray-300 rounded-md text-sm shadow-sm focus:outline-none focus:ring-1 focus:ring-sky-500";
+      "block px-3 py-2 border border-gray-300 rounded-md text-sm shadow-sm focus:outline-none focus:ring-1 focus:ring-sky-500 w-40 md:w-auto";
 
     this.buttonCreate?.addEventListener("click", (evt) => {
       incrementId++;
