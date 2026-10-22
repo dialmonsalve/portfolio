@@ -1,9 +1,20 @@
 import { ui, defaultLang, routes } from './ui';
 
+export function getPathname(url: URL) {
+  const pathname = url.pathname
+    .replace(/(\/index)?\.html$/, '')
+    .replace(/\/+$/, '');
+  return pathname || '/';
+}
+
 export function getLangFromUrl(url: URL):"es" | "en" {
-  const [, lang] = url.pathname.split('/');
+  const [, lang] = getPathname(url).split('/');
   if (lang in ui) return lang as keyof typeof ui;
   return defaultLang;
+}
+
+export function getLangStaticPaths() {
+  return Object.keys(ui).map((lang) => ({ params: { lang } }));
 }
 
 export function useTranslations(lang: keyof typeof ui) {
@@ -30,7 +41,7 @@ export function useTranslatedPath(lang: keyof typeof ui) {
 }
 
 export function getRouteFromUrl(url: URL): string | undefined {
-  const pathname = new URL(url).pathname;
+  const pathname = getPathname(new URL(url));
   const parts = pathname?.split('/').filter(Boolean);
 
   if (parts.length < 2) return '/';

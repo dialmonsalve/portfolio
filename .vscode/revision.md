@@ -21,7 +21,6 @@ Primera parte: configuración, formulario de contacto, layout, header, hero, pá
 
 ## ⚪ Calidad y rendimiento
 
-- [ ] **18. `output: "server"` en todo el sitio.** Prerenderizar las páginas y dejar bajo demanda solo la action. Pendiente de decidir: el commit `48df06e` pasó a propósito la página de proyecto de prerender a SSR.
 - [ ] **19. Remitente de pruebas `@resend.dev`.** `replyTo: email` ya está puesto. Falta verificar `dialmonsalve.com` en Resend (registros DNS en Cloudflare) y, después, cambiar `from` a `contacto@dialmonsalve.com`. Si se cambia antes de verificar, los correos fallan.
 
 ---

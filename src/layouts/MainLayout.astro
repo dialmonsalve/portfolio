@@ -1,6 +1,6 @@
 ---
 import { ClientRouter } from "astro:transitions";
-import { getLangFromUrl } from "@/i18n/locales/utils";
+import { getLangFromUrl, getPathname } from "@/i18n/locales/utils";
 
 import Header from "@/components/layout/Header.astro";
 import Breadcrumbs from "@/components/Breadcrumbs.astro";
@@ -20,9 +20,9 @@ const { title, description, isNotFound = false } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 
 const site = Astro.site ?? Astro.url.origin;
-const routePath = Astro.url.pathname
+const routePath = getPathname(Astro.url)
   .replace(/^\/(es|en)(?=\/|$)/, "")
-  .replace(/\/+$/, "");
+  .replace(/^\/$/, "");
 const toAbsolute = (path: string) => new URL(path, site).href;
 const canonicalUrl = toAbsolute(`/${lang}${routePath}`);
 const alternates = [

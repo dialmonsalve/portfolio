@@ -1,5 +1,5 @@
 ---
-import { getLangFromUrl, useTranslations } from "@/i18n/locales/utils";
+import { getLangFromUrl, getPathname, useTranslations } from "@/i18n/locales/utils";
 
 interface Props {
   isNotFound?: boolean;
@@ -7,13 +7,15 @@ interface Props {
 
 const { isNotFound = false } = Astro.props;
 
+const pathname = getPathname(Astro.url);
+
 function createBreadcrumbs() {
-  const lang = Astro.url.pathname.startsWith("/en") ? "en" : "es";
+  const lang = pathname.startsWith("/en") ? "en" : "es";
   const homeName = lang === "es" ? "inicio" : "home";
   
   const langPath = `/${lang}`;
 
-  const cleanRoute = Astro.url.pathname
+  const cleanRoute = pathname
     .replace(new RegExp(`^\\/${lang}`), "")
     .replace(/^\/+|\/+$/g, "");
 
@@ -46,7 +48,7 @@ const t = useTranslations(getLangFromUrl(Astro.url));
       <ul class="flex gap-1 pt-4 lg:pt-10 lg:pl-10">
         {breadcrumbs.map(({ href, name }) => (
           <li class="flex gap-1 items-center text-[12px]">
-            {href !== Astro.url.pathname && href !== `${Astro.url.pathname}/` ? (
+            {href !== pathname ? (
               <a
                 class="block py-0.5 px-2 bg-green-700 rounded-r-xl text-white text-[12px] md:text-sm"
                 href={href}

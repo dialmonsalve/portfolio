@@ -44,7 +44,18 @@ const i18n = getI18N({ currentLocale });
   </div>
   <p class="text-[14px] flex items-center gap-1">
     <Icon name="astro-pink" class="w-6" />
-    <a href="https://astro.build/" class="hover:underline"> {i18n.footer.astro} Astro </a> -
-    {new Date().getFullYear()}
+    <a href="https://astro.build/" class="hover:underline"> {i18n.footer.astro} Astro </a>
+    <span>- <span data-current-year>{new Date().getFullYear()}</span></span>
   </p>
 </footer>
+
+<script>
+  function updateCurrentYear() {
+    const year = `${new Date().getFullYear()}`;
+    document.querySelectorAll("[data-current-year]").forEach((element) => {
+      if (element.textContent !== year) element.textContent = year;
+    });
+  }
+
+  document.addEventListener("astro:page-load", updateCurrentYear);
+</script>

@@ -1,7 +1,11 @@
 ---
+export const prerender = true;
 import Layout from "@/layouts/MainLayout.astro";
 
 import { getI18N } from "@/i18n";
+import { getLangStaticPaths } from "@/i18n/locales/utils";
+
+export const getStaticPaths = getLangStaticPaths;
 
 const currentLocale = Astro.currentLocale;
 
