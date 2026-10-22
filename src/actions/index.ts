@@ -55,6 +55,14 @@ const sendEmail = defineAction({
 
   handler: async ({ description, email, name, phone }) => {
 
+    if (!RESEND_API_KEY) {
+      console.error("Falta la variable RESEND_API_KEY");
+      throw new ActionError({
+        code: "INTERNAL_SERVER_ERROR",
+        message: "Error al enviar el email. Inténtalo de nuevo más tarde.",
+      });
+    }
+
     const resend = new Resend(RESEND_API_KEY);
 
     const { data, error } = await resend.emails
