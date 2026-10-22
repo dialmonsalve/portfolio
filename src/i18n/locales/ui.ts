@@ -6,12 +6,18 @@ export const ui: Record<language, Record<string, string>> = {
   es: {
     home: "inicio",
     projects: "proyectos",
-    about: "acerca de"
+    about: "acerca de",
+    menu: "menú de navegación",
+    breadcrumbs: "ruta de navegación",
+    addTag: "agregar tag",
   },
   en: {
     home: "home",
     projects: "projects",
-    about: "about"
+    about: "about",
+    menu: "navigation menu",
+    breadcrumbs: "breadcrumb",
+    addTag: "add tag",
   },
 } as const;
 

@@ -134,16 +134,29 @@ export class Typography {
 
     const paragraph = parentInputs.lastElementChild?.querySelector("p");
 
-    const newTitle = paragraph?.innerHTML;
+    const textContent = paragraph ? this.readMultiline(paragraph) : "";
 
-    const textContent = newTitle?.replace(/<br\s*\/?>/gi, "\n");
-
-    containerInput.setAttribute("new_value", textContent || "");
+    containerInput.setAttribute("new_value", textContent);
 
     parentDiv.appendChild(containerInput);
 
     return parentDiv;
   };
+
+  private readMultiline(element: Element) {
+    return Array.from(element.childNodes)
+      .map((node) => (node.nodeName === "BR" ? "\n" : node.textContent ?? ""))
+      .join("");
+  }
+
+  private writeMultiline(element: Element, text: string) {
+    const nodes = text
+      .split("\n")
+      .flatMap((line, index) =>
+        index === 0 ? [line] : [document.createElement("br"), line],
+      );
+    element.replaceChildren(...nodes);
+  }
 
   private update(target: HTMLButtonElement) {
     const parentContainer = target.closest(".container-components");
@@ -167,13 +180,11 @@ export class Typography {
 
       const newValue = containerInput.change
         ? containerInput.value.trim()
-        : paragraph?.innerHTML?.trim() || "";
+        : this.readMultiline(paragraph).trim();
 
       if (newValue === "") return;
 
-      const text = newValue.replace(/\n/g, "<br>");
-
-      paragraph!.innerHTML = text || "";
+      this.writeMultiline(paragraph, newValue);
     }
 
     if (this.type === "heading") {

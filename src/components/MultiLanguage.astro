@@ -26,7 +26,7 @@ const route = getRouteFromUrl(Astro.url);
       Object.entries(LANGUAGES).map(([lang, label]) => (
         <li>
           <a
-            class="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start capitalize"
+            class="w-full btn btn-sm btn-block btn-ghost justify-start capitalize"
             href={translatePath(`/${route ? route : '/'}`, lang)}
           >
             {label}
@@ -36,40 +36,3 @@ const route = getRouteFromUrl(Astro.url);
     }
   </ul>
 </div>
-
-<script>
-  class ButtonLanguage extends HTMLElement {
-    constructor() {
-      super();
-      const buttonLanguage = this.querySelector('#language');
-      const language = this.querySelector('#language-container');
-
-      const container = document.querySelector('body');
-
-      buttonLanguage?.addEventListener('click', (evt) => {
-        evt.stopPropagation();
-        language?.classList.toggle('hidden');
-      });
-
-      container?.addEventListener('click', () => {
-        if (!language?.classList.contains('hidden')) {
-          language?.classList.add('hidden');
-        }
-      });
-    }
-  }
-
-  customElements.define('button-language', ButtonLanguage);
-</script>
-
-<style>
-  .language {
-    opacity: 1;
-    transition:
-      opacity 0.3s ease-in-out,
-      display 0.1s ease-in-out allow-discrete;
-    @starting-style {
-      opacity: 0;
-    }
-  }
-</style>

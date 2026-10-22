@@ -18,45 +18,64 @@ interface Props {
 const { title, description, isNotFound = false } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
+
+const site = Astro.site ?? Astro.url.origin;
+const routePath = Astro.url.pathname
+  .replace(/^\/(es|en)(?=\/|$)/, "")
+  .replace(/\/+$/, "");
+const toAbsolute = (path: string) => new URL(path, site).href;
+const canonicalUrl = toAbsolute(`/${lang}${routePath}`);
+const alternates = [
+  { hreflang: "es", href: toAbsolute(`/es${routePath}`) },
+  { hreflang: "en", href: toAbsolute(`/en${routePath}`) },
+  { hreflang: "x-default", href: toAbsolute(`/es${routePath}`) },
+];
+const ogLocale = lang === "en" ? "en_US" : "es_CO";
+const ogLocaleAlternate = lang === "en" ? "es_CO" : "en_US";
 ---
 
 <html lang={lang}>
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="description" content={description} />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://www.dialmonsalve.com" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    {
+      isNotFound ? (
+        <meta name="robots" content="noindex, follow" />
+      ) : (
+        <>
+          <meta name="robots" content="index, follow" />
+          <link rel="canonical" href={canonicalUrl} />
+          {alternates.map(({ hreflang, href }) => (
+            <link rel="alternate" hreflang={hreflang} href={href} />
+          ))}
+        </>
+      )
+    }
 
     <meta property="og:type" content="website" />
-    <meta property="og:locale" content="es_CO" />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:locale:alternate" content={ogLocaleAlternate} />
     <meta
       property="og:site_name"
       content="Portfolio Diego Monsalve - dialmonsalve"
     />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content="https://www.dialmonsalve.com" />
-    <meta
-      property="og:image"
-      content="https://www.dialmonsalve.com/og-image.jpg"
-    />
+    {!isNotFound && <meta property="og:url" content={canonicalUrl} />}
+    <meta property="og:image" content={toAbsolute("/og-image.jpg")} />
 
-    <meta property="og:image:alt" content="Descripción de la imagen OG" />
+    <meta property="og:image:alt" content={title} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta
       name="twitter:image"
-      content="https://www.dialmonsalve.com/twitter-image.jpg"
+      content={toAbsolute("/twitter-image.jpg")}
     />
 
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
-
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 

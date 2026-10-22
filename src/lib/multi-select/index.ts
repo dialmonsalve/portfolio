@@ -39,6 +39,7 @@ class DialMultiSelect extends HTMLElement {
       "all-selected-msg pointer-events-none text-xs hidden";
     this.ul.appendChild(this.allSelectedMsg);
 
+    this.setupAria();
     this.setupStyles();
     this.setupEventListeners();
     this.setupClickHandlers();
@@ -98,10 +99,10 @@ class DialMultiSelect extends HTMLElement {
     span.setAttribute("data-id", `${id}`);
     span.className =
       "selected-item bg-blue-100 text-blue-800 px-2 py-0.5 rounded-md mr-1 text-xs inline-block mb-0.5 hover:bg-red-200 hover:text-red-600";
-    span.innerHTML = `
-      ${text}
-      <span class="delete-btn ml-1 cursor-pointer hover:text-red-600">x</span>
-    `;
+    const deleteButton = document.createElement("span");
+    deleteButton.className = "delete-btn ml-1 cursor-pointer hover:text-red-600";
+    deleteButton.textContent = "x";
+    span.append(`${text} `, deleteButton);
 
     span.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -136,6 +137,27 @@ class DialMultiSelect extends HTMLElement {
     this.updateListItemsVisibility();
   }
 
+  private setupAria() {
+    const uid = `multi-select-${crypto.randomUUID()}`;
+    this.ul.id ||= `${uid}-listbox`;
+    this.ul.setAttribute("role", "listbox");
+    this.ul.setAttribute("aria-multiselectable", "true");
+
+    this.div.setAttribute("role", "combobox");
+    this.div.setAttribute("aria-haspopup", "listbox");
+    this.div.setAttribute("aria-expanded", "false");
+    this.div.setAttribute("aria-controls", this.ul.id);
+    if (this.placeholder) this.div.setAttribute("aria-label", this.placeholder);
+
+    this.ul.querySelectorAll("li").forEach((li) => this.setupOption(li));
+    this.allSelectedMsg.setAttribute("aria-disabled", "true");
+  }
+
+  private setupOption(li: HTMLLIElement) {
+    li.setAttribute("role", "option");
+    li.id ||= `${this.ul.id}-option-${li.dataset.id ?? crypto.randomUUID()}`;
+  }
+
   private updateDom() {
     this.values.map((value) => {
       this.addSelectedItem(value.label, value.dataId);
@@ -146,6 +168,7 @@ class DialMultiSelect extends HTMLElement {
       li.classList =
         "cursor-pointer hover:shadow p-0.5 rounded-md transition-all hover:bg-blue-500 text-xs hover:text-white py-2 px-2";
       li.textContent = value.label;
+      this.setupOption(li);
       this.ul.appendChild(li);
 
       this.updateListItemsVisibility();
@@ -369,6 +392,7 @@ class DialMultiSelect extends HTMLElement {
     if (this.visibleItems[this.selectedIndex]) {
       const selectedItem = this.visibleItems[this.selectedIndex];
       selectedItem.classList.add("shadow", "bg-blue-500", "text-white");
+      this.div.setAttribute("aria-activedescendant", selectedItem.id);
       selectedItem.scrollIntoView({ block: "nearest", behavior: "smooth" });
     }
   }
@@ -376,6 +400,7 @@ class DialMultiSelect extends HTMLElement {
   private showDropdown() {
     this.ul.classList.remove("hidden", "opacity-0", "translate-y-[-10px]");
     this.ul.classList.add("opacity-100", "translate-y-0");
+    this.div.setAttribute("aria-expanded", "true");
     this.updateVisibleItems();
     if (this.visibleItems.length > 0) {
       this.updateSelection(0);
@@ -384,6 +409,8 @@ class DialMultiSelect extends HTMLElement {
 
   private hideDropdown() {
     this.ul.classList.add("hidden");
+    this.div.setAttribute("aria-expanded", "false");
+    this.div.removeAttribute("aria-activedescendant");
     this.selectedIndex = -1;
     this.visibleItems.forEach((item) =>
       item.classList.remove("shadow", "bg-blue-500", "text-white")

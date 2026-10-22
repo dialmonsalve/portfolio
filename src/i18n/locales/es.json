@@ -4,6 +4,8 @@
     "technology": "Tecnología",
     "styles": "Estilos",
     "go": "ir",
+    "screenshot": "Captura {n} de {title}",
+    "newTab": "(se abre en una pestaña nueva)",
     "description": "descripción",
     "more": "más",
     "abilities": [

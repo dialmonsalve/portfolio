@@ -173,6 +173,8 @@ export class UpdateDOMToSend {
       await AnimationService.animateRemove(parentElement, "spinOut");
     }
 
+    if (image.src.startsWith("blob:")) URL.revokeObjectURL(image.src);
+
     this.config.dropZone.classList.remove("hidden");
   };
 

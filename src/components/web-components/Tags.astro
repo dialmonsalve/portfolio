@@ -1,6 +1,9 @@
 ---
 import Input from "@/components/form/Input.astro";
 import Label from "@/components/form/Label.astro";
+import { getLangFromUrl, useTranslations } from "@/i18n/locales/utils";
+
+const t = useTranslations(getLangFromUrl(Astro.url));
 ---
 
 <dial-multi-tags>
@@ -9,6 +12,7 @@ import Label from "@/components/form/Label.astro";
     <Label for="input-tags" absolute label="tags" />
     <button
       type="button"
+      aria-label={t("addTag")}
       class="absolute right-3 top-1.5 text-[10px] cursor-pointer py-1 px-2 border border-gray-300 bg-blue-500 text-white text-center rounded-full hover:opacity-80"
       >+</button
     >

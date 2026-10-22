@@ -5,6 +5,8 @@
     "technology": "Technology",
     "styles": "Styles",
     "go": "go",
+    "screenshot": "Screenshot {n} of {title}",
+    "newTab": "(opens in a new tab)",
     "description": "description",
     "more": "more",
     "abilities": [

@@ -16,9 +16,13 @@ const files = import.meta.glob<string>("../icons/**/*.svg", {
 const filepath = `../icons/${name}.svg`;
 const svgContent = files[filepath];
 
+if (!svgContent) {
+  console.error(`[Icon] El icono "${name}" no se encontró en src/icons/`);
+}
+
 let scopedSvg = svgContent;
 
-if (svgContent.includes("<style")) {
+if (svgContent?.includes("<style")) {
   const uniqueClass = `icon-${name}`;
 
   scopedSvg = scopedSvg.replace("<svg", `<svg class="${uniqueClass}"`);
@@ -30,15 +34,12 @@ if (svgContent.includes("<style")) {
     },
   );
 }
-
-if (!svgContent) {
-  console.error(`[Icon] El icono "${name}" no se encontró en src/icons/`);
-}
 ---
 
 {
   svgContent ? (
     <span
+      aria-hidden="true"
       class={`inline-flex items-center justify-center ${className}`}
       style={style}
       set:html={scopedSvg}

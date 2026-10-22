@@ -10,12 +10,12 @@ const { lang, slug } = Astro.params;
 const collection = lang === "es" ? "projects_es" : "projects_en";
 
 if (!slug) {
-  return Astro.redirect(`/404`);
+  return Astro.rewrite("/404");
 }
 const project = await getEntry(collection, slug);
 
 if (!project) {
-  return Astro.redirect(`/404`);
+  return Astro.rewrite("/404");
 }
 
 const { currentLocale } = Astro;
@@ -65,7 +65,9 @@ const { Content } = await render(project);
             />
             <img
               src={`/images/${slug}/png/${idx + 1}.png`}
-              alt=""
+              alt={i18n.general.screenshot
+                .replace("{n}", `${idx + 1}`)
+                .replace("{title}", title)}
               class="max-w-full h-70 object-cover block rounded-xl shadow-md shadow-gray-300 dark:shadow-slate-600"
             />
           </picture>

@@ -81,6 +81,8 @@ export class UpdateDOMToUpload extends AbstractUpdateDOM {
       await AnimationService.animateRemove(parentElement, this.animations);
     }
 
+    if (image.src.startsWith("blob:")) URL.revokeObjectURL(image.src);
+
     const countImages = this.modifyParagraph();
 
     if (countImages === 0) {

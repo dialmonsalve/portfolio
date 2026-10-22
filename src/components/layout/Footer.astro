@@ -27,6 +27,7 @@ const i18n = getI18N({ currentLocale });
     >
       <Icon name="linkedin" class="w-6 text-white" />
       Linkedin
+      <span class="sr-only">{i18n.general.newTab}</span>
     </a>
     <a
       target="_blank"
@@ -35,6 +36,7 @@ const i18n = getI18N({ currentLocale });
     >
       <Icon name="github" class="w-6 text-white" style="fill:white;" />
       Github
+      <span class="sr-only">{i18n.general.newTab}</span>
     </a>
     <a href={translatePath("/about", lang)} class="hover:underline"
       >{t("about")}</a

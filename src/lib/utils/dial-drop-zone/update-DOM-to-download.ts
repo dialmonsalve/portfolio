@@ -41,9 +41,7 @@ export class UpdateDOMToDownload extends AbstractUpdateDOM {
     if (lastLink) {
       if (imgs.length > 1) {
         downloadImages.multiple(imgs).then((resp) => {
-          const zipUrl = URL.createObjectURL(resp);
-          lastLink.href = zipUrl;
-          lastLink.download = "imagenes.zip";
+          this.setZipLink(lastLink, resp);
         });
       } else {
         downloadImages.simple(lastLink, imgs[0]);
@@ -64,9 +62,7 @@ export class UpdateDOMToDownload extends AbstractUpdateDOM {
 
       if (imgs.length > 1) {
         downloadImages.multiple(imgs).then((resp) => {
-          const zipUrl = URL.createObjectURL(resp);
-          link.href = zipUrl;
-          link.download = "imagenes.zip";
+          this.setZipLink(link, resp);
         });
       } else {
         downloadImages.simple(link, imgs[0]);
@@ -77,6 +73,21 @@ export class UpdateDOMToDownload extends AbstractUpdateDOM {
       return container;
     }
   };
+
+  private setZipLink(link: HTMLAnchorElement, zip: Blob) {
+    this.revokeZipLink(link);
+    const zipUrl = URL.createObjectURL(zip);
+    link.dataset.zipUrl = zipUrl;
+    link.href = zipUrl;
+    link.download = "imagenes.zip";
+  }
+
+  private revokeZipLink(link: HTMLAnchorElement) {
+    if (link.dataset.zipUrl) {
+      URL.revokeObjectURL(link.dataset.zipUrl);
+      delete link.dataset.zipUrl;
+    }
+  }
 
   protected async deleteImages(images: ImageOptimized[], imageName: string) {
     const downloadImages = new DownLoadImages();
@@ -97,10 +108,9 @@ export class UpdateDOMToDownload extends AbstractUpdateDOM {
 
       if (imgs.length > 1) {
         const zipBlob = await downloadImages.multiple(imgs);
-        const zipUrl = URL.createObjectURL(zipBlob);
-        lastLink.href = zipUrl;
-        lastLink.download = "imagenes.zip";
+        this.setZipLink(lastLink, zipBlob);
       } else {
+        this.revokeZipLink(lastLink);
         downloadImages.simple(lastLink, imgs[0]);
       }
     }
@@ -117,12 +127,15 @@ export class UpdateDOMToDownload extends AbstractUpdateDOM {
       await AnimationService.animateRemove(parentElement, this.animations);
     }
 
+    if (image.src.startsWith("blob:")) URL.revokeObjectURL(image.src);
+
     const countImages = this.modifyParagraph();
 
     if (countImages === 0) {
       const button = document.querySelector("#save-images") as HTMLElement;
 
       button.classList.add("pointer-events-none");
+      if (button instanceof HTMLAnchorElement) this.revokeZipLink(button);
 
       button.parentElement?.remove();
       document.querySelector("#parent-images")?.remove();

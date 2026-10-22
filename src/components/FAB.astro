@@ -12,7 +12,12 @@ const translatePath = useTranslatedPath(lang);
 ---
 
 <div class="fab">
-  <div tabindex="0" role="button" class="btn btn-lg btn-circle btn-success">
+  <div
+    tabindex="0"
+    role="button"
+    aria-label={t("menu")}
+    class="btn btn-lg btn-circle btn-success"
+  >
     <Icon name="menu" class="w-7" />
   </div>
 
