@@ -1,5 +1,18 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "portfolio",
-  "compatibility_date": "2026-04-01"
+  "compatibility_date": "2026-04-01",
+  "routes": [
+    {
+      "pattern": "dialmonsalve.com",
+      "zone_name": "dialmonsalve.com",
+      "custom_domain": true
+    }
+  ],
+  "kv_namespaces": [
+    {
+      "binding": "SESSION",
+      "id": "66cb35c24c394d0e90119dcff0f9e89e"
+    }
+  ]
 }
