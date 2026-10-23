@@ -4,7 +4,7 @@ Primera parte: configuración, formulario de contacto, layout, header, hero, pá
 
 ## 🔴 Seguridad (formulario de contacto)
 
-- [ ] **2. Turnstile: falta la configuración en Cloudflare.** El código ya está (widget `interaction-only` y verificación con `siteverify` en la action). Falta: crear el widget en Cloudflare, poner `TURNSTILE_SITE_KEY` como variable de build y `TURNSTILE_SECRET_KEY` como secreto del Worker, y añadir una regla de *Rate limiting* para `POST /_actions/sendEmail`. Sin las llaves, el formulario en producción rechaza todos los envíos.
+- [ ] **2. Turnstile: falta el Rate limiting.** El widget y la verificación ya están en producción (la *Site Key* va fija en `ContactForm.astro` porque es pública; la secreta es el secreto `TURNSTILE_SECRET_KEY` del Worker). Falta añadir una regla de *Rate limiting* en Cloudflare para `POST /_actions/sendEmail`.
 
 ## ⚪ Calidad y rendimiento
 

@@ -24,7 +24,7 @@ const escapeHtml = (value: string) =>
 const TURNSTILE_TEST_SECRET = "1x0000000000000000000000000000000AA";
 
 const verifyTurnstile = async (token: string | undefined, ip: string | null) => {
-  const secret = TURNSTILE_SECRET_KEY ?? (import.meta.env.DEV ? TURNSTILE_TEST_SECRET : undefined);
+  const secret = import.meta.env.DEV ? TURNSTILE_TEST_SECRET : TURNSTILE_SECRET_KEY;
 
   if (!secret) {
     console.error("Falta la variable TURNSTILE_SECRET_KEY");

@@ -22,11 +22,6 @@ export default defineConfig({
         access: "secret",
         optional: true,
       }),
-      TURNSTILE_SITE_KEY: envField.string({
-        context: "client",
-        access: "public",
-        optional: true,
-      }),
     },
   },
 
