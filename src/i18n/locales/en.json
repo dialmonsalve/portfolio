@@ -59,6 +59,8 @@
       "sending": "Sending…",
       "success": "Message sent! I'll get back to you soon.",
       "error": "The message couldn't be sent. Please try again later.",
+      "captchaError": "We couldn't verify that you're not a robot. Reload the page and try again.",
+      "captchaLabel": "Security check",
       "errors": {
         "name.too_small": "Your name must be at least 3 characters long",
         "name.too_big": "Your name can't be longer than 80 characters",
@@ -74,8 +76,7 @@
     "li1": "More than 2 years of professional experience in software development",
     "li2": "Analytical ability to solve complex problems and continuously improve systems",
     "li3": "Technical training in process optimization, inventory management and logistics, currently applied to the design of efficient software architectures",
-    "li4": "Experience in creating indicators (KPIs), dashboards and workflow automation (Macros/Google Data Studio)",
-    "projectsWebTitle": "Mi projects"
+    "li4": "Experience in creating indicators (KPIs), dashboards and workflow automation (Macros/Google Data Studio)"
   },
   "projects": {
     "formats": "WEBP, PNG, JPG, JPEG or AVIF",
@@ -150,7 +151,40 @@
       "multiSelectPlaceholder": "Choose your options",
       "multiSelectHelp1": "Press Enter or Space, or click, to select an option",
       "multiSelectHelp2": "Use the up and down arrows to move between options",
-      "title": "web components"
+      "title": "web components",
+      "carousel": {
+        "title": "Carousel",
+        "help": "Use the left and right arrows, or swipe, to change slides",
+        "label": "Carousel features",
+        "previous": "Previous slide",
+        "next": "Next slide",
+        "pause": "Pause automatic rotation",
+        "play": "Resume automatic rotation",
+        "goTo": "Go to slide {n}",
+        "slideOf": "{n} of {total}",
+        "slides": [
+          {
+            "title": "Accessible",
+            "text": "ARIA roles, visible focus and full keyboard control."
+          },
+          {
+            "title": "Touch-friendly",
+            "text": "Swipe with your finger: each slide snaps into place."
+          },
+          {
+            "title": "Pausable",
+            "text": "It stops on hover, on focus or with the pause button."
+          },
+          {
+            "title": "No rush",
+            "text": "If your system asks for reduced motion, it never advances on its own."
+          },
+          {
+            "title": "Theme-aware",
+            "text": "It uses the colors of the active theme, light or dark."
+          }
+        ]
+      }
     }
   },
   "about": {

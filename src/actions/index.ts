@@ -2,7 +2,7 @@ import { ActionError, defineAction } from "astro:actions";
 import { z } from "astro/zod";
 
 import { Resend } from "resend";
-import { RESEND_API_KEY } from "astro:env/server";
+import { RESEND_API_KEY, TURNSTILE_SECRET_KEY } from "astro:env/server";
 
 export const prerender = false;
 
@@ -21,6 +21,37 @@ const escapeHtml = (value: string) =>
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 
+const TURNSTILE_TEST_SECRET = "1x0000000000000000000000000000000AA";
+
+const verifyTurnstile = async (token: string | undefined, ip: string | null) => {
+  const secret = TURNSTILE_SECRET_KEY ?? (import.meta.env.DEV ? TURNSTILE_TEST_SECRET : undefined);
+
+  if (!secret) {
+    console.error("Falta la variable TURNSTILE_SECRET_KEY");
+    return false;
+  }
+
+  if (!token) return false;
+
+  const body = new FormData();
+  body.append("secret", secret);
+  body.append("response", token);
+  if (ip) body.append("remoteip", ip);
+
+  try {
+    const response = await fetch(
+      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+      { method: "POST", body },
+    );
+    const result = (await response.json()) as { success: boolean; "error-codes"?: string[] };
+    if (!result.success) console.error("Turnstile rechazó el token:", result["error-codes"]);
+    return result.success;
+  } catch (err) {
+    console.error("Error al verificar Turnstile:", err);
+    return false;
+  }
+};
+
 const html = ({ name, email, description, phone }: Form) => `
   <h2>Nuevo mensaje desde <a href='https://dialmonsalve.com'>dialmonsalve.com</a></h2>
   <p>Ha recibido un nuevo mensaje de ${escapeHtml(name)}!</p>
@@ -30,7 +61,6 @@ const html = ({ name, email, description, phone }: Form) => `
 `;
 
 const sendEmail = defineAction({
-  
   accept: "form",
   input: z.object({
     name: z
@@ -51,9 +81,21 @@ const sendEmail = defineAction({
       .trim()
       .max(20, "El teléfono no puede superar los 20 caracteres")
       .optional(),
+    "cf-turnstile-response": z.string().max(2048).optional(),
   }),
 
-  handler: async ({ description, email, name, phone }) => {
+  handler: async (
+    { description, email, name, phone, "cf-turnstile-response": token },
+    { request },
+  ) => {
+    const human = await verifyTurnstile(token, request.headers.get("CF-Connecting-IP"));
+
+    if (!human) {
+      throw new ActionError({
+        code: "FORBIDDEN",
+        message: "No se pudo verificar que no eres un robot.",
+      });
+    }
 
     if (!RESEND_API_KEY) {
       console.error("Falta la variable RESEND_API_KEY");

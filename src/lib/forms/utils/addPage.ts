@@ -74,5 +74,5 @@ export default function addPage({
 
   parentButton.remove();
 
-  smooth();
+  smooth(page);
 }

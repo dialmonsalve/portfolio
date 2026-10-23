@@ -1,104 +1,64 @@
-enum Color {
-  "yellow" = "yellow",
-  "green" = "green",
-  "purple" = "purple",
-  "red" = "red",
-}
+import { clientT } from "@/lib/i18n";
 
 interface IModal {
   title: string;
-  type?: Color;
   content?: () => HTMLElement | undefined;
   action?: (e: MouseEvent) => void;
-  twoButtons?: boolean;
 }
+
+let titleCount = 0;
 
 export default class Modal {
   private readonly title: string;
-  private readonly twoButtons?: boolean;
   private content?: () => HTMLElement | undefined;
   private action?: (e: MouseEvent) => void;
 
-  constructor({ title, twoButtons, content, action }: IModal) {
+  constructor({ title, content, action }: IModal) {
     this.title = title;
     this.content = content;
-    this.twoButtons = twoButtons;
     this.action = action;
   }
 
   build = () => {
-    const windowModal = document.querySelector(".my-modal.show-modal");
+    if (document.querySelector("dialog.form-modal")) return;
 
-    if (windowModal) return;
+    const opener = document.activeElement as HTMLElement | null;
+    const titleId = `form-modal-title-${++titleCount}`;
 
-    const body = document.querySelector("body");
-
-    const modal = document.createElement("div");
-    modal.classList.add(
-      "my-modal",
-      "show-modal",
-      "absolute",
-      "w-full",
-      "h-screen",
-      "top-0",
-      "z-999",
-      "flex",
-      "bg-white/10",
-      "dark:bg-slate/10",
-      "backdrop-blur-xs"
-    );
+    const modal = document.createElement("dialog");
+    modal.className = "form-modal modal modal-bottom sm:modal-middle";
+    modal.setAttribute("aria-labelledby", titleId);
 
     const containerModal = document.createElement("div");
-    containerModal.classList.add(
-      "rounded-md",
-      "max-w-100",
-      "w-100",
-      "bg-gray-100",
-      "mx-auto",
-      "my-auto",
-      "p-6",
-      "flex",
-      "flex-col",
-      "items-center",
-      "gap-6",
-      "border-t-4",
-      "border-green-500"
-    );
+    containerModal.className =
+      "modal-box flex w-full max-w-md flex-col gap-6 border border-base-300 bg-base-100 p-6 text-base-content shadow-none";
 
-    const modalHeader = this.header();
-
-    containerModal.appendChild(modalHeader);
-
-    const nodeChild = this.body();
-    containerModal.appendChild(nodeChild);
-
-    const modalFooter = this.footer(modal);
-
-    containerModal.appendChild(modalFooter);
+    containerModal.appendChild(this.header(titleId));
+    containerModal.appendChild(this.body());
+    containerModal.appendChild(this.footer(modal));
 
     modal.appendChild(containerModal);
 
     modal.addEventListener("click", (e) => {
-      const target = e.target as HTMLDivElement;
-      if (target.classList.contains("show-modal")) this.closeModal(target);
+      if (e.target === modal) this.closeModal(modal);
     });
 
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") this.closeModal(modal);
+    modal.addEventListener("close", () => {
+      modal.remove();
+      opener?.focus({ preventScroll: true });
     });
 
-    body?.appendChild(modal);
+    document.body.appendChild(modal);
+    modal.showModal();
   };
 
-  private header = () => {
-    const modalHeader = document.createElement("div");
-    modalHeader.classList.add("modal-header");
-
-    const titleModal = document.createElement("p");
-    titleModal.classList.add("uppercase", "dark:text-slate-800");
+  private header = (titleId: string) => {
+    const titleModal = document.createElement("h2");
+    titleModal.id = titleId;
+    titleModal.className =
+      "border-b border-base-300 pb-3 text-lg font-semibold first-letter:uppercase";
     titleModal.textContent = this.title;
-    modalHeader.appendChild(titleModal);
-    return modalHeader;
+    return titleModal;
   };
 
   private body = () => {
@@ -111,59 +71,34 @@ export default class Modal {
     return nodeChild;
   };
 
-
-  private footer = (modal: HTMLDivElement) => {
+  private footer = (modal: HTMLDialogElement) => {
     const modalFooter = document.createElement("div");
-    modalFooter.classList.add("flex", "self-end", "gap-4");
+    modalFooter.className = "flex justify-end gap-2 border-t border-base-300 pt-4";
 
-    const buttonFooter1 = document.createElement("button");
-    buttonFooter1.classList.add(
-      "text-white",
-      "py-2",
-      "px-4",
-      "rounded-md",
-      "shadow-2xs",
-      "shadow-gray-300",
-      "uppercase",
-      "bg-green-600",
-      "cursor-pointer",
-      "hover:opacity-80"
-    );
-    buttonFooter1.textContent = "ok";
+    const buttonAccept = document.createElement("button");
+    buttonAccept.type = "button";
+    buttonAccept.className = "btn btn-primary btn-sm";
+    buttonAccept.textContent = clientT("save");
 
-    const buttonFooter2 = document.createElement("button");
-    buttonFooter2.classList.add(
-      "text-white",
-      "py-2",
-      "px-4",
-      "rounded-md",
-      "shadow-2xs",
-      "shadow-gray-300",
-      "uppercase",
-      "bg-red-400",
-      "cursor-pointer",
-      "hover:opacity-80"
-    );
-    buttonFooter2.textContent = "Cancel";
+    const buttonCancel = document.createElement("button");
+    buttonCancel.type = "button";
+    buttonCancel.className = "btn btn-ghost btn-sm border-base-300";
+    buttonCancel.textContent = clientT("cancel");
 
-    modalFooter.appendChild(buttonFooter1);
-    if (this.twoButtons) modalFooter.appendChild(buttonFooter2);
+    modalFooter.appendChild(buttonCancel);
+    modalFooter.appendChild(buttonAccept);
 
-    if (this.action) {
-      buttonFooter1.addEventListener("click", this.action);
-    }
+    buttonAccept.addEventListener("click", (e) => {
+      this.action?.(e);
+      this.closeModal(modal);
+    });
 
-    buttonFooter1.addEventListener("click", () => this.closeModal(modal));
-
-    buttonFooter2.addEventListener("click", () => this.closeModal(modal));
+    buttonCancel.addEventListener("click", () => this.closeModal(modal));
 
     return modalFooter;
   };
 
-  closeModal = (modal: HTMLDivElement) => {
-    modal.classList.add("hide-modal");
-    setTimeout(() => {
-      modal.remove();
-    }, 300);
+  closeModal = (modal: HTMLDialogElement) => {
+    modal.close();
   };
 }

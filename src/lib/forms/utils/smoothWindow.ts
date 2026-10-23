@@ -1,7 +1,15 @@
-export default function smooth() {
-    const scroller = document.querySelector("main");
-    scroller?.scrollTo({
-        top: scroller.scrollHeight - window.innerHeight + 220,
-        behavior: "smooth",
+export default function smooth(element?: Element | null) {
+  const cards = document.querySelector("#container-cards");
+  const target = element ?? cards?.lastElementChild?.lastElementChild ?? cards?.lastElementChild;
+
+  if (!target) return;
+
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  requestAnimationFrame(() => {
+    target.scrollIntoView({
+      behavior: reduced ? "auto" : "smooth",
+      block: "center",
     });
+  });
 }

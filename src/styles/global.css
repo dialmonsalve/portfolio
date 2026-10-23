@@ -105,17 +105,3 @@ div:has(.menu[type="checkbox"]:checked) + .container-elements {
   transform: translateX(0);
 }
 
-.show-modal {
-  transition:
-    opacity 0.25s ease-in-out,
-    display 0.25s ease-in-out;
-  transition-behavior: allow-discrete;
-  opacity: 1;
-  @starting-style {
-    opacity: 0;
-  }
-}
-
-.hide-modal {
-  opacity: 0;
-}

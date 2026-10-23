@@ -50,7 +50,6 @@ export class Typography {
       children: [element],
       action: (evt) =>
         new Modal({
-          twoButtons: true,
           title: `update ${this.type}`,
           content: () => this.bodyModal(evt.target as HTMLButtonElement),
           action: () => this.update(evt.target as HTMLButtonElement),

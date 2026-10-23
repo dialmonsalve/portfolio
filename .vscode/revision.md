@@ -4,7 +4,7 @@ Primera parte: configuración, formulario de contacto, layout, header, hero, pá
 
 ## 🔴 Seguridad (formulario de contacto)
 
-- [ ] **2. Sin anti-bots ni límite de envíos.** Añadir Cloudflare Turnstile (botón deshabilitado hasta tener token, verificación en el servidor con `siteverify`) y una regla de *Rate limiting* en Cloudflare para la ruta de la action. Para no tocar el diseño: `appearance: "interaction-only"`, pendiente de confirmar.
+- [ ] **2. Turnstile: falta la configuración en Cloudflare.** El código ya está (widget `interaction-only` y verificación con `siteverify` en la action). Falta: crear el widget en Cloudflare, poner `TURNSTILE_SITE_KEY` como variable de build y `TURNSTILE_SECRET_KEY` como secreto del Worker, y añadir una regla de *Rate limiting* para `POST /_actions/sendEmail`. Sin las llaves, el formulario en producción rechaza todos los envíos.
 
 ## ⚪ Calidad y rendimiento
 
@@ -18,5 +18,3 @@ Componentes, páginas de demo, i18n, contenido y scripts de `src/lib`.
 
 ## ⚪ Calidad y rendimiento
 
-- [ ] **40. Carrusel sin usar**: `Carousel.astro` y `mini-carousel.ts` (import comentado en la portada). Pendiente de decidir si se borra o se recupera. Si se recupera, a las flechas les falta `aria-label`, el título debe ser `h2` y "Ir" está sin traducir.
-- [ ] **41. El scroll del constructor de formularios no funciona**: [smoothWindow.ts](../src/lib/forms/utils/smoothWindow.ts), [navigateInPage.ts](../src/lib/forms/utils/navigateInPage.ts) y `smooth()` en [forms/index.ts](../src/lib/forms/index.ts) llaman a `main.scrollTo()`, pero `<main>` no tiene scroll propio, así que no hacen nada. Deberían desplazar `window`.

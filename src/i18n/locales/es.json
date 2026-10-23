@@ -58,6 +58,8 @@
       "sending": "Enviando…",
       "success": "¡Mensaje enviado! Te responderé pronto.",
       "error": "No se pudo enviar el mensaje. Inténtalo de nuevo más tarde.",
+      "captchaError": "No pudimos verificar que no eres un robot. Recarga la página e inténtalo de nuevo.",
+      "captchaLabel": "Verificación de seguridad",
       "errors": {
         "name.too_small": "El nombre debe tener al menos 3 caracteres",
         "name.too_big": "El nombre no puede superar los 80 caracteres",
@@ -74,8 +76,7 @@
     "li1": "Más de 2 Años profesionales en desarrollo de software",
     "li2": "Capacidad analítica para la resolución de problemas complejos y mejora continua de sistemas",
     "li3": "Formación técnica en optimización de procesos, gestión de inventarios y logística, aplicada actualmente al diseño de arquitecturas de software eficientes",
-    "li4": "Experiencia en la creación de indicadores (KPIs), dashboards y automatización de flujos de trabajo (Macros/Google Data Studio)",
-    "projectsWebTitle": "Mi proyectos"
+    "li4": "Experiencia en la creación de indicadores (KPIs), dashboards y automatización de flujos de trabajo (Macros/Google Data Studio)"
   },
   "projects": {
     "formats": "WEBP, PNG, JPG, JPEG o AVIF",
@@ -150,7 +151,40 @@
       "multiSelectPlaceholder": "Elige tus opciones",
       "multiSelectHelp1": "Pulsa Enter o Espacio, o haz clic, para seleccionar una opción",
       "multiSelectHelp2": "Usa las flechas arriba y abajo para moverte entre las opciones",
-      "title": "Componentes web"
+      "title": "Componentes web",
+      "carousel": {
+        "title": "Carrusel",
+        "help": "Usa las flechas izquierda y derecha, o desliza, para cambiar de diapositiva",
+        "label": "Características del carrusel",
+        "previous": "Diapositiva anterior",
+        "next": "Diapositiva siguiente",
+        "pause": "Pausar el avance automático",
+        "play": "Reanudar el avance automático",
+        "goTo": "Ir a la diapositiva {n}",
+        "slideOf": "{n} de {total}",
+        "slides": [
+          {
+            "title": "Accesible",
+            "text": "Roles ARIA, foco visible y control completo con el teclado."
+          },
+          {
+            "title": "Táctil",
+            "text": "Desliza con el dedo: cada diapositiva se ajusta sola a su lugar."
+          },
+          {
+            "title": "Pausable",
+            "text": "Se detiene al pasar el cursor, al enfocarlo o con el botón de pausa."
+          },
+          {
+            "title": "Sin prisas",
+            "text": "Si tu sistema pide reducir el movimiento, no avanza por sí solo."
+          },
+          {
+            "title": "Con tu tema",
+            "text": "Toma los colores del tema activo, claro u oscuro."
+          }
+        ]
+      }
     }
   },
   "about": {

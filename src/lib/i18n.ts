@@ -2,6 +2,7 @@ const messages = {
   es: {
     save: "Guardar",
     delete: "Eliminar",
+    cancel: "Cancelar",
     oneFileSelected: "1 archivo seleccionado",
     filesSelected: "{n} archivos seleccionados",
     unsupportedFiles: "Archivo o archivos no soportados",
@@ -10,6 +11,7 @@ const messages = {
   en: {
     save: "Save",
     delete: "Delete",
+    cancel: "Cancel",
     oneFileSelected: "1 file selected",
     filesSelected: "{n} files selected",
     unsupportedFiles: "Unsupported file or files",

@@ -1,0 +1,124 @@
+---
+import Icon from "@/components/Icon.astro";
+import { getI18N } from "@/i18n";
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+
+const carousel = i18n.projects.web_components.carousel;
+const total = carousel.slides.length;
+
+const tones = [
+  "bg-primary text-primary-content",
+  "bg-secondary text-secondary-content",
+  "bg-accent text-accent-content",
+  "bg-info text-info-content",
+  "bg-success text-success-content",
+];
+
+const format = (text: string, values: Record<string, number>) =>
+  Object.entries(values).reduce(
+    (result, [key, value]) => result.replace(`{${key}}`, `${value}`),
+    text,
+  );
+
+const controlClass =
+  "btn btn-circle btn-sm btn-ghost border-base-300 bg-base-100 hover:border-primary hover:bg-base-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+---
+
+<dial-carousel
+  class="block w-full"
+  data-messages={JSON.stringify({
+    pause: carousel.pause,
+    play: carousel.play,
+  })}
+>
+  <section
+    aria-roledescription="carousel"
+    aria-label={carousel.label}
+    class="flex flex-col gap-4 rounded-2xl border border-base-300 bg-base-200 p-4 sm:p-5"
+  >
+    <div class="flex items-center justify-between gap-3">
+      <button
+        type="button"
+        class={controlClass}
+        data-carousel-toggle
+        aria-label={carousel.pause}
+      >
+        <span data-icon-pause class="inline-flex"><Icon name="pause" class="w-4" /></span>
+        <span data-icon-play class="inline-flex" hidden><Icon name="play" class="w-4" /></span>
+      </button>
+
+      <div class="flex gap-2">
+        <button
+          type="button"
+          class={controlClass}
+          data-carousel-prev
+          aria-label={carousel.previous}
+        >
+          <Icon name="caret-left" class="w-4" />
+        </button>
+        <button
+          type="button"
+          class={controlClass}
+          data-carousel-next
+          aria-label={carousel.next}
+        >
+          <Icon name="caret-right" class="w-4" />
+        </button>
+      </div>
+    </div>
+
+    <div
+      class="relative flex snap-x snap-mandatory overflow-x-auto overscroll-x-contain rounded-xl [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      data-carousel-viewport
+      aria-live="off"
+    >
+      {
+        carousel.slides.map((slide, index) => (
+          <div
+            role="group"
+            aria-roledescription="slide"
+            aria-label={format(carousel.slideOf, { n: index + 1, total })}
+            class={`relative flex min-h-52 w-full overflow-hidden shrink-0 snap-center flex-col justify-between gap-6 rounded-xl p-6 sm:min-h-60 sm:p-8 ${tones[index % tones.length]}`}
+            data-carousel-slide
+          >
+            <span class="text-sm font-semibold tabular-nums opacity-80" aria-hidden="true">
+              {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+            </span>
+            <span
+              class="pointer-events-none absolute -bottom-8 right-4 hidden select-none text-[9rem] font-semibold leading-none tabular-nums opacity-15 sm:-bottom-12 sm:block sm:right-8 sm:text-[14rem]"
+              aria-hidden="true"
+            >
+              {index + 1}
+            </span>
+            <div class="relative flex flex-col gap-2">
+              <h3 class="text-2xl font-semibold tracking-tight sm:text-3xl">
+                {slide.title}
+              </h3>
+              <p class="max-w-md text-sm leading-6 sm:text-base">{slide.text}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="flex justify-center gap-1">
+      {
+        carousel.slides.map((_, index) => (
+          <button
+            type="button"
+            class="group grid size-6 cursor-pointer place-items-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-primary"
+            data-carousel-dot={index}
+            aria-label={format(carousel.goTo, { n: index + 1 })}
+            aria-current={index === 0 ? "true" : undefined}
+          >
+            <span class="block h-2 w-2 rounded-full bg-base-content/30 transition-all duration-200 group-hover:bg-base-content/60 group-aria-current:w-5 group-aria-current:bg-primary" />
+          </button>
+        ))
+      }
+    </div>
+  </section>
+</dial-carousel>
+
+<script src="@/lib/carousel/dial-carousel"></script>

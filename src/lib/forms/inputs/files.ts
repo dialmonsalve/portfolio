@@ -229,32 +229,26 @@ export class InputFiles {
     parentCheckbox.classList.add("grid", "grid-cols-3", "gap-2");
   
     checkboxFormats.map((check) => {
-      const containerCheck = document.createElement("div");
       const label = document.createElement("label");
-  
-      containerCheck.className =
-        "relative w-11 h-6 bg-gray-400 rounded-full peer dark:bg-gray-200 peer-focus:ring-4 peer-focus:ring-purple-300 dark:peer-focus:ring-purple-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-purple-600 dark:peer-checked:bg-purple-600";
   
       const isChecked = !!elementChecked?.split(",").includes(`.${check}`);
   
       const paragraph = document.createElement("p");
       const input = document.createElement("input");
   
-      input.className = "sr-only peer";
-      input.value = "";
+      input.className = "toggle toggle-primary toggle-sm";
       input.type = "checkbox";
       input.checked = isChecked;
       input.id = check;
       input.value = `.${check}`;
       input.setAttribute("name", check);
   
-      label.className = "flex gap-2 items-center me-5 cursor-pointer";
+      label.className = "flex cursor-pointer items-center gap-2 rounded-lg px-1 py-1 text-sm";
       label.htmlFor = check;
   
       paragraph.textContent = check;
   
       label.appendChild(input);
-      label.appendChild(containerCheck);
       label.appendChild(paragraph);
   
       parentCheckbox.appendChild(label);

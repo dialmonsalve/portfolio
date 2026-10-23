@@ -6,6 +6,7 @@ import { getI18N } from "@/i18n";
 import MultiTabs from "@/components/web-components/MultiTabs.astro";
 import MultiSelect from "@/components/web-components/MultiSelect.astro";
 import Tags from "@/components/web-components/Tags.astro";
+import Carousel from "@/components/web-components/Carousel.astro";
 import SingleDropZone from "@/components/web-components/SingleDropZone.astro";
 import { getLangStaticPaths } from "@/i18n/locales/utils";
 
@@ -32,36 +33,48 @@ const webComponentsProjects = i18n.meta.webComponentsProjects;
       {title}
     </h1>
 
-    <article class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-20">
-      <div class="flex flex-col gap-1">
-        <h2 class="uppercase text-muted">Multi Tabs</h2>
-        <MultiTabs />
-      </div>
-
-      <div class="flex flex-col gap-1">
-        <h2 class="uppercase text-muted">
-          Dial Drop Zone
-        </h2>
-        <SingleDropZone />
-      </div>
-
-      <div class="flex flex-col gap-1">
+    <div class="flex w-fit max-w-full flex-col gap-16">
+      <div class="flex w-full flex-col gap-1 contain-[inline-size]">
         <div class="uppercase text-muted">
-          <h2>Multi Select</h2>
+          <h2>{i18n.projects.web_components.carousel.title}</h2>
           <p class="text-xs text-muted">
-            {i18n.projects.web_components.multiSelectHelp1}
-          </p>
-          <p class="text-xs text-muted">
-            {i18n.projects.web_components.multiSelectHelp2}
+            {i18n.projects.web_components.carousel.help}
           </p>
         </div>
-        <MultiSelect />
+        <Carousel />
       </div>
 
-      <div class="flex flex-col gap-1">
-        <h2 class="uppercase text-muted">Tags</h2>
-        <Tags />
-      </div>
-    </article>
+      <article class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-20">
+        <div class="flex flex-col gap-1">
+          <h2 class="uppercase text-muted">Multi Tabs</h2>
+          <MultiTabs />
+        </div>
+
+        <div class="flex flex-col gap-1">
+          <h2 class="uppercase text-muted">
+            Dial Drop Zone
+          </h2>
+          <SingleDropZone />
+        </div>
+
+        <div class="flex flex-col gap-1">
+          <div class="uppercase text-muted">
+            <h2>Multi Select</h2>
+            <p class="text-xs text-muted">
+              {i18n.projects.web_components.multiSelectHelp1}
+            </p>
+            <p class="text-xs text-muted">
+              {i18n.projects.web_components.multiSelectHelp2}
+            </p>
+          </div>
+          <MultiSelect />
+        </div>
+
+        <div class="flex flex-col gap-1">
+          <h2 class="uppercase text-muted">Tags</h2>
+          <Tags />
+        </div>
+      </article>
+    </div>
   </section>
 </Layout>

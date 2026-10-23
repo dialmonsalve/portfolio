@@ -1,4 +1,5 @@
 import addPage from "./utils/addPage";
+import smooth from "./utils/smoothWindow";
 
 import { Container } from "./utils/container";
 
@@ -320,11 +321,7 @@ class FormsApp extends HTMLElement {
   };
 
   private smooth() {
-    const scroller = document.querySelector("main");
-    scroller?.scrollTo({
-      top: scroller.scrollHeight - window.innerHeight + 220,
-      behavior: "smooth",
-    });
+    smooth(this.containerCards?.lastElementChild?.lastElementChild);
   }
 }
 

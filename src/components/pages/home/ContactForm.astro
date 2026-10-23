@@ -2,6 +2,7 @@
 import Input from "@/components/form/Input.astro";
 import Label from "@/components/form/Label.astro";
 import { getI18N } from "@/i18n";
+import { TURNSTILE_SITE_KEY } from "astro:env/client";
 
 const currentLocale = Astro.currentLocale;
 const i18n = getI18N({ currentLocale });
@@ -40,17 +41,21 @@ const inputs: Form[] = [
   },
 ];
 
+const siteKey =
+  TURNSTILE_SITE_KEY ?? (import.meta.env.DEV ? "1x00000000000000000000AA" : "");
+
 const messages = {
   send: contact.send,
   sending: contact.sending,
   success: contact.success,
   error: contact.error,
+  captchaError: contact.captchaError,
   errors: contact.errors,
 };
 ---
 
 <article id="contact" class="w-full scroll-mt-24">
-  <send-form data-messages={JSON.stringify(messages)}>
+  <send-form data-messages={JSON.stringify(messages)} data-site-key={siteKey}>
     <form
       novalidate
       class="mx-auto flex w-full max-w-xl flex-col gap-5 rounded-xl border border-base-300 bg-base-200 p-6 shadow-sm sm:p-8"
@@ -90,7 +95,14 @@ const messages = {
         </div>
       </div>
 
-      <div class="flex justify-end">
+      <div class="flex flex-col items-stretch sm:items-end">
+        <div
+          data-turnstile
+          role="group"
+          aria-label={contact.captchaLabel}
+          class="w-full data-interactive:mb-4"
+        >
+        </div>
         <button
           type="submit"
           class="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 py-2.5 text-sm font-medium text-primary-content transition-opacity duration-200 hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
