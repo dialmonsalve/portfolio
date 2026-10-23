@@ -1,81 +1,41 @@
-import { ActionError, isActionError, isInputError } from "astro:actions";
+import { isInputError, type ActionError } from "astro:actions";
 
-type Inputs = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+type Field = HTMLInputElement | HTMLTextAreaElement;
 
-interface ErrorsCreate {
-  error: ActionError;
-  fields: Inputs[];
-  button: HTMLButtonElement;
-  oldTextButton: string;
+export function clearFieldError(field: Field) {
+  field.removeAttribute("aria-invalid");
+  field.removeAttribute("aria-describedby");
+  document.getElementById(`${field.id}-error`)?.remove();
 }
 
-export class Errors {
-  private readonly error: ActionError;
-  private readonly fields: Inputs[];
-  private readonly button: HTMLButtonElement;
-  private readonly oldTextButton: string;
-  constructor({ error, fields, button, oldTextButton }: ErrorsCreate) {
-    this.error = error;
-    this.fields = fields;
-    this.button = button;
-    this.oldTextButton = oldTextButton;
-  }
-  create = () => {
-    if (isInputError(this.error)) {
-      this.error.issues.map((err) => {
-        const path = err.path.toString();
-        this.fields.forEach((field) => {
-          if (path === field.id) {
-            this.updateDOM(err.message, field.parentNode);
-            this.button.disabled = false;
-            this.button.textContent = this.oldTextButton;
-          }
-        });
-      });
-    }
+export function showFieldErrors(
+  error: ActionError,
+  form: HTMLFormElement,
+  messages: Record<string, string>,
+) {
+  if (!isInputError(error)) return false;
 
-    if (isActionError(this.error)) {
-      const errors = this.error.message.split(",");
-      errors.map((message) => {
-        this.updateDOM(message, this.fields[0].parentNode!.parentNode, true);
-        this.button.disabled = false;
-        this.button.textContent = this.oldTextButton; 
-      });
-    }
-  };
+  let firstInvalid: Field | undefined;
 
-  private updateDOM = (
-    message: string,
-    parent: ParentNode | null,
-    backErrors?: boolean
-  ) => {
-    const paragraph = document.createElement("p");
+  error.issues.forEach((issue) => {
+    const path = issue.path.join(".");
+    const field = form.querySelector<Field>(`#${CSS.escape(path)}`);
+    const container = form.querySelector(`[data-field="${path}"]`);
+    if (!field || !container || field.hasAttribute("aria-invalid")) return;
 
-    paragraph.classList.add(
-      "bg-red-400",
-      "text-white",
-      "p-1",
-      "rounded-md",
-      "text-xs",
-      "animate-message",
-      "absolute",
-      "z-4"
-    );
-    paragraph.textContent = message;
-    const paragraphs = parent?.querySelectorAll("p");
+    const message = document.createElement("p");
+    message.id = `${field.id}-error`;
+    message.className = "mt-1.5 text-xs text-error-strong";
+    message.textContent =
+      messages[`${path}.${issue.code}`] ?? messages[path] ?? issue.message;
 
-    if (!backErrors) {
-      if (paragraphs?.length === 1)
-        paragraphs?.forEach((paragraph) => paragraph.remove());
-      parent?.appendChild(paragraph);
-    } else {
-      parent?.prepend(paragraph);
-    }
+    field.setAttribute("aria-invalid", "true");
+    field.setAttribute("aria-describedby", message.id);
+    container.appendChild(message);
 
-    paragraph.addEventListener("animationend", (e) => {
-      if (e.animationName === "messageExit") {
-        paragraph.remove();
-      }
-    });
-  };
+    firstInvalid ??= field;
+  });
+
+  firstInvalid?.focus();
+  return true;
 }

@@ -3,145 +3,160 @@ export const prerender = true;
 import Layout from "@/layouts/MainLayout.astro";
 
 import { getI18N } from "@/i18n";
-import { getLangStaticPaths } from "@/i18n/locales/utils";
+import {
+  getLangStaticPaths,
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations,
+} from "@/i18n/locales/utils";
 
 export const getStaticPaths = getLangStaticPaths;
 
 const currentLocale = Astro.currentLocale;
 
 const i18n = getI18N({ currentLocale });
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 
 const abilities = i18n.general.abilities;
+const { about } = i18n;
+const meta = i18n.meta.about;
 
-const about = i18n.meta.about;
+const pathParagraphs = [about.path.p2, about.path.p3, about.path.p4, about.path.p5];
+const likeParagraphs = [
+  about.iLike.p1,
+  about.iLike.p2,
+  about.iLike.p3,
+  about.iLike.p4,
+  about.iLike.p5,
+  about.iLike.p6,
+];
+
+const sections = [
+  { id: "about-path", number: "01", title: about.path.title },
+  { id: "about-interests", number: "02", title: about.iLike.title },
+];
+
+const linkClass =
+  "font-medium text-primary-strong underline decoration-primary/40 underline-offset-4 transition-colors hover:decoration-primary focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 ---
 
-<Layout title={about.metaTitle} description={about.metaDescription}>
-
-  <section class="flex flex-col lg:w-85/100 lg:mx-auto gap-3">
-    <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5 gap-2 xl:w-4/5 mx-auto mt-4">
-      {
-        abilities.map((ability) => (
-          <li class="badge text-xs badge-outline hover:bg-white hover:text-violet-500 transition-colors cursor-pointer">
-            {ability}
-          </li>
-        ))
-      }
-    </ul>
-    <article class="flex flex-col gap-2 self-center">
-      <h1
-        class="mt-8 mb-8 font-bold leading-5 text-2xl text-center"
+<Layout title={meta.metaTitle} description={meta.metaDescription}>
+  <section class="mx-auto w-full max-w-6xl px-4 pb-8 pt-6 sm:px-6 lg:pt-10">
+    <header class="max-w-3xl" data-reveal="scroll">
+      <p
+        class="text-sm font-semibold uppercase tracking-wider text-primary-strong first-letter:uppercase"
       >
-        {i18n.about.title}
+        {t("about")}
+      </p>
+      <h1
+        class="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl"
+      >
+        {about.title}
       </h1>
-    </article>
-    <article class="px-6">
-      <article class="grid grid-cols-1 lg:grid-cols-2 gap-2">
+      <p class="mt-5 text-lg leading-8 text-muted">{about.path.p1}</p>
+    </header>
+
+    <div
+      class="mt-12 grid gap-10 lg:mt-16 lg:grid-cols-[18rem_minmax(0,1fr)] lg:gap-16"
+    >
+      <aside class="flex flex-col gap-6 self-start lg:sticky lg:top-24">
         <div
-          class="border p-4 shadow-md border-primary rounded-md bg-white dark:bg-slate-700 shadow-primary"
+          class="rounded-2xl border border-base-300 bg-base-200 p-6"
+          data-reveal="scroll"
         >
-          <h2
-            class="text-center text-[18px] font-bold text-blue-400 md:text-xl"
-          >
-            {i18n.about.path.title}
-          </h2>
-          <p
-            class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
-          >
-            {i18n.about.path.p1}
-          </p>
-  
-          <p
-            class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
-          >
-            {i18n.about.path.p2}
-          </p>
-  
-          <p
-            class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
-          >
-            {i18n.about.path.p3}
-          </p>
-  
-          <p
-            class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
-          >
-            {i18n.about.path.p4}
-          </p>
-  
-          <p
-            class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
-          >
-            {i18n.about.path.p5}
-          </p>
-        </div>
-        <div class="hidden lg:block"></div>
-        <div class="hidden lg:block"></div>
-        <div
-         class="border p-4 shadow-md border-primary rounded-md bg-white dark:bg-slate-700 shadow-primary"
-        >
-          <h2
-            class="text-center text-[18px] font-bold text-blue-400 dark:text-blue-300 md:text-xl"
-          >
-            {i18n.about.iLike.title}
-          </h2>
-  
-          <p
-            class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
-          >
-            {i18n.about.iLike.p1}
-          </p>
-  
-          <p
-            class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
-          >
-            {i18n.about.iLike.p2}
-          </p>
-  
-          <p
-            class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
-          >
-            {i18n.about.iLike.p3}
-          </p>
-  
-          <p
-            class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
-          >
-            {i18n.about.iLike.p4}
-          </p>
-  
-          <p
-            class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
-          >
-            {i18n.about.iLike.p5}
-          </p>
-  
-          <p
-            class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
-          >
-            {i18n.about.iLike.p6}
-          </p>
-  
-          <p
-            class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
-          >
-            {i18n.about.iLike.p7a}
-            <a href="https://www.npmjs.com/package/dialui-components">npm</a>. {
-              i18n.about.iLike.p7b
-            }
+          <picture class="block">
+            <source srcset="/dialmonsalve.webp" type="image/webp" />
+            <img
+              src="/dialmonsalve.png"
+              alt={i18n.home.photoAlt}
+              width="128"
+              height="137"
+              class="size-20 rounded-full object-cover ring-2 ring-primary/30 ring-offset-2 ring-offset-base-200"
+            />
+          </picture>
+          <p class="mt-4 text-lg font-semibold">Diego Monsalve</p>
+          <ul class="mt-1 flex flex-col gap-0.5 text-sm text-muted">
+            {about.roles.map((role) => <li>{role}</li>)}
+          </ul>
+
+          <div class="mt-6 flex flex-wrap gap-2">
             <a
-              class="text-blue-400 dark:text-blue-300 hover:underline hover:opacity-80"
-              href="https://dialui-components.netlify.app/"
-              >{i18n.about.iLike.p7c}</a
-            >.
-          </p>
-          <p
-            class="leading-7 my-4 text-gray-700 dark:text-gray-300 text-xs md:text-sm"
-          >
-            {i18n.about.iLike.p8}
-          </p>
+              href={`${translatePath("/", lang)}#contact`}
+              class="btn btn-primary btn-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              {i18n.footer.contact}
+            </a>
+            <a
+              href={translatePath("/projects", lang)}
+              class="btn btn-ghost btn-sm border-base-300 capitalize focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              {t("projects")}
+            </a>
+          </div>
         </div>
-      </article>
-    </article>
+
+        <div data-reveal="scroll">
+          <h2
+            class="text-xs font-semibold uppercase tracking-wider text-muted"
+          >
+            {about.skills}
+          </h2>
+          <ul class="mt-3 flex flex-wrap gap-2">
+            {
+              abilities.map((ability) => (
+                <li class="rounded-full border border-base-300 bg-base-100 px-3 py-1 text-xs">
+                  {ability}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </aside>
+
+      <div class="flex max-w-prose flex-col gap-14">
+        <article aria-labelledby={sections[0].id} data-reveal="scroll">
+          <h2
+            id={sections[0].id}
+            class="flex items-baseline gap-3 text-2xl font-semibold tracking-tight"
+          >
+            <span class="text-sm font-semibold text-primary-strong" aria-hidden="true">
+              {sections[0].number}
+            </span>
+            {sections[0].title}
+          </h2>
+          <div class="mt-6 flex flex-col gap-5 text-base leading-7">
+            {pathParagraphs.map((paragraph) => <p>{paragraph}</p>)}
+          </div>
+        </article>
+
+        <article aria-labelledby={sections[1].id} data-reveal="scroll">
+          <h2
+            id={sections[1].id}
+            class="flex items-baseline gap-3 text-2xl font-semibold tracking-tight"
+          >
+            <span class="text-sm font-semibold text-primary-strong" aria-hidden="true">
+              {sections[1].number}
+            </span>
+            {sections[1].title}
+          </h2>
+          <div class="mt-6 flex flex-col gap-5 text-base leading-7">
+            {likeParagraphs.map((paragraph) => <p>{paragraph}</p>)}
+            <p>
+              {about.iLike.p7a}
+              <a href="https://www.npmjs.com/package/dialui-components" class={linkClass}>npm</a>.{" "}
+              {about.iLike.p7b}{" "}
+              <a href="https://dialui-components.netlify.app/" class={linkClass}>{about.iLike.p7c}</a>.
+            </p>
+            <p
+              class="rounded-xl border-l-4 border-primary bg-base-200 px-5 py-4 font-medium"
+            >
+              {about.iLike.p8}
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
   </section>
 </Layout>

@@ -13,7 +13,7 @@ const currentLocale = Astro.currentLocale;
 const i18n = getI18N({ currentLocale });
 
 const projects = await getCollection(
-  `projects_${currentLocale}` as "projects_es"
+  currentLocale === "en" ? "projects_en" : "projects_es",
 );
 
 const { meta } = i18n;
@@ -40,6 +40,8 @@ const { meta } = i18n;
             title={data.title}
             pngImage={data.pngImage}
             webpImage={data.webpImage}
+            imageWidth={data.imageWidth}
+            imageHeight={data.imageHeight}
             description={data.description}
             isExternalProject={true}
             href={data.href}
@@ -57,11 +59,22 @@ const { meta } = i18n;
     >
       {
         i18n.projects.internal_projects.map(
-          ({ description, href, pngImage, webpImage, slug, title }) => (
+          ({
+            description,
+            href,
+            pngImage,
+            webpImage,
+            imageWidth,
+            imageHeight,
+            slug,
+            title,
+          }) => (
             <Card
               title={title}
               pngImage={pngImage}
               webpImage={webpImage}
+              imageWidth={imageWidth}
+              imageHeight={imageHeight}
               description={description}
               slug={slug}
               isExternalProject={false}

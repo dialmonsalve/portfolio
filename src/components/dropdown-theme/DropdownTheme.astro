@@ -10,18 +10,17 @@ const i18n = getI18N({ currentLocale });
 ---
 
 <app-theme>
-  <div class="dropdown">
-    <div tabindex="0" role="button" class="btn m-1 btn-outline">
+  <details class="dropdown group">
+    <summary class="btn m-1 btn-outline list-none [&::-webkit-details-marker]:hidden">
       {i18n.general.theme}
-      <Icon name="arrow-down" class="w-2" />
-    </div>
+      <Icon name="arrow-down" class="w-2 transition-transform duration-200 group-open:rotate-180" />
+    </summary>
     <ul
-      tabindex="-1"
-      class="dropdown-content bg-base-300 rounded-box z-1 w-52 p-2 shadow-2xl -translate-x-30 md:-translate-x-25 lg:-translate-x-5"
+      class="dropdown-content rounded-box z-1 mt-1 w-52 border border-base-300 bg-base-100 p-2 shadow-lg -translate-x-30 md:-translate-x-25 lg:-translate-x-5"
     >
       <DropDownButtons />
     </ul>
-  </div>
+  </details>
 </app-theme>
 
 <script>
@@ -29,7 +28,8 @@ const i18n = getI18N({ currentLocale });
     constructor() {
       super();
       const element = document.documentElement;
-      const currentTheme = localStorage.getItem('theme') || 'light';
+      const currentTheme =
+        localStorage.getItem('theme') || element.dataset.theme || 'light';
 
       const radiosThemes = this.querySelectorAll<HTMLInputElement>(
         'input[type="radio"]'

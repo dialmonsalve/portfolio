@@ -1,5 +1,6 @@
 {
   "general": {
+    "iconsCredit": "Icons by Icons8",
     "configurations": "configurations",
     "language": "language",
     "technology": "Technology",
@@ -10,17 +11,19 @@
     "description": "description",
     "more": "more",
     "abilities": [
-      "soft skills",
+      "Soft skills",
       "Teamwork",
       "SEO",
       "RESTful APIs",
-      "UI/UX Design",
-      "Responsive Design",
-      "Version Control",
-      "Serverless Computing",
-      "Containerization",
-      "Gestión de bases de datos",
-      "Progressive Web Apps (PWA)"
+      "UI/UX design",
+      "Responsive design",
+      "Version control",
+      "Serverless",
+      "Containers",
+      "Server management",
+      "Network security",
+      "Database management",
+      "Progressive web apps (PWA)"
     ],
     "theme": "Theme",
     "themes": [
@@ -44,6 +47,29 @@
   },
   "home": {
     "send": "send",
+    "photoAlt": "Diego Monsalve, web developer",
+    "contact": {
+      "title": "Get in touch",
+      "subtitle": "Have a project or an offer? I'll get back to you within 48 hours.",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone (optional)",
+      "message": "Message",
+      "send": "Send",
+      "sending": "Sending…",
+      "success": "Message sent! I'll get back to you soon.",
+      "error": "The message couldn't be sent. Please try again later.",
+      "errors": {
+        "name.too_small": "Your name must be at least 3 characters long",
+        "name.too_big": "Your name can't be longer than 80 characters",
+        "email.invalid_format": "Enter a valid email address",
+        "email.too_big": "Your email can't be longer than 254 characters",
+        "email": "Enter a valid email address",
+        "phone.too_big": "The phone number can't be longer than 20 characters",
+        "description.too_small": "Tell me a little about what you need",
+        "description.too_big": "Your message can't be longer than 2000 characters"
+      }
+    },
     "iAm": "I'm, Diego Monsalve",
     "li1": "More than 2 years of professional experience in software development",
     "li2": "Analytical ability to solve complex problems and continuously improve systems",
@@ -52,6 +78,10 @@
     "projectsWebTitle": "Mi projects"
   },
   "projects": {
+    "formats": "WEBP, PNG, JPG, JPEG or AVIF",
+    "dragOne": "or drag the image",
+    "addPage": "add page",
+    "menuToggle": "Show or hide the form elements",
     "title": "projects",
     "subtitle": "Reduce the weight of your images by up to 50% and convert them from formats like PNG, JPG or JPEG to WebP quickly and easily.",
     "click": "Click here",
@@ -61,6 +91,8 @@
       {
         "title": "forms",
         "pngImage": "/images/internal-projects/forms.png",
+        "imageWidth": 1922,
+        "imageHeight": 993,
         "webpImage": "/images/internal-projects/forms.webp",
         "description": "create your forms, this project is made 100% in typescript without any js library",
         "slug": "project-form",
@@ -69,6 +101,8 @@
       {
         "title": "convert images",
         "pngImage": "/images/internal-projects/convert-image.png",
+        "imageWidth": 1323,
+        "imageHeight": 709,
         "webpImage": "/images/internal-projects/convert-image.webp",
         "description": "change your image format to webp",
         "slug": "convert-images",
@@ -77,6 +111,8 @@
       {
         "title": "web components",
         "pngImage": "/images/internal-projects/web-components.png",
+        "imageWidth": 1042,
+        "imageHeight": 885,
         "webpImage": "/images/internal-projects/web-components.webp",
         "description": "This is my set of javascript web components, made 100% in typescript",
         "slug": "web-components",
@@ -111,13 +147,18 @@
       }
     ],
     "web_components": {
+      "multiSelectPlaceholder": "Choose your options",
+      "multiSelectHelp1": "Press Enter or Space, or click, to select an option",
+      "multiSelectHelp2": "Use the up and down arrows to move between options",
       "title": "web components"
     }
   },
   "about": {
     "title": "Who am I?",
+    "roles": ["Web developer", "Productivity and Quality Engineer"],
+    "skills": "Skills",
     "path": {
-      "title": "Path",
+      "title": "Career path",
       "p1": "Since I started my working life at the age of 18, I have maintained constant progress, facing the challenges that life presents along the way.",
       "p2": "With over 10 years of experience in logistics and inventory management, 1 year in production, and 2+ year as a web developer, I have the necessary expertise to guide companies in creating and maintaining custom software tailored to their specific needs.",
       "p3": "This year as a web developer has allowed me to evolve in ways I never imagined. Initially, I started using Laravel with PHP, a language I was not familiar with, but thanks to my colleagues' help, we managed to carry out the company's most ambitious project: an employee application.",
@@ -125,7 +166,7 @@
       "p5": "During this time, I have been able to undertake amazing projects for the company I work for. These projects can be found in the section of this website cataloged as external projects."
     },
     "iLike": {
-      "title": "And... what do I like?",
+      "title": "What I enjoy",
       "p1": "I have a great passion for my family, web development, and tasks that  require mental effort.",
       "p2": "I value interpersonal relationships and seek to enrich my knowledge through interaction with others.",
       "p3": "I am enthusiastic about tackling every activity with passion and dedication. Additionally, I enjoy spending time with pleasant and enriching people. I consider myself a sociable person, open to new challenges.",
@@ -139,14 +180,19 @@
     }
   },
   "footer": {
-    "astro": "Made with"
+    "astro": "Made with",
+    "tagline": "Web developer. I build fast, accessible and carefully crafted interfaces.",
+    "navigation": "Navigation",
+    "connect": "Connect",
+    "contact": "Get in touch",
+    "backToTop": "Back to top"
   },
   "notFound": {
     "metaTitle": "Page Not Found | dialmonsalve",
     "metaDescription": "Sorry, we couldn't find this page. Browse our site to discover what you need.",
     "title": "Page not found",
     "subtitle": "Sorry, we couldn't find this page. Browse our site to discover what you need",
-    "textButton": "Back"
+    "textButton": "Go to the home page"
   },
   "meta": {
     "home": {

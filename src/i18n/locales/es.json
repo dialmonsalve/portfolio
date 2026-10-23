@@ -1,5 +1,6 @@
 {
   "general": {
+    "iconsCredit": "Iconos de Icons8",
     "configurations": "configuraciones",
     "technology": "Tecnología",
     "styles": "Estilos",
@@ -12,16 +13,16 @@
       "Habilidades blandas",
       "Trabajo en equipo",
       "SEO",
-      "RESTful APIs",
+      "APIs RESTful",
       "Diseño UI/UX",
       "Diseño responsivo",
       "Control de versiones",
       "Serverless",
-      "Containerization",
-      "Server Management",
-      "Network Security",
-      "Database Management",
-      "Apps Web Progresivas (PWA)"
+      "Contenedores",
+      "Administración de servidores",
+      "Seguridad de redes",
+      "Gestión de bases de datos",
+      "Apps web progresivas (PWA)"
     ],
     "theme": "Tema",
     "themes": [
@@ -45,6 +46,29 @@
   },
   "home": {
     "send": "enviar",
+    "photoAlt": "Diego Monsalve, desarrollador web",
+    "contact": {
+      "title": "Escríbeme",
+      "subtitle": "¿Tienes un proyecto o una propuesta? Te respondo en menos de 48 horas.",
+      "name": "Nombre",
+      "email": "Correo electrónico",
+      "phone": "Teléfono (opcional)",
+      "message": "Mensaje",
+      "send": "Enviar",
+      "sending": "Enviando…",
+      "success": "¡Mensaje enviado! Te responderé pronto.",
+      "error": "No se pudo enviar el mensaje. Inténtalo de nuevo más tarde.",
+      "errors": {
+        "name.too_small": "El nombre debe tener al menos 3 caracteres",
+        "name.too_big": "El nombre no puede superar los 80 caracteres",
+        "email.invalid_format": "Escribe un correo electrónico válido",
+        "email.too_big": "El correo no puede superar los 254 caracteres",
+        "email": "Escribe un correo electrónico válido",
+        "phone.too_big": "El teléfono no puede superar los 20 caracteres",
+        "description.too_small": "Cuéntame un poco sobre lo que necesitas",
+        "description.too_big": "El mensaje no puede superar los 2000 caracteres"
+      }
+    },
     "iAm": "Soy, Diego Monsalve",
     "subtitle1": "De profesión:",
     "li1": "Más de 2 Años profesionales en desarrollo de software",
@@ -54,6 +78,10 @@
     "projectsWebTitle": "Mi proyectos"
   },
   "projects": {
+    "formats": "WEBP, PNG, JPG, JPEG o AVIF",
+    "dragOne": "o arrastra la imagen",
+    "addPage": "agregar página",
+    "menuToggle": "Mostrar u ocultar los elementos del formulario",
     "title": "proyectos",
     "subtitle": "Reduzca hasta un 50% el peso de sus imágenes y conviértelas de formatos como png, jpg o jpeg a webp de manera fácil y rápida",
     "click": "Click aquí",
@@ -63,6 +91,8 @@
       {
         "title": "formularios",
         "pngImage": "/images/internal-projects/forms.png",
+        "imageWidth": 1922,
+        "imageHeight": 993,
         "webpImage": "/images/internal-projects/forms.webp",
         "description": "crea tus formularios, este proyecto está hecho 100% en typescript sin librerías js",
         "slug": "project-form",
@@ -71,6 +101,8 @@
       {
         "title": "conversor de imágenes",
         "pngImage": "/images/internal-projects/convert-image.png",
+        "imageWidth": 1323,
+        "imageHeight": 709,
         "webpImage": "/images/internal-projects/convert-image.webp",
         "description": "cambie el formato de sus imágenes a webp",
         "href": "projects/convert-images",
@@ -79,6 +111,8 @@
       {
         "title": "Componentes web",
         "pngImage": "/images/internal-projects/web-components.png",
+        "imageWidth": 1042,
+        "imageHeight": 885,
         "webpImage": "/images/internal-projects/web-components.webp",
         "description": "Este es mi set de componentes web hechos 100% en javascript",
         "slug": "web-components",
@@ -113,11 +147,16 @@
       }
     ],
     "web_components": {
+      "multiSelectPlaceholder": "Elige tus opciones",
+      "multiSelectHelp1": "Pulsa Enter o Espacio, o haz clic, para seleccionar una opción",
+      "multiSelectHelp2": "Usa las flechas arriba y abajo para moverte entre las opciones",
       "title": "Componentes web"
     }
   },
   "about": {
-    "title": "¿Quién Soy?",
+    "title": "¿Quién soy?",
+    "roles": ["Desarrollador web", "Ingeniero de productividad y calidad"],
+    "skills": "Habilidades",
     "path": {
       "title": "Trayectoria",
       "p1": "Desde que inicié mi vida laboral a los 18 años, he mantenido un progreso constante, enfrentando los desafíos que la vida presenta en el camino.",
@@ -127,7 +166,7 @@
       "p5": "Durante este tiempo he podido realizar proyectos increíbles para la compañía en la que trabajo. Estos proyectos se pueden encontrar en la sección de esta web catalogada como proyectos externos."
     },
     "iLike": {
-      "title": "¿Y... que me gusta?",
+      "title": "¿Y qué me gusta?",
       "p1": "Siento una gran pasión por mi familia, el desarrollo web y las tareas que requieren un esfuerzo mental.",
       "p2": "Valoro las relaciones interpersonales y busco enriquecer mi conocimiento a través de la interacción con los demás.",
       "p3": "Me entusiasma abordar cada actividad con pasión y dedicación. Además, disfruto pasar tiempo con personas amenas y enriquecedoras. Me considero una persona sociable y abierta a nuevos retos.",
@@ -141,14 +180,19 @@
     }
   },
   "footer": {
-    "astro": "hecho con"
+    "astro": "hecho con",
+    "tagline": "Desarrollador web. Construyo interfaces rápidas, accesibles y cuidadas.",
+    "navigation": "Navegación",
+    "connect": "Conecta",
+    "contact": "Escríbeme",
+    "backToTop": "Volver arriba"
   },
   "notFound": {
     "metaTitle": "Página no encontrada - dialmonsalve",
     "metaDescription": "Lo sentimos, la página que buscas no existe. Explora nuestro sitio para encontrar lo que necesitas.",
     "title": "Página no encontrada",
     "subtitle": "Lo sentimos, la página que buscas no existe. Explora nuestro sitio para encontrar lo que necesitas.",
-    "textButton": "Regresar"
+    "textButton": "Ir al inicio"
   },
   "meta": {
     "home": {

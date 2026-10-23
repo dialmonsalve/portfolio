@@ -21,6 +21,7 @@ export default defineConfig({
   },
 
   output: "server",
+  compressHTML: true,
   build: {
     format: "file",
   },

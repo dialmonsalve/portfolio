@@ -19,6 +19,8 @@ title: "dialui-components"
 slug: "dialui-components"
 
 pngImage: "/images/dialui-components/main.png"
+imageWidth: 1366
+imageHeight: 768
 webpImage: "/images/dialui-components/main.webp"
 
 metaTitle: "Diego Monsalve | React Component Library (NPM Package)"

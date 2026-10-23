@@ -10,7 +10,9 @@ import { getLangStaticPaths } from "@/i18n/locales/utils";
 export async function getStaticPaths() {
   const paths = await Promise.all(
     getLangStaticPaths().map(async ({ params: { lang } }) => {
-      const projects = await getCollection(`projects_${lang}` as "projects_es");
+      const projects = await getCollection(
+        lang === "en" ? "projects_en" : "projects_es",
+      );
       return projects.map((project) => ({
         params: { lang, slug: project.data.slug },
         props: { project },
@@ -44,14 +46,14 @@ const { Content } = await render(project);
 <Layout title={metaTitle} description={metaDescription}>
   <section class="flex flex-col gap-5 lg:w-80/100 mx-auto pt-10 px-4 md:p-1">
     <h1
-      class="uppercase text-center text-3xl text-primary"
+      class="uppercase text-center text-3xl text-primary-strong"
       transition:name={slug}
     >
       {title}
     </h1>
     <ul>
       <Link
-        className="bg-primary text-white w-fit px-4 rounded-xl shadow-2xl shadow-primary hover:opacity-80 capitalize"
+        className="bg-primary text-primary-content w-fit px-4 rounded-xl shadow-2xl shadow-primary hover:opacity-80 capitalize"
         href={href}
         label={i18n.general.go}
         target="_blank"
@@ -73,7 +75,7 @@ const { Content } = await render(project);
               alt={i18n.general.screenshot
                 .replace("{n}", `${idx + 1}`)
                 .replace("{title}", title)}
-              class="max-w-full h-70 object-cover block rounded-xl shadow-md shadow-gray-300 dark:shadow-slate-600"
+              class="max-w-full h-70 object-cover block rounded-xl shadow-md shadow-base-300"
             />
           </picture>
         ))
@@ -83,23 +85,23 @@ const { Content } = await render(project);
       <Content />
     </div>
     <p class="text-base">
-      <span class="font-bold uppercase text-error"
+      <span class="font-bold uppercase text-error-strong"
         >{i18n.general.description}:</span
       >
       {description}
     </p>
     <p class="text-base">
-      <span class="font-bold uppercase text-error"
+      <span class="font-bold uppercase text-error-strong"
         >{i18n.general.technology}:</span
       >
       {technology}
     </p>
     <p class="text-base">
-      <span class="font-bold uppercase text-error">{i18n.general.styles}:</span>
+      <span class="font-bold uppercase text-error-strong">{i18n.general.styles}:</span>
       {styles}
     </p>
     <p class="text-base">
-      <span class="font-bold uppercase text-error">Scripts:</span>
+      <span class="font-bold uppercase text-error-strong">Scripts:</span>
       {scripts}
     </p>
   </section>

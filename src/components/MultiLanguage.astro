@@ -13,21 +13,24 @@ const translatePath = useTranslatedPath(lang);
 const route = getRouteFromUrl(Astro.url);
 ---
 
-<div class="dropdown">
-  <div tabindex="0" role="button" class="btn btn-outline btn-primary">
+<details class="dropdown group">
+  <summary class="btn btn-outline btn-primary text-primary-strong hover:text-primary-content list-none [&::-webkit-details-marker]:hidden">
     {LANGUAGES[lang]}
-    <Icon name="arrow-down" class="w-3" />
-  </div>
-  <ul
-    tabindex="-1"
-    class="dropdown-content rounded-box z-1 bg-base-300 w-52 p-2 shadow-2xl"
-  >
+    <Icon name="arrow-down" class="w-3 transition-transform duration-200 group-open:rotate-180" />
+  </summary>
+  <ul class="dropdown-content rounded-box z-1 mt-1 w-52 border border-base-300 bg-base-100 p-2 shadow-lg">
     {
-      Object.entries(LANGUAGES).map(([lang, label]) => (
+      Object.entries(LANGUAGES).map(([code, label]) => (
         <li>
           <a
-            class="w-full btn btn-sm btn-block btn-ghost justify-start capitalize"
-            href={translatePath(`/${route ? route : '/'}`, lang)}
+            class:list={[
+              "w-full btn btn-sm btn-block justify-start capitalize",
+              code === lang ? "btn-primary" : "btn-ghost",
+            ]}
+            href={translatePath(`/${route ? route : '/'}`, code)}
+            hreflang={code}
+            lang={code}
+            aria-current={code === lang ? "true" : undefined}
           >
             {label}
           </a>
@@ -35,4 +38,4 @@ const route = getRouteFromUrl(Astro.url);
       ))
     }
   </ul>
-</div>
+</details>

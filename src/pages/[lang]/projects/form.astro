@@ -21,7 +21,7 @@ const formProjects = i18n.meta.formProjects;
     <section class="relative flex flex-col gap-4 pt-20 min-h-[72.2dvh] lg:min-h-[71dvh] 2xl:min-h-[73.8dvh] 3xl:min-h-[84dvh]" id="section-forms">
       <FormMenu />
       <h1
-        class="text-center text-2xl uppercase text-primary"
+        class="text-center text-2xl uppercase text-primary-strong"
         transition:name="project-form"
       >
         {i18n.projects.internal_projects[0].title}
@@ -36,9 +36,9 @@ const formProjects = i18n.meta.formProjects;
           id="card-1"
         >
           <button
-            class="absolute -top-5 right-0 text-primary text-xs flex gap-1 items-center cursor-pointer hover:scale-130 transition-all"
+            class="absolute -top-5 right-0 text-primary-strong text-xs flex gap-1 items-center cursor-pointer hover:scale-130 transition-all"
             id="add-page"
-            >add page<span class="button-square-add"></span>
+            >{i18n.projects.addPage}<span class="button-square-add" aria-hidden="true"></span>
           </button>
         </div>
       </article>
@@ -84,7 +84,15 @@ const formProjects = i18n.meta.formProjects;
   }
 
   .radio {
-    display: none;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+
+  .radio:focus-visible + .label-radio {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
   }
 
   .label-radio {
@@ -103,7 +111,7 @@ const formProjects = i18n.meta.formProjects;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2) inset;
   }
 
-  .radio:not(checked) + .label-radio {
+  .radio:not(:checked) + .label-radio {
     background-color: #80808051;
     box-shadow:
       1px 1px 2px rgba(0, 0, 0, 0.2),

@@ -1,3 +1,4 @@
+import { clientT } from "@/lib/i18n";
 const supportedFiles = ["image/png","image/jpeg","image/jpg","image/webp","image/avif"]
 
 export class Errors {
@@ -15,7 +16,7 @@ export class Errors {
       if (supportedFiles.includes(file.type)) {
         return true;
       } else {
-        throw new Error("Archivo o archivos no soportados");
+        throw new Error(clientT("unsupportedFiles"));
       }
     });
 

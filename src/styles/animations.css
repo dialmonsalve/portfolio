@@ -95,3 +95,21 @@
     transform: translateY(-20px);
   }
 }
+
+[data-reveal] {
+  visibility: hidden;
+  animation: reveal-fallback 0s 3s forwards;
+}
+
+@keyframes reveal-fallback {
+  to {
+    visibility: visible;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    visibility: visible;
+    animation: none;
+  }
+}

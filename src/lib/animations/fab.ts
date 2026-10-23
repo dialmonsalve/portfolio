@@ -1,8 +1,13 @@
 import gsap from "gsap";
 
-export function initFAB() {
+export function initFAB(reduced: boolean) {
   const fab = document.querySelector(".fab") as HTMLDivElement;
   if (!fab) return;
+
+  if (reduced) {
+    gsap.set(fab, { opacity: 1, y: 0, pointerEvents: "all" });
+    return;
+  }
 
   gsap.set(fab, {
     opacity: 0,

@@ -1,3 +1,4 @@
+import { clientT } from "@/lib/i18n";
 import { Image } from "./image";
 import Spinner from "./spinner";
 
@@ -40,35 +41,61 @@ export abstract class AbstractUpdateDOM {
     return this.allImages;
   }
 
-  protected createImageContainer = (): HTMLDivElement => {
+  protected createImageContainer = (image: ImageOptimized): HTMLDivElement => {
     const container = document.createElement("div");
-    container.classList.add(
-      "flex",
-      "flex-col",
-      "items-center",
-      "justify-items-center",
-      "gap-1"
-    );
+    container.dataset.imageCard = image.url;
+    container.className =
+      "flex flex-col gap-2 rounded-xl border border-base-300 bg-base-100 p-2 shadow-sm";
     return container;
   };
 
-  protected createDeleteButton = (): HTMLButtonElement => {
-    const button = document.createElement("button");
-    button.textContent = "Eliminar";
+  private formatSize(bytes: number) {
+    const locale = document.documentElement.lang || "es";
+    const kilobytes = bytes / 1024;
+    const [value, unit] =
+      kilobytes < 1024 ? [kilobytes, "KB"] : [kilobytes / 1024, "MB"];
+    return `${new Intl.NumberFormat(locale, { maximumFractionDigits: 1 }).format(value)} ${unit}`;
+  }
 
-    button.classList.add(
-      "bg-red-400",
-      "text-white",
-      "text-xs",
-      "cursor-pointer",
-      "hover:opacity-80",
-      "px-2",
-      "py-1",
-      "rounded-md"
-    );
+  private createCaption = (image: ImageOptimized): HTMLDivElement => {
+    const { name, type, size } = image.webpImage;
+    const caption = document.createElement("div");
+    caption.className = "flex items-center justify-between gap-2 px-1";
+
+    const info = document.createElement("p");
+    info.className = "min-w-0 text-xs leading-tight";
+
+    const fileName = document.createElement("span");
+    fileName.className = "block truncate font-medium";
+    fileName.textContent = `${name}.${type.split("/").at(-1)}`;
+    fileName.title = fileName.textContent;
+
+    const fileSize = document.createElement("span");
+    fileSize.className = "block text-muted";
+    fileSize.textContent = this.formatSize(size);
+
+    info.append(fileName, fileSize);
+    caption.append(info, this.createDeleteButton(fileName.textContent));
+    return caption;
+  };
+
+  protected createDeleteButton = (fileName: string): HTMLButtonElement => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.textContent = clientT("delete");
+    button.setAttribute("aria-label", `${clientT("delete")} ${fileName}`);
+    button.className =
+      "btn btn-ghost btn-xs shrink-0 text-error-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
     button.addEventListener("click", this.handleDelete);
     return button;
   };
+
+  protected getCardFromEvent(evt: Event) {
+    const card = (evt.currentTarget as HTMLElement).closest<HTMLElement>(
+      "[data-image-card]",
+    );
+    return { card, url: card?.dataset.imageCard };
+  }
 
   public createImages = async (): Promise<void> => {
     const parentImages = document.querySelector("#parent-images");
@@ -112,15 +139,8 @@ export abstract class AbstractUpdateDOM {
     if (!parentImages) {
       const container = document.createElement("div");
       container.id = "parent-images";
-      container.classList.add(
-        "grid",
-        "gap-2",
-        "grid-cols-2",
-        "w-full",
-        "justify-items-center",
-        "items-center",
-        "max-w-70"
-      );
+      container.className =
+        "mt-6 grid w-full max-w-4xl grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4";
       return container;
     }
 
@@ -132,14 +152,16 @@ export abstract class AbstractUpdateDOM {
   ): Promise<HTMLElement[]> => {
     return Promise.all(
       images.map(async (image) => {
-        const container = this.createImageContainer();
+        const container = this.createImageContainer(image);
+        const frame = document.createElement("div");
+        frame.className =
+          "relative aspect-square overflow-hidden rounded-lg bg-base-200";
         const imageElement = this.createImageElement(image);
-        const deleteButton = this.createDeleteButton();
 
-        container.appendChild(imageElement);
-        container.appendChild(deleteButton);
+        frame.appendChild(imageElement);
+        container.append(frame, this.createCaption(image));
 
-        await this.loadImageWithSpinner(imageElement, container);
+        await this.loadImageWithSpinner(imageElement, frame);
         return container;
       })
     );
@@ -149,11 +171,11 @@ export abstract class AbstractUpdateDOM {
     image: HTMLImageElement,
     container: HTMLDivElement
   ): Promise<void> => {
-    const spinner = new Spinner("absolute top-12 left-10");
+    const spinner = new Spinner("absolute inset-0 grid place-items-center");
     container.appendChild(spinner.getElement());
 
     return new Promise((resolve) => {
-      image.onload = () => {
+      image.onload = image.onerror = () => {
         spinner.getElement().remove();
         resolve();
       };
@@ -165,12 +187,11 @@ export abstract class AbstractUpdateDOM {
 
     const name = image.webpImage.name;
     const ext = image.webpImage.type.split("/").at(-1);
-    imageElement.id = "converted-image";
 
     imageElement.src = image.url;
     imageElement.alt = image.webpImage.name;
     imageElement.className =
-      "block w-full object-contain max-h-[240px] images-to-upload";
+      "absolute inset-0 h-full w-full object-contain p-1.5 images-to-upload";
     imageElement.setAttribute("data-name", `${name}.${ext}`);
     return imageElement;
   };
@@ -202,10 +223,12 @@ export abstract class AbstractUpdateDOM {
 
     const text =
       images.length === 1
-        ? "1 archivo seleccionado"
-        : `${images.length} archivos seleccionado`;
+        ? clientT("oneFileSelected")
+        : clientT("filesSelected", { n: images.length });
 
-    paragraph.innerHTML = `<strong>${text}</strong>`;
+    const strong = document.createElement("strong");
+    strong.textContent = text;
+    paragraph.replaceChildren(strong);
 
     return images.length;
   };
@@ -214,7 +237,7 @@ export abstract class AbstractUpdateDOM {
 
   protected abstract deleteImages(
     images: ImageOptimized[],
-    imageName: string
+    imageUrl: string
   ): void;
 
   protected abstract handleDelete(evt: Event): Promise<void>;

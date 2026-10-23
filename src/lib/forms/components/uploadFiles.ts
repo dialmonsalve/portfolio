@@ -1,4 +1,4 @@
-// import modal from "./modal";
+import { Alert } from "@/lib/components/alert";
 
 export default function uploadFiles({
   containerId,
@@ -75,20 +75,7 @@ export default function uploadFiles({
   }
 }
 function alertMessage({ messageError }: { messageError: string }) {
-  modal({
-    title: "error".toUpperCase(),
-    content() {
-      const div = document.createElement("div");
-      const p = document.createElement("p");
-
-      p.textContent = messageError;
-      p.classList.add("paragraph");
-      div.appendChild(p);
-      return div;
-    },
-    twoButtons: false,
-    type: "red",
-  });
+  new Alert({ message: messageError, type: "error" });
 }
 
 function removeChildren(parentButton: HTMLElement | null) {

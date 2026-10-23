@@ -15,16 +15,16 @@ const i18n = getI18N({ currentLocale });
       >
         <label
           for="file-download"
-          class="flex flex-col items-center justify-center w-75 md:w-100 h-50 border-2 border-base-300 rounded-lg cursor-pointer border-dashed drop-zone hover:bg-base-300 hover:border-blue-500 transition-colors"
+          class="flex flex-col items-center justify-center w-75 md:w-100 h-50 border-2 border-base-300 rounded-lg cursor-pointer border-dashed drop-zone hover:bg-base-300 hover:border-blue-500 transition-colors has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-primary"
           id="drop-zone"
         >
           <div class="flex flex-col items-center justify-center pt-5 pb-6">
-            <Icon name="upload" class="w-10 text-info" />
-            <p class="mb-2 text-sm text-info">
+            <Icon name="upload" class="w-10 text-info-strong" />
+            <p class="mb-2 text-sm text-base-content">
               <span class="font-semibold">{i18n.projects.click} </span>
               {i18n.projects.drag}
             </p>
-            <p class="text-xs text-info">WEBP, PNG, JPEG O JPG</p>
+            <p class="text-xs text-muted">{i18n.projects.formats}</p>
           </div>
           <input
             id="file-download"
@@ -32,10 +32,10 @@ const i18n = getI18N({ currentLocale });
             type="file"
             accept="image/png,image/jpeg,image/jpg,image/webp,image/avif"
             multiple
-            class="hidden"
+            class="sr-only"
           />
         </label>
-        <p class="my-2 text-sm text-error" id="lbl-selected-files">
+        <p class="my-2 text-sm text-muted" id="lbl-selected-files" aria-live="polite">
           {i18n.projects.files}
         </p>
       </div>

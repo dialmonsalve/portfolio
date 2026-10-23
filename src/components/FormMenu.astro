@@ -6,27 +6,34 @@ const i18n = getI18N({ currentLocale });
 ---
 
   <div class="fixed z-6 right-6 top-35 lg:top-35">
-    <input id="menu-form" type="checkbox" class="menu-form hidden" />
+    <input
+      id="menu-form"
+      type="checkbox"
+      class="menu-form sr-only"
+      aria-label={i18n.projects.menuToggle}
+      aria-controls="form-menu-elements"
+    />
     <label
       class="px-5 py-2 cursor-pointer shadow-md shadow-primary rounded-full bg-primary"
-      for="menu-form"><span class="text-md"></span></label
+      for="menu-form"><span class="text-md" aria-hidden="true"></span></label
     >
   </div>
 
   <div
-    class="bg-white fixed z-4 right-0 top-31 container-elements w-75 h-[75dvh] h-max-[75dvh] overflow-auto dark:bg-teal-800 border border-gray-400 px-2 rounded-md shadow-md shadow-teal-400 transition-transform duration-300 ease-in-jump"
+    id="form-menu-elements"
+    class="bg-base-100 fixed z-4 right-0 top-31 container-elements w-75 h-[75dvh] h-max-[75dvh] overflow-auto border border-base-300 px-2 rounded-md shadow-md shadow-teal-400 transition-transform duration-300 ease-in-jump"
   >
   <ul class="flex flex-col gap-2 pt-14" >
     {
       i18n.projects.forms.map((component)=>(
-        <p  class="uppercase text-white bg-gray-500 w-full py-0.5 px-1 rounded-sm" >{component.title} </p>
+        <p  class="uppercase text-neutral-content bg-neutral w-full py-0.5 px-1 rounded-sm" >{component.title} </p>
         <>
             {
               component.inputs.map(input=>(
               <li
                 class="w-full"
                 >
-                <button class="w-full cursor-pointer bg-gray-200 text-primary border border-gray-400 transition-all py-0.5 rounded-md capitalize hover:bg-primary hover:text-white shadow-md shadow-gray-400 dark:shadow-teal-900 hover:shadow-gray-900 duration-500"
+                <button class="w-full cursor-pointer bg-base-200 text-primary-strong border border-base-300 transition-all py-0.5 rounded-md capitalize hover:bg-primary hover:text-primary-content shadow-md shadow-base-300 hover:shadow-gray-900 duration-500"
                 id={input}
                   >{input}
                 </button>
@@ -50,9 +57,9 @@ const i18n = getI18N({ currentLocale });
     box-shadow: 1px -1px 8px var(--primary-color) inset;
   }
 
-  .menu-form[type="checkbox"] {
-    opacity: 0;
-    display: none;
+  .menu-form[type="checkbox"]:focus-visible + label {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
   }
 
   .menu-form[type="checkbox"]:checked ~ label {
@@ -61,10 +68,16 @@ const i18n = getI18N({ currentLocale });
 
   div:has(.menu-form[type="checkbox"]:not(:checked)) + .container-elements {
     transform: translateX(305%);
+    visibility: hidden;
+    transition:
+      transform 0.3s,
+      visibility 0s 0.3s;
   }
 
   div:has(.menu-form[type="checkbox"]:checked) + .container-elements {
     transform: translateX(0);
+    visibility: visible;
+    transition: transform 0.3s;
   }
 
   span::after {

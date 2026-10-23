@@ -13,13 +13,13 @@ const t = useTranslations(getLangFromUrl(Astro.url));
     <button
       type="button"
       aria-label={t("addTag")}
-      class="absolute right-3 top-1.5 text-[10px] cursor-pointer py-1 px-2 border border-gray-300 bg-blue-500 text-white text-center rounded-full hover:opacity-80"
+      class="absolute right-3 top-1.5 text-[10px] cursor-pointer py-1 px-2 border border-base-300 bg-primary text-primary-content text-center rounded-full hover:opacity-80"
       >+</button
     >
 
     <div
       id="tags"
-      class="bg-transparent placeholder:text-slate-400 text-sm border rounded-md px-3 py-2 transition-all duration-300 ease outline-none border-gray-400 min-h-100 flex flex-wrap items-start gap-0.5"
+      class="bg-transparent placeholder:text-slate-400 text-sm border rounded-md px-3 py-2 transition-all duration-300 ease outline-none border-base-content/40 min-h-100 flex flex-wrap items-start gap-0.5"
     >
     </div>
   </div>

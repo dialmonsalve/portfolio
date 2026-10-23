@@ -1,3 +1,4 @@
+import { clientT } from "@/lib/i18n";
 import type { ImageOptimized } from "@/lib/utils/dial-drop-zone/interfaces";
 import { AnimationService } from "../animationService";
 
@@ -139,7 +140,7 @@ export class UpdateDOMToSend {
 
   private createDeleteButton = (): HTMLButtonElement => {
     const button = document.createElement("button");
-    button.textContent = "Eliminar";
+    button.textContent = clientT("delete");
     button.type = "button";
 
     button.classList.add(

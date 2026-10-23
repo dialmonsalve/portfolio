@@ -18,8 +18,62 @@
   font-display: swap;
 }
 
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
 @theme {
   --font-sans: "poppins", "sans-serif";
+}
+
+@theme inline {
+  --color-muted: color-mix(
+    in oklch,
+    var(--color-base-content) var(--muted-mix),
+    var(--color-base-100)
+  );
+  --color-info-strong: color-mix(
+    in oklch,
+    var(--color-info) var(--info-strong-mix),
+    var(--color-base-content)
+  );
+  --color-error-strong: color-mix(
+    in oklch,
+    var(--color-error) var(--error-strong-mix),
+    var(--color-base-content)
+  );
+  --color-primary-strong: color-mix(
+    in oklch,
+    var(--color-primary) var(--primary-strong-mix),
+    var(--color-base-content)
+  );
+}
+
+:root {
+  --muted-mix: 70%;
+  --info-strong-mix: 75%;
+  --error-strong-mix: 65%;
+  --primary-strong-mix: 100%;
+}
+
+[data-theme="dark"] {
+  --muted-mix: 70%;
+  --info-strong-mix: 100%;
+  --error-strong-mix: 100%;
+  --primary-strong-mix: 75%;
+  --color-primary-content: oklch(100% 0 0);
+}
+
+[data-theme="cupcake"] {
+  --info-strong-mix: 85%;
+  --error-strong-mix: 75%;
+  --primary-strong-mix: 45%;
+}
+
+[data-theme="valentine"] {
+  --muted-mix: 100%;
+  --info-strong-mix: 35%;
+  --error-strong-mix: 35%;
+  --primary-strong-mix: 30%;
+  --color-primary-content: oklch(20% 0.05 0);
 }
 
 input[type="number"] {

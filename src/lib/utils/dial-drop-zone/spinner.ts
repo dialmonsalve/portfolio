@@ -16,7 +16,7 @@ export default class Spinner {
     svg.setAttribute("aria-hidden", "true");
     svg.setAttribute(
       "class",
-      "w-8 h-8 animate-spin fill-blue-600"
+      "w-8 h-8 animate-spin text-base-300 fill-primary"
     );
     svg.setAttribute("viewBox", "0 0 100 101");
     svg.setAttribute("fill", "none");

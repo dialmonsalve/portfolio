@@ -8,8 +8,8 @@ const items = [
 ];
 ---
 
-<di
-  class="flex flex-col gap-5 w-9/10 md:w-auto border p-4 dark:border-gray-300 border-slate-700 rounded-md mx-auto"
+<div
+  class="flex flex-col gap-5 w-9/10 md:w-auto border p-4 border-base-content/40 rounded-md mx-auto"
 >
   <dial-tabs class="flex flex-col gap-3 h-120">
     <div class:list={["tabs flex gap-2"]}>
@@ -17,7 +17,7 @@ const items = [
         items.map(({ label }, idx) => (
           <button
             class:list={[
-              "text-brand-100 p-2 border border-gray-300 rounded-sm shadow-2xl text-xs dark:text-gray-400 cursor-pointer",
+              "text-base-content p-2 border border-base-300 rounded-sm shadow-2xl text-xs cursor-pointer",
             ]}
             data-tab={`tab-${idx + 1}`}
             type="button"
@@ -29,7 +29,7 @@ const items = [
     </div  >
     <div id="tab-1" class="tab-content hidden">
       <div
-        class="flex flex-col h-80 items-center w-full justify-center text-5xl text-red-400"
+        class="flex flex-col h-80 items-center w-full justify-center text-5xl text-error-strong"
       >
         TAB 1
       </div>
@@ -37,7 +37,7 @@ const items = [
 
     <div id="tab-2" class="tab-content hidden">
       <div
-        class="flex flex-col h-80 items-center w-full justify-center text-5xl text-blue-700"
+        class="flex flex-col h-80 items-center w-full justify-center text-5xl text-primary-strong"
       >
         TAB 2
       </div>
@@ -45,7 +45,7 @@ const items = [
 
     <div id="tab-3" class="tab-content hidden">
       <div
-        class="flex flex-col h-80 items-center w-full justify-center text-5xl text-yellow-500"
+        class="flex flex-col h-80 items-center w-full justify-center text-5xl text-info-strong"
       >
         TAB 3
       </div>
@@ -53,7 +53,7 @@ const items = [
 
     <div id="tab-4" class="tab-content hidden">
       <div
-        class="flex flex-col h-80 items-center w-full justify-center text-5xl text-green-500"
+        class="flex flex-col h-80 items-center w-full justify-center text-5xl text-base-content"
       >
         TAB 4
       </div>
@@ -61,13 +61,13 @@ const items = [
 
     <div id="tab-5" class="tab-content hidden">
       <div
-        class="flex flex-col h-80 items-center w-full justify-center text-5xl text-purple-600"
+        class="flex flex-col h-80 items-center w-full justify-center text-5xl text-muted"
       >
         TAB 5
       </div>
     </div>
   </dial-tabs>
-</di>
+</div>
 
 <style>
   .tab-content {
@@ -82,8 +82,8 @@ const items = [
   }
 
   .tabs button.active {
-    background-color: #00aeee;
-    color: white;
+    background-color: var(--color-primary);
+    color: var(--color-primary-content);
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.313) inset;
   }
 </style>

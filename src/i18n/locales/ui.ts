@@ -10,6 +10,7 @@ export const ui: Record<language, Record<string, string>> = {
     menu: "menú de navegación",
     breadcrumbs: "ruta de navegación",
     addTag: "agregar tag",
+    skipToContent: "Saltar al contenido",
   },
   en: {
     home: "home",
@@ -18,6 +19,7 @@ export const ui: Record<language, Record<string, string>> = {
     menu: "navigation menu",
     breadcrumbs: "breadcrumb",
     addTag: "add tag",
+    skipToContent: "Skip to content",
   },
 } as const;
 

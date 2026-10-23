@@ -14,39 +14,124 @@ const translatePath = useTranslatedPath(lang);
 const { currentLocale } = Astro;
 
 const i18n = getI18N({ currentLocale });
+
+const links = [
+  { href: translatePath("/", lang), label: t("home") },
+  { href: translatePath("/projects", lang), label: t("projects") },
+  { href: translatePath("/about", lang), label: t("about") },
+];
+
+const socials = [
+  {
+    href: "https://www.linkedin.com/in/dialmonsalve",
+    label: "LinkedIn",
+    icon: "linkedin",
+    iconClass: "w-5",
+  },
+  {
+    href: "https://github.com/dialmonsalve",
+    label: "GitHub",
+    icon: "github",
+    iconClass: "w-6 fill-current",
+  },
+];
 ---
 
-<footer
-  class="h-30 w-full bg-base-300 mt-8 flex flex-col items-center justify-center gap-4"
->
-  <div class="flex gap-4">
-    <a
-      target="_blank"
-      href="https://www.linkedin.com/in/dialmonsalve"
-      class="flex fap-1 items-center hover:underline"
-    >
-      <Icon name="linkedin" class="w-6 text-white" />
-      Linkedin
-      <span class="sr-only">{i18n.general.newTab}</span>
-    </a>
-    <a
-      target="_blank"
-      href="https://github.com/dialmonsalve"
-      class="flex fap-1 items-center hover:underline"
-    >
-      <Icon name="github" class="w-6 text-white" style="fill:white;" />
-      Github
-      <span class="sr-only">{i18n.general.newTab}</span>
-    </a>
-    <a href={translatePath("/about", lang)} class="hover:underline"
-      >{t("about")}</a
-    >
+<footer class="mt-16 w-full border-t border-base-content/10 bg-base-200">
+  <div
+    class="mx-auto grid w-full max-w-5xl gap-10 px-6 py-12 sm:grid-cols-2 lg:grid-cols-3"
+  >
+    <div data-reveal="scroll">
+      <p class="text-lg font-semibold">Diego Monsalve</p>
+      <p class="mt-2 max-w-xs text-sm leading-6 text-muted">
+        {i18n.footer.tagline}
+      </p>
+    </div>
+
+    <nav aria-labelledby="footer-navigation" data-reveal="scroll">
+      <p
+        id="footer-navigation"
+        class="text-xs font-semibold uppercase tracking-wider text-muted"
+      >
+        {i18n.footer.navigation}
+      </p>
+      <ul class="mt-4 flex flex-col gap-2 text-sm">
+        {
+          links.map(({ href, label }) => (
+            <li>
+              <a
+                href={href}
+                class="footer-link inline-block rounded-sm first-letter:uppercase focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+              >
+                {label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div data-reveal="scroll">
+      <p
+        class="text-xs font-semibold uppercase tracking-wider text-muted"
+      >
+        {i18n.footer.connect}
+      </p>
+      <ul class="mt-4 flex gap-3">
+        {
+          socials.map(({ href, label, icon, iconClass }) => (
+            <li>
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-magnetic
+                class="inline-flex size-11 items-center justify-center rounded-full border border-base-content/15 transition-colors duration-200 hover:border-primary hover:text-primary-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              >
+                <Icon name={icon} class={iconClass} />
+                <span class="sr-only">
+                  {label} {i18n.general.newTab}
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <a
+        href={`${translatePath("/", lang)}#contact`}
+        data-magnetic
+        class="mt-5 inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm text-primary-content transition-opacity duration-200 hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+      >
+        <Icon name="contact" class="w-4" />
+        {i18n.footer.contact}
+      </a>
+    </div>
   </div>
-  <p class="text-[14px] flex items-center gap-1">
-    <Icon name="astro-pink" class="w-6" />
-    <a href="https://astro.build/" class="hover:underline"> {i18n.footer.astro} Astro </a>
-    <span>- <span data-current-year>{new Date().getFullYear()}</span></span>
-  </p>
+
+  <div class="border-t border-base-content/10">
+    <div
+      class="mx-auto flex w-full max-w-5xl flex-wrap items-center justify-between gap-3 px-6 py-4 text-xs text-muted"
+    >
+      <p class="flex items-center gap-1">
+        <Icon name="astro-pink" class="w-5" />
+        <a
+          href="https://astro.build/"
+          class="footer-link rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        >
+          {i18n.footer.astro} Astro
+        </a>
+        <span>· <span data-current-year>{new Date().getFullYear()}</span></span>
+      </p>
+      <a
+        href="#"
+        data-back-to-top
+        class="inline-flex items-center gap-1.5 rounded-full border border-base-content/15 px-3 py-1.5 transition-colors duration-200 hover:border-primary hover:text-primary-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+      >
+        <Icon name="arrow-down" class="w-3.5 rotate-180" />
+        {i18n.footer.backToTop}
+      </a>
+    </div>
+  </div>
 </footer>
 
 <script>
@@ -59,3 +144,18 @@ const i18n = getI18N({ currentLocale });
 
   document.addEventListener("astro:page-load", updateCurrentYear);
 </script>
+
+<style>
+  .footer-link {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: left bottom;
+    background-repeat: no-repeat;
+    transition: background-size 0.3s ease;
+  }
+
+  .footer-link:hover,
+  .footer-link:focus-visible {
+    background-size: 100% 1px;
+  }
+</style>

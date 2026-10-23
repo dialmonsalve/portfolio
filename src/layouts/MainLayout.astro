@@ -1,6 +1,6 @@
 ---
 import { ClientRouter } from "astro:transitions";
-import { getLangFromUrl, getPathname } from "@/i18n/locales/utils";
+import { getLangFromUrl, getPathname, useTranslations } from "@/i18n/locales/utils";
 
 import Header from "@/components/layout/Header.astro";
 import Breadcrumbs from "@/components/Breadcrumbs.astro";
@@ -18,6 +18,7 @@ interface Props {
 const { title, description, isNotFound = false } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const site = Astro.site ?? Astro.url.origin;
 const routePath = getPathname(Astro.url)
@@ -32,6 +33,7 @@ const alternates = [
 ];
 const ogLocale = lang === "en" ? "en_US" : "es_CO";
 const ogLocaleAlternate = lang === "en" ? "es_CO" : "en_US";
+const ogImage = toAbsolute(`/og-image-${lang}.jpg`);
 ---
 
 <html lang={lang}>
@@ -63,17 +65,17 @@ const ogLocaleAlternate = lang === "en" ? "es_CO" : "en_US";
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     {!isNotFound && <meta property="og:url" content={canonicalUrl} />}
-    <meta property="og:image" content={toAbsolute("/og-image.jpg")} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <meta property="og:image:alt" content={title} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta
-      name="twitter:image"
-      content={toAbsolute("/twitter-image.jpg")}
-    />
+    <meta name="twitter:image" content={ogImage} />
 
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -86,19 +88,41 @@ const ogLocaleAlternate = lang === "en" ? "es_CO" : "en_US";
       content="black-translucent"
     />
     <title>{title}</title>
+    <noscript>
+      <style>
+        [data-reveal] {
+          visibility: visible !important;
+          animation: none !important;
+        }
+        .fab {
+          opacity: 1 !important;
+          transform: none !important;
+          animation: none !important;
+        }
+      </style>
+    </noscript>
     <script is:inline src="/js/theme.js"></script>
     <ClientRouter />
   </head>
   <body
     class="bg-[url('/images/background.webp')] bg-cover bg-center bg-no-repeat"
   >
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-content focus:outline-2 focus:outline-offset-2 focus:outline-primary"
+    >
+      {t("skipToContent")}
+    </a>
+
     <Header />
 
-    <main class="pt-14 p-1 lg:pt-10">
-      <Breadcrumbs isNotFound={isNotFound} />
-      <FAB />
+    <main id="main-content" tabindex="-1" class="focus:outline-none">
+      <div class="pt-14 p-1 lg:pt-10">
+        <Breadcrumbs isNotFound={isNotFound} />
+        <FAB />
+      </div>
+      <slot />
     </main>
-    <slot />
     <Footer />
 
     <script src="@/lib/animations/setup.ts"></script>

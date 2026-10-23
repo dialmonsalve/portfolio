@@ -23,9 +23,12 @@ const { subtitle, title, textButton, metaTitle, metaDescription} = i18n.notFound
     <p class="" >{subtitle}</p>
     
     <div >
-      <button class="btn px-2 rounded-md  shadow-white cursor-pointer" onclick="window.history.back()"
-      >{textButton}</button
+      <a
+        href={`/${currentLocale ?? "es"}`}
+        class="btn btn-primary rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
       >
+        {textButton}
+      </a>
     </div>
   </div>
 

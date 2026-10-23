@@ -1,4 +1,6 @@
 ---
+import { getEntry } from "astro:content";
+import { getI18N } from "@/i18n";
 import { getLangFromUrl, getPathname, useTranslations } from "@/i18n/locales/utils";
 
 interface Props {
@@ -8,55 +10,76 @@ interface Props {
 const { isNotFound = false } = Astro.props;
 
 const pathname = getPathname(Astro.url);
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const i18n = getI18N({ currentLocale: lang });
 
-function createBreadcrumbs() {
-  const lang = pathname.startsWith("/en") ? "en" : "es";
-  const homeName = lang === "es" ? "inicio" : "home";
-  
-  const langPath = `/${lang}`;
+const sectionNames: Record<string, string> = {
+  projects: t("projects"),
+  about: t("about"),
+  ...Object.fromEntries(
+    i18n.projects.internal_projects.map(({ href, title }) => [
+      href.split("/").at(-1) ?? href,
+      title,
+    ]),
+  ),
+};
 
-  const cleanRoute = pathname
-    .replace(new RegExp(`^\\/${lang}`), "")
-    .replace(/^\/+|\/+$/g, "");
-
-  if (cleanRoute === "") {
-    return [{ name: homeName, href: langPath }];
+async function getName(part: string, parent: string | undefined) {
+  if (parent === "projects" && !sectionNames[part]) {
+    const project = await getEntry(
+      lang === "en" ? "projects_en" : "projects_es",
+      part,
+    );
+    if (project) return project.data.title;
   }
-
-  const parts = cleanRoute.split("/");
-  const breadcrumbs = parts.map((part, index) => {
-    const currentPath = parts.slice(0, index + 1).join("/");
-    
-    const href = `${langPath}/${currentPath}`;
-
-    return {
-      name: part.replace(/-/g, " "),
-      href: href,
-    };
-  });
-
-  return [{ name: homeName, href: langPath }, ...breadcrumbs];
+  return sectionNames[part] ?? part.replace(/-/g, " ");
 }
 
-const breadcrumbs = createBreadcrumbs();
-const t = useTranslations(getLangFromUrl(Astro.url));
+const langPath = `/${lang}`;
+const parts = pathname
+  .replace(new RegExp(`^\\/${lang}`), "")
+  .split("/")
+  .filter(Boolean);
+
+const breadcrumbs = [
+  { name: t("home"), href: langPath },
+  ...(await Promise.all(
+    parts.map(async (part, index) => ({
+      name: await getName(part, parts[index - 1]),
+      href: `${langPath}/${parts.slice(0, index + 1).join("/")}`,
+    })),
+  )),
+];
+
+const site = Astro.site ?? Astro.url.origin;
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: breadcrumbs.map(({ name, href }, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    name,
+    item: new URL(href, site).href,
+  })),
+};
 ---
 
 {
   !isNotFound && breadcrumbs.length > 0 && (
     <nav aria-label={t("breadcrumbs")}>
-      <ul class="flex gap-1 pt-4 lg:pt-10 lg:pl-10">
+      <ul class="flex flex-wrap gap-1 pt-4 lg:pt-10 lg:pl-10">
         {breadcrumbs.map(({ href, name }) => (
           <li class="flex gap-1 items-center text-[12px]">
             {href !== pathname ? (
               <a
-                class="block py-0.5 px-2 bg-green-700 rounded-r-xl text-white text-[12px] md:text-sm"
+                class="block py-0.5 px-2 first-letter:uppercase rounded-r-xl border border-base-300 bg-base-200 text-base-content text-[12px] md:text-sm transition-colors duration-200 hover:border-primary hover:bg-primary hover:text-primary-content focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                 href={href}
               >
                 {name}
               </a>
             ) : (
-              <span aria-current="page" class="block py-0.5 px-2 bg-gray-400 rounded-r-xl text-gray-800  text-[12px] md:text-sm">
+              <span aria-current="page" class="block py-0.5 px-2 first-letter:uppercase rounded-r-xl border border-primary bg-primary text-primary-content text-[12px] md:text-sm">
                 {name}
               </span>
             )}
@@ -64,5 +87,15 @@ const t = useTranslations(getLangFromUrl(Astro.url));
         ))}
       </ul>
     </nav>
+  )
+}
+
+{
+  !isNotFound && (
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(structuredData)}
+    />
   )
 }

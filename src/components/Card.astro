@@ -3,6 +3,8 @@ interface Props {
   title: string;
   pngImage: string;
   webpImage: string;
+  imageWidth: number;
+  imageHeight: number;
   description: string;
   slug: string;
   isExternalProject: boolean;
@@ -22,6 +24,8 @@ const {
   title,
   pngImage,
   webpImage,
+  imageWidth,
+  imageHeight,
   description,
   slug,
   isExternalProject,
@@ -36,10 +40,12 @@ const translatePath = useTranslatedPath(lang);
 ---
 
 <div
+  data-reveal="scroll"
+  data-tilt
   class="flex flex-col gap-8 border border-primary p-4 rounded-sm shadow-primary shadow-md justify-between items-center bg-base-200"
 >
   <h2
-    class="bg-primary text-white px-2 py-1 -translate-y-8 uppercase rounded text-center"
+    class="bg-primary text-primary-content px-2 py-1 -translate-y-8 uppercase rounded text-center"
     transition:name={slug}
   >
     {title}
@@ -47,8 +53,15 @@ const translatePath = useTranslatedPath(lang);
 
   <div>
     <picture>
-      <source srcset={webpImage} />
-      <img src={pngImage} alt={title} />
+      <source srcset={webpImage} type="image/webp" />
+      <img
+        src={pngImage}
+        alt={title}
+        width={imageWidth}
+        height={imageHeight}
+        loading="lazy"
+        decoding="async"
+      />
     </picture>
     <div class="flex flex-col gap-1 py-2">
       {
@@ -56,23 +69,23 @@ const translatePath = useTranslatedPath(lang);
           <>
             <p class="text-md  flex items-center gap-2">
               {i18n.general.technology}:
-              <span class="text-slate-400 capitalize text-sm">
+              <span class="text-muted capitalize text-sm">
                 {technology}
               </span>
             </p>
             <p class="text-md flex items-center gap-2">
               {i18n.general.styles}:
-              <span class="text-slate-400 capitalize text-sm">{styles}</span>
+              <span class="text-muted capitalize text-sm">{styles}</span>
             </p>
             <p class="text-md flex items-center gap-2">
               Scripts:
-              <span class="text-slate-400 capitalize text-sm">{scripts}</span>
+              <span class="text-muted capitalize text-sm">{scripts}</span>
             </p>
           </>
         )
       }
     </div>
-    <p class="text-gray-800 dark:text-gray-400 text-sm h-12">{description}</p>
+    <p class="text-muted text-sm h-12">{description}</p>
   </div>
 
   <ul class="flex justify-around w-full">
@@ -81,20 +94,20 @@ const translatePath = useTranslatedPath(lang);
         <>
           <Link
             label={i18n.general.more}
-            className="py-1 px-3 rounded-sm uppercase text-md text-white transition-colors cursor-pointer bg-blue-500 shadow-lg shadow-blue-500/50 hover:opacity-85 active:shadow-inset buttons-more"
+            className="py-1 px-3 rounded-sm uppercase text-md text-primary-strong border border-primary transition-colors cursor-pointer hover:bg-primary hover:text-primary-content focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary buttons-more"
             href={`projects/${slug}`}
           />
           <Link
             target="_blank"
             label={i18n.general.go}
-            className="py-1 px-3 rounded-sm uppercase text-md text-white transition-colors cursor-pointer bg-indigo-500 shadow-lg shadow-indigo-500/50 hover:opacity-85 active:shadow-inset"
+            className="py-1 px-3 rounded-sm uppercase text-md text-primary-content transition-opacity cursor-pointer bg-primary shadow-lg shadow-primary/30 hover:opacity-85 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             href={href}
           />
         </>
       ) : (
         <Link
           label={i18n.general.go}
-          className="py-1 px-3 rounded-sm uppercase text-md text-white transition-colors cursor-pointer bg-indigo-500 shadow-lg shadow-indigo-500/50 hover:opacity-85 active:shadow-inset"
+          className="py-1 px-3 rounded-sm uppercase text-md text-primary-content transition-opacity cursor-pointer bg-primary shadow-lg shadow-primary/30 hover:opacity-85 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           href={translatePath(`/${href ? href : ""}`, lang)}
         />
       )

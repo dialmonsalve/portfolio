@@ -1,3 +1,4 @@
+import { clientT } from "@/lib/i18n";
 interface Values {
   dataId: number;
   label: string;
@@ -33,8 +34,7 @@ class DialMultiSelect extends HTMLElement {
     this.ul = this.querySelector("ul") as HTMLUListElement;
 
     this.allSelectedMsg = document.createElement("li");
-    this.allSelectedMsg.textContent =
-      "¡Todas las opciones han sido seleccionadas!";
+    this.allSelectedMsg.textContent = clientT("allOptionsSelected");
     this.allSelectedMsg.className =
       "all-selected-msg pointer-events-none text-xs hidden";
     this.ul.appendChild(this.allSelectedMsg);
@@ -166,7 +166,7 @@ class DialMultiSelect extends HTMLElement {
 
       li.setAttribute("data-id", value.dataId.toString());
       li.classList =
-        "cursor-pointer hover:shadow p-0.5 rounded-md transition-all hover:bg-blue-500 text-xs hover:text-white py-2 px-2";
+        "cursor-pointer hover:shadow p-0.5 rounded-md transition-all hover:bg-primary text-xs hover:text-primary-content py-2 px-2";
       li.textContent = value.label;
       this.setupOption(li);
       this.ul.appendChild(li);
@@ -379,7 +379,7 @@ class DialMultiSelect extends HTMLElement {
 
   private updateVisibleItems() {
     this.visibleItems.forEach((item) =>
-      item.classList.remove("shadow", "bg-blue-500", "text-white")
+      item.classList.remove("shadow", "bg-primary", "text-primary-content")
     );
     this.visibleItems = Array.from(
       this.ul.querySelectorAll("li:not(.hidden):not(.no-results-msg)")
@@ -391,7 +391,7 @@ class DialMultiSelect extends HTMLElement {
 
     if (this.visibleItems[this.selectedIndex]) {
       const selectedItem = this.visibleItems[this.selectedIndex];
-      selectedItem.classList.add("shadow", "bg-blue-500", "text-white");
+      selectedItem.classList.add("shadow", "bg-primary", "text-primary-content");
       this.div.setAttribute("aria-activedescendant", selectedItem.id);
       selectedItem.scrollIntoView({ block: "nearest", behavior: "smooth" });
     }
@@ -413,7 +413,7 @@ class DialMultiSelect extends HTMLElement {
     this.div.removeAttribute("aria-activedescendant");
     this.selectedIndex = -1;
     this.visibleItems.forEach((item) =>
-      item.classList.remove("shadow", "bg-blue-500", "text-white")
+      item.classList.remove("shadow", "bg-primary", "text-primary-content")
     );
   }
   private clearInput() {

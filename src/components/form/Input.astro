@@ -10,7 +10,7 @@ const { className, ...rest } = Astro.props;
 
 <input
   class:list={[
-    "peer w-full bg-transparent placeholder:text-slate-400 text-sm border border-gray-400 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow",
+    "peer w-full rounded-lg border border-base-content/25 bg-base-100 px-3 py-2.5 text-sm text-base-content placeholder:text-transparent transition-colors duration-200 hover:border-base-content/45 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 aria-invalid:border-error",
     className,
   ]}
   placeholder=" "

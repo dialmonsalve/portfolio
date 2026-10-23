@@ -1,4 +1,8 @@
 ---
+import { getI18N } from "@/i18n";
+
+const i18n = getI18N({ currentLocale: Astro.currentLocale });
+
 const data = [
   { name: "Select 1" },
   { name: "Select 2" },
@@ -16,23 +20,23 @@ const data = [
 
 <dial-multi-select
   name={"dial-multi-select"}
-  placeholder={"Elija sus opciones"}
+  placeholder={i18n.projects.web_components.multiSelectPlaceholder}
 >
   <div class="relative w-75">
     <div
       tabindex="0"
-      class="px-2 py-1 outline-none border border-gray-400 rounded-md focus:ring-2 focus:ring-blue-600 focus:outline-2 focus:outline-offset-4 transition-all hover:cursor-pointer min-h-9 shadow select-none"
+      class="px-2 py-1 outline-none border border-base-content/40 rounded-md focus:ring-2 focus:ring-primary focus:outline-2 focus:outline-offset-4 transition-all hover:cursor-pointer min-h-9 shadow select-none"
       id="container-multi-select"
     >
     </div>
     <ul
-      class="hidden absolute w-full left-0 z-10 px-2 py-1.5 border border-gray-200 rounded-md max-h-50 min-h-5 overflow-y-auto un-order-list bg-base-300"
+      class="hidden absolute w-full left-0 z-10 px-2 py-1.5 border border-base-300 rounded-md max-h-50 min-h-5 overflow-y-auto un-order-list bg-base-300"
     >
       {
         data.map(({ name }, idx) => (
           <li
             data-id={idx + 1}
-            class="cursor-pointer hover:shadow p-0.5 rounded-md transition-all hover:bg-blue-500 text-xs hover:text-white py-2 px-2"
+            class="cursor-pointer hover:shadow p-0.5 rounded-md transition-all hover:bg-primary text-xs hover:text-primary-content py-2 px-2"
           >
             {name}
           </li>

@@ -1,3 +1,4 @@
+import { clientT } from "@/lib/i18n";
 import { AnimationService } from "@/lib/components/animationService";
 
 import { AbstractUpdateDOM } from "./abstract-update-DOM";
@@ -40,7 +41,7 @@ export class UpdateDOMToUpload extends AbstractUpdateDOM {
 
     const button = document.createElement("button");
     button.id = "save-images";
-    button.textContent = "Guardar";
+    button.textContent = clientT("save");
     button.classList.add(
       "bg-primary",
       "cursor-pointer",
@@ -60,9 +61,9 @@ export class UpdateDOMToUpload extends AbstractUpdateDOM {
     return container;
   };
 
-  protected deleteImages(images: ImageOptimized[], imageName: string) {
+  protected deleteImages(images: ImageOptimized[], imageUrl: string) {
     const index = images.findIndex(
-      (elemento) => elemento.webpImage.name === imageName
+      (elemento) => elemento.url === imageUrl
     );
 
     if (index !== -1) {
@@ -71,17 +72,14 @@ export class UpdateDOMToUpload extends AbstractUpdateDOM {
   }
 
   protected handleDelete = async (evt: Event) => {
-    const target = evt.target as HTMLButtonElement;
-    const parentElement = target.parentElement;
-    const image = target.previousElementSibling as HTMLImageElement;
+    const { card, url } = this.getCardFromEvent(evt);
+    if (!card || !url) return;
 
-    this.deleteImages(this.allImages, image.alt);
+    this.deleteImages(this.allImages, url);
 
-    if (parentElement) {
-      await AnimationService.animateRemove(parentElement, this.animations);
-    }
+    await AnimationService.animateRemove(card, this.animations);
 
-    if (image.src.startsWith("blob:")) URL.revokeObjectURL(image.src);
+    URL.revokeObjectURL(url);
 
     const countImages = this.modifyParagraph();
 

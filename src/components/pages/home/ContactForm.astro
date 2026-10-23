@@ -6,73 +6,104 @@ import { getI18N } from "@/i18n";
 const currentLocale = Astro.currentLocale;
 const i18n = getI18N({ currentLocale });
 
+const { contact } = i18n.home;
+
 interface Form {
   type: astroHTML.JSX.HTMLInputTypeAttribute | null | undefined;
   name: string;
   label: string;
   required: boolean;
+  autocomplete: string;
 }
 
 const inputs: Form[] = [
   {
     type: "text",
     name: "name",
-    label: "Nombre",
+    label: contact.name,
     required: true,
+    autocomplete: "name",
   },
   {
     type: "email",
     name: "email",
-    label: "Correo electrónico",
+    label: contact.email,
     required: true,
+    autocomplete: "email",
   },
   {
     type: "tel",
     name: "phone",
-    label: "Teléfono",
+    label: contact.phone,
     required: false,
+    autocomplete: "tel",
   },
 ];
+
+const messages = {
+  send: contact.send,
+  sending: contact.sending,
+  success: contact.success,
+  error: contact.error,
+  errors: contact.errors,
+};
 ---
 
-<article class="">
-  <send-form>
+<article id="contact" class="w-full scroll-mt-24">
+  <send-form data-messages={JSON.stringify(messages)}>
     <form
-      action=""
-      class="flex flex-col gap-2 border border-slate-300 rounded-md p-4 shadow-2xl w-9/10 bg-neutral mx-auto"
+      novalidate
+      class="mx-auto flex w-full max-w-xl flex-col gap-5 rounded-xl border border-base-300 bg-base-200 p-6 shadow-sm sm:p-8"
     >
+      <header>
+        <h2 class="text-xl font-semibold">{contact.title}</h2>
+        <p class="mt-1 text-sm text-muted">{contact.subtitle}</p>
+      </header>
+
       {
-        inputs.map(({ label, name, required, type }) => (
-          <div class="relative flex flex-col gap-2">
-            <Input type={type} name={name} id={name} />
-            <Label label={label} for={name} required={required} absolute />
+        inputs.map(({ label, name, required, type, autocomplete }) => (
+          <div data-field={name}>
+            <div class="relative">
+              <Input
+                type={type}
+                name={name}
+                id={name}
+                autocomplete={autocomplete}
+                aria-required={required ? "true" : undefined}
+              />
+              <Label label={label} for={name} required={required} absolute />
+            </div>
           </div>
         ))
       }
 
-      <div class="flex flex-col gap-1">
-        <Label
-          label="Description"
-          for="description"
-          required={true}
-          className="ml-2"
-        />
-        <textarea
-          name="description"
-          id="description"
-          class:list={[
-            "peer bg-transparent placeholder:text-slate-400 text-sm border text-white border-slate-300 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow h-30 resize-none",
-          ]}></textarea>
+      <div data-field="description">
+        <div class="relative">
+          <textarea
+            name="description"
+            id="description"
+            placeholder=" "
+            aria-required="true"
+            class="peer block h-36 w-full resize-none rounded-lg border border-base-content/25 bg-base-100 px-3 py-2.5 text-sm text-base-content placeholder:text-transparent transition-colors duration-200 hover:border-base-content/45 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 aria-invalid:border-error"
+          ></textarea>
+          <Label label={contact.message} for="description" required absolute />
+        </div>
       </div>
-      <div class="self-center">
+
+      <div class="flex justify-end">
         <button
           type="submit"
-          class="mx-auto bg-primary text-white px-4 py-1 rounded-md hover:opacity-80 cursor-pointer capitalize"
-          >{i18n.home.send}</button
+          class="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 py-2.5 text-sm font-medium text-primary-content transition-opacity duration-200 hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
         >
+          <span
+            class="loading loading-spinner loading-xs hidden"
+            aria-hidden="true"
+            data-spinner></span>
+          <span data-label>{contact.send}</span>
+        </button>
       </div>
     </form>
   </send-form>
 
-  <script src="@/lib/actions/sendForm.ts" ></script>
+  <script src="@/lib/actions/sendForm.ts"></script>
 </article>

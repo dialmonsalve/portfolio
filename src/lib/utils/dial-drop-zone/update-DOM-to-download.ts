@@ -1,3 +1,4 @@
+import { clientT } from "@/lib/i18n";
 import { AnimationService } from "@/lib/components/animationService";
 
 import { DownLoadImages } from "./download-images";
@@ -29,7 +30,7 @@ export class UpdateDOMToDownload extends AbstractUpdateDOM {
 
   protected createSaveButton = (): HTMLElement | undefined => {
     const container = document.createElement("div");
-    container.classList.add("flex", "gap-2");
+    container.className = "mt-4 flex gap-2";
 
     const downloadImages = new DownLoadImages();
 
@@ -49,16 +50,9 @@ export class UpdateDOMToDownload extends AbstractUpdateDOM {
     } else {
       const link = document.createElement("a");
       link.id = "save-images";
-      link.textContent = "Guardar";
-      link.classList.add(
-        "bg-primary",
-        "cursor-pointer",
-        "py-1",
-        "px-2",
-        "text-white",
-        "rounded-md",
-        "hover:opacity-80"
-      );
+      link.textContent = clientT("save");
+      link.className =
+        "btn btn-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 
       if (imgs.length > 1) {
         downloadImages.multiple(imgs).then((resp) => {
@@ -89,10 +83,10 @@ export class UpdateDOMToDownload extends AbstractUpdateDOM {
     }
   }
 
-  protected async deleteImages(images: ImageOptimized[], imageName: string) {
+  protected async deleteImages(images: ImageOptimized[], imageUrl: string) {
     const downloadImages = new DownLoadImages();
     const index = images.findIndex(
-      (elemento) => elemento.webpImage.name === imageName
+      (elemento) => elemento.url === imageUrl
     );
 
     if (index !== -1) {
@@ -117,17 +111,14 @@ export class UpdateDOMToDownload extends AbstractUpdateDOM {
   }
 
   protected handleDelete = async (evt: Event) => {
-    const target = evt.target as HTMLButtonElement;
-    const parentElement = target.parentElement;
-    const image = target.previousElementSibling as HTMLImageElement;
+    const { card, url } = this.getCardFromEvent(evt);
+    if (!card || !url) return;
 
-    this.deleteImages(this.allImages, image.alt);
+    this.deleteImages(this.allImages, url);
 
-    if (parentElement) {
-      await AnimationService.animateRemove(parentElement, this.animations);
-    }
+    await AnimationService.animateRemove(card, this.animations);
 
-    if (image.src.startsWith("blob:")) URL.revokeObjectURL(image.src);
+    URL.revokeObjectURL(url);
 
     const countImages = this.modifyParagraph();
 

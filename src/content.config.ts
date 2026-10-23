@@ -12,6 +12,8 @@ const projectSchema = z.object({
   scripts: z.string().nonempty(),
   styles: z.string().nonempty(),
   pngImage: z.string().nonempty(),
+  imageWidth: z.number().int().positive(),
+  imageHeight: z.number().int().positive(),
   webpImage: z.string().nonempty(),
   metaTitle: z.string().nonempty(),
   metaDescription: z.string().nonempty(),
