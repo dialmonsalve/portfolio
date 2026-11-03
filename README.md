@@ -1,43 +1,65 @@
-# Astro Starter Kit: Minimal
+# Portfolio
+
+Personal portfolio of Diego Monsalve, live at [dialmonsalve.com](https://dialmonsalve.com), in Spanish and English, with light and dark themes. It shows my projects, an about page and a contact form.
+
+## Stack
+
+- [Astro](https://astro.build) with the Cloudflare adapter.
+- [Tailwind CSS](https://tailwindcss.com) and [daisyUI](https://daisyui.com) for styles.
+- [GSAP](https://gsap.com) for animations.
+- [Resend](https://resend.com) and Cloudflare Turnstile for the contact form.
+
+## Getting started
+
+It needs Node.js 22.12 or later and pnpm.
 
 ```sh
-pnpm create astro@latest -- --template minimal
+pnpm install
+pnpm dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+The site runs at `http://localhost:4321`.
 
-## 🚀 Project Structure
+### Environment variables
 
-Inside of your Astro project, you'll see the following folders and files:
+The contact form reads these from a `.env` file, which Git ignores. Both are optional for working on the rest of the site.
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+| Variable | What it's for |
+| --- | --- |
+| `RESEND_API_KEY` | Sends the contact form's email. |
+| `TURNSTILE_SECRET_KEY` | Verifies the form's Cloudflare Turnstile challenge. |
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Commands
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+| Command | What it does |
+| --- | --- |
+| `pnpm dev` | Starts the dev server. |
+| `pnpm build` | Builds the site into `dist/`. |
+| `pnpm preview` | Previews the build locally. |
+| `pnpm astro ...` | Runs Astro CLI commands. |
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Structure
 
-## 🧞 Commands
+| Path | Content |
+| --- | --- |
+| `src/pages/[lang]/` | Pages for each language: home, about and projects. |
+| `src/pages/[lang]/projects/` | Project list, the page for each project, and the internal projects. |
+| `src/content/projects_es/`, `src/content/projects_en/` | One Markdown file per project and language. |
+| `src/i18n/locales/` | Interface text, including the internal projects. |
+| `src/components/` | Interface components, form builder and web components. |
+| `src/actions/` | Server action for the contact form. |
+| `public/images/` | Project images. |
 
-All commands are run from the root of the project, from a terminal:
+## Add a project
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+1. Add `src/content/projects_es/<slug>.md` and `src/content/projects_en/<slug>.md`. `src/content.config.ts` defines the required fields.
+2. Add its images to `public/images/<slug>/`:
+   - `main.png` and `main.webp`, shown on the project card.
+   - `png/1.png`, `webp/1.webp` and so on, shown as the gallery on the project page.
+3. List the WebP images in the `images` field, in order. The gallery uses that list to know how many images there are.
 
-## 👀 Want to learn more?
+The project appears in the list and gets its own page at `/<lang>/projects/<slug>`.
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## Deployment
+
+The site runs on Cloudflare, configured in `wrangler.jsonc`.
