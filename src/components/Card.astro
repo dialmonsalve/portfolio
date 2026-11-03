@@ -37,80 +37,85 @@ const {
 const lang = getLangFromUrl(Astro.url);
 
 const translatePath = useTranslatedPath(lang);
+
+const chipClass = "rounded-full border border-base-300 px-2.5 py-0.5 text-xs text-muted capitalize";
+const buttonBase =
+  "inline-block rounded-lg px-3.5 py-2 text-sm font-medium first-letter:uppercase cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+const primaryButton = `${buttonBase} bg-primary text-primary-content transition-opacity hover:opacity-85`;
+const secondaryButton = `${buttonBase} border border-base-300 text-primary-strong transition-colors hover:border-primary hover:bg-base-200 buttons-more`;
 ---
 
 <div
   data-reveal="scroll"
-  data-tilt
-  class="flex flex-col gap-8 border border-primary p-4 rounded-sm shadow-primary shadow-md justify-between items-center bg-base-200"
+  class="flex h-full flex-col overflow-hidden rounded-2xl border border-base-300 bg-base-100 transition-colors duration-200 hover:border-primary"
 >
-  <h2
-    class="bg-primary text-primary-content px-2 py-1 -translate-y-8 uppercase rounded text-center"
-    transition:name={slug}
-  >
-    {title}
-  </h2>
+  <picture class="block aspect-video overflow-hidden border-b border-base-300 bg-base-200">
+    <source srcset={webpImage} type="image/webp" />
+    <img
+      src={pngImage}
+      alt={title}
+      width={imageWidth}
+      height={imageHeight}
+      loading="lazy"
+      decoding="async"
+      class="size-full object-cover object-top"
+    />
+  </picture>
 
-  <div>
-    <picture>
-      <source srcset={webpImage} type="image/webp" />
-      <img
-        src={pngImage}
-        alt={title}
-        width={imageWidth}
-        height={imageHeight}
-        loading="lazy"
-        decoding="async"
-      />
-    </picture>
-    <div class="flex flex-col gap-1 py-2">
-      {
-        isExternalProject && (
-          <>
-            <p class="text-md  flex items-center gap-2">
-              {i18n.general.technology}:
-              <span class="text-muted capitalize text-sm">
-                {technology}
-              </span>
-            </p>
-            <p class="text-md flex items-center gap-2">
-              {i18n.general.styles}:
-              <span class="text-muted capitalize text-sm">{styles}</span>
-            </p>
-            <p class="text-md flex items-center gap-2">
-              Scripts:
-              <span class="text-muted capitalize text-sm">{scripts}</span>
-            </p>
-          </>
-        )
-      }
-    </div>
-    <p class="text-muted text-sm h-12">{description}</p>
-  </div>
+  <div class="flex flex-1 flex-col gap-3 p-5">
+    <h2
+      class="w-fit text-base font-semibold uppercase tracking-wide text-primary-strong"
+      transition:name={slug}
+    >
+      {title}
+    </h2>
 
-  <ul class="flex justify-around w-full">
+    <p class="text-sm leading-6 text-muted first-letter:uppercase">{description}</p>
+
     {
-      isExternalProject ? (
-        <>
-          <Link
-            label={i18n.general.more}
-            className="py-1 px-3 rounded-sm uppercase text-md text-primary-strong border border-primary transition-colors cursor-pointer hover:bg-primary hover:text-primary-content focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary buttons-more"
-            href={`projects/${slug}`}
-          />
-          <Link
-            target="_blank"
-            label={i18n.general.go}
-            className="py-1 px-3 rounded-sm uppercase text-md text-primary-content transition-opacity cursor-pointer bg-primary shadow-lg shadow-primary/30 hover:opacity-85 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-            href={href}
-          />
-        </>
-      ) : (
-        <Link
-          label={i18n.general.go}
-          className="py-1 px-3 rounded-sm uppercase text-md text-primary-content transition-opacity cursor-pointer bg-primary shadow-lg shadow-primary/30 hover:opacity-85 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-          href={translatePath(`/${href ? href : ""}`, lang)}
-        />
+      isExternalProject && (
+        <ul class="flex flex-wrap gap-2">
+          <li class={chipClass}>
+            <span class="sr-only">{i18n.general.technology}:</span>
+            {technology}
+          </li>
+          <li class={chipClass}>
+            <span class="sr-only">{i18n.general.styles}:</span>
+            {styles}
+          </li>
+          <li class={chipClass}>
+            <span class="sr-only">Scripts:</span>
+            {scripts}
+          </li>
+        </ul>
       )
     }
-  </ul>
+
+    <ul class="mt-auto flex flex-wrap gap-2 pt-2">
+      {
+        isExternalProject ? (
+          <>
+            <Link
+              target="_blank"
+              showArrow
+              label={i18n.general.visit}
+              className={primaryButton}
+              href={href}
+            />
+            <Link
+              label={i18n.general.more}
+              className={secondaryButton}
+              href={`projects/${slug}`}
+            />
+          </>
+        ) : (
+          <Link
+            label={i18n.general.go}
+            className={primaryButton}
+            href={translatePath(`/${href ? href : ""}`, lang)}
+          />
+        )
+      }
+    </ul>
+  </div>
 </div>

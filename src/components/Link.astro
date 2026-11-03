@@ -6,9 +6,10 @@ interface Props {
   label: string;
   className?: string;
   target?: "_blank" | "_self" | "_parent" | "_top";
+  showArrow?: boolean;
 }
 
-const { href, label, className, target = "_self" } = Astro.props;
+const { href, label, className, target = "_self", showArrow = false } = Astro.props;
 
 const i18n = getI18N({ currentLocale: Astro.currentLocale });
 ---
@@ -16,6 +17,7 @@ const i18n = getI18N({ currentLocale: Astro.currentLocale });
 <li class="list-none">
   <a target={target} referrerpolicy="no-referrer" href={href} class={className}>
     {label}
+    {showArrow && <span class="ml-1" aria-hidden="true">↗</span>}
     {target === "_blank" && <span class="sr-only">{i18n.general.newTab}</span>}
   </a>
 </li>

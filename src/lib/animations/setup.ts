@@ -3,7 +3,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { SplitText } from "gsap/SplitText";
 
-import { initCardTilt } from "./cards";
 import { initFAB } from "./fab";
 import { initBackToTop } from "./footer";
 import { initHeader } from "./header";
@@ -41,7 +40,7 @@ function setupAnimations() {
         initHero();
         revealOnScroll();
         if (finePointer) {
-          cleanups.push(initTechnologies(), initCardTilt(), initMagnetic());
+          cleanups.push(initTechnologies(), initMagnetic());
         }
       }
 
